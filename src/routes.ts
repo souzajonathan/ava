@@ -17,7 +17,7 @@ routes.put("/areas/:id", new UpdateAreaController().handle);
 
 routes.post("/disciplinas", new CreateDisciplinaController().handle);
 routes.get("/disciplinas", new GetAllDisciplinasController().handle);
-routes.delete("/disciplinas", new DeleteDisciplinaController().handle);
+routes.delete("/disciplinas/:id", new DeleteDisciplinaController().handle);
 routes.put("/disciplinas/:id", new UpdateDisciplinaController().handle);
 
 export { routes }
