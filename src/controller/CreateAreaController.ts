@@ -7,7 +7,10 @@ export class CreateAreaController {
 
         const service = new CreateAreaService();
 
-        const result = await service.execute({name, description});
+        const result = await service.execute({
+            name,
+            description
+        });
 
         if (result instanceof Error) {
             return response.status(400).json(result.message);

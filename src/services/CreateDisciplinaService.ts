@@ -13,7 +13,7 @@ export class CreateDisciplinaService {
         const repo = getRepository(Disciplina);
         const repoArea = getRepository(Area);
 
-        if(!await repoArea.findOne(area_id)) {
+        if(!(await repoArea.findOne(area_id))) {
             return new Error("Área não existe!");
         }
 

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreateDisciplinaService } from "../services/CreateDisciplinaService";
 
 export class CreateDisciplinaController {
-    async handle(request: Request, response: Response) {
+    async handle (request: Request, response: Response) {
         const {name, description, area_id} = request.body;
 
         const service = new CreateDisciplinaService();
