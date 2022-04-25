@@ -1,5 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuid} from "uuid";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Area } from "./Area";
 
 @Entity("disciplinas")
 export class Disciplina {
@@ -11,13 +11,15 @@ export class Disciplina {
 
     @Column()
     description: string;
+
+    @Column("uuid")
+    area_id: string;
+
+    @ManyToOne(() => Area)
+    @JoinColumn({name: "area_id"})
+    area: Area;
     
     @CreateDateColumn()
     created_at: Date;
 
-    constructor() {
-        if(!this.id){
-            this.id = uuid();
-        }
-    }
 }
