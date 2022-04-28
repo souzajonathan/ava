@@ -9,9 +9,6 @@ export class Disciplina {
     @Column()
     name: string;
 
-    @Column()
-    description: string;
-
     @Column("uuid")
     area_id: string;
 

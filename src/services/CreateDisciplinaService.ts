@@ -2,25 +2,39 @@ import { getRepository } from "typeorm";
 import { Area } from "../entities/Area";
 import { Disciplina } from "../entities/Disciplina";
 
+
 type DisciplinaRequest = {
     name: string;
-    description: string;
     area_id: string;
 }
 
 export class CreateDisciplinaService {
-    async execute ({name, description, area_id}: DisciplinaRequest) {
+    async execute ({name, area_id}: DisciplinaRequest) {
         const repo = getRepository(Disciplina);
         const repoArea = getRepository(Area);
 
-        if(!(await repoArea.findOne(area_id))) {
+        const area = await repoArea.findOne(area_id)
+
+        if(!area) {
             return new Error("Área não existe!");
         }
 
-        const disciplina = repo.create({name, description, area_id});
+        const disciplinaSameName = await repo.findOne({
+            where: {
+                name: name
+            }
+        })
+
+        if (disciplinaSameName) {
+            return new Error("Disciplina já existe!");
+        }
+
+        const disciplina = repo.create({name, area_id});
         
         await repo.save(disciplina);
 
-        return disciplina;
+        return {
+            ...disciplina, area
+        }
     }
 }
