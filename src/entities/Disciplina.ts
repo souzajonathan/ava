@@ -8,10 +8,10 @@ export class Disciplina {
     
     @Column()
     name: string;
-
+    
     @Column("uuid")
     area_id: string;
-
+    
     @ManyToOne(() => Area)
     @JoinColumn({name: "area_id"})
     area: Area;
