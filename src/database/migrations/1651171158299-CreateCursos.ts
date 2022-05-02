@@ -20,8 +20,9 @@ export class CreateCursos1651171158299 implements MigrationInterface {
                         type: "varchar"
                     },
                     {
-                        name: "ppcAtivo",
-                        type: "varchar"
+                        name: "ppc_ativo",
+                        type: "uuid",
+                        isNullable: true
                     },
                     {
                         name: "created_at",

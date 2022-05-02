@@ -11,7 +11,9 @@ export class Curso {
     @CreateDateColumn()
     created_at: Date;
     
-    @Column()
+    @Column("uuid", {
+        name: "ppc_ativo"
+    })
     pccAtivo: string;
 
 }

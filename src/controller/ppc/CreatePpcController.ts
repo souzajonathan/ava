@@ -3,7 +3,7 @@ import { CreatePpcService } from "../../services/ppc/CreatePpcService";
 
 export class CreatePpcController {
     async handle (request: Request, response: Response) {
-        const {curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres} = request.body;
+        const {curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active} = request.body;
 
         const service = new CreatePpcService();
 
@@ -13,7 +13,8 @@ export class CreatePpcController {
             dataInicio,
             dataFim,
             horaCredito,
-            quantSemestres
+            quantSemestres,
+            active
         });
 
         if (result instanceof Error) {

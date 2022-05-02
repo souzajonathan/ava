@@ -3,13 +3,12 @@ import { CreateCursoService } from "../../services/curso/CreateCursoService";
 
 export class CreateCursoController {
     async handle (request: Request, response: Response) {
-        const { name, pccAtivo } = request.body;
+        const { name } = request.body;
 
         const service = new CreateCursoService();
 
         const result = await service.execute({
-            name,
-            pccAtivo
+            name
         });
 
         if (result instanceof Error) {

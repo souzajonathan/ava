@@ -10,10 +10,11 @@ type PpcRequest = {
     dataFim: string;
     horaCredito: number;
     quantSemestres: number;
+    active: boolean;
 }
 
 export class CreatePpcService {
-    async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres}: PpcRequest) {
+    async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active}: PpcRequest) {
         const repo = getRepository(Ppc);
         const repoCurso = getRepository(Curso);
 
@@ -26,6 +27,11 @@ export class CreatePpcService {
         const ppc = repo.create({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres});
         
         await repo.save(ppc);
+
+        if(active){
+            curso.pccAtivo = ppc.id;
+            await repoCurso.save(curso);
+        }
 
         return {
             ...ppc, curso
