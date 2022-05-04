@@ -36,7 +36,7 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                         type: "varchar"
                     },
                     {
-                        name: "bibiografia_basica",
+                        name: "bibliografia_basica",
                         type: "varchar"
                     },
                     {

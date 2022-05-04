@@ -23,6 +23,10 @@ import { CreatePerfilController } from "./controller/perfil/CreatePerfilControll
 import { GetAllPerfisController } from "./controller/perfil/GetAllPerfisController";
 import { DeletePerfilController } from "./controller/perfil/DeletePerfilController";
 import { UpdatePerfilController } from "./controller/perfil/UpdatePerfilController";
+import { CreateDisciplinaVersaoController } from "./controller/disciplina_versao/CreateDisciplinaVersaoController";
+import { GetAllDisciplinaVersoesController } from "./controller/disciplina_versao/GetAllDisciplinaVersoesController";
+import { DeleteDisciplinaVersaoController } from "./controller/disciplina_versao/DeleteDisciplinaVersaoController";
+import { UpdateDisciplinaVersaoController } from "./controller/disciplina_versao/UpdateDisciplinaVersaoController";
 
 const routes = Router();
 
@@ -55,5 +59,10 @@ routes.post("/perfis", new CreatePerfilController().handle);
 routes.get("/perfis", new GetAllPerfisController().handle);
 routes.delete("/perfis/:id", new DeletePerfilController().handle);
 routes.put("/perfis/:id", new UpdatePerfilController().handle);
+
+routes.post("/versoes", new CreateDisciplinaVersaoController().handle);
+routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
+routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
+routes.put("/versoes/:id", new UpdateDisciplinaVersaoController().handle);
 
 export { routes }

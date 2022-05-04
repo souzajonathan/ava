@@ -14,6 +14,6 @@ export class Curso {
     @Column("uuid", {
         name: "ppc_ativo"
     })
-    pccAtivo: string;
+    ppcAtivo: string;
 
 }

@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { Ppc } from "../../entities/Ppc";
 
 type PerfilRequest = {
     ppc_id: string;
@@ -8,8 +9,15 @@ type PerfilRequest = {
 };
 
 export class CreatePerfilService {
-    async execute({ ppc_id, perfil, perfilNumero }: PerfilRequest): Promise<PerfilEgresso | Error> {
+    async execute({ ppc_id, perfil, perfilNumero }: PerfilRequest) {
         const repo = getRepository(PerfilEgresso);
+        const repoPpc = getRepository(Ppc);
+
+        const ppc = await repoPpc.findOne(ppc_id);
+
+        if(!ppc) {
+            return new Error("Ppc não existe!");
+        }
 
         const perfilEgresso = repo.create({
             ppc_id,
@@ -19,7 +27,9 @@ export class CreatePerfilService {
 
         await repo.save(perfilEgresso);
 
-        return perfilEgresso;
+        return {
+            ...perfilEgresso, ppc
+        };
     }
 
 }

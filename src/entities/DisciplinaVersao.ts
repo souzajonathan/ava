@@ -31,7 +31,7 @@ export class DisciplinaVersao {
     ementa: string;
 
     @Column()
-    bibiografia_basica: string;
+    bibliografia_basica: string;
 
     @Column()
     comp_bibliografia: string;

@@ -18,7 +18,7 @@ export class CreatePpcService {
         const repo = getRepository(Ppc);
         const repoCurso = getRepository(Curso);
 
-        const curso = await repoCurso.findOne(curso_id)
+        const curso = await repoCurso.findOne(curso_id);
 
         if(!curso) {
             return new Error("Curso não existe!");
@@ -29,7 +29,7 @@ export class CreatePpcService {
         await repo.save(ppc);
 
         if(active){
-            curso.pccAtivo = ppc.id;
+            curso.ppcAtivo = ppc.id;
             await repoCurso.save(curso);
         }
 
