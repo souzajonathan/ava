@@ -4,11 +4,11 @@ import { Curso } from "../../entities/Curso";
 type CursoUpdateRequest = {
     id: string;
     name: string;
-    pccAtivo: string;
+    ppcAtivo: string;
 };
 
 export class UpdateCursoService {
-    async execute ({id, name, pccAtivo}: CursoUpdateRequest) {
+    async execute ({id, name, ppcAtivo}: CursoUpdateRequest) {
         const repo = getRepository(Curso);
 
         const curso = await repo.findOne(id);
@@ -18,7 +18,7 @@ export class UpdateCursoService {
         }
 
         curso.name = name ? name : curso.name;
-        curso.pccAtivo = pccAtivo ? pccAtivo : curso.pccAtivo;
+        curso.ppcAtivo = ppcAtivo ? ppcAtivo : curso.ppcAtivo;
 
         await repo.save(curso);
 

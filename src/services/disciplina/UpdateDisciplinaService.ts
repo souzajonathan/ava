@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { Area } from "../../entities/Area";
 import { Disciplina } from "../../entities/Disciplina";
 
 type DisciplinaUpdateRequest = {
@@ -10,11 +11,17 @@ type DisciplinaUpdateRequest = {
 export class UpdateDisciplinaService {
     async execute ({id, name, area_id}: DisciplinaUpdateRequest) {
         const repo = getRepository(Disciplina);
+        const repoArea = getRepository(Area);
 
         const disciplina = await repo.findOne(id);
+        const area = await repoArea.findOne(area_id);
 
         if (!disciplina) {
             return new Error("Disciplina não existe!");
+        }
+
+        if (!area) {
+            return new Error("Área não existe!");
         }
 
         disciplina.name = name ? name : disciplina.name;

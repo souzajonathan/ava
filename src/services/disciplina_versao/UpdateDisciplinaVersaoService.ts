@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
 type DisciplinaVersaoUpdateRequest = {
@@ -32,11 +33,17 @@ export class UpdateDisciplinaVersaoService {
         produzido
     }: DisciplinaVersaoUpdateRequest) {
         const repo = getRepository(DisciplinaVersao);
+        const repoDisciplina = getRepository(Disciplina);
 
         const disciplinaVersao = await repo.findOne(id);
+        const disciplina = await repoDisciplina.findOne(disciplina_id);
 
         if (!disciplinaVersao) {
             return new Error("Versão de disciplina não existe!");
+        }
+
+        if (!disciplina) {
+            return new Error("Disciplina não existe!");
         }
 
         disciplinaVersao.disciplina_id = disciplina_id ? disciplina_id : disciplinaVersao.disciplina_id;

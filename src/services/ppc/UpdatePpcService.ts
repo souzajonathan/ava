@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { Curso } from "../../entities/Curso";
 import { Ppc } from "../../entities/Ppc";
 
 type PpcUpdateRequest = {
@@ -14,11 +15,17 @@ type PpcUpdateRequest = {
 export class UpdatePpcService {
     async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id}: PpcUpdateRequest) {
         const repo = getRepository(Ppc);
+        const repoCurso = getRepository(Curso);
 
         const ppc = await repo.findOne(id);
+        const curso = await repoCurso.findOne(curso_id);
 
         if (!ppc) {
             return new Error("PPC não existe!");
+        }
+
+        if (!curso) {
+            return new Error("Curso não existe!");
         }
 
         ppc.anoVoto = anoVoto ? anoVoto : ppc.anoVoto;

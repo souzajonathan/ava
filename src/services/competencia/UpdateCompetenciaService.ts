@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { Ppc } from "../../entities/Ppc";
 
 type CompetenciaUpdateRequest = {
     id: string;
@@ -11,11 +12,17 @@ type CompetenciaUpdateRequest = {
 export class UpdateCompetenciaService {
     async execute ({id, ppc_id, competencia, competenciaNumero}: CompetenciaUpdateRequest) {
         const repo = getRepository(CompetHabilidades);
+        const repoPpc = getRepository(Ppc);
 
         const competHabilidades = await repo.findOne(id);
+        const ppc = await repoPpc.findOne(ppc_id);
 
         if (!competHabilidades) {
             return new Error("Competências e Habilidades não existente!");
+        }
+
+        if (!ppc) {
+            return new Error("Ppc não existente!");
         }
 
         competHabilidades.ppc_id = ppc_id ? ppc_id : competHabilidades.ppc_id;
