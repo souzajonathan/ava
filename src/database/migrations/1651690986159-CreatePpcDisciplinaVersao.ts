@@ -10,7 +10,7 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                 columns: [
                     {
                         name: 'id',
-                        type: 'varchar',
+                        type: 'uuid',
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'

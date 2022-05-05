@@ -9,11 +9,13 @@ export class CreateMorango1651773603534 implements MigrationInterface {
                 columns: [
                     {
                         name: "perfil_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
                     },
                     {
                         name: "ppc_disciplina_versao_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
                     }
                 ],
                 foreignKeys: [

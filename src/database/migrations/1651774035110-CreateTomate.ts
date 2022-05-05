@@ -9,11 +9,13 @@ export class CreateTomate1651774035110 implements MigrationInterface {
                 columns: [
                     {
                         name: "competencia_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
                     },
                     {
                         name: "ppc_disciplina_versao_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
                     }
                 ],
                 foreignKeys: [
