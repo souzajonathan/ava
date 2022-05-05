@@ -36,7 +36,7 @@ export class CreateDisciplinaVersaoService {
         const disciplina = await repoDisciplina.findOne(disciplina_id);
 
         if(!disciplina) {
-            return new Error("Ppc não existe!");
+            return new Error("Disciplina não existe!");
         }
 
         const disciplinaVersao = repo.create({

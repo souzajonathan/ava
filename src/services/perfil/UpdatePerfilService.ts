@@ -8,14 +8,14 @@ type PerfilUpdateRequest = {
     perfilNumero: string;
 };
 
-export class UpdateperfilService {
+export class UpdatePerfilService {
     async execute ({id, ppc_id, perfil, perfilNumero}: PerfilUpdateRequest) {
         const repo = getRepository(PerfilEgresso);
 
         const perfilEgresso = await repo.findOne(id);
 
         if (!perfilEgresso) {
-            return new Error("Competências e Habilidades não existente!");
+            return new Error("Perfil não existente!");
         }
 
         perfilEgresso.ppc_id = ppc_id ? ppc_id : perfilEgresso.ppc_id;

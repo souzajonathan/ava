@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { UpdateCompetenciaService } from "../../services/competencia/UpdateCompetenciaService";
+import { UpdatePerfilService } from "../../services/perfil/UpdatePerfilService";
 
 export class UpdatePerfilController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
-        const { ppc_id, competencia, competenciaNumero } = request.body;
+        const { ppc_id, perfil, perfilNumero } = request.body;
 
-        const service = new UpdateCompetenciaService();
+        const service = new UpdatePerfilService();
 
-        const result = await service.execute({id, ppc_id, competencia, competenciaNumero});
+        const result = await service.execute({id, ppc_id, perfil, perfilNumero});
 
         if(result instanceof Error) {
             return response.status(400).json(result.message);
