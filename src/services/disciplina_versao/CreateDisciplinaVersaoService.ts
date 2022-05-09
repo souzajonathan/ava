@@ -38,6 +38,10 @@ export class CreateDisciplinaVersaoService {
 
         const disciplina_versao_nome = disciplina.sigla;
 
+        if(!disciplina_versao_nome){
+            return new Error("Disciplina sem sigla");
+        }
+
         const disciplinaVersao = repo.create({
             disciplina_id,
             disciplina_versao_nome,
