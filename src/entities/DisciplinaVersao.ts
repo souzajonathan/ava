@@ -8,7 +8,7 @@ export class DisciplinaVersao {
     
     @ManyToOne(() => Disciplina)
     @JoinColumn({name: "disciplina_id"})
-    curso: Disciplina;
+    disciplina: Disciplina;
     @Column("uuid")
     disciplina_id: string;
     
@@ -17,9 +17,6 @@ export class DisciplinaVersao {
 
     @Column()
     disciplina_versao_nome: string;
-
-    @Column()
-    sigla: string;
     
     @Column()
     codigo: string;

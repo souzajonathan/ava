@@ -3,13 +3,14 @@ import { CreateDisciplinaService } from "../../services/disciplina/CreateDiscipl
 
 export class CreateDisciplinaController {
     async handle (request: Request, response: Response) {
-        const {name, area_id} = request.body;
+        const {name, area_id, sigla} = request.body;
 
         const service = new CreateDisciplinaService();
 
         const result = await service.execute({
             name,
-            area_id
+            area_id,
+            sigla
         });
 
         if (result instanceof Error) {

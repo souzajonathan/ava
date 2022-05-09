@@ -6,10 +6,11 @@ type DisciplinaUpdateRequest = {
     id: string;
     name: string;
     area_id: string;
+    sigla: string;
 };
 
 export class UpdateDisciplinaService {
-    async execute ({id, name, area_id}: DisciplinaUpdateRequest) {
+    async execute ({id, name, area_id, sigla}: DisciplinaUpdateRequest) {
         const repo = getRepository(Disciplina);
         const repoArea = getRepository(Area);
 
@@ -26,6 +27,7 @@ export class UpdateDisciplinaService {
 
         disciplina.name = name ? name : disciplina.name;
         disciplina.area_id = area_id ? area_id : disciplina.area_id;
+        disciplina.sigla = sigla ? sigla : disciplina.sigla;
 
         await repo.save(disciplina);
 

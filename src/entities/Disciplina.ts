@@ -8,6 +8,9 @@ export class Disciplina {
     
     @Column()
     name: string;
+
+    @Column()
+    sigla: string;
     
     @Column("uuid")
     area_id: string;

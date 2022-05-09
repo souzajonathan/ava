@@ -6,10 +6,11 @@ import { Disciplina } from "../../entities/Disciplina";
 type DisciplinaRequest = {
     name: string;
     area_id: string;
+    sigla: string;
 }
 
 export class CreateDisciplinaService {
-    async execute ({name, area_id}: DisciplinaRequest) {
+    async execute ({name, area_id, sigla}: DisciplinaRequest) {
         const repo = getRepository(Disciplina);
         const repoArea = getRepository(Area);
 
@@ -29,7 +30,7 @@ export class CreateDisciplinaService {
             return new Error("Disciplina já existe!");
         }
 
-        const disciplina = repo.create({name, area_id});
+        const disciplina = repo.create({name, area_id, sigla});
         
         await repo.save(disciplina);
 

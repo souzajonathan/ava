@@ -5,8 +5,6 @@ export class CreateDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
         const {
             disciplina_id,
-            disciplina_versao_nome,
-            sigla,
             codigo,
             credito_quantidade,
             ementa,
@@ -21,8 +19,6 @@ export class CreateDisciplinaVersaoController {
 
         const result = await service.execute({
             disciplina_id,
-            disciplina_versao_nome,
-            sigla,
             codigo,
             credito_quantidade,
             ementa,
