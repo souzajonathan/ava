@@ -28,7 +28,6 @@ export class CreateDisciplinaVersaoService {
     }: DisciplinaVersaoRequest) {
         const repo = getRepository(DisciplinaVersao);
         const repoDisciplina = getRepository(Disciplina);
-        const repoVersaoDisciplina = getRepository(DisciplinaVersao);
 
         const disciplina = await repoDisciplina.findOne(disciplina_id);
 
@@ -36,28 +35,7 @@ export class CreateDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        const name = disciplina.name;
-
-        const pontosDecortes = Math.round(name.length/5);
-
-        const nomeBase = ["L", "U", "N", "A"];
-
-        for(let idx = 0; idx < 4; idx++){
-            if (name[idx*pontosDecortes] != undefined && name[idx*pontosDecortes] != " "){
-                nomeBase[idx] = name[idx*pontosDecortes]
-            }
-        }
-
-        let versoesExistentesQuant = 1;
-
-        const versoesExistentes = await repoVersaoDisciplina.count({where: {disciplina_id}});
-
-        if(versoesExistentes !== null){
-           versoesExistentesQuant = versoesExistentes+1;
-        }
-
-        const disciplina_versao_nome = nomeBase[0]+nomeBase[1]+nomeBase[2]+nomeBase[3]+versoesExistentesQuant+"-"+credito_quantidade;
-        console.log(disciplina_versao_nome);
+        const disciplina_versao_nome = disciplina.sigla;
 
         const disciplinaVersao = repo.create({
             disciplina_id,
