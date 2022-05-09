@@ -5,7 +5,7 @@ export class CreateMorango1651773603534 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.createTable(
             new Table({
-                name: "morango",
+                name: "perfil_ppc_versao",
                 columns: [
                     {
                         name: "perfil_id",
@@ -37,7 +37,7 @@ export class CreateMorango1651773603534 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("morango");
+        await queryRunner.dropTable("perfil_ppc_versao");
     }
 
 }
