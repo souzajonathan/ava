@@ -16,7 +16,7 @@ export class CreateCursoService {
         }
 
         const curso = repo.create({
-            name,
+            name
         });
 
         await repo.save(curso);

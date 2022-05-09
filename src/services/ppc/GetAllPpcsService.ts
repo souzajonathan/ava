@@ -5,7 +5,7 @@ export class GetAllPpcsService {
     async execute(curso_id?: string) {
         const repo = getRepository(Ppc);
 
-        const where: FindConditions<Ppc> = {}
+        const where: FindConditions<Ppc> = {};
 
         if (curso_id){
             where.curso_id = curso_id;

@@ -30,6 +30,7 @@ export class CreateDisciplinaVersaoService {
         const repoDisciplina = getRepository(Disciplina);
 
         const disciplina = await repoDisciplina.findOne(disciplina_id);
+        console.log(disciplina.sigla);
 
         if(!disciplina) {
             return new Error("Disciplina não existe!");

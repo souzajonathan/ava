@@ -9,6 +9,7 @@ export class DisciplinaVersao {
     @ManyToOne(() => Disciplina)
     @JoinColumn({name: "disciplina_id"})
     disciplina: Disciplina;
+    
     @Column("uuid")
     disciplina_id: string;
     

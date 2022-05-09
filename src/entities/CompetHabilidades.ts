@@ -8,7 +8,8 @@ export class CompetHabilidades {
     
     @ManyToOne(() => Ppc)
     @JoinColumn({name: "ppc_id"})
-    curso: Ppc;
+    ppc: Ppc;
+    
     @Column("uuid")
     ppc_id: string;
     

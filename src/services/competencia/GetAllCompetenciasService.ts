@@ -5,7 +5,9 @@ export class GetAllCompetenciasService {
     async execute() {
         const repo = getRepository(CompetHabilidades);
 
-        const competHabilidades = await repo.find();
+        const competHabilidades = await repo.find({
+            relations: ["ppc"]
+        });
 
         return competHabilidades;
     }
