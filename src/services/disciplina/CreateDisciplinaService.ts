@@ -20,14 +20,14 @@ export class CreateDisciplinaService {
             return new Error("Área não existe!");
         }
 
-        const disciplinaSameName = await repo.findOne({
+        const siglaSameName = await repo.findOne({
             where: {
-                name: name
+                name: sigla
             }
         })
 
-        if (disciplinaSameName) {
-            return new Error("Disciplina já existe!");
+        if (siglaSameName) {
+            return new Error("Sigla já existe!");
         }
 
         const disciplina = repo.create({name, area_id, sigla});

@@ -36,11 +36,11 @@ export class CreateDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        const disciplina_versao_nome = disciplina.sigla;
-
-        if(!disciplina_versao_nome){
+        if(!disciplina.sigla){
             return new Error("Disciplina sem sigla");
         }
+
+        const disciplina_versao_nome = `${disciplina.sigla} - ${credito_quantidade}`;
 
         const disciplinaVersao = repo.create({
             disciplina_id,

@@ -32,6 +32,8 @@ import { GetAllPpcDisciplinaVersaoController } from "./controller/ppc_disciplina
 import { DeletePpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeletePpcDisciplinaVersaoController";
 import { UpdatePpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/UpdatePpcDisciplinaVersaoController";
 import { CreatePerfilPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/CreatePerfilPpcDisciplinaVersaoController";
+import { GetOnePpcController } from "./controller/ppc/GetOnePpcController";
+import { CreateCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/CreateCompetenciaPpcDisciplinaVersaoController";
 
 const routes = Router();
 
@@ -52,6 +54,7 @@ routes.put("/cursos/:id", new UpdateCursoController().handle);
 
 routes.post("/ppcs", new CreatePpcController().handle);
 routes.get("/ppcs", new GetAllPpcsController().handle);
+routes.get("/ppc", new GetOnePpcController().handle);
 routes.delete("/ppcs/:id", new DeletePpcController().handle);
 routes.put("/ppcs/:id", new UpdatePpcController().handle);
 
@@ -76,5 +79,6 @@ routes.delete("/ppc_disciplina_versao/:id", new DeletePpcDisciplinaVersaoControl
 routes.put("/ppc_disciplina_versao/:id", new UpdatePpcDisciplinaVersaoController().handle);
 
 routes.post("/perfil_ppc_disciplina_versao/:perfil_id", new CreatePerfilPpcDisciplinaVersaoController().handle);
+routes.post("/competencia_ppc_disciplina_versao/:competencia_id", new CreateCompetenciaPpcDisciplinaVersaoController().handle);
 
 export { routes }

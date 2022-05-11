@@ -1,4 +1,4 @@
-import { getRepository, In } from "typeorm";
+import { getRepository } from "typeorm";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
