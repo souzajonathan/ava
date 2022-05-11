@@ -34,6 +34,7 @@ import { UpdatePpcDisciplinaVersaoController } from "./controller/ppc_disciplina
 import { CreatePerfilPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/CreatePerfilPpcDisciplinaVersaoController";
 import { GetOnePpcController } from "./controller/ppc/GetOnePpcController";
 import { CreateCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/CreateCompetenciaPpcDisciplinaVersaoController";
+import { GetOneDisciplinaVersaoController } from "./controller/disciplina_versao/GetOneDisciplinaVersaoController";
 
 const routes = Router();
 
@@ -70,6 +71,7 @@ routes.put("/perfis/:id", new UpdatePerfilController().handle);
 
 routes.post("/versoes", new CreateDisciplinaVersaoController().handle);
 routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
+routes.get("/versao", new GetOneDisciplinaVersaoController().handle);
 routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
 routes.put("/versoes/:id", new UpdateDisciplinaVersaoController().handle);
 

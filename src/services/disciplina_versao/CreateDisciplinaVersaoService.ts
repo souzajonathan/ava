@@ -30,7 +30,7 @@ export class CreateDisciplinaVersaoService {
         const repoDisciplina = getRepository(Disciplina);
 
         const disciplina = await repoDisciplina.findOne(disciplina_id);
-        console.log(disciplina.sigla);
+        const numeroVersao = await repo.count();
 
         if(!disciplina) {
             return new Error("Disciplina não existe!");
@@ -40,7 +40,7 @@ export class CreateDisciplinaVersaoService {
             return new Error("Disciplina sem sigla");
         }
 
-        const disciplina_versao_nome = `${disciplina.sigla} - ${credito_quantidade}`;
+        const disciplina_versao_nome = `${disciplina.sigla}${credito_quantidade}-${numeroVersao+1}`;
 
         const disciplinaVersao = repo.create({
             disciplina_id,
