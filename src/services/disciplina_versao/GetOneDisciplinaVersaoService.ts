@@ -11,12 +11,12 @@ export class GetOneDisciplinaVersaoService {
             where.id = id;
         }
 
-        const versoes = await repo.find({
+        const versao = await repo.find({
             relations: ["disciplina"],
             where
         });
 
-        return versoes;
+        return versao;
     }
 
 }
