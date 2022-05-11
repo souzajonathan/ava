@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateMorango1651773603534 implements MigrationInterface {
+export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.createTable(

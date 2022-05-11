@@ -3,7 +3,7 @@ import { CreatePpcDisciplinaVersaoService } from "../../services/ppc_disciplina_
 
 export class CreatePpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { ppc_id, disciplina_id, modulo, semestre } = request.body;
+        const { ppc_id, disciplina_id, modulo, semestre, competencias_id, perfis_id } = request.body;
 
         const service = new CreatePpcDisciplinaVersaoService;
 
@@ -11,7 +11,9 @@ export class CreatePpcDisciplinaVersaoController {
             ppc_id,
             disciplina_id,
             modulo,
-            semestre
+            semestre,
+            competencias_id,
+            perfis_id
         });
 
         if (result instanceof Error) {

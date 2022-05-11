@@ -6,7 +6,7 @@ export class GetAllPpcDisciplinaVersaoService {
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.find({
-            relations: ["ppc", "disciplina"]
+            relations: ["ppc", "disciplina", "competencias", "perfis"]
         });
 
         return ppcDisciplinaVersao;
