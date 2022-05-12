@@ -12,11 +12,12 @@ export class GetOnePpcService {
         }
 
         const ppc = await repo.findOne({
-            relations: ["curso"],
+            relations: ["curso", "perfis", "competencias", "versoes"],
             where
         });
 
         return ppc;
+
     }
 
 }

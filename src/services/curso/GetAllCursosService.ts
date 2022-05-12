@@ -5,7 +5,9 @@ export class GetAllCursosService {
     async execute() {
         const repo = getRepository(Curso);
 
-        const cursos = await repo.find();
+        const cursos = await repo.find({
+            relations: ["ppcs"]
+        });
 
         return cursos;
     }

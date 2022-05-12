@@ -12,7 +12,7 @@ export class GetAllPpcsService {
         }
 
         const ppc = await repo.find({
-            relations: ["curso"],
+            relations: ["curso", "versoes", "perfis", "competencias"],
             where
         });
 

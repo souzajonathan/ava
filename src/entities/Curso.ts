@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Ppc } from "./Ppc";
 
 @Entity("cursos")
 export class Curso {
@@ -15,5 +16,8 @@ export class Curso {
         name: "ppc_ativo"
     })
     ppcAtivo: string;
+
+    @OneToMany(() => Ppc, (ppc) => ppc.curso)
+    ppcs: Ppc[];
 
 }

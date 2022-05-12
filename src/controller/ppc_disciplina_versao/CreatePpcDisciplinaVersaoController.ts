@@ -3,13 +3,13 @@ import { CreatePpcDisciplinaVersaoService } from "../../services/ppc_disciplina_
 
 export class CreatePpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { ppc_id, disciplina_id, modulo, semestre, competencias_id, perfis_id } = request.body;
+        const { ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id } = request.body;
 
         const service = new CreatePpcDisciplinaVersaoService;
 
         const result = await service.execute({
             ppc_id,
-            disciplina_id,
+            disciplina_versao_id,
             modulo,
             semestre,
             competencias_id,

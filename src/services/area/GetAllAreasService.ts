@@ -5,7 +5,9 @@ export class GetAllAreasService {
     async execute() {
         const repo = getRepository(Area);
 
-        const areas = await repo.find();
+        const areas = await repo.find({
+            relations: ["disciplinas"]
+        });
 
         return areas;
     }

@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Disciplina } from "./Disciplina";
 
 @Entity("areas")
 export class Area {
@@ -13,5 +14,8 @@ export class Area {
     
     @CreateDateColumn()
     created_at: Date;
+
+    @OneToMany(() => Disciplina, (disciplina) => disciplina.area)
+    disciplinas: Disciplina[];
 
 }

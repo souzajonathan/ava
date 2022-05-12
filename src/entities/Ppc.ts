@@ -1,5 +1,8 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CompetHabilidades } from "./CompetHabilidades";
 import { Curso } from "./Curso";
+import { PerfilEgresso } from "./PerfilEgresso";
+import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
 @Entity("ppcs")
 export class Ppc {
@@ -9,6 +12,16 @@ export class Ppc {
     @ManyToOne(() => Curso)
     @JoinColumn({name: "curso_id"})
     curso: Curso;
+
+    @OneToMany(() => PerfilEgresso, (perfil) => perfil.ppc)
+    perfis: PerfilEgresso[];
+
+    @OneToMany(() => CompetHabilidades, (competencia) => competencia.ppc)
+    competencias: CompetHabilidades[];
+
+    @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.ppc)
+    versoes: PpcDisciplinaVersao[];
+    
     @Column("uuid")
     curso_id: string;
 

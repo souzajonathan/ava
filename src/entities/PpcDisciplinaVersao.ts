@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CompetHabilidades } from "./CompetHabilidades";
-import { Disciplina } from "./Disciplina";
+import { DisciplinaVersao } from "./DisciplinaVersao";
 import { PerfilEgresso } from "./PerfilEgresso";
 import { Ppc } from "./Ppc";
 
@@ -16,12 +16,12 @@ export class PpcDisciplinaVersao {
     @Column("uuid")
     ppc_id: string;
 
-    @ManyToOne(() => Disciplina)
-    @JoinColumn({name: "disciplina_id"})
-    disciplina: Disciplina;
+    @ManyToOne(() => DisciplinaVersao)
+    @JoinColumn({name: "disciplina_versao_id"})
+    versoes: DisciplinaVersao;
 
     @Column("uuid")
-    disciplina_id: string;
+    disciplina_versao_id: string;
     
     @CreateDateColumn()
     created_at: Date;

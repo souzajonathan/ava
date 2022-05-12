@@ -6,7 +6,7 @@ export class GetAllDisciplinasService {
         const repo = getRepository(Disciplina);
 
         const disciplinas = await repo.find({
-            relations: ["area"]
+            relations: ["area", "versoes"]
         });
 
         return disciplinas;
