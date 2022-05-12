@@ -11,7 +11,7 @@ export class GetOneDisciplinaVersaoService {
             where.id = id;
         }
 
-        const versao = await repo.find({
+        const versao = await repo.findOne({
             relations: ["disciplina"],
             where
         });
