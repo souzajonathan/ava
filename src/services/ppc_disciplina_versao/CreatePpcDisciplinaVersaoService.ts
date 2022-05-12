@@ -24,8 +24,8 @@ export class CreatePpcDisciplinaVersaoService {
 
         const ppc = await repoPpc.findOne(ppc_id);
         const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
-        const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
-        const competencias = await repoCompetencias.find({where: {id: In(competencias_id) }});
+        const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
+        const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
 
         if(!ppc) {
             return new Error("Ppc não existe!");
