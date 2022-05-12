@@ -2,7 +2,6 @@ import { getRepository } from "typeorm";
 import { Area } from "../../entities/Area";
 import { Disciplina } from "../../entities/Disciplina";
 
-
 type DisciplinaRequest = {
     name: string;
     area_id: string;
@@ -36,6 +35,6 @@ export class CreateDisciplinaService {
 
         return {
             ...disciplina, area
-        }
+        };
     }
 }

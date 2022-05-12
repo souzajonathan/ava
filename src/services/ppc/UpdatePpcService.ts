@@ -37,6 +37,8 @@ export class UpdatePpcService {
 
         await repo.save(ppc);
 
-        return ppc;
+        return {
+            ...ppc, curso
+        }
     }
 }

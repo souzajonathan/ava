@@ -80,6 +80,6 @@ export class CreatePpcService {
 
         return {
             ...ppc, curso
-        }
+        };
     }
 }

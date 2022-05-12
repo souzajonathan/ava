@@ -31,6 +31,8 @@ export class UpdatePerfilService {
 
         await repo.save(perfilEgresso);
 
-        return perfilEgresso;
+        return {
+            ...perfilEgresso, ppc
+        };
     }
 }

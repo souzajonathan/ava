@@ -25,7 +25,7 @@ export class UpdatePpcDisciplinaVersaoService {
 
         const ppcDisciplinaVersao = await repo.findOne(id);
         const ppc = await repoPpc.findOne(ppc_id);
-        const disciplina = await repoDisciplinaVersao.findOne(disciplina_versao_id);
+        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
         const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
         const competencias = await repoCompetencias.find({where: {id: In(competencias_id) }});
 
@@ -37,7 +37,7 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("Ppc não existe!");
         }
 
-        if (!disciplina) {
+        if (!disciplinaVersao) {
             return new Error("Disciplina não existe!");
         }
 
@@ -50,6 +50,8 @@ export class UpdatePpcDisciplinaVersaoService {
 
         await repo.save(ppcDisciplinaVersao);
 
-        return ppcDisciplinaVersao;
+        return {
+            ...ppcDisciplinaVersao, ppc, disciplinaVersao
+        };
     }
 }

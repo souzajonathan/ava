@@ -5,10 +5,10 @@ export class GetAllPpcDisciplinaVersaoService {
     async execute() {
         const repo = getRepository(PpcDisciplinaVersao);
 
-        const ppcDisciplinaVersao = await repo.find({
+        const ppcDisciplinaVersoes = await repo.find({
             relations: ["ppc", "versoes", "perfis", "competencias"]
         });
 
-        return ppcDisciplinaVersao;
+        return ppcDisciplinaVersoes;
     }
 }

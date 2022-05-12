@@ -5,10 +5,10 @@ export class GetAllPerfisService {
     async execute() {
         const repo = getRepository(PerfilEgresso);
 
-        const perfil = await repo.find({
+        const perfis = await repo.find({
             relations: ["ppc"]
         });
 
-        return perfil;
+        return perfis;
     }
 }

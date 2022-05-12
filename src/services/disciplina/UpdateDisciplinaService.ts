@@ -31,6 +31,8 @@ export class UpdateDisciplinaService {
 
         await repo.save(disciplina);
 
-        return disciplina;
+        return {
+            ...disciplina, area
+        };
     }
 }

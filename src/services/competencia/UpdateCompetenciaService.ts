@@ -31,6 +31,8 @@ export class UpdateCompetenciaService {
 
         await repo.save(competHabilidades);
 
-        return competHabilidades;
+        return {
+            ...competHabilidades, ppc
+        };
     }
 }

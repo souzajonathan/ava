@@ -41,6 +41,6 @@ export class CreatePpcDisciplinaVersaoService {
 
         return {
             ...ppcDisciplinaVersao, ppc, disciplinaVersao
-        }
+        };
     }
 }

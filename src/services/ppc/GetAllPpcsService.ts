@@ -11,12 +11,12 @@ export class GetAllPpcsService {
             where.curso_id = curso_id;
         }
 
-        const ppc = await repo.find({
+        const ppcs = await repo.find({
             relations: ["curso", "versoes", "perfis", "competencias"],
             where
         });
 
-        return ppc;
+        return ppcs;
     }
 
 }
