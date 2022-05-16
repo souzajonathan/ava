@@ -5,7 +5,7 @@ export class GetAllAreasController {
     async handle(request: Request, response: Response) {
         const service = new GetAllAreasService();
 
-        const areas = await service.execute();
+        const areas = await service.execute(request.query);
 
         return response.json(areas);
     }
