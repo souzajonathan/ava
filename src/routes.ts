@@ -36,11 +36,13 @@ import { GetOnePpcController } from "./controller/ppc/GetOnePpcController";
 import { CreateCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/CreateCompetenciaPpcDisciplinaVersaoController";
 import { GetOneDisciplinaVersaoController } from "./controller/disciplina_versao/GetOneDisciplinaVersaoController";
 import { GetOneDisciplinaController } from "./controller/disciplina/GetOneDisciplinaController";
+import { GetOneAreaController } from "./controller/area/GetOneAreaController";
 
 const routes = Router();
 
 routes.post("/areas", new CreateAreaController().handle);
 routes.get("/areas", new GetAllAreasController().handle);
+routes.get("/area", new GetOneAreaController().handle);
 routes.delete("/areas/:id", new DeleteAreaController().handle);
 routes.put("/areas/:id", new UpdateAreaController().handle);
 
