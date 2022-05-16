@@ -12,7 +12,7 @@ export class GetOneDisciplinaVersaoService {
         }
 
         const versao = await repo.findOne({
-            relations: ["disciplina"],
+            relations: ["disciplina", "ppcDisciplinaVersoes"],
             where
         });
 

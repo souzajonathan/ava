@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Disciplina } from "./Disciplina";
+import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
 @Entity("disciplinaVersao")
 export class DisciplinaVersao {
@@ -9,6 +10,9 @@ export class DisciplinaVersao {
     @ManyToOne(() => Disciplina)
     @JoinColumn({name: "disciplina_id"})
     disciplina: Disciplina;
+
+    @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.versoes)
+    ppcDisciplinaVersoes: PpcDisciplinaVersao[];
     
     @Column("uuid")
     disciplina_id: string;
