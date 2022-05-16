@@ -5,7 +5,7 @@ export class GetAllDisciplinasController {
     async handle(request: Request, response: Response) {
         const service = new GetAllDisciplinasService();
 
-        const disciplinas = await service.execute();
+        const disciplinas = await service.execute(request.query);
 
         return response.json(disciplinas);
     }
