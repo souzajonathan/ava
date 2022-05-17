@@ -37,6 +37,7 @@ import { CreateCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc
 import { GetOneDisciplinaVersaoController } from "./controller/disciplina_versao/GetOneDisciplinaVersaoController";
 import { GetOneDisciplinaController } from "./controller/disciplina/GetOneDisciplinaController";
 import { GetOneAreaController } from "./controller/area/GetOneAreaController";
+import { GetOneCursoController } from "./controller/curso/GetOneCursoController";
 
 const routes = Router();
 
@@ -54,6 +55,7 @@ routes.put("/disciplinas/:id", new UpdateDisciplinaController().handle);
 
 routes.post("/cursos", new CreateCursoController().handle);
 routes.get("/cursos", new GetAllCursosController().handle);
+routes.get("/curso", new GetOneCursoController().handle);
 routes.delete("/cursos/:id", new DeleteCursoController().handle);
 routes.put("/cursos/:id", new UpdateCursoController().handle);
 

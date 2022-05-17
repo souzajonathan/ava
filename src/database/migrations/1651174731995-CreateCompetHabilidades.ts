@@ -35,7 +35,7 @@ export class CreateCompetHabilidades1651174731995 implements MigrationInterface 
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_pcc",
+                        name: "fk_ppc",
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
                         referencedColumnNames: ["id"]
