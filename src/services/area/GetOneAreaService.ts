@@ -11,7 +11,7 @@ export class GetOneAreaService {
             where.id = id;
         }
 
-        const area = await repo.find({
+        const area = await repo.findOne({
             relations: ["disciplinas"],
             where
         });
