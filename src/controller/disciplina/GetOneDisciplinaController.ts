@@ -3,9 +3,10 @@ import { GetOneDisciplinaService } from "../../services/disciplina/GetOneDiscipl
 
 export class GetOneDisciplinaController {
     async handle(request: Request, response: Response) {
+        const { id } = request.params;
         const service = new GetOneDisciplinaService();
 
-        const disciplina = await service.execute(request.query?.id as string);
+        const disciplina = await service.execute(id);
 
         return response.json(disciplina);
     }

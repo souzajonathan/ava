@@ -6,13 +6,17 @@ type filter = {
 }
 
 export class GetAllDisciplinasService {
-    async execute(query?:filter) {
+    async execute(query?:filter, area_id?: string) {
         const repo = getRepository(Disciplina);
 
         const where: FindConditions<Disciplina> = {};
 
         if (query?.nome) {
             where.name = Raw((alias) => `${alias} ilike '%${query.nome}%'`);
+        }
+
+        if (area_id) {
+            where.area_id = area_id;
         }
 
         const disciplinas = await repo.find({

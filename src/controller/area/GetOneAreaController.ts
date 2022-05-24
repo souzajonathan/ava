@@ -3,9 +3,10 @@ import { GetOneAreaService } from "../../services/area/GetOneAreaService";
 
 export class GetOneAreaController {
     async handle(request: Request, response: Response) {
+        const { id } = request.params;
         const service = new GetOneAreaService();
 
-        const area = await service.execute(request.query?.id as string);
+        const area = await service.execute(id);
 
         return response.json(area);
     }

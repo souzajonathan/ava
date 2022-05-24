@@ -1,23 +1,19 @@
-import { FindConditions, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 import { Ppc } from "../../entities/Ppc";
 
 export class GetOnePpcService {
-    async execute(id?: string) {
+    async execute(id: string) {
         const repo = getRepository(Ppc);
 
-        const where: FindConditions<Ppc> = {};
-
-        if (id){
-            where.id = id;
-        }
-
-        const ppc = await repo.findOne({
-            relations: ["curso", "versoes", "perfis", "competencias"],
-            where
+        const ppc = await repo.findOne(id, {
+            relations: ["curso", "versoes", "perfis", "competencias"]
         });
 
-        return ppc;
+        if (!ppc) {
+            return new Error("PPC não existe!");
+        }
 
+        return ppc;
     }
 
 }

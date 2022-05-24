@@ -12,4 +12,4 @@ app.use(express.json());
 
 app.use(routes);
 
-app.listen(5001, () => console.log("Server is running"));
+app.listen(5001, () => console.log("Server running"));

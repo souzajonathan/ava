@@ -44,7 +44,6 @@ export class CreateDisciplinaVersaoService {
         }
 
         const disciplina_versao_nome = `${disciplina.sigla}${credito_quantidade}-${numeroVersao+1}`;
-        console.log(disciplina_versao_nome);
 
         const disciplinaVersao = repo.create({
             disciplina_id,

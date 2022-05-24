@@ -38,30 +38,31 @@ import { GetOneDisciplinaVersaoController } from "./controller/disciplina_versao
 import { GetOneDisciplinaController } from "./controller/disciplina/GetOneDisciplinaController";
 import { GetOneAreaController } from "./controller/area/GetOneAreaController";
 import { GetOneCursoController } from "./controller/curso/GetOneCursoController";
+import { GetOnePpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/GetOnePpcDisciplinaVersaoController";
 
 const routes = Router();
 
 routes.post("/areas", new CreateAreaController().handle);
 routes.get("/areas", new GetAllAreasController().handle);
-routes.get("/area", new GetOneAreaController().handle);
+routes.get("/area/:id", new GetOneAreaController().handle);
 routes.delete("/areas/:id", new DeleteAreaController().handle);
 routes.put("/areas/:id", new UpdateAreaController().handle);
 
 routes.post("/disciplinas", new CreateDisciplinaController().handle);
 routes.get("/disciplinas", new GetAllDisciplinasController().handle);
-routes.get("/disciplina", new GetOneDisciplinaController().handle);
+routes.get("/disciplina/:id", new GetOneDisciplinaController().handle);
 routes.delete("/disciplinas/:id", new DeleteDisciplinaController().handle);
 routes.put("/disciplinas/:id", new UpdateDisciplinaController().handle);
 
 routes.post("/cursos", new CreateCursoController().handle);
 routes.get("/cursos", new GetAllCursosController().handle);
-routes.get("/curso", new GetOneCursoController().handle);
+routes.get("/curso/:id", new GetOneCursoController().handle);
 routes.delete("/cursos/:id", new DeleteCursoController().handle);
 routes.put("/cursos/:id", new UpdateCursoController().handle);
 
 routes.post("/ppcs", new CreatePpcController().handle);
 routes.get("/ppcs", new GetAllPpcsController().handle);
-routes.get("/ppc", new GetOnePpcController().handle);
+routes.get("/ppc/:id", new GetOnePpcController().handle);
 routes.delete("/ppcs/:id", new DeletePpcController().handle);
 routes.put("/ppcs/:id", new UpdatePpcController().handle);
 
@@ -77,12 +78,13 @@ routes.put("/perfis/:id", new UpdatePerfilController().handle);
 
 routes.post("/versoes", new CreateDisciplinaVersaoController().handle);
 routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
-routes.get("/versao", new GetOneDisciplinaVersaoController().handle);
+routes.get("/versao/:id", new GetOneDisciplinaVersaoController().handle);
 routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
 routes.put("/versoes/:id", new UpdateDisciplinaVersaoController().handle);
 
 routes.post("/ppc_disciplina_versao", new CreatePpcDisciplinaVersaoController().handle);
-routes.get("/ppc_disciplina_versao", new GetAllPpcDisciplinaVersaoController().handle);
+routes.get("/ppc_disciplina_versoes", new GetAllPpcDisciplinaVersaoController().handle);
+routes.get("/ppc_disciplina_versao/:id", new GetOnePpcDisciplinaVersaoController().handle);
 routes.delete("/ppc_disciplina_versao/:id", new DeletePpcDisciplinaVersaoController().handle);
 routes.put("/ppc_disciplina_versao/:id", new UpdatePpcDisciplinaVersaoController().handle);
 
