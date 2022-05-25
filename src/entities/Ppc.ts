@@ -20,7 +20,7 @@ export class Ppc {
     competencias: CompetHabilidades[];
 
     @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.ppc)
-    versoes: PpcDisciplinaVersao[];
+    versoesPdv: PpcDisciplinaVersao[];
     
     @Column("uuid")
     curso_id: string;
