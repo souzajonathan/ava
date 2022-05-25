@@ -41,6 +41,8 @@ import { GetOneCursoController } from "./controller/curso/GetOneCursoController"
 import { GetOnePpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/GetOnePpcDisciplinaVersaoController";
 import { DeletePerfilPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeletePerfilPpcDisciplinaVersaoController";
 import { DeleteCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeleteCompetenciaPpcDisciplinaVersaoController";
+import { GetOneCompetenciaController } from "./controller/competencia/GetOneCompetenciaController";
+import { GetOnePerfilController } from "./controller/perfil/GetOnePerfilController";
 
 const routes = Router();
 
@@ -70,11 +72,13 @@ routes.put("/ppcs/:id", new UpdatePpcController().handle);
 
 routes.post("/competencias", new CreateCompetenciaController().handle);
 routes.get("/competencias", new GetAllCompetenciasController().handle);
+routes.get("/competencia/:id", new GetOneCompetenciaController().handle);
 routes.delete("/competencias/:id", new DeleteCompetenciaController().handle);
 routes.put("/competencias/:id", new UpdateCompetenciaController().handle);
 
 routes.post("/perfis", new CreatePerfilController().handle);
 routes.get("/perfis", new GetAllPerfisController().handle);
+routes.get("/perfil/:id", new GetOnePerfilController().handle);
 routes.delete("/perfis/:id", new DeletePerfilController().handle);
 routes.put("/perfis/:id", new UpdatePerfilController().handle);
 
