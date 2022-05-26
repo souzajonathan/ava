@@ -6,7 +6,7 @@ export class GetOnePpcService {
         const repo = getRepository(Ppc);
 
         const ppc = await repo.findOne(id, {
-            relations: ["curso", "versoes", "perfis", "competencias"]
+            relations: ["curso", "versoesPdv", "perfis", "competencias"]
         });
 
         if (!ppc) {
