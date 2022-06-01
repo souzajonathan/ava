@@ -33,7 +33,8 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                     },
                     {
                         name: "observacao",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "em_oferta",

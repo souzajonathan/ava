@@ -17,15 +17,18 @@ export class CreateAutor1653592198272 implements MigrationInterface {
                     },
                     {
                         name: "first_name",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "middle_name",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "last_name",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "quote",
@@ -33,7 +36,8 @@ export class CreateAutor1653592198272 implements MigrationInterface {
                     },
                     {
                         name: "nationality",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "created_at",
