@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { CompetHabilidades } from "../../entities/CompetHabilidades";
 import { Ppc } from "../../entities/Ppc";
 
@@ -11,6 +12,9 @@ type CompetenciaUpdateRequest = {
 
 export class UpdateCompetenciaService {
     async execute ({id, ppc_id, competencia, competenciaNumero}: CompetenciaUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(CompetHabilidades);
         const repoPpc = getRepository(Ppc);
 

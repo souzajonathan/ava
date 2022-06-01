@@ -33,7 +33,7 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

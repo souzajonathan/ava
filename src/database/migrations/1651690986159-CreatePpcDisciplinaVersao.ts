@@ -3,7 +3,7 @@ import {MigrationInterface, QueryRunner, Table} from "typeorm";
 export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        
+        await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
                 name: "ppcDisciplinaVersao",
@@ -33,7 +33,7 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                         type: "uuid"
                     },
                     {
-                        name: "disciplina_id",
+                        name: "disciplina_versao_id",
                         type: "uuid"
                     }
                 ],
@@ -45,14 +45,14 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                         referencedColumnNames: ["id"]
                     },
                     {
-                        name: "fk_disciplina",
-                        columnNames: ["disciplina_id"],
-                        referencedTableName: "disciplinas",
+                        name: "fk_disciplina_versao_id",
+                        columnNames: ["disciplina_versao_id"],
+                        referencedTableName: "disciplinaVersao",
                         referencedColumnNames: ["id"]
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

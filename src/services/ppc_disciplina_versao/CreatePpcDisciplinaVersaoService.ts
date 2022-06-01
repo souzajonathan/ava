@@ -1,4 +1,5 @@
 import { getRepository, In } from "typeorm";
+import { validate } from "uuid";
 import { CompetHabilidades } from "../../entities/CompetHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
@@ -16,6 +17,9 @@ type PpcDisciplinaVersaoRequest = {
 
 export class CreatePpcDisciplinaVersaoService {
     async execute ({ppc_id, disciplina_versao_id, modulo, semestre, perfis_id, competencias_id}: PpcDisciplinaVersaoRequest) {
+        if (!validate(ppc_id) && !validate(disciplina_versao_id)){
+            return new Error("ID's inválidos");
+        }
         const repo = getRepository(PpcDisciplinaVersao);
         const repoPpc = getRepository(Ppc);
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);

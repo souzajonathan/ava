@@ -17,12 +17,15 @@ export class CreateDisciplinas1650910636023 implements MigrationInterface {
                     },
                     {
                         name: "name",
-                        type: "varchar",
-                        isUnique: true
+                        type: "varchar"
                     },
                     {
                         name: "area_id",
                         type: "uuid"
+                    },
+                    {
+                        name: "sigla",
+                        type: "varchar"
                     },
                     {
                         name: "created_at",
@@ -39,7 +42,7 @@ export class CreateDisciplinas1650910636023 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

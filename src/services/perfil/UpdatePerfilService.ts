@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
 import { Ppc } from "../../entities/Ppc";
 
@@ -11,6 +12,9 @@ type PerfilUpdateRequest = {
 
 export class UpdatePerfilService {
     async execute ({id, ppc_id, perfil, perfilNumero}: PerfilUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(PerfilEgresso);
         const repoPpc = getRepository(Ppc);
 

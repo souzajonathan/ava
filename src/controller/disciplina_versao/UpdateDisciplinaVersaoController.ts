@@ -7,12 +7,9 @@ export class UpdateDisciplinaVersaoController {
         const {
             disciplina_id,
             disciplina_versao_nome,
-            sigla,
             codigo,
             credito_quantidade,
             ementa,
-            bibliografia_basica,
-            comp_bibliografia,
             observacao,
             em_oferta,
             produzido
@@ -24,12 +21,9 @@ export class UpdateDisciplinaVersaoController {
             id,
             disciplina_id,
             disciplina_versao_nome,
-            sigla,
             codigo,
             credito_quantidade,
             ementa,
-            bibliografia_basica,
-            comp_bibliografia,
             observacao,
             em_oferta,
             produzido

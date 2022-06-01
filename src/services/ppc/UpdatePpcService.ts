@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
 import { Ppc } from "../../entities/Ppc";
 
@@ -14,6 +15,9 @@ type PpcUpdateRequest = {
 
 export class UpdatePpcService {
     async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id}: PpcUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(Ppc);
         const repoCurso = getRepository(Curso);
 

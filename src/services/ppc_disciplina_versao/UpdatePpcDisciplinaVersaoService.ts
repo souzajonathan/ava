@@ -1,11 +1,12 @@
 import { getRepository, In } from "typeorm";
+import { validate } from "uuid";
 import { CompetHabilidades } from "../../entities/CompetHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
 import { Ppc } from "../../entities/Ppc";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
-type PerfilPpcDisciplinaVersaoRequest = {
+type PpcDisciplinaVersaoUpdateRequest = {
     id: string;
     ppc_id: string;
     disciplina_versao_id: string;
@@ -16,7 +17,10 @@ type PerfilPpcDisciplinaVersaoRequest = {
 };
 
 export class UpdatePpcDisciplinaVersaoService {
-    async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PerfilPpcDisciplinaVersaoRequest) {
+    async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PpcDisciplinaVersaoUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(PpcDisciplinaVersao);
         const repoPpc = getRepository(Ppc);
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);

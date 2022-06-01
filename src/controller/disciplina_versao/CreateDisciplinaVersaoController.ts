@@ -8,8 +8,6 @@ export class CreateDisciplinaVersaoController {
             codigo,
             credito_quantidade,
             ementa,
-            bibliografia_basica,
-            comp_bibliografia,
             observacao,
             em_oferta,
             produzido
@@ -22,8 +20,6 @@ export class CreateDisciplinaVersaoController {
             codigo,
             credito_quantidade,
             ementa,
-            bibliografia_basica,
-            comp_bibliografia,
             observacao,
             em_oferta,
             produzido

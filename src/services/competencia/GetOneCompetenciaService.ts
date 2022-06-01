@@ -1,8 +1,14 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { CompetHabilidades } from "../../entities/CompetHabilidades";
 
 export class GetOneCompetenciaService {
     async execute(id: string) {
+        
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
+        
         const repo = getRepository(CompetHabilidades);
 
         /* const competencia = await repo.findOne(id, {
@@ -15,8 +21,8 @@ export class GetOneCompetenciaService {
                 id: id
             })
             .leftJoinAndSelect("competencia.ppc", "ppc")
-            .leftJoinAndSelect("ppc.versoesPdv", "versoesPdv")
-            .leftJoinAndSelect("versoesPdv.versoes", "versoes")
+            .leftJoinAndSelect("ppc.ppcDisciplinaVersoes", "ppcDisciplinaVersoes")
+            .leftJoinAndSelect("ppcDisciplinaVersoes.versoes", "versoes")
             .getMany();
 
         if (!competencia) {

@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
@@ -9,11 +10,9 @@ type DisciplinaVersaoUpdateRequest = {
     codigo: string;
     credito_quantidade: number;
     ementa: string;
-    bibliografia_basica: string;
-    comp_bibliografia: string;
     observacao: string;
-    em_oferta: number;
-    produzido: number;
+    em_oferta: boolean;
+    produzido: boolean;
 };
 
 export class UpdateDisciplinaVersaoService {
@@ -24,12 +23,13 @@ export class UpdateDisciplinaVersaoService {
         codigo,
         credito_quantidade,
         ementa,
-        bibliografia_basica,
-        comp_bibliografia,
         observacao,
         em_oferta,
         produzido
     }: DisciplinaVersaoUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(DisciplinaVersao);
         const repoDisciplina = getRepository(Disciplina);
 
@@ -49,8 +49,6 @@ export class UpdateDisciplinaVersaoService {
         disciplinaVersao.codigo = codigo ? codigo : disciplinaVersao.codigo;
         disciplinaVersao.credito_quantidade = credito_quantidade ? credito_quantidade : disciplinaVersao.credito_quantidade;
         disciplinaVersao.ementa = ementa ? ementa : disciplinaVersao.ementa;
-        disciplinaVersao.bibliografia_basica = bibliografia_basica ? bibliografia_basica : disciplinaVersao.bibliografia_basica;
-        disciplinaVersao.comp_bibliografia = comp_bibliografia ? comp_bibliografia : disciplinaVersao.comp_bibliografia;
         disciplinaVersao.observacao = observacao ? observacao : disciplinaVersao.observacao;
         disciplinaVersao.em_oferta = em_oferta ? em_oferta : disciplinaVersao.em_oferta;
         disciplinaVersao.produzido = produzido ? produzido : disciplinaVersao.produzido;

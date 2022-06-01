@@ -42,7 +42,7 @@ export class CreateCompetHabilidades1651174731995 implements MigrationInterface 
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

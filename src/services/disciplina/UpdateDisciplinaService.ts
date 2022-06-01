@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Area } from "../../entities/Area";
 import { Disciplina } from "../../entities/Disciplina";
 
@@ -11,6 +12,9 @@ type DisciplinaUpdateRequest = {
 
 export class UpdateDisciplinaService {
     async execute ({id, name, area_id, sigla}: DisciplinaUpdateRequest) {
+        if (!validate(id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(Disciplina);
         const repoArea = getRepository(Area);
 

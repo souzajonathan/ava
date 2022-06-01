@@ -50,11 +50,12 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                         name: "fk_cursos",
                         columnNames: ["curso_id"],
                         referencedTableName: "cursos",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: 'CASCADE'
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

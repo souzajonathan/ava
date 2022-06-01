@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Bibliografia } from "./Bibliografia";
 import { Disciplina } from "./Disciplina";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
@@ -13,6 +14,9 @@ export class DisciplinaVersao {
 
     @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.versoes)
     ppcDisciplinaVersoes: PpcDisciplinaVersao[];
+
+    @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.versoes)
+    bibliografias: Bibliografia[];
     
     @Column("uuid")
     disciplina_id: string;
@@ -33,17 +37,11 @@ export class DisciplinaVersao {
     ementa: string;
 
     @Column()
-    bibliografia_basica: string;
-
-    @Column()
-    comp_bibliografia: string;
-
-    @Column()
     observacao: string;
 
     @Column()
-    em_oferta: number;
+    em_oferta: boolean;
 
     @Column()
-    produzido: number;
+    produzido: boolean;
 }

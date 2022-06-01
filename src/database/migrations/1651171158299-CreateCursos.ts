@@ -31,7 +31,7 @@ export class CreateCursos1651171158299 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

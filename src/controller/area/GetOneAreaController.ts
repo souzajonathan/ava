@@ -8,6 +8,10 @@ export class GetOneAreaController {
 
         const area = await service.execute(id);
 
+        if(area instanceof Error) {
+            return response.status(400).json(area.message);
+        }
+
         return response.json(area);
     }
 }

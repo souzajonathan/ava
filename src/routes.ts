@@ -43,6 +43,26 @@ import { DeletePerfilPpcDisciplinaVersaoController } from "./controller/ppc_disc
 import { DeleteCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeleteCompetenciaPpcDisciplinaVersaoController";
 import { GetOneCompetenciaController } from "./controller/competencia/GetOneCompetenciaController";
 import { GetOnePerfilController } from "./controller/perfil/GetOnePerfilController";
+import { CreateAutorController } from "./controller/autor/CreateAutorController";
+import { GetAllAutoresController } from "./controller/autor/GetAllAutoresController";
+import { GetOneAutorController } from "./controller/autor/GetOneAutorController";
+import { DeleteAutorController } from "./controller/autor/DeleteAutorController";
+import { UpdateAutorController } from "./controller/autor/UpdateAutorController";
+import { CreateObraController } from "./controller/obra/CreateObraController";
+import { GetAllObrasController } from "./controller/obra/GetAllObrasController";
+import { GetOneObraController } from "./controller/obra/GetOneObraController";
+import { DeleteObraController } from "./controller/obra/DeleteObraController";
+import { UpdateObraController } from "./controller/obra/UpdateObraController";
+import { CreateBibliografiaController } from "./controller/bibliografia/CreateBibliografiaController";
+import { GetAllBibliografiasController } from "./controller/bibliografia/GetAllBibliografiasController";
+import { GetOneBibliografiaController } from "./controller/bibliografia/GetOneBibliografiaController";
+import { DeleteBibliografiaController } from "./controller/bibliografia/DeleteBibliografiaController";
+import { UpdateBibliografiaController } from "./controller/bibliografia/UpdateBibliografiaController";
+import { CreateObraAutorController } from "./controller/obra_autor/CreateObraAutorController";
+import { GetAllObraAutorController } from "./controller/obra_autor/GetAllObraAutorController";
+import { GetOneObraAutorController } from "./controller/obra_autor/GetOneObraAutorController";
+import { DeleteObraAutorController } from "./controller/obra_autor/DeleteObraAutorController";
+import { UpdateObraAutorController } from "./controller/obra_autor/UpdateObraAutorController";
 
 const routes = Router();
 
@@ -87,6 +107,30 @@ routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
 routes.get("/versao/:id", new GetOneDisciplinaVersaoController().handle);
 routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
 routes.put("/versoes/:id", new UpdateDisciplinaVersaoController().handle);
+
+routes.post("/autores", new CreateAutorController().handle);
+routes.get("/autores", new GetAllAutoresController().handle);
+routes.get("/autor/:id", new GetOneAutorController().handle);
+routes.delete("/autores/:id", new DeleteAutorController().handle);
+routes.put("/autores/:id", new UpdateAutorController().handle);
+
+routes.post("/obras", new CreateObraController().handle);
+routes.get("/obras", new GetAllObrasController().handle);
+routes.get("/obra/:id", new GetOneObraController().handle);
+routes.delete("/obras/:id", new DeleteObraController().handle);
+routes.put("/obras/:id", new UpdateObraController().handle);
+
+routes.post("/bibliografias", new CreateBibliografiaController().handle);
+routes.get("/bibliografias", new GetAllBibliografiasController().handle);
+routes.get("/bibliografia/:id", new GetOneBibliografiaController().handle);
+routes.delete("/bibliografias/:id", new DeleteBibliografiaController().handle);
+routes.put("/bibliografias/:id", new UpdateBibliografiaController().handle);
+
+routes.post("/obra_autor", new CreateObraAutorController().handle);
+routes.get("/obra_autor", new GetAllObraAutorController().handle);
+routes.get("/obra_autor/:id", new GetOneObraAutorController().handle);
+routes.delete("/obra_autor/:id", new DeleteObraAutorController().handle);
+routes.put("/obra_autor/:id", new UpdateObraAutorController().handle);
 
 routes.post("/ppc_disciplina_versao", new CreatePpcDisciplinaVersaoController().handle);
 routes.get("/ppc_disciplina_versoes", new GetAllPpcDisciplinaVersaoController().handle);

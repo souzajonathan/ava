@@ -42,7 +42,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

@@ -33,7 +33,7 @@ export class CreateCompetenciaPpcVersao1651774035110 implements MigrationInterfa
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

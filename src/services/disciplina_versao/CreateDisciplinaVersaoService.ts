@@ -7,11 +7,9 @@ type DisciplinaVersaoRequest = {
     codigo: string;
     credito_quantidade: number;
     ementa: string;
-    bibliografia_basica: string;
-    comp_bibliografia: string;
     observacao: string;
-    em_oferta: number;
-    produzido: number;
+    em_oferta: boolean;
+    produzido: boolean;
 };
 
 export class CreateDisciplinaVersaoService {
@@ -20,8 +18,6 @@ export class CreateDisciplinaVersaoService {
         codigo,
         credito_quantidade,
         ementa,
-        bibliografia_basica,
-        comp_bibliografia,
         observacao,
         em_oferta,
         produzido
@@ -51,8 +47,6 @@ export class CreateDisciplinaVersaoService {
             codigo,
             credito_quantidade,
             ementa,
-            bibliografia_basica,
-            comp_bibliografia,
             observacao,
             em_oferta,
             produzido

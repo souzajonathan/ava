@@ -20,10 +20,6 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                         type: "varchar"
                     },
                     {
-                        name: "sigla",
-                        type: "varchar"
-                    },
-                    {
                         name: "codigo",
                         type: "varchar"
                     },
@@ -36,24 +32,16 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                         type: "varchar"
                     },
                     {
-                        name: "bibliografia_basica",
-                        type: "varchar"
-                    },
-                    {
-                        name: "comp_bibliografia",
-                        type: "varchar"
-                    },
-                    {
                         name: "observacao",
                         type: "varchar"
                     },
                     {
                         name: "em_oferta",
-                        type: "int"
+                        type: "boolean"
                     },
                     {
                         name: "produzido",
-                        type: "int"
+                        type: "boolean"
                     },
                     {
                         name: "disciplina_id",
@@ -74,7 +62,7 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

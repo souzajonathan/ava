@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 type CompetenciaPpcDisciplinaVersaoRequest = {
@@ -8,6 +9,9 @@ type CompetenciaPpcDisciplinaVersaoRequest = {
 
 export class DeleteCompetenciaPpcDisciplinaVersaoService {
     async execute ({competencia_id, ppcDisciplinaVersao_id}: CompetenciaPpcDisciplinaVersaoRequest) {
+        if (!validate(competencia_id || ppcDisciplinaVersao_id)){
+            return new Error("ID inválido");
+        }
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["competencias"]});

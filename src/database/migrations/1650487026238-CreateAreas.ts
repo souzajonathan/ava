@@ -31,7 +31,7 @@ export class CreateAreas1650487026238 implements MigrationInterface {
                     }
                 ]
             })
-        )
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

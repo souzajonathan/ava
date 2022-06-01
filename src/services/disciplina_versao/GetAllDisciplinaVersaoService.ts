@@ -12,7 +12,7 @@ export class GetAllDisciplinaVersoesService {
         }
 
         const versoes = await repo.find({
-            relations: ["disciplina", "ppcDisciplinaVersoes"],
+            relations: ["disciplina", "ppcDisciplinaVersoes", "bibliografias"],
             where
         });
 
