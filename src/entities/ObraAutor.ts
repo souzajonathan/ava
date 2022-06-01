@@ -23,8 +23,5 @@ export class ObraAutor {
     
     @Column()
     funcao: string;
-
-    @CreateDateColumn()
-    created_at: Date;
     
 }

@@ -13,6 +13,7 @@ type ObraRequest = {
     ano: string;
     mes: string;
     dia: string;
+    volume: string;
     edicao: string;
     resumo: string;
     periodico_nome: string;
@@ -40,6 +41,7 @@ export class CreateObraService {
         ano,
         mes,
         dia,
+        volume,
         edicao,
         resumo,
         periodico_nome,
@@ -67,6 +69,7 @@ export class CreateObraService {
             ano,
             mes,
             dia,
+            volume,
             edicao,
             resumo,
             periodico_nome,

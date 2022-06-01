@@ -52,6 +52,7 @@ export class UpdateObraService {
         idioma,
         doi,
         isbn,
+        issn,
         acesso_em,
         contido_em
     }: ObraUpdateRequest) {
@@ -86,6 +87,7 @@ export class UpdateObraService {
         obra.idioma = idioma ? idioma : obra.idioma;
         obra.doi = doi ? doi : obra.doi;
         obra.isbn = isbn ? isbn : obra.isbn;
+        obra.issn = issn ? issn : obra.issn;
         obra.acesso_em = acesso_em ? acesso_em : obra.acesso_em;
         obra.contido_em = contido_em ? contido_em : obra.contido_em;
 

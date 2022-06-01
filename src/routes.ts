@@ -127,7 +127,7 @@ routes.delete("/bibliografias/:id", new DeleteBibliografiaController().handle);
 routes.put("/bibliografias/:id", new UpdateBibliografiaController().handle);
 
 routes.post("/obra_autor", new CreateObraAutorController().handle);
-routes.get("/obra_autor", new GetAllObraAutorController().handle);
+routes.get("/obras_autores", new GetAllObraAutorController().handle);
 routes.get("/obra_autor/:id", new GetOneObraAutorController().handle);
 routes.delete("/obra_autor/:id", new DeleteObraAutorController().handle);
 routes.put("/obra_autor/:id", new UpdateObraAutorController().handle);
