@@ -6,6 +6,7 @@ type ObraRequest = {
     obra_nome: string;
     capitulo_nome: string;
     serie_nome: string;
+    colecao_nome: string;
     organizador_editor_nome: string;
     funcao: string;
     cidade: string;
@@ -34,6 +35,7 @@ export class CreateObraService {
         obra_nome,
         capitulo_nome,
         serie_nome,
+        colecao_nome,
         organizador_editor_nome,
         funcao,
         cidade,
@@ -62,6 +64,7 @@ export class CreateObraService {
             obra_nome,
             capitulo_nome,
             serie_nome,
+            colecao_nome,
             organizador_editor_nome,
             funcao,
             cidade,

@@ -8,6 +8,7 @@ type ObraUpdateRequest = {
     obra_nome: string;
     capitulo_nome: string;
     serie_nome: string;
+    colecao_nome: string;
     organizador_editor_nome: string;
     funcao: string;
     cidade: string;
@@ -37,6 +38,7 @@ export class UpdateObraService {
         obra_nome,
         capitulo_nome,
         serie_nome,
+        colecao_nome,
         organizador_editor_nome,
         funcao,
         cidade,
@@ -73,6 +75,7 @@ export class UpdateObraService {
         obra.obra_nome = obra_nome ? obra_nome : obra.obra_nome;
         obra.capitulo_nome = capitulo_nome ? capitulo_nome : obra.capitulo_nome;
         obra.serie_nome = serie_nome ? serie_nome : obra.serie_nome;
+        obra.colecao_nome = colecao_nome ? colecao_nome : obra.colecao_nome;
         obra.organizador_editor_nome = organizador_editor_nome ? organizador_editor_nome : obra.organizador_editor_nome;
         obra.funcao = funcao ? funcao : obra.funcao;
         obra.cidade = cidade ? cidade : obra.cidade;
