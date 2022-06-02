@@ -10,12 +10,15 @@ export class DeleteCursoService {
         }
         const repo = getRepository(Curso);
         const repoPpc = getRepository(Ppc);
+        const curso = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!curso){
             return new Error("Curso não existe!");
         }
 
-        if(await repoPpc.findOne({where: {curso_id : id}})){
+        const cursoWithPpcs = await repoPpc.findOne({where: {curso_id : id}});
+
+        if(cursoWithPpcs){
             return new Error("Curso com ppc's cadastrados");
         }
 

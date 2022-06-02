@@ -1,4 +1,4 @@
-import { FindConditions, getRepository, Like, Raw } from "typeorm";
+import { FindConditions, getRepository, Raw } from "typeorm";
 import { Disciplina } from "../../entities/Disciplina";
 
 type filter = {

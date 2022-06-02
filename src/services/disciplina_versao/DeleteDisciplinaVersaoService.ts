@@ -8,8 +8,9 @@ export class DeleteDisciplinaVersaoService {
             return new Error("ID inválido");
         }
         const repo = getRepository(DisciplinaVersao);
+        const versao = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!versao){
             return new Error("Versão de Disciplina não existente!");
         }
 

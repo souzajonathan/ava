@@ -19,13 +19,13 @@ export class CreateDisciplinaService {
             return new Error("Área não existe!");
         }
 
-        const siglaSameName = await repo.findOne({
+        const siglaAlreadyExists = await repo.findOne({
             where: {
                 name: sigla
             }
         })
 
-        if (siglaSameName) {
+        if (siglaAlreadyExists) {
             return new Error("Sigla já existe!");
         }
 

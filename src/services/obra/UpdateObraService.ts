@@ -15,6 +15,7 @@ type ObraUpdateRequest = {
     ano: string;
     mes: string;
     dia: string;
+    volume: string;
     edicao: string;
     resumo: string;
     periodico_nome: string;
@@ -43,6 +44,7 @@ export class UpdateObraService {
         ano,
         mes,
         dia,
+        volume,
         edicao,
         resumo,
         periodico_nome,
@@ -78,6 +80,7 @@ export class UpdateObraService {
         obra.ano = ano ? ano : obra.ano;
         obra.mes = mes ? mes : obra.mes;
         obra.dia = dia ? dia : obra.dia;
+        obra.volume = volume ? volume : obra.volume;
         obra.edicao = edicao ? edicao : obra.edicao;
         obra.resumo = resumo ? resumo : obra.resumo;
         obra.periodico_nome = periodico_nome ? periodico_nome : obra.periodico_nome;

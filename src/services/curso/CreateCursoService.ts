@@ -9,9 +9,9 @@ export class CreateCursoService {
     async execute({ name }: CursoRequest): Promise<Curso | Error> {
         const repo = getRepository(Curso);
 
-        const cursoDb = await repo.findOne({name});
+        const cursoAlreadyExists = await repo.findOne({name});
 
-        if( cursoDb ) {
+        if(cursoAlreadyExists) {
             return new Error("Curso já existe");
         }
 

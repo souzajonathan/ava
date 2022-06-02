@@ -9,8 +9,9 @@ type AreaRequest = {
 export class CreateAreaService {
     async execute({ name, description }: AreaRequest): Promise<Area | Error> {
         const repo = getRepository(Area);
+        const areaAlreadyExists = await repo.findOne({name});
 
-        if(await repo.findOne({name})) {
+        if(areaAlreadyExists) {
             return new Error("Área já existe");
         }
 

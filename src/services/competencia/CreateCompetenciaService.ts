@@ -12,7 +12,6 @@ export class CreateCompetenciaService {
     async execute({ ppc_id, competencia, competenciaNumero }: CompetenciaRequest) {
         const repo = getRepository(CompetHabilidades);
         const repoPpc = getRepository(Ppc);
-
         const ppc = await repoPpc.findOne(ppc_id);
 
         if(!ppc) {

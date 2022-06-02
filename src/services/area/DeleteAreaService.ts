@@ -10,12 +10,15 @@ export class DeleteAreaService {
         }
         const repo = getRepository(Area);
         const repoDisciplina = getRepository(Disciplina);
+        const area = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!area){
             return new Error("Área não existe!");
         }
 
-        if(await repoDisciplina.findOne({where: {area_id : id}})){
+        const areaWithDisciplinas = await repoDisciplina.findOne({where: {area_id : id}});
+
+        if(areaWithDisciplinas){
             return new Error("Área com disciplinas cadastradas");
         }
 

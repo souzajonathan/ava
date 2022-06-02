@@ -8,8 +8,9 @@ export class DeleteObraService {
             return new Error("ID inválido");
         }
         const repo = getRepository(Obra);
+        const obra = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!obra){
             return new Error("Obra não existe!");
         }
 

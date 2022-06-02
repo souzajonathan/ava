@@ -8,8 +8,9 @@ export class DeletePerfilService {
             return new Error("ID inválido");
         }
         const repo = getRepository(PerfilEgresso);
+        const perfil = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!perfil){
             return new Error("Perfil do egresso não existente!");
         }
 

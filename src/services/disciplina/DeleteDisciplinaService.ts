@@ -10,12 +10,15 @@ export class DeleteDisciplinaService {
         }
         const repo = getRepository(Disciplina);
         const repoVersoes = getRepository(DisciplinaVersao);
+        const disciplina = await repo.findOne(id);
         
-        if(!(await repo.findOne(id))){
+        if(!disciplina){
             return new Error("Disciplina não existe!");
         }
 
-        if(await repoVersoes.findOne({where: {disciplina_id : id}})){
+        const disciplinaWithVersoes = await repoVersoes.findOne({where: {disciplina_id : id}});
+
+        if(disciplinaWithVersoes){
             return new Error("Disciplina com versões cadastradas");
         }
 
