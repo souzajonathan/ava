@@ -11,7 +11,9 @@ export class GetOneAutorService {
 
         const repo = getRepository(Autor);
         
-        const autor = await repo.findOne(id);
+        const autor = await repo.findOne(id, {
+            relations: ["obrasAutores"]
+        });
 
         if (!autor) {
             return new Error("Autor não existe!");

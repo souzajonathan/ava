@@ -21,6 +21,7 @@ export class GetAllAutoresService {
         }
 
         const autores = await repo.find({
+            relations: ["obrasAutores"],
             where
         });
 

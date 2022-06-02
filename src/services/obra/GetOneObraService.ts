@@ -11,7 +11,9 @@ export class GetOneObraService {
 
         const repo = getRepository(Obra);
         
-        const obra = await repo.findOne(id);
+        const obra = await repo.findOne(id, {
+            relations: ["bibliografias", "obrasAutores"],
+        });
 
         if (!obra) {
             return new Error("Obra não existe!");
