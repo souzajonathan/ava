@@ -28,6 +28,7 @@ export class UpdateObraController {
             doi,
             isbn,
             issn,
+            url,
             acesso_em,
             contido_em
         } = request.body;
@@ -59,6 +60,7 @@ export class UpdateObraController {
             doi,
             isbn,
             issn,
+            url,
             acesso_em,
             contido_em
         });

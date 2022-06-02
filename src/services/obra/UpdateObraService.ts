@@ -27,6 +27,7 @@ type ObraUpdateRequest = {
     doi: string;
     isbn: string;
     issn: string;
+    url: string;
     acesso_em: string;
     contido_em: string;
 };
@@ -57,6 +58,7 @@ export class UpdateObraService {
         doi,
         isbn,
         issn,
+        url,
         acesso_em,
         contido_em
     }: ObraUpdateRequest) {
@@ -94,6 +96,7 @@ export class UpdateObraService {
         obra.doi = doi ? doi : obra.doi;
         obra.isbn = isbn ? isbn : obra.isbn;
         obra.issn = issn ? issn : obra.issn;
+        obra.url = url ? url : obra.url;
         obra.acesso_em = acesso_em ? acesso_em : obra.acesso_em;
         obra.contido_em = contido_em ? contido_em : obra.contido_em;
 

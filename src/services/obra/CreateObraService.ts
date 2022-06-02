@@ -25,6 +25,7 @@ type ObraRequest = {
     doi: string;
     isbn: string;
     issn: string;
+    url: string;
     acesso_em: string;
     contido_em: string;
 };
@@ -54,6 +55,7 @@ export class CreateObraService {
         doi,
         isbn,
         issn,
+        url,
         acesso_em,
         contido_em
     }: ObraRequest): Promise< Obra | Error > {
@@ -83,6 +85,7 @@ export class CreateObraService {
             doi,
             isbn,
             issn,
+            url,
             acesso_em,
             contido_em
         });
