@@ -8,6 +8,10 @@ export class GetOneDisciplinaVersaoController {
 
         const versao = await service.execute(id);
 
+        if(versao instanceof Error) {
+            return response.status(400).json(versao.message);
+        }
+
         return response.json(versao);
     }
 }

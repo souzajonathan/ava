@@ -8,6 +8,10 @@ export class GetOneDisciplinaController {
 
         const disciplina = await service.execute(id);
 
+        if(disciplina instanceof Error) {
+            return response.status(400).json(disciplina.message);
+        }
+
         return response.json(disciplina);
     }
 }

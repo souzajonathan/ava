@@ -8,6 +8,10 @@ export class GetOnePerfilController {
 
         const perfil = await service.execute(id);
 
+        if(perfil instanceof Error) {
+            return response.status(400).json(perfil.message);
+        }
+
         return response.json(perfil);
     }
 }

@@ -8,6 +8,10 @@ export class GetOneCursoController {
 
         const curso = await service.execute(id);
 
+        if(curso instanceof Error) {
+            return response.status(400).json(curso.message);
+        }
+
         return response.json(curso);
     }
 }

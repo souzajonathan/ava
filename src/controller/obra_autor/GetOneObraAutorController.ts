@@ -8,6 +8,10 @@ export class GetOneObraAutorController {
 
         const obraAutor = await service.execute(id);
 
+        if(obraAutor instanceof Error) {
+            return response.status(400).json(obraAutor.message);
+        }
+
         return response.json(obraAutor);
     }
 }
