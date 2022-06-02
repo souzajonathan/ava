@@ -8,6 +8,10 @@ export class GetOnePpcController {
 
         const ppc = await service.execute(id);
 
+        if(ppc instanceof Error) {
+            return response.status(400).json(ppc.message);
+        }
+
         return response.json(ppc);
     }
 }

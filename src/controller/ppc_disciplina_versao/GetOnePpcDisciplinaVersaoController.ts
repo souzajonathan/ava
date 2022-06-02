@@ -8,6 +8,10 @@ export class GetOnePpcDisciplinaVersaoController {
 
         const ppcDisciplinaVersao = await service.execute(id);
 
+        if(ppcDisciplinaVersao instanceof Error) {
+            return response.status(400).json(ppcDisciplinaVersao.message);
+        }
+
         return response.json(ppcDisciplinaVersao);
     }
 }

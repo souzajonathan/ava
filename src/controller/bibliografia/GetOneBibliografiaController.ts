@@ -8,6 +8,10 @@ export class GetOneBibliografiaController {
 
         const bibliografia = await service.execute(id);
 
+        if(bibliografia instanceof Error) {
+            return response.status(400).json(bibliografia.message);
+        }
+
         return response.json(bibliografia);
     }
 }

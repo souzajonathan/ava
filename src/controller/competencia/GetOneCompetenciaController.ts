@@ -8,6 +8,10 @@ export class GetOneCompetenciaController {
 
         const competencia = await service.execute(id);
 
+        if(competencia instanceof Error) {
+            return response.status(400).json(competencia.message);
+        }
+
         return response.json(competencia);
     }
 }
