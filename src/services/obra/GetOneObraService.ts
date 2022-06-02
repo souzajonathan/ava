@@ -11,9 +11,20 @@ export class GetOneObraService {
 
         const repo = getRepository(Obra);
         
-        const obra = await repo.findOne(id, {
+        /* const obra = await repo.findOne(id, {
             relations: ["bibliografias", "obrasAutores"],
-        });
+        }); */
+
+        const obra = await repo
+            .createQueryBuilder("obra")
+            .where({
+                id: id
+            })
+            .leftJoin("obra.bibliografias", "bibliografias")
+            .select(["obra", "bibliografias.tipo"])
+            .leftJoinAndSelect("obra.obrasAutores", "obraAutor")
+            .leftJoinAndSelect("obraAutor.autores", "autores")
+            .getOne();
 
         if (!obra) {
             return new Error("Obra não existe!");

@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Obra } from "../../entities/Obra";
 
 type ObraRequest = {
@@ -60,6 +61,17 @@ export class CreateObraService {
         contido_em
     }: ObraRequest): Promise< Obra | Error > {
         const repo = getRepository(Obra);
+
+        if(contido_em){
+            if(validate(contido_em)){
+                if(!repo.findOne({where: {id: contido_em}})){
+                    return new Error("ID de 'contido em' inexistente");
+                }
+            }
+            else{
+                return new Error("ID de 'contido em' inválido");
+            }
+        }
 
         const obra = repo.create({
             item_tipo,

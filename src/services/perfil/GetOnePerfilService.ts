@@ -23,7 +23,7 @@ export class GetOnePerfilService {
             .leftJoinAndSelect("perfil.ppc", "ppc")
             .leftJoinAndSelect("ppc.ppcDisciplinaVersoes", "ppcDisciplinaVersoes")
             .leftJoinAndSelect("ppcDisciplinaVersoes.versoes", "versoes")
-            .getMany();
+            .getOne();
 
         if (!perfil) {
             return new Error("Perfil não existe!");

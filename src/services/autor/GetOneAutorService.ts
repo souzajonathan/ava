@@ -11,9 +11,18 @@ export class GetOneAutorService {
 
         const repo = getRepository(Autor);
         
-        const autor = await repo.findOne(id, {
+        /* const autor = await repo.findOne(id, {
             relations: ["obrasAutores"]
-        });
+        }); */
+
+        const autor = await repo
+            .createQueryBuilder("autor")
+            .where({
+                id: id
+            })
+            .leftJoinAndSelect("autor.obrasAutores", "obraAutor")
+            .leftJoinAndSelect("obraAutor.obras", "obras")
+            .getOne();
 
         if (!autor) {
             return new Error("Autor não existe!");

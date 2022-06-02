@@ -23,7 +23,7 @@ export class GetOneCompetenciaService {
             .leftJoinAndSelect("competencia.ppc", "ppc")
             .leftJoinAndSelect("ppc.ppcDisciplinaVersoes", "ppcDisciplinaVersoes")
             .leftJoinAndSelect("ppcDisciplinaVersoes.versoes", "versoes")
-            .getMany();
+            .getOne();
 
         if (!competencia) {
             return new Error("Competência não existe!");
