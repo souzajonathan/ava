@@ -7,6 +7,7 @@ export class DeleteCompetenciaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(CompetHabilidades);
         const competencia = await repo.findOne(id);
         

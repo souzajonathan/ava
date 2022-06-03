@@ -1,6 +1,5 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { Bibliografia } from "../../entities/Bibliografia";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
 export class DeleteDisciplinaVersaoService {
@@ -8,18 +7,22 @@ export class DeleteDisciplinaVersaoService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(DisciplinaVersao);
-        const versao = await repo.findOne(id);
+        const versao = await repo.findOne(id, {
+            relations: ["bibliografias", "ppcDisciplinaVersoes"]
+        });
         
         if(!versao){
             return new Error("Versão de Disciplina não existente!");
         }
 
-        const repoBibliografia = getRepository(Bibliografia);
-        const versaoWithBibliografias = await repoBibliografia.findOne({where: {versao_disciplina_id : id}});
-
-        if(versaoWithBibliografias){
+        if(versao.bibliografias.length > 0){
             return new Error("Versão de disciplina com bibliografias cadastradas");
+        }
+
+        if(versao.ppcDisciplinaVersoes.length > 0){
+            return new Error("Versão de disciplina com ppc's cadastrados");
         }
 
         await repo.delete(id);

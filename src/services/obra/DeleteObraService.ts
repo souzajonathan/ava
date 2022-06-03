@@ -1,32 +1,27 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { Bibliografia } from "../../entities/Bibliografia";
 import { Obra } from "../../entities/Obra";
-import { ObraAutor } from "../../entities/ObraAutor";
 
 export class DeleteObraService {
     async execute(id: string) {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Obra);
-        const obra = await repo.findOne(id);
+        const obra = await repo.findOne(id, {
+            relations: ["bibliografias", "obrasAutores"]
+        });
         
         if(!obra){
             return new Error("Obra não existe!");
         }
 
-        const repoBibliografia = getRepository(Bibliografia);
-        const obraWithBibliografias = await repoBibliografia.findOne({where: {obra_id : id}});
-
-        if(obraWithBibliografias){
+        if(obra.bibliografias.length > 0){
             return new Error("Obra com bibliografias cadastradas");
         }
 
-        const repoObraAutor = getRepository(ObraAutor);
-        const obraWithObraAutor = await repoObraAutor.findOne({where: {obra_id : id}});
-
-        if(obraWithObraAutor){
+        if(obra.obrasAutores.length > 0){
             return new Error("Obra com autores cadastrados");
         }
 

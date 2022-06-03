@@ -7,6 +7,7 @@ export class DeleteBibliografiaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Bibliografia);
         const bibliografia = await repo.findOne(id);
 

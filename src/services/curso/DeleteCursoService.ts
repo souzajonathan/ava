@@ -1,24 +1,23 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
-import { Ppc } from "../../entities/Ppc";
 
 export class DeleteCursoService {
     async execute(id: string) {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Curso);
-        const repoPpc = getRepository(Ppc);
-        const curso = await repo.findOne(id);
+        const curso = await repo.findOne(id, {
+            relations: ["ppcs"]
+        });
         
         if(!curso){
             return new Error("Curso não existe!");
         }
 
-        const cursoWithPpcs = await repoPpc.findOne({where: {curso_id : id}});
-
-        if(cursoWithPpcs){
+        if(curso.ppcs.length > 0){
             return new Error("Curso com ppc's cadastrados");
         }
 

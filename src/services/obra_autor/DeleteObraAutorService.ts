@@ -7,6 +7,7 @@ export class DeleteObraAutorService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(ObraAutor);
         const obraAutor = await repo.findOne(id);
 
