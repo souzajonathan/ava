@@ -73,6 +73,23 @@ export class UpdateObraService {
             return new Error("Obra não existe!");
         }
 
+        if(contido_em){
+            if(validate(contido_em)){
+                if(!(id == contido_em)){
+                    const idAux = await repo.findOne({where: {id: contido_em}});
+                    if(!idAux){
+                        return new Error("ID de 'contido em' inexistente");
+                    }
+                }
+                else{
+                    return new Error("Não é possível editar uma obra e inseri-la nela mesma");
+                }
+            }
+            else{
+                return new Error("ID de 'contido em' inválido");
+            }
+        }
+
         obra.item_tipo = item_tipo ? item_tipo : obra.item_tipo;
         obra.obra_nome = obra_nome ? obra_nome : obra.obra_nome;
         obra.capitulo_nome = capitulo_nome ? capitulo_nome : obra.capitulo_nome;

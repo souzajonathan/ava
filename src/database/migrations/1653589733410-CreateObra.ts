@@ -142,13 +142,21 @@ export class CreateObras1653589733410 implements MigrationInterface {
                     },
                     {
                         name: "contido_em",
-                        type: "varchar",
+                        type: "uuid",
                         isNullable: true
                     },
                     {
                         name: "created_at",
                         type: "timestamp",
                         default: "now()"
+                    }
+                ],
+                foreignKeys: [
+                    {
+                        name: "fk_obra",
+                        columnNames: ["contido_em"],
+                        referencedTableName: "obras",
+                        referencedColumnNames: ["id"]
                     }
                 ]
             })

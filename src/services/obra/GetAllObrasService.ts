@@ -41,7 +41,7 @@ export class GetAllObrasService {
         }
 
         const obras = await repo.find({
-            relations: ["bibliografias", "obrasAutores"],
+            relations: ["bibliografias", "obrasAutores", "obrasChildren", "obraParent"],
             where
         });
 

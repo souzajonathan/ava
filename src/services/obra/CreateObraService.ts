@@ -64,7 +64,8 @@ export class CreateObraService {
 
         if(contido_em){
             if(validate(contido_em)){
-                if(!repo.findOne({where: {id: contido_em}})){
+                const idAux = await repo.findOne({where: {id: contido_em}});
+                if(!idAux){
                     return new Error("ID de 'contido em' inexistente");
                 }
             }

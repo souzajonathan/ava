@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Bibliografia } from "./Bibliografia";
 import { ObraAutor } from "./ObraAutor";
 
@@ -82,7 +82,7 @@ export class Obra {
     @Column()
     acesso_em: string;
 
-    @Column()
+    @Column("uuid")
     contido_em: string;
 
     @CreateDateColumn()
@@ -93,5 +93,12 @@ export class Obra {
 
     @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.obras)
     bibliografias: Bibliografia[];
+
+    @ManyToOne(() => Obra)
+    @JoinColumn({name: "contido_em"})
+    obraParent: Obra[];
+
+    @OneToMany(() => Obra, (obras) => obras.obraParent)
+    obrasChildren: Obra;
 
 }
