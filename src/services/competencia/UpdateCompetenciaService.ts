@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { Ppc } from "../../entities/Ppc";
 
 type CompetenciaUpdateRequest = {
@@ -15,7 +15,7 @@ export class UpdateCompetenciaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
-        const repo = getRepository(CompetHabilidades);
+        const repo = getRepository(CompetenciasHabilidades);
         const repoPpc = getRepository(Ppc);
 
         const competHabilidades = await repo.findOne(id);

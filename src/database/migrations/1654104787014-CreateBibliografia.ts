@@ -16,7 +16,7 @@ export class CreateBibliografia1654104787014 implements MigrationInterface {
                         default: 'uuid_generate_v4()'
                     },
                     {
-                        name: "versao_disciplina_id",
+                        name: "disciplina_versao_id",
                         type: "uuid",
                         isPrimary: true
                     },
@@ -29,13 +29,18 @@ export class CreateBibliografia1654104787014 implements MigrationInterface {
                         name: "tipo",
                         type: "boolean",
                         isNullable: true
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [
                     {
                         name: "fk_versao_disciplina",
-                        columnNames: ["versao_disciplina_id"],
-                        referencedTableName: "disciplinaVersao",
+                        columnNames: ["disciplina_versao_id"],
+                        referencedTableName: "disciplina_versao",
                         referencedColumnNames: ["id"]
                     },
                     {

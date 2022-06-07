@@ -1,6 +1,6 @@
 import { getRepository, In } from "typeorm";
 import { validate } from "uuid";
-import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { PerfilEgresso } from "../../entities/PerfilEgresso";
 import { Ppc } from "../../entities/Ppc";
@@ -9,8 +9,8 @@ import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 type PpcDisciplinaVersaoRequest = {
     ppc_id: string;
     disciplina_versao_id: string;
-    modulo: string;
-    semestre: string;
+    modulo: number;
+    semestre: number;
     competencias_id: string[];
     perfis_id: string[];
 }
@@ -24,7 +24,7 @@ export class CreatePpcDisciplinaVersaoService {
         const repoPpc = getRepository(Ppc);
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);
         const repoPerfis = getRepository(PerfilEgresso);
-        const repoCompetencias = getRepository(CompetHabilidades);
+        const repoCompetencias = getRepository(CompetenciasHabilidades);
 
         const ppc = await repoPpc.findOne(ppc_id);
         const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);

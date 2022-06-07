@@ -16,19 +16,24 @@ export class CreateCompetenciaPpcVersao1651774035110 implements MigrationInterfa
                         name: "ppc_disciplina_versao_id",
                         type: "uuid",
                         isPrimary: true
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [
                     {
                         name: "fk_competencia",
                         columnNames: ["competencia_id"],
-                        referencedTableName: "competHabilidades",
+                        referencedTableName: "competencias_habilidades",
                         referencedColumnNames: ["id"]
                     },
                     {
                         name: "fk_ppc_disciplina_versao",
                         columnNames: ["ppc_disciplina_versao_id"],
-                        referencedTableName: "ppcDisciplinaVersao",
+                        referencedTableName: "ppc_disciplina_versao",
                         referencedColumnNames: ["id"]
                     }
                 ]

@@ -1,10 +1,10 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { CompetHabilidades } from "./CompetHabilidades";
+import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { DisciplinaVersao } from "./DisciplinaVersao";
 import { PerfilEgresso } from "./PerfilEgresso";
 import { Ppc } from "./Ppc";
 
-@Entity("ppcDisciplinaVersao")
+@Entity("ppc_disciplina_versao")
 export class PpcDisciplinaVersao {
     @PrimaryGeneratedColumn("uuid")
     id: string;
@@ -27,18 +27,18 @@ export class PpcDisciplinaVersao {
     created_at: Date;
 
     @Column()
-    modulo: string;
+    modulo: number;
 
     @Column()
-    semestre: string;
+    semestre: number;
 
-    @ManyToMany(() => CompetHabilidades)
+    @ManyToMany(() => CompetenciasHabilidades)
     @JoinTable({
         name: "competencia_ppc_versao",
         joinColumn: {name: "ppc_disciplina_versao_id"},
         inverseJoinColumn: {name: "competencia_id"}
     })
-    competencias: CompetHabilidades[];
+    competencias: CompetenciasHabilidades[];
 
     @ManyToMany(() => PerfilEgresso)
     @JoinTable({

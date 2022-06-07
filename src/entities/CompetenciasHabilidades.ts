@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Ppc } from "./Ppc";
 
-@Entity("competHabilidades")
-export class CompetHabilidades {
+@Entity("competencias_habilidades")
+export class CompetenciasHabilidades {
     @PrimaryGeneratedColumn("uuid")
     id: string;
     

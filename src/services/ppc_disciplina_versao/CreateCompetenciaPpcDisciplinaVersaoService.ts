@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 type CompetenciaPpcDisciplinaVersaoRequest = {
@@ -14,7 +14,7 @@ export class CreateCompetenciaPpcDisciplinaVersaoService {
             return new Error("ID's inválidos");
         }
         const repo = getRepository(PpcDisciplinaVersao);
-        const repoCompetencias = getRepository(CompetHabilidades);
+        const repoCompetencias = getRepository(CompetenciasHabilidades);
 
         const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["perfis", "competencias"]});
         const competencia = await repoCompetencias.findOne(competencia_id);

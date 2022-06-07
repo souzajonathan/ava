@@ -6,7 +6,7 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "disciplinaVersao",
+                name: "disciplina_versao",
                 columns: [
                     {
                         name: 'id',
@@ -67,7 +67,7 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("disciplinaVersao");
+        await queryRunner.dropTable("disciplina_versao");
     }
 
 }

@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { Ppc } from "../../entities/Ppc";
 
 type CompetenciaRequest = {
@@ -10,7 +10,7 @@ type CompetenciaRequest = {
 
 export class CreateCompetenciaService {
     async execute({ ppc_id, competencia, competenciaNumero }: CompetenciaRequest) {
-        const repo = getRepository(CompetHabilidades);
+        const repo = getRepository(CompetenciasHabilidades);
         const repoPpc = getRepository(Ppc);
         const ppc = await repoPpc.findOne(ppc_id);
 

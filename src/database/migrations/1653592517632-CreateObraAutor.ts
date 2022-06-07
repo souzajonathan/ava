@@ -6,7 +6,7 @@ export class CreateObraAutor1653592517632 implements MigrationInterface {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "obraAutor",
+                name: "obra_autor",
                 columns: [
                     {
                         name: 'id',
@@ -29,6 +29,11 @@ export class CreateObraAutor1653592517632 implements MigrationInterface {
                         name: "funcao",
                         type: "varchar",
                         isNullable: true
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [
@@ -50,7 +55,7 @@ export class CreateObraAutor1653592517632 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("obraAutor");
+        await queryRunner.dropTable("obra_autor");
     }
 
 }

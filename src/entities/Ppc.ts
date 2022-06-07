@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { CompetHabilidades } from "./CompetHabilidades";
+import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { Curso } from "./Curso";
 import { PerfilEgresso } from "./PerfilEgresso";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
@@ -16,8 +16,8 @@ export class Ppc {
     @OneToMany(() => PerfilEgresso, (perfil) => perfil.ppc)
     perfis: PerfilEgresso[];
 
-    @OneToMany(() => CompetHabilidades, (competencia) => competencia.ppc)
-    competencias: CompetHabilidades[];
+    @OneToMany(() => CompetenciasHabilidades, (competencia) => competencia.ppc)
+    competencias: CompetenciasHabilidades[];
 
     @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.ppc)
     ppcDisciplinaVersoes: PpcDisciplinaVersao[];

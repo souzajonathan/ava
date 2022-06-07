@@ -3,12 +3,12 @@ import { CreateBibliografiaService } from "../../services/bibliografia/CreateBib
 
 export class CreateBibliografiaController {
     async handle (request: Request, response: Response) {
-        const { versao_disciplina_id, obra_id, tipo } = request.body;
+        const { disciplina_versao_id, obra_id, tipo } = request.body;
 
         const service = new CreateBibliografiaService;
 
         const result = await service.execute({
-            versao_disciplina_id,
+            disciplina_versao_id,
             obra_id,
             tipo
         });

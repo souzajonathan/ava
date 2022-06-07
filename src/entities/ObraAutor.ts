@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGenerat
 import { Autor } from "./Autor";
 import { Obra } from "./Obra";
 
-@Entity("obraAutor")
+@Entity("obra_autor")
 export class ObraAutor {
     @PrimaryGeneratedColumn("uuid")
     id: string;
@@ -23,5 +23,8 @@ export class ObraAutor {
     
     @Column()
     funcao: string;
+
+    @CreateDateColumn()
+    created_at: Date;
     
 }

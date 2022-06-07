@@ -6,7 +6,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "perfilEgresso",
+                name: "perfil_egresso",
                 columns: [
                     {
                         name: 'id',
@@ -35,7 +35,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_pcc",
+                        name: "fk_ppc",
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
                         referencedColumnNames: ["id"]
@@ -46,7 +46,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("perfilEgresso");
+        await queryRunner.dropTable("perfil_egresso");
     }
 
 }

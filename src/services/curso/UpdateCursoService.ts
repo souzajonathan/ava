@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
+import { Ppc } from "../../entities/Ppc";
 
 type CursoUpdateRequest = {
     id: string;
@@ -19,6 +20,14 @@ export class UpdateCursoService {
 
         if (!curso) {
             return new Error("Curso não existe!");
+        }
+
+        const repoPpc = getRepository(Ppc);
+
+        const ppc = await repoPpc.findOne(ppcAtivo);
+
+        if (!ppc) {
+            return new Error("ID de ppc inexistente");
         }
 
         curso.name = name ? name : curso.name;

@@ -6,13 +6,13 @@ import { Obra } from "../../entities/Obra";
 
 type BibliografiaUpdateRequest = {
     id: string;
-    versao_disciplina_id: string;
+    disciplina_versao_id: string;
     obra_id: string;
     tipo: boolean;
 };
 
 export class UpdateBibliografiaService {
-    async execute ({id, versao_disciplina_id, obra_id, tipo}: BibliografiaUpdateRequest) {
+    async execute ({id, disciplina_versao_id, obra_id, tipo}: BibliografiaUpdateRequest) {
         if (!validate(id)){
             return new Error("ID inválido");
         }
@@ -21,7 +21,7 @@ export class UpdateBibliografiaService {
         const repoObra = getRepository(Obra);
 
         const bibliografia = await repo.findOne(id);
-        const disciplinaVersao = await repoDisciplinaVersao.findOne(versao_disciplina_id);
+        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
         const obra = await repoObra.findOne(obra_id);
 
 
@@ -37,7 +37,7 @@ export class UpdateBibliografiaService {
             return new Error("Obra não existe!");
         }
 
-        bibliografia.versao_disciplina_id = versao_disciplina_id ? versao_disciplina_id : bibliografia.versao_disciplina_id;
+        bibliografia.disciplina_versao_id = disciplina_versao_id ? disciplina_versao_id : bibliografia.disciplina_versao_id;
         bibliografia.obra_id = obra_id ? obra_id : bibliografia.obra_id;
         bibliografia.tipo = tipo ? tipo : bibliografia.tipo;
 

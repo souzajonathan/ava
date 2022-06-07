@@ -6,7 +6,7 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "ppcDisciplinaVersao",
+                name: "ppc_disciplina_versao",
                 columns: [
                     {
                         name: 'id',
@@ -17,11 +17,13 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                     },
                     {
                         name: 'modulo',
-                        type: 'varchar'
+                        type: 'int',
+                        isNullable: true
                     },
                     {
                         name: 'semestre',
-                        type: 'varchar'
+                        type: 'int',
+                        isNullable: true
                     },
                     {
                         name: "created_at",
@@ -47,7 +49,7 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                     {
                         name: "fk_disciplina_versao_id",
                         columnNames: ["disciplina_versao_id"],
-                        referencedTableName: "disciplinaVersao",
+                        referencedTableName: "disciplina_versao",
                         referencedColumnNames: ["id"]
                     }
                 ]
@@ -56,7 +58,7 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("ppcDisciplinaVersao");
+        await queryRunner.dropTable("ppc_disciplina_versao");
     }
 
 }

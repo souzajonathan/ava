@@ -17,8 +17,7 @@ export class CreateAreas1650487026238 implements MigrationInterface {
                     },
                     {
                         name: "name",
-                        type: "varchar",
-                        isUnique: true
+                        type: "varchar"
                     },
                     {
                         name: "description",

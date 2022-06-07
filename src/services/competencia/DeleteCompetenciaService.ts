@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { CompetHabilidades } from "../../entities/CompetHabilidades";
+import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 
 export class DeleteCompetenciaService {
     async execute(id: string) {
@@ -8,7 +8,7 @@ export class DeleteCompetenciaService {
             return new Error("ID inválido");
         }
         
-        const repo = getRepository(CompetHabilidades);
+        const repo = getRepository(CompetenciasHabilidades);
         const competencia = await repo.findOne(id);
         
         if(!competencia){

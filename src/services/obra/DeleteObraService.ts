@@ -25,7 +25,7 @@ export class DeleteObraService {
             return new Error("Obra com autores cadastrados");
         }
 
-        if(obra.obrasChildren.length > 0){
+        if(obra.obraParent.length > 0){
             return new Error("Obra com obras cadastradas");
         }
 

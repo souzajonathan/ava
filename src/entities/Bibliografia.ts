@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { DisciplinaVersao } from "./DisciplinaVersao";
 import { Obra } from "./Obra";
 
@@ -8,11 +8,11 @@ export class Bibliografia {
     id: string;
     
     @ManyToOne(() => DisciplinaVersao)
-    @JoinColumn({name: "versao_disciplina_id"})
+    @JoinColumn({name: "disciplina_versao_id"})
     versoes: DisciplinaVersao;
 
     @Column("uuid")
-    versao_disciplina_id: string;
+    disciplina_versao_id: string;
 
     @ManyToOne(() => Obra)
     @JoinColumn({name: "obra_id"})
@@ -23,5 +23,8 @@ export class Bibliografia {
     
     @Column()
     tipo: boolean;
+
+    @CreateDateColumn()
+    created_at: Date;
     
 }

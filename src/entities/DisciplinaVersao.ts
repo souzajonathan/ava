@@ -3,7 +3,7 @@ import { Bibliografia } from "./Bibliografia";
 import { Disciplina } from "./Disciplina";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
-@Entity("disciplinaVersao")
+@Entity("disciplina_versao")
 export class DisciplinaVersao {
     @PrimaryGeneratedColumn("uuid")
     id: string;
