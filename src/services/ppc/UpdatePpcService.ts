@@ -1,7 +1,20 @@
+import { response } from "express";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
 import { Ppc } from "../../entities/Ppc";
+import { CreateCompetenciaService } from "../competencia/CreateCompetenciaService";
+import { CreatePerfilService } from "../perfil/CreatePerfilService";
+
+type Competencia = {
+    competencia: string;
+    competenciaNumero: string;
+};
+
+type Perfil = {
+    perfil: string;
+    perfilNumero: string;
+};
 
 type PpcUpdateRequest = {
     id: string;
@@ -11,10 +24,13 @@ type PpcUpdateRequest = {
     dataFim: string;
     horaCredito: number;
     quantSemestres: number;
+    active: boolean;
+    competencias: Competencia[];
+    perfis: Perfil[];
 };
 
 export class UpdatePpcService {
-    async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id}: PpcUpdateRequest) {
+    async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id, active, competencias, perfis}: PpcUpdateRequest) {
         if (!validate(id)){
             return new Error("ID inválido");
         }
@@ -30,6 +46,45 @@ export class UpdatePpcService {
 
         if (!curso) {
             return new Error("Curso não existe!");
+        }
+
+        if(active){
+            curso.ppcAtivo = ppc.id;
+            await repoCurso.save(curso);
+        }
+        else{
+            curso.ppcAtivo = null;
+        }
+
+        for await (const competencia of competencias) {
+
+            const service = new CreateCompetenciaService();
+
+            const result = await service.execute({
+                ppc_id: ppc.id,
+                competencia: competencia.competencia,
+                competenciaNumero: competencia.competenciaNumero
+            });
+
+            if (result instanceof Error) {
+                return response.status(400).json(result.message);
+            }
+        
+        }
+
+        for await (const perfil of perfis) {
+            
+            const service = new CreatePerfilService();
+
+            const result = await service.execute({
+                ppc_id: ppc.id,
+                perfil: perfil.perfil,
+                perfilNumero: perfil.perfilNumero
+            });
+
+            if (result instanceof Error) {
+                return response.status(400).json(result.message);
+            }
         }
 
         ppc.anoVoto = anoVoto ? anoVoto : ppc.anoVoto;
