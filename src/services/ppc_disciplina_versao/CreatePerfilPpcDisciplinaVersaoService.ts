@@ -10,29 +10,27 @@ type PerfilPpcDisciplinaVersaoRequest = {
 
 export class CreatePerfilPpcDisciplinaVersaoService {
     async execute ({perfil_id, ppcDisciplinaVersao_id}: PerfilPpcDisciplinaVersaoRequest) {
-        if (!validate(perfil_id || ppcDisciplinaVersao_id)){
-            return new Error("ID's inválidos");
+        if (!validate(perfil_id) || !validate(ppcDisciplinaVersao_id)){
+            return new Error("ID('s) inválido(s)");
         }
-        const repo = getRepository(PpcDisciplinaVersao);
+
         const repoPerfis = getRepository(PerfilEgresso);
-
-        const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["competencias", "perfis"]});
         const perfil = await repoPerfis.findOne(perfil_id);
-
-        if(!ppcDisciplinaVersao) {
-            return new Error("Ppc_Disciplina_Versão não existe!");
-        }
-
         if(!perfil) {
             return new Error("Perfil não existe!");
+        }
+
+        const repo = getRepository(PpcDisciplinaVersao);
+        const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["competencias", "perfis"]});
+        if(!ppcDisciplinaVersao) {
+            return new Error("Ppc_Disciplina_Versão não existe!");
         }
 
         ppcDisciplinaVersao.perfis = [...ppcDisciplinaVersao.perfis, perfil];
 
         await repo.save(ppcDisciplinaVersao);
 
-        return {
-            ppcDisciplinaVersao
-        };
+        return ppcDisciplinaVersao;
+        
     }
 }

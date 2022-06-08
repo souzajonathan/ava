@@ -15,16 +15,21 @@ export class UpdatePerfilService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
+        if(ppc_id){
+            if(!validate(ppc_id)){
+                return new Error("ID de PPC inválido");
+            }
+        }
+        
         const repo = getRepository(PerfilEgresso);
-        const repoPpc = getRepository(Ppc);
-
         const perfilEgresso = await repo.findOne(id);
-        const ppc = await repoPpc.findOne(ppc_id);
-
         if (!perfilEgresso) {
             return new Error("Perfil não existente!");
         }
-
+        
+        const repoPpc = getRepository(Ppc);
+        const ppc = await repoPpc.findOne(ppc_id);
         if (!ppc) {
             return new Error("Ppc não existe!");
         }

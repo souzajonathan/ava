@@ -16,23 +16,33 @@ export class UpdateObraAutorService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+
+        if(autor_id){
+            if(!validate(autor_id)){
+                return new Error("ID de autor inválido");
+            }
+        }
+        
+        if(obra_id){
+            if(!validate(obra_id)){
+                return new Error("ID de obra inválido");
+            }
+        }
+        
         const repo = getRepository(ObraAutor);
-        const repoAutor = getRepository(Autor);
-        const repoObra = getRepository(Obra);
-
         const obraAutor = await repo.findOne(id);
-        const autor = await repoAutor.findOne(autor_id);
-        const obra = await repoObra.findOne(obra_id);
-
-
         if (!obraAutor) {
             return new Error("obra_autor não existente!");
         }
 
+        const repoAutor = getRepository(Autor);
+        const autor = await repoAutor.findOne(autor_id);
         if (!autor) {
             return new Error("Autor não existe!");
         }
-
+        
+        const repoObra = getRepository(Obra);
+        const obra = await repoObra.findOne(obra_id);
         if (!obra) {
             return new Error("Obra não existe!");
         }

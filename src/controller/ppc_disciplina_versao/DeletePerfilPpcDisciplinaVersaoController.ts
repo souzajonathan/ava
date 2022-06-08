@@ -3,7 +3,8 @@ import { DeletePerfilPpcDisciplinaVersaoService } from "../../services/ppc_disci
 
 export class DeletePerfilPpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { perfil_id, ppcDisciplinaVersao_id } = request.params;
+        const { ppcDisciplinaVersao_id } = request.body;
+        const { perfil_id } = request.params;
 
         const service = new DeletePerfilPpcDisciplinaVersaoService();
 

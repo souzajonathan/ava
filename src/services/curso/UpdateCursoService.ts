@@ -14,27 +14,32 @@ export class UpdateCursoService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Curso);
-
         const curso = await repo.findOne(id);
-
         if (!curso) {
             return new Error("Curso não existe!");
         }
 
+        if(ppcAtivo){
+            if(!validate(ppcAtivo)){
+                return new Error("ID de ppc inválido");
+            }
+        }
+        
         const repoPpc = getRepository(Ppc);
-
         const ppc = await repoPpc.findOne(ppcAtivo);
-
         if (!ppc) {
             return new Error("ID de ppc inexistente");
         }
-
+        
         curso.name = name ? name : curso.name;
         curso.ppcAtivo = ppcAtivo ? ppcAtivo : curso.ppcAtivo;
 
         await repo.save(curso);
 
-        return curso;
+        return{
+            ...curso, ppc
+        };
     }
 }

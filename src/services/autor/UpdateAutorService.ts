@@ -16,10 +16,9 @@ export class UpdateAutorService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Autor);
-
         const autor = await repo.findOne(id);
-
         if (!autor) {
             return new Error("Autor não existe!");
         }

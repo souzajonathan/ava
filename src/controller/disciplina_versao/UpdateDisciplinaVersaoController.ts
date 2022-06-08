@@ -6,7 +6,6 @@ export class UpdateDisciplinaVersaoController {
         const { id } = request.params;
         const {
             disciplina_id,
-            disciplina_versao_nome,
             codigo,
             credito_quantidade,
             ementa,
@@ -20,7 +19,6 @@ export class UpdateDisciplinaVersaoController {
         const result = await service.execute({
             id,
             disciplina_id,
-            disciplina_versao_nome,
             codigo,
             credito_quantidade,
             ementa,

@@ -18,9 +18,10 @@ type PpcDisciplinaVersaoUpdateRequest = {
 
 export class UpdatePpcDisciplinaVersaoService {
     async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PpcDisciplinaVersaoUpdateRequest) {
-        if (!validate(id)){
-            return new Error("ID inválido");
+        if (!validate(id && ppc_id && disciplina_versao_id)){
+            return new Error("ID('s) inválido(s)");
         }
+        
         const repo = getRepository(PpcDisciplinaVersao);
         const repoPpc = getRepository(Ppc);
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);
@@ -30,6 +31,7 @@ export class UpdatePpcDisciplinaVersaoService {
         const ppcDisciplinaVersao = await repo.findOne(id);
         const ppc = await repoPpc.findOne(ppc_id);
         const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
+        
         const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
         const competencias = await repoCompetencias.find({where: {id: In(competencias_id) }});
 

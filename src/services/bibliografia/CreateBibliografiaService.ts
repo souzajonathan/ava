@@ -12,20 +12,20 @@ type BibliografiaRequest = {
 
 export class CreateBibliografiaService {
     async execute ({disciplina_versao_id, obra_id, tipo}: BibliografiaRequest) {
-        if (!validate(disciplina_versao_id) && !validate(obra_id)){
-            return new Error("ID's inválidos");
+        if (!validate(disciplina_versao_id) || !validate(obra_id)){
+            return new Error("ID('s) inválido(s)");
         }
+
         const repo = getRepository(Bibliografia);
+
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);
-        const repoObra = getRepository(Obra);
-
         const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
-        const obra = await repoObra.findOne(obra_id);
-
         if(!disciplinaVersao) {
             return new Error("Versão de disciplina não existe!");
         }
-        
+
+        const repoObra = getRepository(Obra);
+        const obra = await repoObra.findOne(obra_id);
         if(!obra) {
             return new Error("Obra não existe!");
         }

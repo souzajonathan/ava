@@ -13,10 +13,9 @@ export class UpdateAreaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         const repo = getRepository(Area);
-
         const area = await repo.findOne(id);
-
         if (!area) {
             return new Error("Área não existe!");
         }

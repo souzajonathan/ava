@@ -15,16 +15,20 @@ export class UpdateCompetenciaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        if(ppc_id){
+            if(!validate(ppc_id)){
+                return new Error("ID de PPC inválido");
+            }
+        }
+        
         const repo = getRepository(CompetenciasHabilidades);
-        const repoPpc = getRepository(Ppc);
-
         const competHabilidades = await repo.findOne(id);
-        const ppc = await repoPpc.findOne(ppc_id);
-
         if (!competHabilidades) {
             return new Error("Competências e Habilidades não existente!");
         }
-
+        
+        const repoPpc = getRepository(Ppc);
+        const ppc = await repoPpc.findOne(ppc_id);
         if (!ppc) {
             return new Error("Ppc não existente!");
         }

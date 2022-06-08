@@ -34,26 +34,28 @@ export class UpdatePpcService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
+        if(curso_id){
+            if(!validate(curso_id)){
+                return new Error("ID de curso inválido");
+            }
+        }
+        
         const repo = getRepository(Ppc);
-        const repoCurso = getRepository(Curso);
-
         const ppc = await repo.findOne(id);
-        const curso = await repoCurso.findOne(curso_id);
-
         if (!ppc) {
             return new Error("PPC não existe!");
         }
-
+        
+        const repoCurso = getRepository(Curso);
+        const curso = await repoCurso.findOne(curso_id);
         if (!curso) {
             return new Error("Curso não existe!");
         }
-
+        
         if(active){
             curso.ppcAtivo = ppc.id;
             await repoCurso.save(curso);
-        }
-        else{
-            curso.ppcAtivo = null;
         }
 
         for await (const competencia of competencias) {

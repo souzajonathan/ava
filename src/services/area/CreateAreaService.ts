@@ -8,6 +8,9 @@ type AreaRequest = {
 
 export class CreateAreaService {
     async execute({ name, description }: AreaRequest): Promise<Area | Error> {
+        if(!name){
+            return new Error("Nome de área não inserido");
+        }
         const repo = getRepository(Area);
         const areaAlreadyExists = await repo.findOne({name});
 

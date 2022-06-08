@@ -3,7 +3,8 @@ import { CreatePerfilPpcDisciplinaVersaoService } from "../../services/ppc_disci
 
 export class CreatePerfilPpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { perfil_id, ppcDisciplinaVersao_id } = request.body;
+        const { ppcDisciplinaVersao_id } = request.body;
+        const { perfil_id } = request.params;
 
         const service = new CreatePerfilPpcDisciplinaVersaoService;
 

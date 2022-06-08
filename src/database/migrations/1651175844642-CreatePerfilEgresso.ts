@@ -38,7 +38,8 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
                         name: "fk_ppc",
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: 'CASCADE'
                     }
                 ]
             })

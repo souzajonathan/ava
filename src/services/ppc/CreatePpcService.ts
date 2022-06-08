@@ -1,5 +1,6 @@
 import { response } from "express";
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
 import { Ppc } from "../../entities/Ppc";
 import { CreateCompetenciaService } from "../competencia/CreateCompetenciaService";
@@ -29,11 +30,17 @@ type PpcRequest = {
 
 export class CreatePpcService {
     async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active, competencias, perfis}: PpcRequest) {
+        if(!curso_id || !anoVoto || !dataInicio || !dataFim || !horaCredito || !quantSemestres){
+            return new Error("É necessário preencher os campos obrigatórios");
+        }
+        if(!validate(curso_id)){
+            return new Error("ID de curso inválido");
+        }
+        
         const repo = getRepository(Ppc);
+
         const repoCurso = getRepository(Curso);
-
         const curso = await repoCurso.findOne(curso_id);
-
         if(!curso) {
             return new Error("Curso não existe!");
         }

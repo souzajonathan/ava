@@ -15,16 +15,21 @@ export class UpdateDisciplinaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+
         const repo = getRepository(Disciplina);
-        const repoArea = getRepository(Area);
-
         const disciplina = await repo.findOne(id);
-        const area = await repoArea.findOne(area_id);
-
         if (!disciplina) {
             return new Error("Disciplina não existe!");
         }
 
+        if(area_id){
+            if(!validate(area_id)){
+                return new Error("ID de área inválido");
+            }
+        }
+
+        const repoArea = getRepository(Area);
+        const area = await repoArea.findOne(area_id);
         if (!area) {
             return new Error("Área não existe!");
         }

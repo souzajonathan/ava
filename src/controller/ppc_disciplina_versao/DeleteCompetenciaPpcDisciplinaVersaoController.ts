@@ -3,7 +3,8 @@ import { DeleteCompetenciaPpcDisciplinaVersaoService } from "../../services/ppc_
 
 export class DeleteCompetenciaPpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { competencia_id, ppcDisciplinaVersao_id } = request.params;
+        const { ppcDisciplinaVersao_id } = request.body;
+        const { competencia_id } = request.params;
 
         const service = new DeleteCompetenciaPpcDisciplinaVersaoService();
 

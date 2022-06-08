@@ -17,19 +17,16 @@ type PpcDisciplinaVersaoRequest = {
 
 export class CreatePpcDisciplinaVersaoService {
     async execute ({ppc_id, disciplina_versao_id, modulo, semestre, perfis_id, competencias_id}: PpcDisciplinaVersaoRequest) {
-        if (!validate(ppc_id) && !validate(disciplina_versao_id)){
+        if (!validate(ppc_id && disciplina_versao_id)){
             return new Error("ID's inválidos");
         }
+
         const repo = getRepository(PpcDisciplinaVersao);
         const repoPpc = getRepository(Ppc);
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);
-        const repoPerfis = getRepository(PerfilEgresso);
-        const repoCompetencias = getRepository(CompetenciasHabilidades);
 
         const ppc = await repoPpc.findOne(ppc_id);
         const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
-        const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
-        const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
 
         if(!ppc) {
             return new Error("Ppc não existe!");
@@ -39,12 +36,40 @@ export class CreatePpcDisciplinaVersaoService {
             return new Error("Versão de disciplina não existe!");
         }
 
-        const ppcDisciplinaVersao = repo.create({ppc_id, disciplina_versao_id, modulo, semestre, perfis, competencias});
+        const ppcDisciplinaVersao = repo.create({ ppc_id, disciplina_versao_id, modulo, semestre });
 
-        await repo.save(ppcDisciplinaVersao);
+        let ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersao);
+
+        if (perfis_id && perfis_id.length > 0) {
+            const repoPerfis = getRepository(PerfilEgresso);
+
+            const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
+
+            if(!(perfis.length > 0)){
+                return new Error("Perfil(s) não encontrado(s)");
+            }
+
+            ppcDisciplinaVersaoCreated.perfis = perfis;
+
+            ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersaoCreated);
+        }
+
+        if (competencias_id && competencias_id.length > 0) {
+            const repoCompetencias = getRepository(CompetenciasHabilidades);
+
+            const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
+
+            if(!(competencias.length > 0)){
+                return new Error("Competência(s) não encontrada(s)");
+            }
+
+            ppcDisciplinaVersaoCreated.competencias = competencias;
+
+            ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersaoCreated);
+        }
 
         return {
-            ...ppcDisciplinaVersao, ppc, disciplinaVersao
+            ...ppcDisciplinaVersaoCreated, ppc, disciplinaVersao
         };
     }
 }

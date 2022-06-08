@@ -10,21 +10,22 @@ type DisciplinaRequest = {
 
 export class CreateDisciplinaService {
     async execute ({name, area_id, sigla}: DisciplinaRequest) {
-        const repo = getRepository(Disciplina);
+        if(!name || !area_id || !sigla){
+            return new Error("Insira todos os itens obrigatórios");
+        }
+
         const repoArea = getRepository(Area);
-
         const area = await repoArea.findOne(area_id);
-
         if(!area) {
             return new Error("Área não existe!");
         }
-
+        
+        const repo = getRepository(Disciplina);
         const siglaAlreadyExists = await repo.findOne({
             where: {
                 name: sigla
             }
         })
-
         if (siglaAlreadyExists) {
             return new Error("Sigla já existe!");
         }

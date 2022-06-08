@@ -24,6 +24,8 @@ export class GetOneObraService {
             .select(["obra", "bibliografias.tipo"])
             .leftJoinAndSelect("obra.obrasAutores", "obraAutor")
             .leftJoinAndSelect("obraAutor.autores", "autores")
+            .leftJoinAndSelect("obra.obrasChildren", "obrasChildren")
+            .leftJoinAndSelect("obra.obraParent", "obraParent")
             .getOne();
 
         if (!obra) {

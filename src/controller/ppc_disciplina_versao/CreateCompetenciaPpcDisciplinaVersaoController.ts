@@ -3,7 +3,8 @@ import { CreateCompetenciaPpcDisciplinaVersaoService } from "../../services/ppc_
 
 export class CreateCompetenciaPpcDisciplinaVersaoController {
     async handle (request: Request, response: Response) {
-        const { competencia_id, ppcDisciplinaVersao_id } = request.body;
+        const { ppcDisciplinaVersao_id } = request.body;
+        const { competencia_id } = request.params;
 
         const service = new CreateCompetenciaPpcDisciplinaVersaoService;
 

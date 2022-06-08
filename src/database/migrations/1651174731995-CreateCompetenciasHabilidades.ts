@@ -38,7 +38,8 @@ export class CreateCompetenciasHabilidades1651174731995 implements MigrationInte
                         name: "fk_ppc",
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: 'CASCADE'
                     }
                 ]
             })

@@ -11,6 +11,10 @@ type AutorRequest = {
 
 export class CreateAutorService {
     async execute({ first_name, middle_name, last_name, quote, nationality }: AutorRequest): Promise< Autor | Error > {
+        if(!quote){
+            return new Error("Citação é obrigatória");
+        }
+        
         const repo = getRepository(Autor);
 
         const autor = repo.create({

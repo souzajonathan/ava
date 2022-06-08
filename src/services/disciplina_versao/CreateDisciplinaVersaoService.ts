@@ -1,4 +1,5 @@
 import { FindConditions, getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
@@ -22,22 +23,27 @@ export class CreateDisciplinaVersaoService {
         em_oferta,
         produzido
     }: DisciplinaVersaoRequest) {
-        const repo = getRepository(DisciplinaVersao);
+        if(!disciplina_id || !codigo || !credito_quantidade || !ementa || !em_oferta || !produzido){
+            return new Error("Insira todos os itens obrigatórios");
+        }
+
+        if(validate(disciplina_id)){
+            return new Error("ID de área inválido");
+        }
         const repoDisciplina = getRepository(Disciplina);
-
         const disciplina = await repoDisciplina.findOne(disciplina_id);
-
-        const where: FindConditions<DisciplinaVersao> = {};
-        where.disciplina_id = disciplina_id;
-        const numeroVersao = await repo.count({where});
-
         if(!disciplina) {
             return new Error("Disciplina não existe!");
         }
 
-        if(!disciplina.sigla){
+        const repo = getRepository(DisciplinaVersao);
+        const where: FindConditions<DisciplinaVersao> = {};
+        where.disciplina_id = disciplina_id;
+        const numeroVersao = await repo.count({where});
+
+        /* if(!disciplina.sigla){
             return new Error("Disciplina sem sigla");
-        }
+        } */
 
         const disciplina_versao_nome = `${disciplina.sigla}${credito_quantidade}-${numeroVersao+1}`;
 
