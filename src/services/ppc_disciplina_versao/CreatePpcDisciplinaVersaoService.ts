@@ -17,27 +17,24 @@ type PpcDisciplinaVersaoRequest = {
 
 export class CreatePpcDisciplinaVersaoService {
     async execute ({ppc_id, disciplina_versao_id, modulo, semestre, perfis_id, competencias_id}: PpcDisciplinaVersaoRequest) {
-        if (!validate(ppc_id && disciplina_versao_id)){
+        if (!validate(ppc_id) || validate(disciplina_versao_id)){
             return new Error("ID's inválidos");
         }
 
-        const repo = getRepository(PpcDisciplinaVersao);
         const repoPpc = getRepository(Ppc);
-        const repoDisciplinaVersao = getRepository(DisciplinaVersao);
-
         const ppc = await repoPpc.findOne(ppc_id);
-        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
-
         if(!ppc) {
             return new Error("Ppc não existe!");
         }
 
+        const repoDisciplinaVersao = getRepository(DisciplinaVersao);
+        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
         if(!disciplinaVersao) {
             return new Error("Versão de disciplina não existe!");
         }
 
+        const repo = getRepository(PpcDisciplinaVersao);
         const ppcDisciplinaVersao = repo.create({ ppc_id, disciplina_versao_id, modulo, semestre });
-
         let ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersao);
 
         if (perfis_id && perfis_id.length > 0) {

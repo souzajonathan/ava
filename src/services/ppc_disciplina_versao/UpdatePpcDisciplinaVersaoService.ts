@@ -18,34 +18,33 @@ type PpcDisciplinaVersaoUpdateRequest = {
 
 export class UpdatePpcDisciplinaVersaoService {
     async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PpcDisciplinaVersaoUpdateRequest) {
-        if (!validate(id && ppc_id && disciplina_versao_id)){
+        if (!validate(id) || !validate(ppc_id) || !validate(disciplina_versao_id)){
             return new Error("ID('s) inválido(s)");
         }
-        
+
         const repo = getRepository(PpcDisciplinaVersao);
-        const repoPpc = getRepository(Ppc);
-        const repoDisciplinaVersao = getRepository(DisciplinaVersao);
-        const repoPerfis = getRepository(PerfilEgresso);
-        const repoCompetencias = getRepository(CompetenciasHabilidades);
-
         const ppcDisciplinaVersao = await repo.findOne(id);
-        const ppc = await repoPpc.findOne(ppc_id);
-        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
-        
-        const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
-        const competencias = await repoCompetencias.find({where: {id: In(competencias_id) }});
-
         if (!ppcDisciplinaVersao) {
             return new Error("PPC_Disciplina_Versão não existente!");
         }
 
+        const repoPpc = getRepository(Ppc);
+        const ppc = await repoPpc.findOne(ppc_id);
         if (!ppc) {
             return new Error("Ppc não existe!");
         }
 
+        const repoDisciplinaVersao = getRepository(DisciplinaVersao);
+        const disciplinaVersao = await repoDisciplinaVersao.findOne(disciplina_versao_id);
         if (!disciplinaVersao) {
             return new Error("Disciplina não existe!");
         }
+
+        const repoPerfis = getRepository(PerfilEgresso);
+        const repoCompetencias = getRepository(CompetenciasHabilidades);
+        
+        const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
+        const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
 
         ppcDisciplinaVersao.ppc_id = ppc_id ? ppc_id : ppcDisciplinaVersao.ppc_id;
         ppcDisciplinaVersao.disciplina_versao_id = disciplina_versao_id ? disciplina_versao_id : ppcDisciplinaVersao.disciplina_versao_id;
