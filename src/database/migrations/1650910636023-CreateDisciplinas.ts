@@ -25,7 +25,8 @@ export class CreateDisciplinas1650910636023 implements MigrationInterface {
                     },
                     {
                         name: "sigla",
-                        type: "varchar"
+                        type: "varchar",
+                        isUnique: true
                     },
                     {
                         name: "created_at",

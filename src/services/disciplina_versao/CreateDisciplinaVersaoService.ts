@@ -23,12 +23,12 @@ export class CreateDisciplinaVersaoService {
         em_oferta,
         produzido
     }: DisciplinaVersaoRequest) {
-        if(!disciplina_id || !codigo || !credito_quantidade || !ementa || !em_oferta || !produzido){
+        if(!disciplina_id || !codigo || !credito_quantidade || !ementa || em_oferta === undefined || produzido === undefined){
             return new Error("Insira todos os itens obrigatórios");
         }
 
-        if(validate(disciplina_id)){
-            return new Error("ID de área inválido");
+        if(!validate(disciplina_id)){
+            return new Error("ID de disciplina inválido");
         }
         const repoDisciplina = getRepository(Disciplina);
         const disciplina = await repoDisciplina.findOne(disciplina_id);

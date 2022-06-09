@@ -28,13 +28,15 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                         name: "fk_perfil",
                         columnNames: ["perfil_id"],
                         referencedTableName: "perfil_egresso",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
                     },
                     {
                         name: "fk_ppc_disciplina_versao",
                         columnNames: ["ppc_disciplina_versao_id"],
                         referencedTableName: "ppc_disciplina_versao",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
                     }
                 ]
             })

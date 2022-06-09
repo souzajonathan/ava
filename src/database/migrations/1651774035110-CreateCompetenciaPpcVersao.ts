@@ -28,13 +28,15 @@ export class CreateCompetenciaPpcVersao1651774035110 implements MigrationInterfa
                         name: "fk_competencia",
                         columnNames: ["competencia_id"],
                         referencedTableName: "competencias_habilidades",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
                     },
                     {
                         name: "fk_ppc_disciplina_versao",
                         columnNames: ["ppc_disciplina_versao_id"],
                         referencedTableName: "ppc_disciplina_versao",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
                     }
                 ]
             })

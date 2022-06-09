@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { validate } from "uuid";
 import { Area } from "../../entities/Area";
 import { Disciplina } from "../../entities/Disciplina";
 
@@ -12,6 +13,10 @@ export class CreateDisciplinaService {
     async execute ({name, area_id, sigla}: DisciplinaRequest) {
         if(!name || !area_id || !sigla){
             return new Error("Insira todos os itens obrigatórios");
+        }
+
+        if(!validate(area_id)){
+            return new Error("ID de área inválido");
         }
 
         const repoArea = getRepository(Area);

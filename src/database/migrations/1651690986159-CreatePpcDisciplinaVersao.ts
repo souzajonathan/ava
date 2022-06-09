@@ -44,7 +44,8 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                         name: "fk_ppc",
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
-                        referencedColumnNames: ["id"]
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
                     },
                     {
                         name: "fk_disciplina_versao_id",

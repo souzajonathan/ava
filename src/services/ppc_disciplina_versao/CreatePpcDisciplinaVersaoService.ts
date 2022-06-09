@@ -17,8 +17,32 @@ type PpcDisciplinaVersaoRequest = {
 
 export class CreatePpcDisciplinaVersaoService {
     async execute ({ppc_id, disciplina_versao_id, modulo, semestre, perfis_id, competencias_id}: PpcDisciplinaVersaoRequest) {
-        if (!validate(ppc_id) || validate(disciplina_versao_id)){
+        if (!validate(ppc_id) || !validate(disciplina_versao_id)){
             return new Error("ID's inválidos");
+        }
+
+        if (perfis_id && perfis_id.length > 0) {
+
+            const invalideId = perfis_id.some( (perfil_id) => {
+                return !validate(perfil_id);
+            });
+            
+            if(invalideId){
+                return new Error("ID's de perfis inválidos");
+            }
+
+        }
+
+        if (competencias_id && competencias_id.length > 0) {
+
+            const invalideId = competencias_id.some( (competencia_id) => {
+                return !validate(competencia_id);
+            })
+            
+            if(invalideId){
+                return new Error("ID's de competências inválidos");
+            }
+
         }
 
         const repoPpc = getRepository(Ppc);

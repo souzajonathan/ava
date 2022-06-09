@@ -30,7 +30,7 @@ export class UpdateDisciplinaVersaoService {
         }
 
         if(disciplina_id){
-            if(validate(disciplina_id)){
+            if(!validate(disciplina_id)){
                 return new Error("ID de disciplina inválido");
             }
         }

@@ -22,6 +22,30 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("ID('s) inválido(s)");
         }
 
+        if (perfis_id && perfis_id.length > 0) {
+
+            const invalideId = perfis_id.some( (perfil_id) => {
+                return !validate(perfil_id);
+            });
+            
+            if(invalideId){
+                return new Error("ID's de perfis inválidos");
+            }
+
+        }
+
+        if (competencias_id && competencias_id.length > 0) {
+
+            const invalideId = competencias_id.some( (competencia_id) => {
+                return !validate(competencia_id);
+            })
+            
+            if(invalideId){
+                return new Error("ID's de competências inválidos");
+            }
+
+        }
+
         const repo = getRepository(PpcDisciplinaVersao);
         const ppcDisciplinaVersao = await repo.findOne(id);
         if (!ppcDisciplinaVersao) {
@@ -40,18 +64,36 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        const repoPerfis = getRepository(PerfilEgresso);
-        const repoCompetencias = getRepository(CompetenciasHabilidades);
-        
-        const perfis = await repoPerfis.find({where: {id: In(perfis_id) }});
-        const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
+        if (perfis_id && perfis_id.length > 0) {
+            const repoPerfis = getRepository(PerfilEgresso);
+
+            const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
+            
+            if(!(perfis.length > 0)){
+                return new Error("Perfil(s) não encontrado(s)");
+            }
+            
+            ppcDisciplinaVersao.perfis = perfis;
+
+        }
+
+        if (competencias_id && competencias_id.length > 0) {
+            const repoCompetencias = getRepository(CompetenciasHabilidades);
+
+            const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
+
+            if(!(competencias.length > 0)){
+                return new Error("Competência(s) não encontrada(s)");
+            }
+
+            ppcDisciplinaVersao.competencias = competencias;
+
+        }
 
         ppcDisciplinaVersao.ppc_id = ppc_id ? ppc_id : ppcDisciplinaVersao.ppc_id;
         ppcDisciplinaVersao.disciplina_versao_id = disciplina_versao_id ? disciplina_versao_id : ppcDisciplinaVersao.disciplina_versao_id;
         ppcDisciplinaVersao.modulo = modulo ? modulo : ppcDisciplinaVersao.modulo;
         ppcDisciplinaVersao.semestre = semestre ? semestre : ppcDisciplinaVersao.semestre;
-        ppcDisciplinaVersao.competencias = competencias ? competencias : ppcDisciplinaVersao.competencias;
-        ppcDisciplinaVersao.perfis = perfis ? perfis : ppcDisciplinaVersao.perfis;
 
         await repo.save(ppcDisciplinaVersao);
 

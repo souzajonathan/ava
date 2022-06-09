@@ -65,7 +65,7 @@ export class CreatePpcService {
             });
 
             if (result instanceof Error) {
-                return response.status(400).json(result.message);
+                return result;
             }
         
         }
@@ -81,7 +81,7 @@ export class CreatePpcService {
             });
 
             if (result instanceof Error) {
-                return response.status(400).json(result.message);
+                return result;
             }
         }
 
