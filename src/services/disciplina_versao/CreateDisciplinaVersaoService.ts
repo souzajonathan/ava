@@ -27,6 +27,18 @@ export class CreateDisciplinaVersaoService {
             return new Error("Insira todos os itens obrigatórios");
         }
 
+        if(!Number.isInteger(credito_quantidade)){
+            return new Error("Insira um número válido em 'crédito quantidade'");
+        }
+
+        if(typeof em_oferta != "boolean"){
+            return new Error("Marcação para 'em oferta' inválido");
+        }
+
+        if(typeof produzido != "boolean"){
+            return new Error("Marcação para 'produzido' inválido");
+        }
+
         if(!validate(disciplina_id)){
             return new Error("ID de disciplina inválido");
         }

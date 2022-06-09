@@ -1,4 +1,3 @@
-import { response } from "express";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
@@ -33,20 +32,35 @@ export class CreatePpcService {
         if(!curso_id || !anoVoto || !dataInicio || !dataFim || !horaCredito || !quantSemestres){
             return new Error("É necessário preencher os campos obrigatórios");
         }
+        
+        if(!Number.isInteger(anoVoto)){
+            return new Error("Insira um número válido em 'ano voto'");
+        }
+
+        if(!Number.isInteger(horaCredito)){
+            return new Error("Insira um número válido em 'hora crédito'");
+        }
+
+        if(!Number.isInteger(quantSemestres)){
+            return new Error("Insira um número válido em 'quantidade de semestres'");
+        }
+
+        if(typeof active != "boolean"){
+            return new Error("Marcação para 'PPC ativo' inválido");
+        }
+        
         if(!validate(curso_id)){
             return new Error("ID de curso inválido");
         }
-        
-        const repo = getRepository(Ppc);
 
         const repoCurso = getRepository(Curso);
         const curso = await repoCurso.findOne(curso_id);
         if(!curso) {
             return new Error("Curso não existe!");
         }
-
-        const ppc = repo.create({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres});
         
+        const repo = getRepository(Ppc);
+        const ppc = repo.create({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres});
         await repo.save(ppc);
 
         if(active){

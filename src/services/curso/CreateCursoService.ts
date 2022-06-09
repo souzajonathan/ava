@@ -10,10 +10,10 @@ export class CreateCursoService {
         if(!name){
             return new Error("Nome de curso não inserido");
         }
+        
         const repo = getRepository(Curso);
 
         const cursoAlreadyExists = await repo.findOne({name});
-
         if(cursoAlreadyExists) {
             return new Error("Curso já existe");
         }

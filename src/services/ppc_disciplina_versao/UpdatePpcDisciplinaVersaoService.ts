@@ -22,6 +22,20 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("ID('s) inválido(s)");
         }
 
+        if(modulo){
+            if(!Number.isInteger(modulo)){
+                return new Error("Insira um número válido em módulo");
+            }
+        }
+
+        if(semestre){
+            if(!Number.isInteger(semestre)){
+                return new Error("Insira um número válido em semestre");
+            }
+        }
+
+        let auxP = false;
+
         if (perfis_id && perfis_id.length > 0) {
 
             const invalideId = perfis_id.some( (perfil_id) => {
@@ -29,10 +43,13 @@ export class UpdatePpcDisciplinaVersaoService {
             });
             
             if(invalideId){
-                return new Error("ID's de perfis inválidos");
+                return new Error("ID('s) de perfil(s) inválido(s)");
             }
 
+            auxP = true;
         }
+
+        let auxC = false;
 
         if (competencias_id && competencias_id.length > 0) {
 
@@ -41,9 +58,10 @@ export class UpdatePpcDisciplinaVersaoService {
             })
             
             if(invalideId){
-                return new Error("ID's de competências inválidos");
+                return new Error("ID('s) de competência(s) inválido(s)");
             }
 
+            auxC = true;
         }
 
         const repo = getRepository(PpcDisciplinaVersao);
@@ -64,7 +82,7 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        if (perfis_id && perfis_id.length > 0) {
+        if (auxP) {
             const repoPerfis = getRepository(PerfilEgresso);
 
             const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
@@ -74,10 +92,9 @@ export class UpdatePpcDisciplinaVersaoService {
             }
             
             ppcDisciplinaVersao.perfis = perfis;
-
         }
 
-        if (competencias_id && competencias_id.length > 0) {
+        if (auxC) {
             const repoCompetencias = getRepository(CompetenciasHabilidades);
 
             const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});
@@ -87,7 +104,6 @@ export class UpdatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersao.competencias = competencias;
-
         }
 
         ppcDisciplinaVersao.ppc_id = ppc_id ? ppc_id : ppcDisciplinaVersao.ppc_id;

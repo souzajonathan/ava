@@ -1,4 +1,3 @@
-import { response } from "express";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
@@ -33,6 +32,30 @@ export class UpdatePpcService {
     async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id, active, competencias, perfis}: PpcUpdateRequest) {
         if (!validate(id)){
             return new Error("ID inválido");
+        }
+
+        if(anoVoto){
+            if(!Number.isInteger(anoVoto)){
+                return new Error("Insira um número válido em 'ano voto'");
+            }
+        }
+
+        if(horaCredito){
+            if(!Number.isInteger(horaCredito)){
+                return new Error("Insira um número válido em 'hora crédito'");
+            }
+        }
+
+        if(quantSemestres){
+            if(!Number.isInteger(quantSemestres)){
+                return new Error("Insira um número válido em 'quantidade de semestres'");
+            }
+        }
+
+        if(active){
+            if(typeof active != "boolean"){
+                return new Error("Marcação para 'PPC ativo' inválido");
+            }
         }
         
         if(curso_id){
@@ -69,7 +92,7 @@ export class UpdatePpcService {
             });
 
             if (result instanceof Error) {
-                return response.status(400).json(result.message);
+                return result;
             }
         
         }
@@ -85,7 +108,7 @@ export class UpdatePpcService {
             });
 
             if (result instanceof Error) {
-                return response.status(400).json(result.message);
+                return result;
             }
         }
 

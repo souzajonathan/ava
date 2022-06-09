@@ -16,6 +16,12 @@ export class CreateBibliografiaService {
             return new Error("ID('s) inválido(s)");
         }
 
+        if(tipo){
+            if(typeof tipo != "boolean"){
+                return new Error("Tipo inválido");
+            }
+        }
+
         const repo = getRepository(Bibliografia);
 
         const repoDisciplinaVersao = getRepository(DisciplinaVersao);

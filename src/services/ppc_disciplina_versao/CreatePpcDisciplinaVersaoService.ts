@@ -21,6 +21,16 @@ export class CreatePpcDisciplinaVersaoService {
             return new Error("ID's inválidos");
         }
 
+        if(!Number.isInteger(modulo)){
+            return new Error("Insira um número válido em módulo");
+        }
+
+        if(!Number.isInteger(semestre)){
+            return new Error("Insira um número válido em semestre");
+        }
+
+        let auxP = false;
+
         if (perfis_id && perfis_id.length > 0) {
 
             const invalideId = perfis_id.some( (perfil_id) => {
@@ -28,10 +38,13 @@ export class CreatePpcDisciplinaVersaoService {
             });
             
             if(invalideId){
-                return new Error("ID's de perfis inválidos");
+                return new Error("ID('s) de perfil(s) inválido(s)");
             }
 
+            auxP = true;
         }
+
+        let auxC = false;
 
         if (competencias_id && competencias_id.length > 0) {
 
@@ -40,9 +53,10 @@ export class CreatePpcDisciplinaVersaoService {
             })
             
             if(invalideId){
-                return new Error("ID's de competências inválidos");
+                return new Error("ID('s) de competência(s) inválido(s)");
             }
 
+            auxC = true;
         }
 
         const repoPpc = getRepository(Ppc);
@@ -61,7 +75,7 @@ export class CreatePpcDisciplinaVersaoService {
         const ppcDisciplinaVersao = repo.create({ ppc_id, disciplina_versao_id, modulo, semestre });
         let ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersao);
 
-        if (perfis_id && perfis_id.length > 0) {
+        if (auxP) {
             const repoPerfis = getRepository(PerfilEgresso);
 
             const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
@@ -75,7 +89,7 @@ export class CreatePpcDisciplinaVersaoService {
             ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersaoCreated);
         }
 
-        if (competencias_id && competencias_id.length > 0) {
+        if (auxC) {
             const repoCompetencias = getRepository(CompetenciasHabilidades);
 
             const competencias = await repoCompetencias.find({where: {id: In(competencias_id)}});

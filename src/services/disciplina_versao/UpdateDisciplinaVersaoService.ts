@@ -34,6 +34,24 @@ export class UpdateDisciplinaVersaoService {
                 return new Error("ID de disciplina inválido");
             }
         }
+
+        if(credito_quantidade){
+            if(!Number.isInteger(credito_quantidade)){
+                return new Error("Insira um número válido em 'crédito quantidade'");
+            }
+        }
+
+        if(em_oferta){
+            if(typeof em_oferta != "boolean"){
+                return new Error("Marcação para 'em oferta' inválido");
+            }
+        }
+
+        if(produzido){
+            if(typeof produzido != "boolean"){
+                return new Error("Marcação para 'produzido' inválido");
+            }
+        }
         
         const repo = getRepository(DisciplinaVersao);
         const disciplinaVersao = await repo.findOne(id);

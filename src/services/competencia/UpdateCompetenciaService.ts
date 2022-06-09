@@ -15,6 +15,7 @@ export class UpdateCompetenciaService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+        
         if(ppc_id){
             if(!validate(ppc_id)){
                 return new Error("ID de PPC inválido");

@@ -14,6 +14,7 @@ export class CreateCompetenciaService {
         if(!ppc_id || !competencia || !competenciaNumero){
             return new Error("Preencha os itens obrigatórios");
         }
+        
         if(!validate(ppc_id)){
             return new Error("ID de PPC inválido");
         }
