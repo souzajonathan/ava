@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  # Banco de Dados Postgres
+  pg_tudosempre:
+    image: "postgres:13.3-alpine"
+    container_name: pg_tudosempre
+    tty: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data_t:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_DB=${TYPEORM_DATABASE}"
+      - "POSTGRES_USER=${TYPEORM_USERNAME}"
+      - "POSTGRES_PASSWORD=${TYPEORM_PASSWORD}"
+    networks: 
+      - desespero
+
+volumes:
+  pg_data_t:
+    name: tudosempre_pg_data_t
+
+networks: 
+  desespero:
+    name: 'desespero'
+    driver: 'bridge'
