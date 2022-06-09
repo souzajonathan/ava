@@ -50,7 +50,7 @@ export class CreatePpcDisciplinaVersaoService {
 
             const invalideId = competencias_id.some( (competencia_id) => {
                 return !validate(competencia_id);
-            })
+            });
             
             if(invalideId){
                 return new Error("ID('s) de competência(s) inválido(s)");
