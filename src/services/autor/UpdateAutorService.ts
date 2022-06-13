@@ -9,7 +9,7 @@ type AutorUpdateRequest = {
     last_name: string;
     quote: string;
     nationality: string;
-};
+}
 
 export class UpdateAutorService {
     async execute ({id, first_name, middle_name, last_name, quote, nationality}: AutorUpdateRequest) {

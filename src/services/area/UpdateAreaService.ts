@@ -6,7 +6,7 @@ type AreaUpdateRequest = {
     id: string;
     name: string;
     description: string;
-};
+}
 
 export class UpdateAreaService {
     async execute ({id, name, description}: AreaUpdateRequest) {

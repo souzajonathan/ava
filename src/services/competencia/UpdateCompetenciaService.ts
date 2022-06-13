@@ -8,7 +8,7 @@ type CompetenciaUpdateRequest = {
     ppc_id: string;
     competencia: string;
     competenciaNumero: string;
-};
+}
 
 export class UpdateCompetenciaService {
     async execute ({id, ppc_id, competencia, competenciaNumero}: CompetenciaUpdateRequest) {

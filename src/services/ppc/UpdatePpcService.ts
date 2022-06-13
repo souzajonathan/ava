@@ -8,12 +8,12 @@ import { CreatePerfilService } from "../perfil/CreatePerfilService";
 type Competencia = {
     competencia: string;
     competenciaNumero: string;
-};
+}
 
 type Perfil = {
     perfil: string;
     perfilNumero: string;
-};
+}
 
 type PpcUpdateRequest = {
     id: string;
@@ -26,7 +26,7 @@ type PpcUpdateRequest = {
     active: boolean;
     competencias: Competencia[];
     perfis: Perfil[];
-};
+}
 
 export class UpdatePpcService {
     async execute ({id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, curso_id, active, competencias, perfis}: PpcUpdateRequest) {

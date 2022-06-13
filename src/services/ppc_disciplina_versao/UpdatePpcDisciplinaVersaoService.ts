@@ -14,7 +14,7 @@ type PpcDisciplinaVersaoUpdateRequest = {
     semestre: number;
     competencias_id: string[];
     perfis_id: string[];
-};
+}
 
 export class UpdatePpcDisciplinaVersaoService {
     async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PpcDisciplinaVersaoUpdateRequest) {

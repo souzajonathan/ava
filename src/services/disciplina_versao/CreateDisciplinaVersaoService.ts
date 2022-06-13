@@ -11,7 +11,7 @@ type DisciplinaVersaoRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
-};
+}
 
 export class CreateDisciplinaVersaoService {
     async execute({

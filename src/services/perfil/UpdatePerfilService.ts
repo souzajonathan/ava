@@ -8,7 +8,7 @@ type PerfilUpdateRequest = {
     ppc_id: string;
     perfil: string;
     perfilNumero: string;
-};
+}
 
 export class UpdatePerfilService {
     async execute ({id, ppc_id, perfil, perfilNumero}: PerfilUpdateRequest) {

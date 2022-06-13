@@ -29,7 +29,7 @@ type ObraRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
-};
+}
 
 export class CreateObraService {
     async execute({

@@ -12,7 +12,7 @@ type DisciplinaVersaoUpdateRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
-};
+}
 
 export class UpdateDisciplinaVersaoService {
     async execute ({

@@ -5,7 +5,7 @@ type PpcRequest = {
     id: string;
     dataLeft: string;
     dataRight: string;
-};
+}
 
 export class CalculoPedido {
     async execute({ id, dataLeft, dataRight }: PpcRequest): Promise<Ppc | Error> {
@@ -15,7 +15,6 @@ export class CalculoPedido {
 
         const inicioData = new Date(ppc.dataInicio);
         const dataA = new Date(dataLeft);
-
 
             /* dateTo.getMonth() -
             dateFrom.getMonth() +

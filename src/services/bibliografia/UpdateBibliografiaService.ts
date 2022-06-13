@@ -9,7 +9,7 @@ type BibliografiaUpdateRequest = {
     disciplina_versao_id: string;
     obra_id: string;
     tipo: boolean;
-};
+}
 
 export class UpdateBibliografiaService {
     async execute ({id, disciplina_versao_id, obra_id, tipo}: BibliografiaUpdateRequest) {

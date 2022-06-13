@@ -30,7 +30,7 @@ type ObraUpdateRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
-};
+}
 
 export class UpdateObraService {
     async execute ({

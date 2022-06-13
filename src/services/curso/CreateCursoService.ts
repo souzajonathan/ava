@@ -3,7 +3,7 @@ import { Curso } from "../../entities/Curso";
 
 type CursoRequest = {
     name: string;
-};
+}
 
 export class CreateCursoService {
     async execute({ name }: CursoRequest): Promise<Curso | Error> {

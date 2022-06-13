@@ -8,12 +8,12 @@ import { CreatePerfilService } from "../perfil/CreatePerfilService";
 type Competencia = {
     competencia: string;
     competenciaNumero: string;
-};
+}
 
 type Perfil = {
     perfil: string;
     perfilNumero: string;
-};
+}
 
 type PpcRequest = {
     curso_id: string;

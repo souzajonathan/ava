@@ -8,7 +8,7 @@ type DisciplinaUpdateRequest = {
     name: string;
     area_id: string;
     sigla: string;
-};
+}
 
 export class UpdateDisciplinaService {
     async execute ({id, name, area_id, sigla}: DisciplinaUpdateRequest) {

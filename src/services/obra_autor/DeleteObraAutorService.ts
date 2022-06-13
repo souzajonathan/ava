@@ -11,7 +11,7 @@ export class DeleteObraAutorService {
         const repo = getRepository(ObraAutor);
         const obraAutor = await repo.findOne(id);
 
-        if(!(obraAutor)){
+        if(!obraAutor){
             return new Error("obra_autor não existente!");
         }
 

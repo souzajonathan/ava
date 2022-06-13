@@ -4,7 +4,7 @@ import { Area } from "../../entities/Area";
 type AreaRequest = {
     name: string;
     description: string;
-};
+}
 
 export class CreateAreaService {
     async execute({ name, description }: AreaRequest): Promise<Area | Error> {

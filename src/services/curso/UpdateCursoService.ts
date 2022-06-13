@@ -7,7 +7,7 @@ type CursoUpdateRequest = {
     id: string;
     name: string;
     ppcAtivo: string;
-};
+}
 
 export class UpdateCursoService {
     async execute ({id, name, ppcAtivo}: CursoUpdateRequest) {

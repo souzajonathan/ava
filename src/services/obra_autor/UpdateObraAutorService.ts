@@ -9,7 +9,7 @@ type ObraAutorUpdateRequest = {
     autor_id: string;
     obra_id: string;
     funcao: string;
-};
+}
 
 export class UpdateObraAutorService {
     async execute ({id, autor_id, obra_id, funcao}: ObraAutorUpdateRequest) {
