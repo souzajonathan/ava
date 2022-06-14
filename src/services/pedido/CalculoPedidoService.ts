@@ -14,7 +14,7 @@ export class CalculoPedidoService {
         /* const ppcs = await repo.find({
             where: {dataInicio: (dateLeft)},
             relations: ["ppcDisciplinaVersoes"]
-        }) */;
+        }); */
 
         const ppcs = await repo.createQueryBuilder("ppc")
         .where({
