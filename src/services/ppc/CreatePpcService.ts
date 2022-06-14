@@ -29,7 +29,7 @@ type PpcRequest = {
 
 export class CreatePpcService {
     async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active, competencias, perfis}: PpcRequest) {
-        if(!curso_id || !anoVoto || !dataInicio || !dataFim || !horaCredito || !quantSemestres){
+        if(!curso_id || !anoVoto || !dataInicio || !horaCredito || !quantSemestres){
             return new Error("É necessário preencher os campos obrigatórios");
         }
         
