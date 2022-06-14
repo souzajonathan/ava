@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { Ppc } from "../../entities/Ppc";
 
 type PpcRequest = {
@@ -6,34 +7,47 @@ type PpcRequest = {
     dateRight: string;
 }
 
+type DisciplinaPedido = DisciplinaVersao & {
+    modulo: number;
+}
+
 export class CalculoPedidoService {
     async execute({ dateLeft, dateRight }: PpcRequest) {
-''
         const repo = getRepository(Ppc);
 
-        /* const ppcs = await repo.find({
-            where: {dataInicio: (dateLeft)},
-            relations: ["ppcDisciplinaVersoes"]
-        }); */
-
-        const ppcs = await repo.createQueryBuilder("ppc")
-        .where({
-            dataInicio: dateLeft
-        })
-        .leftJoinAndSelect("ppc.ppcDisciplinaVersoes", "ppcDisciplinaVersao")
-        .leftJoinAndSelect("ppcDisciplinaVersao.versoes", "disciplinaVersao")
-        .getMany();
+        const ppcs = await repo
+            .createQueryBuilder("ppc")
+            .leftJoinAndSelect(
+                "ppc.ppcDisciplinaVersoes",
+                "ppcDisciplinaVersao"
+            )
+            .leftJoinAndSelect(
+                "ppcDisciplinaVersao.versoes",
+                "disciplinaVersao"
+            )
+            .getMany();
 
         const startDate = new Date(dateLeft);
         const endDate = new Date(dateRight);
-        /* const startDatePpc = dataInicioDoPpc
 
-        const mesesI = startDate.getMonth() - startDatePpc.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear())
-        const mesesF = endDate.getMonth() - startDatePpc.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear())
+        const disciplinasPedido: DisciplinaPedido[] = [];
 
-        const moduloI = mesesI/3
-        const moduloF = mesesF/3 */
+        ppcs.forEach( (ppc) => {
+            const startDatePpc = new Date(ppc.dataInicio);
+    
+            const mesesI = startDate.getMonth() - startDatePpc.getMonth() + 12 * (startDate.getFullYear() - startDatePpc.getFullYear());
+            const mesesF = endDate.getMonth() - startDatePpc.getMonth() + 12 * (endDate.getFullYear() - startDatePpc.getFullYear());
 
-        return ppcs;
+            const moduloI = mesesI/3;
+            const moduloF = mesesF/3;
+
+            ppc.ppcDisciplinaVersoes.forEach( (versao) => {
+                if(versao.modulo <= moduloF && versao.modulo >= moduloI){
+                    disciplinasPedido.push({...versao.versoes, modulo: versao.modulo})
+                }
+            });
+        });
+
+        return disciplinasPedido;
     }
 }
