@@ -77,7 +77,7 @@ export class UpdatePpcService {
         }
         
         if(active){
-            curso.ppcAtivo = ppc.id;
+            curso.ppc_ativo = ppc.id;
             await repoCurso.save(curso);
         }
 

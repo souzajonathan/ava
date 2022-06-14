@@ -64,7 +64,7 @@ export class CreatePpcService {
         await repo.save(ppc);
 
         if(active){
-            curso.ppcAtivo = ppc.id;
+            curso.ppc_ativo = ppc.id;
             await repoCurso.save(curso);
         }
 

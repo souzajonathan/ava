@@ -25,7 +25,8 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                     },
                     {
                         name: "dataFim",
-                        type: "varchar"
+                        type: "varchar",
+                        isNullable: true
                     },
                     {
                         name: "horaCredito",

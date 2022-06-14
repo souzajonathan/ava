@@ -38,11 +38,11 @@ export class UpdatePpcDisciplinaVersaoService {
 
         if (perfis_id && perfis_id.length > 0) {
 
-            const invalideId = perfis_id.some( (perfil_id) => {
+            const invalidId = perfis_id.some( (perfil_id) => {
                 return !validate(perfil_id);
             });
             
-            if(invalideId){
+            if(invalidId){
                 return new Error("ID('s) de perfil(s) inválido(s)");
             }
 
@@ -53,11 +53,11 @@ export class UpdatePpcDisciplinaVersaoService {
 
         if (competencias_id && competencias_id.length > 0) {
 
-            const invalideId = competencias_id.some( (competencia_id) => {
+            const invalidId = competencias_id.some( (competencia_id) => {
                 return !validate(competencia_id);
             });
             
-            if(invalideId){
+            if(invalidId){
                 return new Error("ID('s) de competência(s) inválido(s)");
             }
 

@@ -30,7 +30,7 @@ export class DisciplinaVersao {
     @Column()
     codigo: string;
 
-    @Column()
+    @Column("int")
     credito_quantidade: number;
 
     @Column()

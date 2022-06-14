@@ -26,10 +26,10 @@ export class PpcDisciplinaVersao {
     @CreateDateColumn()
     created_at: Date;
 
-    @Column()
+    @Column("int")
     modulo: number;
 
-    @Column()
+    @Column("int")
     semestre: number;
 
     @ManyToMany(() => CompetenciasHabilidades)

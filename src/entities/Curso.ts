@@ -12,10 +12,8 @@ export class Curso {
     @CreateDateColumn()
     created_at: Date;
     
-    @Column("uuid", {
-        name: "ppc_ativo"
-    })
-    ppcAtivo: string;
+    @Column("uuid")
+    ppc_ativo: string;
 
     @OneToMany(() => Ppc, (ppc) => ppc.curso)
     ppcs: Ppc[];

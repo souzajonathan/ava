@@ -63,6 +63,7 @@ import { GetAllObraAutorController } from "./controller/obra_autor/GetAllObraAut
 import { GetOneObraAutorController } from "./controller/obra_autor/GetOneObraAutorController";
 import { DeleteObraAutorController } from "./controller/obra_autor/DeleteObraAutorController";
 import { UpdateObraAutorController } from "./controller/obra_autor/UpdateObraAutorController";
+import { CalculoPedidoController } from "./controller/pedido/CalculoPedidoController";
 
 const routes = Router();
 
@@ -142,5 +143,7 @@ routes.post("/perfil_ppc_disciplina_versao/:perfil_id", new CreatePerfilPpcDisci
 routes.post("/competencia_ppc_disciplina_versao/:competencia_id", new CreateCompetenciaPpcDisciplinaVersaoController().handle);
 routes.delete("/perfil_ppc_disciplina_versao/:perfil_id", new DeletePerfilPpcDisciplinaVersaoController().handle);
 routes.delete("/competencia_ppc_disciplina_versao/:competencia_id", new DeleteCompetenciaPpcDisciplinaVersaoController().handle);
+
+routes.get("/pedido", new CalculoPedidoController().handle);
 
 export { routes }
