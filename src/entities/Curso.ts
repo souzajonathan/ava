@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Ppc } from "./Ppc";
 
 @Entity("cursos")
@@ -9,13 +9,15 @@ export class Curso {
     @Column()
     name: string;
     
-    @CreateDateColumn()
-    created_at: Date;
-    
     @Column("uuid")
     ppc_ativo: string;
-
+    
     @OneToMany(() => Ppc, (ppc) => ppc.curso)
     ppcs: Ppc[];
+    
+    @CreateDateColumn()
+    created_at: Date;
 
+    @UpdateDateColumn()
+    updated_at: Date;
 }

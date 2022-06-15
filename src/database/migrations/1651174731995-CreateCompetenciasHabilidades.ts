@@ -31,6 +31,11 @@ export class CreateCompetenciasHabilidades1651174731995 implements MigrationInte
                         name: "created_at",
                         type: "timestamp",
                         default: "now()"
+                    },
+                    {
+                        name: "updated_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [

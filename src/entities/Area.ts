@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Disciplina } from "./Disciplina";
 
 @Entity("areas")
@@ -12,10 +12,12 @@ export class Area {
     @Column()
     description: string;
     
-    @CreateDateColumn()
-    created_at: Date;
-
     @OneToMany(() => Disciplina, (disciplina) => disciplina.area)
     disciplinas: Disciplina[];
 
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { DisciplinaVersao } from "./DisciplinaVersao";
 import { PerfisEgresso } from "./PerfisEgresso";
@@ -23,9 +23,6 @@ export class PpcDisciplinaVersao {
     @Column("uuid")
     disciplina_versao_id: string;
     
-    @CreateDateColumn()
-    created_at: Date;
-
     @Column("int")
     modulo: number;
 
@@ -39,7 +36,7 @@ export class PpcDisciplinaVersao {
         inverseJoinColumn: {name: "competencia_id"}
     })
     competencias: CompetenciasHabilidades[];
-
+    
     @ManyToMany(() => PerfisEgresso)
     @JoinTable({
         name: "perfil_ppc_versao",
@@ -48,4 +45,9 @@ export class PpcDisciplinaVersao {
     })
     perfis: PerfisEgresso[];
     
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }

@@ -21,6 +21,11 @@ export class CreateCompetenciaPpcVersao1651774035110 implements MigrationInterfa
                         name: "created_at",
                         type: "timestamp",
                         default: "now()"
+                    },
+                    {
+                        name: "updated_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [

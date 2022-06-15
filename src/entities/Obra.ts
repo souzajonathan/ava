@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Bibliografia } from "./Bibliografia";
 import { ObraAutor } from "./ObraAutor";
 
@@ -84,10 +84,7 @@ export class Obra {
 
     @Column("uuid")
     contido_em: string;
-
-    @CreateDateColumn()
-    created_at: Date;
-
+    
     @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
     obrasAutores: ObraAutor[];
 
@@ -97,8 +94,13 @@ export class Obra {
     @ManyToOne(() => Obra)
     @JoinColumn({name: "contido_em"})
     obraParent: Obra[];
-
+    
     @OneToMany(() => Obra, (obras) => obras.obraParent)
     obrasChildren: Obra;
+    
+    @CreateDateColumn()
+    created_at: Date;
 
+    @UpdateDateColumn()
+    updated_at: Date;
 }

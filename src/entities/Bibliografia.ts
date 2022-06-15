@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { DisciplinaVersao } from "./DisciplinaVersao";
 import { Obra } from "./Obra";
 
@@ -26,5 +26,7 @@ export class Bibliografia {
 
     @CreateDateColumn()
     created_at: Date;
-    
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }

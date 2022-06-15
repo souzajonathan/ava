@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { Curso } from "./Curso";
 import { PerfisEgresso } from "./PerfisEgresso";
@@ -43,4 +43,6 @@ export class Ppc {
     @CreateDateColumn()
     created_at: Date;
 
+    @UpdateDateColumn()
+    updated_at: Date;
 }

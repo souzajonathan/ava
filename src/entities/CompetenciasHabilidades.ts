@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Ppc } from "./Ppc";
 
 @Entity("competencias_habilidades")
@@ -11,15 +11,17 @@ export class CompetenciasHabilidades {
     ppc: Ppc;
     
     @Column("uuid")
-    ppc_id: string;
+    ppc_id: string; 
+    
+    @Column()
+    competencia: string;
+    
+    @Column("int")
+    competenciaNumero: number;
     
     @CreateDateColumn()
     created_at: Date;
 
-    @Column()
-    competencia: string;
-
-    @Column("int")
-    competenciaNumero: number;
-    
+    @UpdateDateColumn()
+    updated_at: Date;
 }

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Bibliografia } from "./Bibliografia";
 import { Disciplina } from "./Disciplina";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
@@ -21,27 +21,30 @@ export class DisciplinaVersao {
     @Column("uuid")
     disciplina_id: string;
     
-    @CreateDateColumn()
-    created_at: Date;
-
     @Column()
     disciplina_versao_nome: string;
     
     @Column()
     codigo: string;
-
+    
     @Column("int")
     credito_quantidade: number;
-
+    
     @Column()
     ementa: string;
-
+    
     @Column()
     observacao: string;
-
+    
     @Column()
     em_oferta: boolean;
-
+    
     @Column()
     produzido: boolean;
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }

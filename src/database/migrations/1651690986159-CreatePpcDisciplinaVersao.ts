@@ -26,17 +26,22 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                         isNullable: true
                     },
                     {
-                        name: "created_at",
-                        type: "timestamp",
-                        default: "now()"
-                    },
-                    {
                         name: "ppc_id",
                         type: "uuid"
                     },
                     {
                         name: "disciplina_versao_id",
                         type: "uuid"
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
+                    },
+                    {
+                        name: "updated_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ],
                 foreignKeys: [

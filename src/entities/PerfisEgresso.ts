@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Ppc } from "./Ppc";
 
 @Entity("perfis_egresso")
@@ -13,13 +13,15 @@ export class PerfisEgresso {
     @Column("uuid")
     ppc_id: string;
     
+    @Column()
+    perfil: string;
+    
+    @Column("int")
+    perfilNumero: number; 
+    
     @CreateDateColumn()
     created_at: Date;
 
-    @Column()
-    perfil: string;
-
-    @Column("int")
-    perfilNumero: number;
-    
+    @UpdateDateColumn()
+    updated_at: Date;
 }

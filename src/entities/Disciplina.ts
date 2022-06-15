@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Area } from "./Area";
 import { DisciplinaVersao } from "./DisciplinaVersao";
 
@@ -26,4 +26,6 @@ export class Disciplina {
     @CreateDateColumn()
     created_at: Date;
 
+    @UpdateDateColumn()
+    updated_at: Date;
 }

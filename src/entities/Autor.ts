@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ObraAutor } from "./ObraAutor";
 
 @Entity("autores")
@@ -21,10 +21,12 @@ export class Autor {
     @Column()
     nationality: string;
     
+    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.autores)
+    obrasAutores: ObraAutor[];
+    
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.autores)
-    obrasAutores: ObraAutor[];
-
+    @UpdateDateColumn()
+    updated_at: Date;
 }
