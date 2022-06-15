@@ -4,7 +4,6 @@ import { Bibliografia } from "../../entities/Bibliografia";
 
 export class GetOneBibliografiaService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

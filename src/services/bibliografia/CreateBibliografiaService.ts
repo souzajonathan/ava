@@ -1,4 +1,4 @@
-import { getRepository, In } from "typeorm";
+import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Bibliografia } from "../../entities/Bibliografia";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";

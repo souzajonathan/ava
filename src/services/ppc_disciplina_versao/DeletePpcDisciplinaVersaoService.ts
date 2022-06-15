@@ -7,7 +7,9 @@ export class DeletePpcDisciplinaVersaoService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+
         const repo = getRepository(PpcDisciplinaVersao);
+        
         const ppcDisciplinaVersao = await repo.findOne(id, {
             relations: ["competencias", "perfis"]
         });

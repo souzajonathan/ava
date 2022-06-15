@@ -9,9 +9,10 @@ type PerfilPpcDisciplinaVersaoRequest = {
 
 export class DeletePerfilPpcDisciplinaVersaoService {
     async execute ({perfil_id, ppcDisciplinaVersao_id}: PerfilPpcDisciplinaVersaoRequest) {
-        if (!validate(perfil_id || ppcDisciplinaVersao_id)){
-            return new Error("ID inválido");
+        if (!validate(perfil_id) || !validate(ppcDisciplinaVersao_id)){
+            return new Error("ID('s) inválido(s)");
         }
+        
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["perfis"]});
@@ -26,8 +27,6 @@ export class DeletePerfilPpcDisciplinaVersaoService {
 
         await repo.save(ppcDisciplinaVersao);
 
-        return {
-            ppcDisciplinaVersao
-        };
+        return ppcDisciplinaVersao;
     }
 }

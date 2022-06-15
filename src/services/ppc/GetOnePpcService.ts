@@ -4,7 +4,6 @@ import { validate} from "uuid";
 
 export class GetOnePpcService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

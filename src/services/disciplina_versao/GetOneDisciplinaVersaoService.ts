@@ -4,7 +4,6 @@ import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
 export class GetOneDisciplinaVersaoService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

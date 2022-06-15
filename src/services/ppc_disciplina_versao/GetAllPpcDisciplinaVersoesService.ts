@@ -1,7 +1,7 @@
 import { getRepository } from "typeorm";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
-export class GetAllPpcDisciplinaVersaoService {
+export class GetAllPpcDisciplinaVersoesService {
     async execute() {
         const repo = getRepository(PpcDisciplinaVersao);
 

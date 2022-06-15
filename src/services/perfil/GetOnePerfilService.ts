@@ -4,7 +4,6 @@ import { PerfilEgresso } from "../../entities/PerfilEgresso";
 
 export class GetOnePerfilService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

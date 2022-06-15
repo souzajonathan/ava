@@ -7,6 +7,7 @@ export class DeletePpcService {
         if (!validate(id)){
             return new Error("ID inválido");
         }
+
         const repo = getRepository(Ppc);
         /* const repoCompet = getRepository(CompetHabilidades);
         const repoPerf = getRepository(PerfilEgresso);

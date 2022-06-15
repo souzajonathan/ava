@@ -4,7 +4,6 @@ import { Obra } from "../../entities/Obra";
 
 export class GetOneObraService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

@@ -38,5 +38,4 @@ export class CreatePerfilService {
             ...perfilEgresso, ppc
         };
     }
-
 }

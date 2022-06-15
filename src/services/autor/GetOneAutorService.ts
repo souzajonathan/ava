@@ -4,7 +4,6 @@ import { Autor } from "../../entities/Autor";
 
 export class GetOneAutorService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

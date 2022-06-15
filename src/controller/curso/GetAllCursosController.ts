@@ -5,8 +5,8 @@ export class GetAllCursosController {
     async handle(request: Request, response: Response) {
         const service = new GetAllCursosService();
 
-        const areas = await service.execute(request.query);
+        const cursos = await service.execute(request.query);
 
-        return response.json(areas);
+        return response.json(cursos);
     }
 }

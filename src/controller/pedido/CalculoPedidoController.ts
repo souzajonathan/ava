@@ -12,10 +12,6 @@ export class CalculoPedidoController {
             dateRight
         });
 
-        if (result instanceof Error) {
-            return response.status(400).json(result.message);
-        }
-
         return response.json(result);
     }
 }

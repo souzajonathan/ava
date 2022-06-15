@@ -4,7 +4,6 @@ import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades"
 
 export class GetOneCompetenciaService {
     async execute(id: string) {
-        
         if (!validate(id)){
             return new Error("ID inválido");
         }

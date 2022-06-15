@@ -4,7 +4,6 @@ import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 export class GetOnePpcDisciplinaVersaoService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

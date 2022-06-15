@@ -4,7 +4,6 @@ import { Curso } from "../../entities/Curso";
 
 export class GetOneCursoService {
     async execute(id: string) {
-
         if (!validate(id)){
             return new Error("ID inválido");
         }

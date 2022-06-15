@@ -9,9 +9,10 @@ type CompetenciaPpcDisciplinaVersaoRequest = {
 
 export class DeleteCompetenciaPpcDisciplinaVersaoService {
     async execute ({competencia_id, ppcDisciplinaVersao_id}: CompetenciaPpcDisciplinaVersaoRequest) {
-        if (!validate(competencia_id || ppcDisciplinaVersao_id)){
-            return new Error("ID inválido");
+        if (!validate(competencia_id) || !validate(ppcDisciplinaVersao_id)){
+            return new Error("ID('s) inválido(s)");
         }
+        
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.findOne(ppcDisciplinaVersao_id, {relations: ["competencias"]});
@@ -26,8 +27,6 @@ export class DeleteCompetenciaPpcDisciplinaVersaoService {
 
         await repo.save(ppcDisciplinaVersao);
 
-        return {
-            ppcDisciplinaVersao
-        };
+        return ppcDisciplinaVersao;
     }
 }

@@ -11,6 +11,7 @@ export class CreateAreaService {
         if(!name){
             return new Error("Nome de área não inserido");
         }
+        
         const repo = getRepository(Area);
         const areaAlreadyExists = await repo.findOne({name});
 
