@@ -27,7 +27,7 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                     {
                         name: "fk_perfil",
                         columnNames: ["perfil_id"],
-                        referencedTableName: "perfil_egresso",
+                        referencedTableName: "perfis_egresso",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE"
                     },

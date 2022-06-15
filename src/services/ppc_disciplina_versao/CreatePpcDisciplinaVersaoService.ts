@@ -2,7 +2,7 @@ import { getRepository, In } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
-import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
@@ -76,7 +76,7 @@ export class CreatePpcDisciplinaVersaoService {
         let ppcDisciplinaVersaoCreated = await repo.save(ppcDisciplinaVersao);
 
         if (auxP) {
-            const repoPerfis = getRepository(PerfilEgresso);
+            const repoPerfis = getRepository(PerfisEgresso);
 
             const perfis = await repoPerfis.find({where: {id: In(perfis_id)}});
 

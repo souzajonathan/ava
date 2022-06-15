@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { Curso } from "./Curso";
-import { PerfilEgresso } from "./PerfilEgresso";
+import { PerfisEgresso } from "./PerfisEgresso";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
 @Entity("ppcs")
@@ -13,8 +13,8 @@ export class Ppc {
     @JoinColumn({name: "curso_id"})
     curso: Curso;
 
-    @OneToMany(() => PerfilEgresso, (perfil) => perfil.ppc)
-    perfis: PerfilEgresso[];
+    @OneToMany(() => PerfisEgresso, (perfil) => perfil.ppc)
+    perfis: PerfisEgresso[];
 
     @OneToMany(() => CompetenciasHabilidades, (competencia) => competencia.ppc)
     competencias: CompetenciasHabilidades[];

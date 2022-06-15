@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 type PerfilPpcDisciplinaVersaoRequest = {
@@ -14,7 +14,7 @@ export class CreatePerfilPpcDisciplinaVersaoService {
             return new Error("ID('s) inválido(s)");
         }
 
-        const repoPerfis = getRepository(PerfilEgresso);
+        const repoPerfis = getRepository(PerfisEgresso);
         const perfil = await repoPerfis.findOne(perfil_id);
         if(!perfil) {
             return new Error("Perfil não existe!");
@@ -31,6 +31,5 @@ export class CreatePerfilPpcDisciplinaVersaoService {
         await repo.save(ppcDisciplinaVersao);
 
         return ppcDisciplinaVersao;
-        
     }
 }

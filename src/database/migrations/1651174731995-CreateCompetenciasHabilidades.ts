@@ -17,7 +17,7 @@ export class CreateCompetenciasHabilidades1651174731995 implements MigrationInte
                     },
                     {
                         name: "competenciaNumero",
-                        type: "varchar"
+                        type: "int"
                     },
                     {
                         name: "competencia",

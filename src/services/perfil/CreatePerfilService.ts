@@ -1,18 +1,22 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 
 type PerfilRequest = {
     ppc_id: string;
     perfil: string;
-    perfilNumero: string;
+    perfilNumero: number;
 }
 
 export class CreatePerfilService {
     async execute({ ppc_id, perfil, perfilNumero }: PerfilRequest) {
         if(!ppc_id || !perfil || !perfilNumero){
             return new Error("Preencha os itens obrigatórios");
+        }
+
+        if(!Number.isInteger(perfilNumero)){
+            return new Error("Insira um número válido em 'número de perfil'");
         }
         
         if(!validate(ppc_id)){
@@ -25,7 +29,7 @@ export class CreatePerfilService {
             return new Error("Ppc não existe!");
         }
 
-        const repo = getRepository(PerfilEgresso);
+        const repo = getRepository(PerfisEgresso);
         const perfilEgresso = repo.create({
             ppc_id,
             perfil,

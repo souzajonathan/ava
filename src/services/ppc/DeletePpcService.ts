@@ -10,7 +10,7 @@ export class DeletePpcService {
 
         const repo = getRepository(Ppc);
         /* const repoCompet = getRepository(CompetHabilidades);
-        const repoPerf = getRepository(PerfilEgresso);
+        const repoPerf = getRepository(PerfisEgresso);
         
         if(!(await repo.findOne(id))){
             return new Error("Ppc não existe!");

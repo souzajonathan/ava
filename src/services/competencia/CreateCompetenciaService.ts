@@ -6,13 +6,17 @@ import { Ppc } from "../../entities/Ppc";
 type CompetenciaRequest = {
     ppc_id: string;
     competencia: string;
-    competenciaNumero: string;
+    competenciaNumero: number;
 }
 
 export class CreateCompetenciaService {
     async execute({ ppc_id, competencia, competenciaNumero }: CompetenciaRequest) {
         if(!ppc_id || !competencia || !competenciaNumero){
             return new Error("Preencha os itens obrigatórios");
+        }
+
+        if(!Number.isInteger(competenciaNumero)){
+            return new Error("Insira um número válido em 'número de competência'");
         }
         
         if(!validate(ppc_id)){
@@ -38,5 +42,4 @@ export class CreateCompetenciaService {
             ...competHabilidades, ppc
         };
     }
-
 }

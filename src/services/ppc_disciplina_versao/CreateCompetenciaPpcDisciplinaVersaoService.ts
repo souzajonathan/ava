@@ -31,6 +31,5 @@ export class CreateCompetenciaPpcDisciplinaVersaoService {
         await repo.save(ppcDisciplinaVersao);
 
         return ppcDisciplinaVersao;
-        
     }
 }

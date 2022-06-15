@@ -33,5 +33,4 @@ export class GetOneObraService {
 
         return obra;
     }
-
 }

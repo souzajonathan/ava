@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { DisciplinaVersao } from "./DisciplinaVersao";
-import { PerfilEgresso } from "./PerfilEgresso";
+import { PerfisEgresso } from "./PerfisEgresso";
 import { Ppc } from "./Ppc";
 
 @Entity("ppc_disciplina_versao")
@@ -40,12 +40,12 @@ export class PpcDisciplinaVersao {
     })
     competencias: CompetenciasHabilidades[];
 
-    @ManyToMany(() => PerfilEgresso)
+    @ManyToMany(() => PerfisEgresso)
     @JoinTable({
         name: "perfil_ppc_versao",
         joinColumn: {name: "ppc_disciplina_versao_id"},
         inverseJoinColumn: {name: "perfil_id"}
     })
-    perfis: PerfilEgresso[];
+    perfis: PerfisEgresso[];
     
 }

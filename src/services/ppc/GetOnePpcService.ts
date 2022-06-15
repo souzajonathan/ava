@@ -20,5 +20,4 @@ export class GetOnePpcService {
 
         return ppc;
     }
-
 }

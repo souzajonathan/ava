@@ -1,12 +1,12 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
+export class CreatePerfisEgresso1651175844642 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "perfil_egresso",
+                name: "perfis_egresso",
                 columns: [
                     {
                         name: 'id',
@@ -17,7 +17,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
                     },
                     {
                         name: "perfilNumero",
-                        type: "varchar"
+                        type: "int"
                     },
                     {
                         name: "perfil",
@@ -47,7 +47,7 @@ export class CreatePerfilEgresso1651175844642 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("perfil_egresso");
+        await queryRunner.dropTable("perfis_egresso");
     }
 
 }

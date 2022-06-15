@@ -19,7 +19,7 @@ export class CompetenciasHabilidades {
     @Column()
     competencia: string;
 
-    @Column()
-    competenciaNumero: string;
+    @Column("int")
+    competenciaNumero: number;
     
 }

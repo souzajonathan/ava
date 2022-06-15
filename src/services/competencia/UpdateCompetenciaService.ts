@@ -7,7 +7,7 @@ type CompetenciaUpdateRequest = {
     id: string;
     ppc_id: string;
     competencia: string;
-    competenciaNumero: string;
+    competenciaNumero: number;
 }
 
 export class UpdateCompetenciaService {
@@ -19,6 +19,12 @@ export class UpdateCompetenciaService {
         if(ppc_id){
             if(!validate(ppc_id)){
                 return new Error("ID de PPC inválido");
+            }
+        }
+
+        if(competenciaNumero){
+            if(!Number.isInteger(competenciaNumero)){
+                return new Error("Insira um número válido em 'número de competência'");
             }
         }
         

@@ -28,5 +28,4 @@ export class CreateAreaService {
 
         return area;
     }
-
 }

@@ -20,5 +20,4 @@ export class GetOneDisciplinaVersaoService {
 
         return versao;
     }
-
 }

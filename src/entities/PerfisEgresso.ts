@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Ppc } from "./Ppc";
 
-@Entity("perfil_egresso")
-export class PerfilEgresso {
+@Entity("perfis_egresso")
+export class PerfisEgresso {
     @PrimaryGeneratedColumn("uuid")
     id: string;
     
@@ -19,7 +19,7 @@ export class PerfilEgresso {
     @Column()
     perfil: string;
 
-    @Column()
-    perfilNumero: string;
+    @Column("int")
+    perfilNumero: number;
     
 }

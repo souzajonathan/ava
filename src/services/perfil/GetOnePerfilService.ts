@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { PerfisEgresso } from "../../entities/PerfisEgresso";
 
 export class GetOnePerfilService {
     async execute(id: string) {
@@ -8,7 +8,7 @@ export class GetOnePerfilService {
             return new Error("ID inválido");
         }
 
-        const repo = getRepository(PerfilEgresso);
+        const repo = getRepository(PerfisEgresso);
 
         /* const perfil = await repo.findOne(id, {
             relations: ["ppc"]
@@ -30,5 +30,4 @@ export class GetOnePerfilService {
 
         return perfil;
     }
-
 }

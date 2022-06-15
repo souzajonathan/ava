@@ -20,5 +20,4 @@ export class GetOneDisciplinaService {
 
         return disciplina;
     }
-
 }

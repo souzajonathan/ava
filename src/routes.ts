@@ -68,76 +68,76 @@ import { CalculoPedidoController } from "./controller/pedido/CalculoPedidoContro
 const routes = Router();
 
 routes.post("/areas", new CreateAreaController().handle);
-routes.get("/areas", new GetAllAreasController().handle);
-routes.get("/area/:id", new GetOneAreaController().handle);
-routes.delete("/areas/:id", new DeleteAreaController().handle);
 routes.put("/areas/:id", new UpdateAreaController().handle);
+routes.get("/area/:id", new GetOneAreaController().handle);
+routes.get("/areas", new GetAllAreasController().handle);
+routes.delete("/areas/:id", new DeleteAreaController().handle);
 
 routes.post("/disciplinas", new CreateDisciplinaController().handle);
-routes.get("/disciplinas", new GetAllDisciplinasController().handle);
-routes.get("/disciplina/:id", new GetOneDisciplinaController().handle);
-routes.delete("/disciplinas/:id", new DeleteDisciplinaController().handle);
 routes.put("/disciplinas/:id", new UpdateDisciplinaController().handle);
+routes.get("/disciplina/:id", new GetOneDisciplinaController().handle);
+routes.get("/disciplinas", new GetAllDisciplinasController().handle);
+routes.delete("/disciplinas/:id", new DeleteDisciplinaController().handle);
 
 routes.post("/cursos", new CreateCursoController().handle);
-routes.get("/cursos", new GetAllCursosController().handle);
-routes.get("/curso/:id", new GetOneCursoController().handle);
-routes.delete("/cursos/:id", new DeleteCursoController().handle);
 routes.put("/cursos/:id", new UpdateCursoController().handle);
+routes.get("/curso/:id", new GetOneCursoController().handle);
+routes.get("/cursos", new GetAllCursosController().handle);
+routes.delete("/cursos/:id", new DeleteCursoController().handle);
 
 routes.post("/ppcs", new CreatePpcController().handle);
-routes.get("/ppcs", new GetAllPpcsController().handle);
-routes.get("/ppc/:id", new GetOnePpcController().handle);
-routes.delete("/ppcs/:id", new DeletePpcController().handle);
 routes.put("/ppcs/:id", new UpdatePpcController().handle);
+routes.get("/ppc/:id", new GetOnePpcController().handle);
+routes.get("/ppcs", new GetAllPpcsController().handle);
+routes.delete("/ppcs/:id", new DeletePpcController().handle);
 
 routes.post("/perfis", new CreatePerfilController().handle);
-routes.get("/perfis", new GetAllPerfisController().handle);
-routes.get("/perfil/:id", new GetOnePerfilController().handle);
-routes.delete("/perfis/:id", new DeletePerfilController().handle);
 routes.put("/perfis/:id", new UpdatePerfilController().handle);
+routes.get("/perfil/:id", new GetOnePerfilController().handle);
+routes.get("/perfis", new GetAllPerfisController().handle);
+routes.delete("/perfis/:id", new DeletePerfilController().handle);
 
 routes.post("/competencias", new CreateCompetenciaController().handle);
-routes.get("/competencias", new GetAllCompetenciasController().handle);
-routes.get("/competencia/:id", new GetOneCompetenciaController().handle);
-routes.delete("/competencias/:id", new DeleteCompetenciaController().handle);
 routes.put("/competencias/:id", new UpdateCompetenciaController().handle);
+routes.get("/competencia/:id", new GetOneCompetenciaController().handle);
+routes.get("/competencias", new GetAllCompetenciasController().handle);
+routes.delete("/competencias/:id", new DeleteCompetenciaController().handle);
 
 routes.post("/versoes", new CreateDisciplinaVersaoController().handle);
-routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
-routes.get("/versao/:id", new GetOneDisciplinaVersaoController().handle);
-routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
 routes.put("/versoes/:id", new UpdateDisciplinaVersaoController().handle);
+routes.get("/versao/:id", new GetOneDisciplinaVersaoController().handle);
+routes.get("/versoes", new GetAllDisciplinaVersoesController().handle);
+routes.delete("/versoes/:id", new DeleteDisciplinaVersaoController().handle);
 
 routes.post("/autores", new CreateAutorController().handle);
-routes.get("/autores", new GetAllAutoresController().handle);
-routes.get("/autor/:id", new GetOneAutorController().handle);
-routes.delete("/autores/:id", new DeleteAutorController().handle);
 routes.put("/autores/:id", new UpdateAutorController().handle);
+routes.get("/autor/:id", new GetOneAutorController().handle);
+routes.get("/autores", new GetAllAutoresController().handle);
+routes.delete("/autores/:id", new DeleteAutorController().handle);
 
 routes.post("/obras", new CreateObraController().handle);
-routes.get("/obras", new GetAllObrasController().handle);
-routes.get("/obra/:id", new GetOneObraController().handle);
-routes.delete("/obras/:id", new DeleteObraController().handle);
 routes.put("/obras/:id", new UpdateObraController().handle);
+routes.get("/obra/:id", new GetOneObraController().handle);
+routes.get("/obras", new GetAllObrasController().handle);
+routes.delete("/obras/:id", new DeleteObraController().handle);
 
 routes.post("/bibliografias", new CreateBibliografiaController().handle);
-routes.get("/bibliografias", new GetAllBibliografiasController().handle);
-routes.get("/bibliografia/:id", new GetOneBibliografiaController().handle);
-routes.delete("/bibliografias/:id", new DeleteBibliografiaController().handle);
 routes.put("/bibliografias/:id", new UpdateBibliografiaController().handle);
+routes.get("/bibliografia/:id", new GetOneBibliografiaController().handle);
+routes.get("/bibliografias", new GetAllBibliografiasController().handle);
+routes.delete("/bibliografias/:id", new DeleteBibliografiaController().handle);
 
 routes.post("/obra_autor", new CreateObraAutorController().handle);
-routes.get("/obra_autor", new GetAllObraAutorController().handle);
-routes.get("/obra_autor/:id", new GetOneObraAutorController().handle);
-routes.delete("/obra_autor/:id", new DeleteObraAutorController().handle);
 routes.put("/obra_autor/:id", new UpdateObraAutorController().handle);
+routes.get("/obra_autor/:id", new GetOneObraAutorController().handle);
+routes.get("/obra_autor", new GetAllObraAutorController().handle);
+routes.delete("/obra_autor/:id", new DeleteObraAutorController().handle);
 
-routes.post("/ppc_disciplina_versoes", new CreatePpcDisciplinaVersaoController().handle);
-routes.get("/ppc_disciplina_versoes", new GetAllPpcDisciplinaVersoesController().handle);
+routes.post("/ppc_disciplina_versao", new CreatePpcDisciplinaVersaoController().handle);
+routes.put("/ppc_disciplina_versao/:id", new UpdatePpcDisciplinaVersaoController().handle);
 routes.get("/ppc_disciplina_versao/:id", new GetOnePpcDisciplinaVersaoController().handle);
-routes.delete("/ppc_disciplina_versoes/:id", new DeletePpcDisciplinaVersaoController().handle);
-routes.put("/ppc_disciplina_versoes/:id", new UpdatePpcDisciplinaVersaoController().handle);
+routes.get("/ppc_disciplina_versao", new GetAllPpcDisciplinaVersoesController().handle);
+routes.delete("/ppc_disciplina_versao/:id", new DeletePpcDisciplinaVersaoController().handle);
 
 routes.post("/perfil_ppc_disciplina_versao/:perfil_id", new CreatePerfilPpcDisciplinaVersaoController().handle);
 routes.post("/competencia_ppc_disciplina_versao/:competencia_id", new CreateCompetenciaPpcDisciplinaVersaoController().handle);

@@ -20,5 +20,4 @@ export class GetOneAreaService {
 
         return area;
     }
-
 }

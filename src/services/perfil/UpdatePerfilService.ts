@@ -1,13 +1,13 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { PerfilEgresso } from "../../entities/PerfilEgresso";
+import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 
 type PerfilUpdateRequest = {
     id: string;
     ppc_id: string;
     perfil: string;
-    perfilNumero: string;
+    perfilNumero: number;
 }
 
 export class UpdatePerfilService {
@@ -21,8 +21,14 @@ export class UpdatePerfilService {
                 return new Error("ID de PPC inválido");
             }
         }
+
+        if(perfilNumero){
+            if(!Number.isInteger(perfilNumero)){
+                return new Error("Insira um número válido em 'número de perfil'");
+            }
+        }
         
-        const repo = getRepository(PerfilEgresso);
+        const repo = getRepository(PerfisEgresso);
         const perfilEgresso = await repo.findOne(id);
         if (!perfilEgresso) {
             return new Error("Perfil não existente!");
@@ -36,7 +42,7 @@ export class UpdatePerfilService {
 
         perfilEgresso.ppc_id = ppc_id ? ppc_id : perfilEgresso.ppc_id;
         perfilEgresso.perfil = perfil ? perfil : perfilEgresso.perfil;
-        perfilEgresso.perfilNumero = perfilNumero ? perfil : perfilEgresso.perfilNumero;
+        perfilEgresso.perfilNumero = perfilNumero ? perfilNumero : perfilEgresso.perfilNumero;
 
         await repo.save(perfilEgresso);
 

@@ -53,10 +53,6 @@ export class CreateDisciplinaVersaoService {
         where.disciplina_id = disciplina_id;
         const numeroVersao = await repo.count({where});
 
-        /* if(!disciplina.sigla){
-            return new Error("Disciplina sem sigla");
-        } */
-
         const disciplina_versao_nome = `${disciplina.sigla}${credito_quantidade}-${numeroVersao+1}`;
 
         const disciplinaVersao = repo.create({

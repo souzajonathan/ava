@@ -30,5 +30,4 @@ export class GetOneCompetenciaService {
 
         return competencia;
     }
-
 }

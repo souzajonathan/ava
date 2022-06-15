@@ -29,5 +29,4 @@ export class GetOneAutorService {
 
         return autor;
     }
-
 }

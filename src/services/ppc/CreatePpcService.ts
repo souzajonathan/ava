@@ -7,12 +7,12 @@ import { CreatePerfilService } from "../perfil/CreatePerfilService";
 
 type Competencia = {
     competencia: string;
-    competenciaNumero: string;
+    competenciaNumero: number;
 }
 
 type Perfil = {
     perfil: string;
-    perfilNumero: string;
+    perfilNumero: number;
 }
 
 type PpcRequest = {
