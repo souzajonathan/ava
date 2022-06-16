@@ -6,11 +6,8 @@ export class CreateObraController {
         const {
             item_tipo,
             obra_nome,
-            capitulo_nome,
             serie_nome,
             colecao_nome,
-            organizador_editor_nome,
-            funcao,
             cidade,
             editora,
             ano,
@@ -37,11 +34,8 @@ export class CreateObraController {
         const result = await service.execute({
             item_tipo,
             obra_nome,
-            capitulo_nome,
             serie_nome,
             colecao_nome,
-            organizador_editor_nome,
-            funcao,
             cidade,
             editora,
             ano,

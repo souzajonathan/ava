@@ -4,6 +4,8 @@ import { Autor } from "../../entities/Autor";
 type filter = {
     primeiroNome?: string;
     ultimoNome?: string;
+    nacionalidade?: string;
+    citacao?: string;
 }
 
 export class GetAllAutoresService {
@@ -18,6 +20,14 @@ export class GetAllAutoresService {
 
         if (query?.ultimoNome) {
             where.last_name = Raw((alias) => `${alias} ilike '%${query.ultimoNome}%'`);
+        }
+
+        if (query?.nacionalidade) {
+            where.nationality = Raw((alias) => `${alias} ilike '%${query.nacionalidade}%'`);
+        }
+
+        if (query?.citacao) {
+            where.quote = Raw((alias) => `${alias} ilike '%${query.citacao}%'`);
         }
 
         const autores = await repo.find({

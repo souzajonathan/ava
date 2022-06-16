@@ -16,16 +16,12 @@ export class UpdateCompetenciaService {
             return new Error("ID inválido");
         }
         
-        if(ppc_id){
-            if(!validate(ppc_id)){
-                return new Error("ID de PPC inválido");
-            }
+        if(ppc_id && !validate(ppc_id)){
+            return new Error("ID de PPC inválido");
         }
 
-        if(competenciaNumero){
-            if(!Number.isInteger(competenciaNumero)){
-                return new Error("Insira um número válido em 'número de competência'");
-            }
+        if(competenciaNumero && !Number.isInteger(competenciaNumero)){
+            return new Error("Insira um número válido em número de competência");
         }
         
         const repo = getRepository(CompetenciasHabilidades);

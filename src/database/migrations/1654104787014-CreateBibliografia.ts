@@ -27,8 +27,7 @@ export class CreateBibliografia1654104787014 implements MigrationInterface {
                     },
                     {
                         name: "tipo",
-                        type: "boolean",
-                        isNullable: true
+                        type: "varchar"
                     },
                     {
                         name: "created_at",

@@ -34,22 +34,16 @@ export class UpdatePpcService {
             return new Error("ID inválido");
         }
 
-        if(anoVoto){
-            if(!Number.isInteger(anoVoto)){
-                return new Error("Insira um número válido em 'ano voto'");
-            }
+        if(anoVoto && !Number.isInteger(anoVoto)){
+            return new Error("Insira um número válido em 'ano voto'");
         }
 
-        if(horaCredito){
-            if(!Number.isInteger(horaCredito)){
-                return new Error("Insira um número válido em 'hora crédito'");
-            }
+        if(horaCredito && !Number.isInteger(horaCredito)){
+            return new Error("Insira um número válido em 'hora crédito'");
         }
 
-        if(quantSemestres){
-            if(!Number.isInteger(quantSemestres)){
-                return new Error("Insira um número válido em 'quantidade de semestres'");
-            }
+        if(quantSemestres && !Number.isInteger(quantSemestres)){
+            return new Error("Insira um número válido em 'quantidade de semestres'");
         }
 
         if(active){
@@ -58,10 +52,8 @@ export class UpdatePpcService {
             }
         }
         
-        if(curso_id){
-            if(!validate(curso_id)){
-                return new Error("ID de curso inválido");
-            }
+        if(curso_id && !validate(curso_id)){
+            return new Error("ID de curso inválido");
         }
         
         const repo = getRepository(Ppc);

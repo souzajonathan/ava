@@ -17,8 +17,12 @@ type PpcDisciplinaVersaoRequest = {
 
 export class CreatePpcDisciplinaVersaoService {
     async execute ({ppc_id, disciplina_versao_id, modulo, semestre, perfis_id, competencias_id}: PpcDisciplinaVersaoRequest) {
-        if (!validate(ppc_id) || !validate(disciplina_versao_id)){
-            return new Error("ID's inválidos");
+        if (!validate(ppc_id)){
+            return new Error("ID de PPC inválido");
+        }
+
+        if (!validate(disciplina_versao_id)){
+            return new Error("ID de versão de disciplina inválido");
         }
 
         if(!Number.isInteger(modulo)){

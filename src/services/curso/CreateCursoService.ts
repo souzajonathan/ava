@@ -6,9 +6,9 @@ type CursoRequest = {
 }
 
 export class CreateCursoService {
-    async execute({ name }: CursoRequest): Promise<Curso | Error> {
+    async execute({ name }: CursoRequest) {
         if(!name){
-            return new Error("Nome de curso não inserido");
+            return new Error("Nome de curso é obrigatório");
         }
         
         const repo = getRepository(Curso);

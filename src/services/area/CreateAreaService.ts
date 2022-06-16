@@ -7,7 +7,7 @@ type AreaRequest = {
 }
 
 export class CreateAreaService {
-    async execute({ name, description }: AreaRequest): Promise<Area | Error> {
+    async execute({ name, description }: AreaRequest) {
         if(!name){
             return new Error("Nome de área não inserido");
         }

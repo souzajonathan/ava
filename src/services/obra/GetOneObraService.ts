@@ -9,10 +9,6 @@ export class GetOneObraService {
         }
 
         const repo = getRepository(Obra);
-        
-        /* const obra = await repo.findOne(id, {
-            relations: ["bibliografias", "obrasAutores"],
-        }); */
 
         const obra = await repo
             .createQueryBuilder("obra")

@@ -15,18 +15,16 @@ export class UpdateCursoService {
             return new Error("ID inválido");
         }
         
+        if(ppc_ativo && !validate(ppc_ativo)){
+            return new Error("ID de ppc inválido");
+        }
+
         const repo = getRepository(Curso);
         const curso = await repo.findOne(id);
         if (!curso) {
             return new Error("Curso não existe!");
         }
 
-        if(ppc_ativo){
-            if(!validate(ppc_ativo)){
-                return new Error("ID de ppc inválido");
-            }
-        }
-        
         const repoPpc = getRepository(Ppc);
         const ppc = await repoPpc.findOne(ppc_ativo);
         if (!ppc) {

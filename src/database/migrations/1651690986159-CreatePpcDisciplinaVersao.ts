@@ -17,13 +17,11 @@ export class CreatePpcDisciplinaVersao1651690986159 implements MigrationInterfac
                     },
                     {
                         name: 'modulo',
-                        type: 'int',
-                        isNullable: true
+                        type: 'int'
                     },
                     {
                         name: 'semestre',
-                        type: 'int',
-                        isNullable: true
+                        type: 'int'
                     },
                     {
                         name: "ppc_id",

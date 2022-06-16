@@ -11,8 +11,12 @@ type DisciplinaRequest = {
 
 export class CreateDisciplinaService {
     async execute ({name, area_id, sigla}: DisciplinaRequest) {
-        if(!name || !area_id || !sigla){
-            return new Error("Insira todos os itens obrigatórios");
+        if(!name){
+            return new Error("Nome de disciplina é obrigatório");
+        }
+
+        if(!sigla){
+            return new Error("Sigla é obrigatório");
         }
 
         if(!validate(area_id)){

@@ -11,18 +11,18 @@ type CompetenciaRequest = {
 
 export class CreateCompetenciaService {
     async execute({ ppc_id, competencia, competenciaNumero }: CompetenciaRequest) {
-        if(!ppc_id || !competencia || !competenciaNumero){
-            return new Error("Preencha os itens obrigatórios");
+        if(!validate(ppc_id)){
+            return new Error("ID de PPC inválido");
+        }
+
+        if(!competencia){
+            return new Error("Competência é obrigatória");
         }
 
         if(!Number.isInteger(competenciaNumero)){
             return new Error("Insira um número válido em 'número de competência'");
         }
         
-        if(!validate(ppc_id)){
-            return new Error("ID de PPC inválido");
-        }
-
         const repoPpc = getRepository(Ppc);
         const ppc = await repoPpc.findOne(ppc_id);
         if(!ppc) {

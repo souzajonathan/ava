@@ -8,7 +8,7 @@ type BibliografiaUpdateRequest = {
     id: string;
     disciplina_versao_id: string;
     obra_id: string;
-    tipo: boolean;
+    tipo: string;
 }
 
 export class UpdateBibliografiaService {
@@ -17,22 +17,12 @@ export class UpdateBibliografiaService {
             return new Error("ID inválido");
         }
 
-        if(tipo){
-            if(typeof tipo != "boolean"){
-                return new Error("Tipo inválido");
-            }
+        if(disciplina_versao_id && !validate(disciplina_versao_id)){
+            return new Error("ID de versão de disciplina inválido");
         }
 
-        if(disciplina_versao_id){
-            if(!validate(disciplina_versao_id)){
-                return new Error("ID de versão de disciplina inválido");
-            }
-        }
-
-        if(obra_id){
-            if(!validate(obra_id)){
-                return new Error("ID de obra inválido");
-            }
+        if(obra_id && !validate(obra_id)){
+            return new Error("ID de obra inválido");
         }
 
         const repo = getRepository(Bibliografia);

@@ -29,8 +29,12 @@ type PpcRequest = {
 
 export class CreatePpcService {
     async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active, competencias, perfis}: PpcRequest) {
-        if(!curso_id || !anoVoto || !dataInicio || !horaCredito || !quantSemestres){
-            return new Error("É necessário preencher os campos obrigatórios");
+        if(!validate(curso_id)){
+            return new Error("ID de curso inválido");
+        }
+
+        if(!dataInicio){
+            return new Error("Data de início é obrigatória");
         }
         
         if(!Number.isInteger(anoVoto)){
@@ -47,10 +51,6 @@ export class CreatePpcService {
 
         if(typeof active != "boolean"){
             return new Error("Marcação para 'PPC ativo' inválido");
-        }
-        
-        if(!validate(curso_id)){
-            return new Error("ID de curso inválido");
         }
 
         const repoCurso = getRepository(Curso);

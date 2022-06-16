@@ -6,16 +6,13 @@ type ObraUpdateRequest = {
     id: string;
     item_tipo: string;
     obra_nome: string;
-    capitulo_nome: string;
     serie_nome: string;
     colecao_nome: string;
-    organizador_editor_nome: string;
-    funcao: string;
     cidade: string;
     editora: string;
-    ano: string;
+    ano: number;
     mes: string;
-    dia: string;
+    dia: number;
     volume: string;
     edicao: string;
     resumo: string;
@@ -37,11 +34,8 @@ export class UpdateObraService {
         id,
         item_tipo,
         obra_nome,
-        capitulo_nome,
         serie_nome,
         colecao_nome,
-        organizador_editor_nome,
-        funcao,
         cidade,
         editora,
         ano,
@@ -66,36 +60,39 @@ export class UpdateObraService {
             return new Error("ID inválido");
         }
 
+        if(ano && !Number.isInteger(ano)){
+            return new Error("Insira um número válido em 'ano'");
+        }
+
+        if(dia && !Number.isInteger(dia)){
+            return new Error("Insira um número válido em 'dia'");
+        }
+
         const repo = getRepository(Obra);
         const obra = await repo.findOne(id);
         if (!obra) {
             return new Error("Obra não existe!");
         }
 
-        if(contido_em){
-            if(validate(contido_em)){
-                if(!(id == contido_em)){
-                    const idAux = await repo.findOne({where: {id: contido_em}});
-                    if(!idAux){
-                        return new Error("ID de 'contido em' inexistente");
-                    }
-                }
-                else{
-                    return new Error("Não é possível editar uma obra e inseri-la nela mesma");
+        if(contido_em && validate(contido_em)){
+            if(!(id == contido_em)){
+                const idAux = await repo.findOne({where: {id: contido_em}});
+                if(!idAux){
+                    return new Error("ID de 'contido em' inexistente");
                 }
             }
             else{
-                return new Error("ID de 'contido em' inválido");
+                return new Error("Não é possível editar uma obra e inseri-la nela mesma");
             }
+        }
+        else{
+            return new Error("ID de 'contido em' inválido");
         }
 
         obra.item_tipo = item_tipo ? item_tipo : obra.item_tipo;
         obra.obra_nome = obra_nome ? obra_nome : obra.obra_nome;
-        obra.capitulo_nome = capitulo_nome ? capitulo_nome : obra.capitulo_nome;
         obra.serie_nome = serie_nome ? serie_nome : obra.serie_nome;
         obra.colecao_nome = colecao_nome ? colecao_nome : obra.colecao_nome;
-        obra.organizador_editor_nome = organizador_editor_nome ? organizador_editor_nome : obra.organizador_editor_nome;
-        obra.funcao = funcao ? funcao : obra.funcao;
         obra.cidade = cidade ? cidade : obra.cidade;
         obra.editora = editora ? editora : obra.editora;
         obra.ano = ano ? ano : obra.ano;

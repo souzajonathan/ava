@@ -17,18 +17,11 @@ export class CreateObras1653589733410 implements MigrationInterface {
                     },
                     {
                         name: "item_tipo",
-                        type: "varchar",
-                        isNullable: true
+                        type: "varchar"
                     },
                     {
                         name: "obra_nome",
-                        type: "varchar",
-                        isNullable: true
-                    },
-                    {
-                        name: "capitulo_nome",
-                        type: "varchar",
-                        isNullable: true
+                        type: "varchar"
                     },
                     {
                         name: "serie_nome",
@@ -37,16 +30,6 @@ export class CreateObras1653589733410 implements MigrationInterface {
                     },
                     {
                         name: "colecao_nome",
-                        type: "varchar",
-                        isNullable: true
-                    },
-                    {
-                        name: "organizador_editor_nome",
-                        type: "varchar",
-                        isNullable: true
-                    },
-                    {
-                        name: "funcao",
                         type: "varchar",
                         isNullable: true
                     },
@@ -62,7 +45,7 @@ export class CreateObras1653589733410 implements MigrationInterface {
                     },
                     {
                         name: "ano",
-                        type: "varchar",
+                        type: "int",
                         isNullable: true
                     },
                     {
@@ -72,7 +55,7 @@ export class CreateObras1653589733410 implements MigrationInterface {
                     },
                     {
                         name: "dia",
-                        type: "varchar",
+                        type: "int",
                         isNullable: true
                     },
                     {

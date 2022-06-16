@@ -29,28 +29,20 @@ export class UpdateDisciplinaVersaoService {
             return new Error("ID inválido");
         }
 
-        if(disciplina_id){
-            if(!validate(disciplina_id)){
-                return new Error("ID de disciplina inválido");
-            }
+        if(disciplina_id && !validate(disciplina_id)){
+            return new Error("ID de disciplina inválido");
         }
 
-        if(credito_quantidade){
-            if(!Number.isInteger(credito_quantidade)){
-                return new Error("Insira um número válido em 'crédito quantidade'");
-            }
+        if(credito_quantidade && !Number.isInteger(credito_quantidade)){
+            return new Error("Insira um número válido em quantidade de crédito");
         }
 
-        if(em_oferta){
-            if(typeof em_oferta != "boolean"){
-                return new Error("Marcação para 'em oferta' inválido");
-            }
+        if(em_oferta && typeof em_oferta != "boolean"){
+            return new Error("Marcação para 'em oferta' inválido");
         }
 
-        if(produzido){
-            if(typeof produzido != "boolean"){
-                return new Error("Marcação para 'produzido' inválido");
-            }
+        if(produzido && typeof produzido != "boolean"){
+            return new Error("Marcação para 'produzido' inválido");
         }
         
         const repo = getRepository(DisciplinaVersao);

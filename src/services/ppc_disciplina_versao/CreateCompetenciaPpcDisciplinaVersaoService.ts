@@ -10,8 +10,12 @@ type CompetenciaPpcDisciplinaVersaoRequest = {
 
 export class CreateCompetenciaPpcDisciplinaVersaoService {
     async execute ({competencia_id, ppcDisciplinaVersao_id}: CompetenciaPpcDisciplinaVersaoRequest) {
-        if (!validate(competencia_id) || !validate(ppcDisciplinaVersao_id)){
-            return new Error("ID('s) inválido(s)");
+        if (!validate(competencia_id)){
+            return new Error("ID de competência inválido");
+        }
+
+        if (!validate(ppcDisciplinaVersao_id)){
+            return new Error("ID de Ppc_disciplina_versão inválido");
         }
 
         const repoCompetencias = getRepository(CompetenciasHabilidades);

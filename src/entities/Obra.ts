@@ -14,19 +14,10 @@ export class Obra {
     obra_nome: string;
 
     @Column()
-    capitulo_nome: string;
-
-    @Column()
     serie_nome: string;
 
     @Column()
     colecao_nome: string;
-
-    @Column()
-    organizador_editor_nome: string;
-
-    @Column()
-    funcao: string;
 
     @Column()
     cidade: string;
@@ -34,14 +25,14 @@ export class Obra {
     @Column()
     editora: string;
 
-    @Column()
-    ano: string;
+    @Column("int")
+    ano: number;
 
     @Column()
     mes: string;
     
-    @Column()
-    dia: string;
+    @Column("int")
+    dia: number;
 
     @Column()
     volume: string;

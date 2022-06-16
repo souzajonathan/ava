@@ -11,7 +11,7 @@ export class DeleteBibliografiaService {
         const repo = getRepository(Bibliografia);
         const bibliografia = await repo.findOne(id);
 
-        if(!(bibliografia)){
+        if(!bibliografia){
             return new Error("Bibliografia não existente!");
         }
 

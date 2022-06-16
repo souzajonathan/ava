@@ -12,8 +12,16 @@ type ObraAutorRequest = {
 
 export class CreateObraAutorService {
     async execute ({autor_id, obra_id, funcao}: ObraAutorRequest) {
-        if (!validate(autor_id) || !validate(obra_id)){
-            return new Error("ID's inválidos");
+        if (!validate(autor_id)){
+            return new Error("ID de autor inválido");
+        }
+
+        if (!validate(obra_id)){
+            return new Error("ID de obra inválido");
+        }
+
+        if(!funcao){
+            return new Error("Função não inserida");
         }
 
         const repoAutor = getRepository(Autor);

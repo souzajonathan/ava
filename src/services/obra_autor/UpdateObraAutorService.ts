@@ -17,16 +17,12 @@ export class UpdateObraAutorService {
             return new Error("ID inválido");
         }
 
-        if(autor_id){
-            if(!validate(autor_id)){
-                return new Error("ID de autor inválido");
-            }
+        if(autor_id && !validate(autor_id)){
+            return new Error("ID de autor inválido");
         }
         
-        if(obra_id){
-            if(!validate(obra_id)){
-                return new Error("ID de obra inválido");
-            }
+        if(obra_id && !validate(obra_id)){
+            return new Error("ID de obra inválido");
         }
         
         const repo = getRepository(ObraAutor);

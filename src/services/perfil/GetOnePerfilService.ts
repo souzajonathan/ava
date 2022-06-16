@@ -10,10 +10,6 @@ export class GetOnePerfilService {
 
         const repo = getRepository(PerfisEgresso);
 
-        /* const perfil = await repo.findOne(id, {
-            relations: ["ppc"]
-        }); */
-
         const perfil = await repo
             .createQueryBuilder("perfil")
             .where({

@@ -4,7 +4,6 @@ import { Obra } from "../../entities/Obra";
 type filter = {
     obra_nome?: string;
     serie_nome?: string;
-    organizador_editor_nome?: string;
     editora?: string;
     periodico_nome?: string;
     periodico_abreviacao?: string;
@@ -22,10 +21,6 @@ export class GetAllObrasService {
 
         if (query?.serie_nome) {
             where.serie_nome = Raw((alias) => `${alias} ilike '%${query.serie_nome}%'`);
-        }
-
-        if (query?.organizador_editor_nome) {
-            where.organizador_editor_nome = Raw((alias) => `${alias} ilike '%${query.organizador_editor_nome}%'`);
         }
 
         if (query?.editora) {

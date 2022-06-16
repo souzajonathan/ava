@@ -9,10 +9,6 @@ export class GetOneAutorService {
         }
 
         const repo = getRepository(Autor);
-        
-        /* const autor = await repo.findOne(id, {
-            relations: ["obrasAutores"]
-        }); */
 
         const autor = await repo
             .createQueryBuilder("autor")

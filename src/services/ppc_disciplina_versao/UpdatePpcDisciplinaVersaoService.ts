@@ -18,20 +18,24 @@ type PpcDisciplinaVersaoUpdateRequest = {
 
 export class UpdatePpcDisciplinaVersaoService {
     async execute ({id, ppc_id, disciplina_versao_id, modulo, semestre, competencias_id, perfis_id}: PpcDisciplinaVersaoUpdateRequest) {
-        if (!validate(id) || !validate(ppc_id) || !validate(disciplina_versao_id)){
-            return new Error("ID('s) inválido(s)");
+        if (!validate(id)){
+            return new Error("ID inválido");
         }
 
-        if(modulo){
-            if(!Number.isInteger(modulo)){
-                return new Error("Insira um número válido em módulo");
-            }
+        if (!validate(ppc_id)){
+            return new Error("ID de PPC inválido");
         }
 
-        if(semestre){
-            if(!Number.isInteger(semestre)){
-                return new Error("Insira um número válido em semestre");
-            }
+        if (!validate(disciplina_versao_id)){
+            return new Error("ID de versão de disciplina inválido");
+        }
+
+        if(modulo && !Number.isInteger(modulo)){
+            return new Error("Insira um número válido em módulo");
+        }
+
+        if(semestre && !Number.isInteger(semestre)){
+            return new Error("Insira um número válido em semestre");
         }
 
         let auxP = false;

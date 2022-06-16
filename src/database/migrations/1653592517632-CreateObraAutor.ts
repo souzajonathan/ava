@@ -27,8 +27,7 @@ export class CreateObraAutor1653592517632 implements MigrationInterface {
                     },
                     {
                         name: "funcao",
-                        type: "varchar",
-                        isNullable: true
+                        type: "varchar"
                     },
                     {
                         name: "created_at",

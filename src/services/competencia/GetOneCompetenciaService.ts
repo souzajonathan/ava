@@ -10,10 +10,6 @@ export class GetOneCompetenciaService {
         
         const repo = getRepository(CompetenciasHabilidades);
 
-        /* const competencia = await repo.findOne(id, {
-            relations: ["ppc"]
-        }); */
-
         const competencia = await repo
             .createQueryBuilder("competencia")
             .where({

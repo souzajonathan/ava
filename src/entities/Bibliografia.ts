@@ -22,7 +22,7 @@ export class Bibliografia {
     obra_id: string;
     
     @Column()
-    tipo: boolean;
+    tipo: string;
 
     @CreateDateColumn()
     created_at: Date;

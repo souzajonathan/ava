@@ -5,16 +5,13 @@ import { Obra } from "../../entities/Obra";
 type ObraRequest = {
     item_tipo: string;
     obra_nome: string;
-    capitulo_nome: string;
     serie_nome: string;
     colecao_nome: string;
-    organizador_editor_nome: string;
-    funcao: string;
     cidade: string;
     editora: string;
-    ano: string;
+    ano: number;
     mes: string;
-    dia: string;
+    dia: number;
     volume: string;
     edicao: string;
     resumo: string;
@@ -32,14 +29,11 @@ type ObraRequest = {
 }
 
 export class CreateObraService {
-    async execute({
+    async execute ({
         item_tipo,
         obra_nome,
-        capitulo_nome,
         serie_nome,
         colecao_nome,
-        organizador_editor_nome,
-        funcao,
         cidade,
         editora,
         ano,
@@ -59,29 +53,40 @@ export class CreateObraService {
         url,
         acesso_em,
         contido_em
-    }: ObraRequest): Promise< Obra | Error > {
+    }: ObraRequest) {
+        if(!item_tipo){
+            return new Error("Tipo de item é obrigatório");
+        }
+
+        if(!obra_nome){
+            return new Error("Nome de obra é obrigatório");
+        }
+
+        if(dia && !Number.isInteger(dia)){
+            return new Error("Insira um número válido em dia");
+        }
+
+        if(ano && !Number.isInteger(ano)){
+            return new Error("Insira um número válido em ano");
+        }
+
         const repo = getRepository(Obra);
 
-        if(contido_em){
-            if(validate(contido_em)){
-                const idAux = await repo.findOne({where: {id: contido_em}});
-                if(!idAux){
-                    return new Error("ID de 'contido em' inexistente");
-                }
+        if(contido_em && validate(contido_em)){
+            const idAux = await repo.findOne({where: {id: contido_em}});
+            if(!idAux){
+                return new Error("ID de 'contido em' inexistente");
             }
-            else{
-                return new Error("ID de 'contido em' inválido");
-            }
+        }
+        else{
+            return new Error("ID de 'contido em' inválido");
         }
 
         const obra = repo.create({
             item_tipo,
             obra_nome,
-            capitulo_nome,
             serie_nome,
             colecao_nome,
-            organizador_editor_nome,
-            funcao,
             cidade,
             editora,
             ano,

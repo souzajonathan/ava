@@ -9,13 +9,14 @@ export class DeletePpcService {
         }
 
         const repo = getRepository(Ppc);
-        /* const repoCompet = getRepository(CompetHabilidades);
-        const repoPerf = getRepository(PerfisEgresso);
-        
-        if(!(await repo.findOne(id))){
+        const ppc = await repo.findOne(id);
+        if(!ppc){
             return new Error("Ppc não existe!");
         }
 
+        /* const repoCompet = getRepository(CompetHabilidades);
+        const repoPerf = getRepository(PerfisEgresso);
+        
         if(await repoCompet.findOne({where: {ppc_id : id}})){
             return new Error("PPC com competências cadastradas");
         }

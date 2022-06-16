@@ -5,7 +5,7 @@ export class GetAllObraAutorController {
     async handle(request: Request, response: Response) {
         const service = new GetAllObraAutorService();
 
-        const obraAutor = await service.execute();
+        const obraAutor = await service.execute(request.query);
 
         return response.json(obraAutor);
     }

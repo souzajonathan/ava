@@ -7,19 +7,21 @@ import { Obra } from "../../entities/Obra";
 type BibliografiaRequest = {
     disciplina_versao_id: string;
     obra_id: string;
-    tipo: boolean;
+    tipo: string;
 }
 
 export class CreateBibliografiaService {
     async execute ({disciplina_versao_id, obra_id, tipo}: BibliografiaRequest) {
-        if (!validate(disciplina_versao_id) || !validate(obra_id)){
-            return new Error("ID('s) inválido(s)");
+        if(!validate(disciplina_versao_id)){
+            return new Error("ID de versão de disciplina inválido");
         }
 
-        if(tipo){
-            if(typeof tipo != "boolean"){
-                return new Error("Tipo inválido");
-            }
+        if(!validate(obra_id)){
+            return new Error("ID de obra inválido");
+        }
+        
+        if(!tipo){
+            return new Error("Tipo não inserido");
         }
 
         const repo = getRepository(Bibliografia);

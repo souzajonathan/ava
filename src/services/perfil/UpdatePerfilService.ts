@@ -16,16 +16,12 @@ export class UpdatePerfilService {
             return new Error("ID inválido");
         }
         
-        if(ppc_id){
-            if(!validate(ppc_id)){
-                return new Error("ID de PPC inválido");
-            }
+        if(ppc_id && !validate(ppc_id)){
+            return new Error("ID de PPC inválido");
         }
 
-        if(perfilNumero){
-            if(!Number.isInteger(perfilNumero)){
-                return new Error("Insira um número válido em 'número de perfil'");
-            }
+        if(perfilNumero && !Number.isInteger(perfilNumero)){
+            return new Error("Insira um número válido em número de perfil");
         }
         
         const repo = getRepository(PerfisEgresso);

@@ -23,12 +23,20 @@ export class CreateDisciplinaVersaoService {
         em_oferta,
         produzido
     }: DisciplinaVersaoRequest) {
-        if(!disciplina_id || !codigo || !credito_quantidade || !ementa || em_oferta === undefined || produzido === undefined){
-            return new Error("Insira todos os itens obrigatórios");
+        if(!disciplina_id){
+            return new Error("ID de disciplina é obrigatório");
+        }
+
+        if(!codigo){
+            return new Error("Código de versão de disciplina é obrigatório");
+        }
+
+        if(!ementa){
+            return new Error("Ementa é obrigatório");
         }
 
         if(!Number.isInteger(credito_quantidade)){
-            return new Error("Insira um número válido em 'crédito quantidade'");
+            return new Error("Insira um número válido em quantidade de crédito");
         }
 
         if(typeof em_oferta != "boolean"){

@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { Ppc } from "../../entities/Ppc";
 
-type PpcRequest = {
+type CalculoPedidoRequest = {
     dateLeft: string;
     dateRight: string;
 }
@@ -12,7 +12,7 @@ type DisciplinaPedido = DisciplinaVersao & {
 }
 
 export class CalculoPedidoService {
-    async execute({ dateLeft, dateRight }: PpcRequest) {
+    async execute({ dateLeft, dateRight }: CalculoPedidoRequest) {
         const repo = getRepository(Ppc);
 
         const ppcs = await repo
