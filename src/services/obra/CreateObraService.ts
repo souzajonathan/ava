@@ -26,10 +26,10 @@ type ObraRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
-}
+};
 
 export class CreateObraService {
-    async execute ({
+    async execute({
         item_tipo,
         obra_nome,
         serie_nome,
@@ -52,34 +52,35 @@ export class CreateObraService {
         issn,
         url,
         acesso_em,
-        contido_em
+        contido_em,
     }: ObraRequest) {
-        if(!item_tipo){
+        if (!item_tipo) {
             return new Error("Tipo de item é obrigatório");
         }
 
-        if(!obra_nome){
+        if (!obra_nome) {
             return new Error("Nome de obra é obrigatório");
         }
 
-        if(dia && !Number.isInteger(dia)){
+        if (dia && !Number.isInteger(dia)) {
             return new Error("Insira um número válido em dia");
         }
 
-        if(ano && !Number.isInteger(ano)){
+        if (ano && !Number.isInteger(ano)) {
             return new Error("Insira um número válido em ano");
         }
 
         const repo = getRepository(Obra);
 
-        if(contido_em && validate(contido_em)){
-            const idAux = await repo.findOne({where: {id: contido_em}});
-            if(!idAux){
-                return new Error("ID de 'contido em' inexistente");
+        if (contido_em) {
+            if (validate(contido_em)) {
+                const idAux = await repo.findOne({ where: { id: contido_em } });
+                if (!idAux) {
+                    return new Error("ID de 'contido em' inexistente");
+                }
+            } else {
+                return new Error("ID de 'contido em' inválido");
             }
-        }
-        else{
-            return new Error("ID de 'contido em' inválido");
         }
 
         const obra = repo.create({
@@ -105,7 +106,7 @@ export class CreateObraService {
             issn,
             url,
             acesso_em,
-            contido_em
+            contido_em,
         });
 
         await repo.save(obra);

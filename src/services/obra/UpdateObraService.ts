@@ -27,10 +27,10 @@ type ObraUpdateRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
-}
+};
 
 export class UpdateObraService {
-    async execute ({
+    async execute({
         id,
         item_tipo,
         obra_nome,
@@ -54,17 +54,17 @@ export class UpdateObraService {
         issn,
         url,
         acesso_em,
-        contido_em
+        contido_em,
     }: ObraUpdateRequest) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if(ano && !Number.isInteger(ano)){
+        if (ano && !Number.isInteger(ano)) {
             return new Error("Insira um número válido em 'ano'");
         }
 
-        if(dia && !Number.isInteger(dia)){
+        if (dia && !Number.isInteger(dia)) {
             return new Error("Insira um número válido em 'dia'");
         }
 
@@ -74,19 +74,23 @@ export class UpdateObraService {
             return new Error("Obra não existe!");
         }
 
-        if(contido_em && validate(contido_em)){
-            if(!(id == contido_em)){
-                const idAux = await repo.findOne({where: {id: contido_em}});
-                if(!idAux){
-                    return new Error("ID de 'contido em' inexistente");
+        if (contido_em) {
+            if (validate(contido_em)) {
+                if (!(id == contido_em)) {
+                    const idAux = await repo.findOne({
+                        where: { id: contido_em },
+                    });
+                    if (!idAux) {
+                        return new Error("ID de 'contido em' inexistente");
+                    }
+                } else {
+                    return new Error(
+                        "Não é possível editar uma obra e inseri-la nela mesma"
+                    );
                 }
+            } else {
+                return new Error("ID de 'contido em' inválido");
             }
-            else{
-                return new Error("Não é possível editar uma obra e inseri-la nela mesma");
-            }
-        }
-        else{
-            return new Error("ID de 'contido em' inválido");
         }
 
         obra.item_tipo = item_tipo ? item_tipo : obra.item_tipo;
@@ -101,8 +105,12 @@ export class UpdateObraService {
         obra.volume = volume ? volume : obra.volume;
         obra.edicao = edicao ? edicao : obra.edicao;
         obra.resumo = resumo ? resumo : obra.resumo;
-        obra.periodico_nome = periodico_nome ? periodico_nome : obra.periodico_nome;
-        obra.periodico_abreviacao = periodico_abreviacao ? periodico_abreviacao : obra.periodico_abreviacao;
+        obra.periodico_nome = periodico_nome
+            ? periodico_nome
+            : obra.periodico_nome;
+        obra.periodico_abreviacao = periodico_abreviacao
+            ? periodico_abreviacao
+            : obra.periodico_abreviacao;
         obra.numero = numero ? numero : obra.numero;
         obra.paginas = paginas ? paginas : obra.paginas;
         obra.idioma = idioma ? idioma : obra.idioma;
