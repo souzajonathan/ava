@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import { CreateCursoService } from "../../services/curso/CreateCursoService";
 
 export class CreateCursoController {
-    async handle (request: Request, response: Response) {
-        const { name } = request.body;
+    async handle(request: Request, response: Response) {
+        const { name, active } = request.body;
 
         const service = new CreateCursoService();
 
         const result = await service.execute({
-            name
+            name,
+            active,
         });
 
         if (result instanceof Error) {

@@ -4,16 +4,16 @@ import { UpdateCursoService } from "../../services/curso/UpdateCursoService";
 export class UpdateCursoController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
-        const { name, ppc_ativo } = request.body;
+        const { name, ppc_ativo, active } = request.body;
 
         const service = new UpdateCursoService();
 
-        const result = await service.execute({id, name, ppc_ativo});
+        const result = await service.execute({ id, name, ppc_ativo, active });
 
-        if(result instanceof Error) {
+        if (result instanceof Error) {
             return response.status(400).json(result.message);
         }
-        
+
         return response.json(result);
     }
 }

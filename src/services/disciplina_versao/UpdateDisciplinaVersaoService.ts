@@ -12,10 +12,10 @@ type DisciplinaVersaoUpdateRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
-}
+};
 
 export class UpdateDisciplinaVersaoService {
-    async execute ({
+    async execute({
         id,
         disciplina_id,
         codigo,
@@ -23,28 +23,30 @@ export class UpdateDisciplinaVersaoService {
         ementa,
         observacao,
         em_oferta,
-        produzido
+        produzido,
     }: DisciplinaVersaoUpdateRequest) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if(disciplina_id && !validate(disciplina_id)){
+        if (disciplina_id && !validate(disciplina_id)) {
             return new Error("ID de disciplina inválido");
         }
 
-        if(credito_quantidade && !Number.isInteger(credito_quantidade)){
-            return new Error("Insira um número válido em quantidade de crédito");
+        if (credito_quantidade && !Number.isInteger(credito_quantidade)) {
+            return new Error(
+                "Insira um número válido em quantidade de crédito"
+            );
         }
 
-        if(em_oferta && typeof em_oferta != "boolean"){
-            return new Error("Marcação para 'em oferta' inválido");
+        if (em_oferta && typeof em_oferta != "boolean") {
+            return new Error("Marcação para 'em oferta' inválida");
         }
 
-        if(produzido && typeof produzido != "boolean"){
-            return new Error("Marcação para 'produzido' inválido");
+        if (produzido && typeof produzido != "boolean") {
+            return new Error("Marcação para 'produzido' inválida");
         }
-        
+
         const repo = getRepository(DisciplinaVersao);
         const disciplinaVersao = await repo.findOne(id);
         if (!disciplinaVersao) {
@@ -57,18 +59,29 @@ export class UpdateDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        disciplinaVersao.disciplina_id = disciplina_id ? disciplina_id : disciplinaVersao.disciplina_id;
+        disciplinaVersao.disciplina_id = disciplina_id
+            ? disciplina_id
+            : disciplinaVersao.disciplina_id;
         disciplinaVersao.codigo = codigo ? codigo : disciplinaVersao.codigo;
-        disciplinaVersao.credito_quantidade = credito_quantidade ? credito_quantidade : disciplinaVersao.credito_quantidade;
+        disciplinaVersao.credito_quantidade = credito_quantidade
+            ? credito_quantidade
+            : disciplinaVersao.credito_quantidade;
         disciplinaVersao.ementa = ementa ? ementa : disciplinaVersao.ementa;
-        disciplinaVersao.observacao = observacao ? observacao : disciplinaVersao.observacao;
-        disciplinaVersao.em_oferta = em_oferta ? em_oferta : disciplinaVersao.em_oferta;
-        disciplinaVersao.produzido = produzido ? produzido : disciplinaVersao.produzido;
+        disciplinaVersao.observacao = observacao
+            ? observacao
+            : disciplinaVersao.observacao;
+        disciplinaVersao.em_oferta = em_oferta
+            ? em_oferta
+            : disciplinaVersao.em_oferta;
+        disciplinaVersao.produzido = produzido
+            ? produzido
+            : disciplinaVersao.produzido;
 
         await repo.save(disciplinaVersao);
 
         return {
-            ...disciplinaVersao, disciplina
+            ...disciplinaVersao,
+            disciplina,
         };
     }
 }

@@ -11,7 +11,7 @@ type DisciplinaVersaoRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
-}
+};
 
 export class CreateDisciplinaVersaoService {
     async execute({
@@ -21,47 +21,51 @@ export class CreateDisciplinaVersaoService {
         ementa,
         observacao,
         em_oferta,
-        produzido
+        produzido,
     }: DisciplinaVersaoRequest) {
-        if(!disciplina_id){
+        if (!disciplina_id) {
             return new Error("ID de disciplina é obrigatório");
         }
 
-        if(!codigo){
+        if (!codigo) {
             return new Error("Código de versão de disciplina é obrigatório");
         }
 
-        if(!ementa){
+        if (!ementa) {
             return new Error("Ementa é obrigatório");
         }
 
-        if(!Number.isInteger(credito_quantidade)){
-            return new Error("Insira um número válido em quantidade de crédito");
+        if (!Number.isInteger(credito_quantidade)) {
+            return new Error(
+                "Insira um número válido em quantidade de crédito"
+            );
         }
 
-        if(typeof em_oferta != "boolean"){
-            return new Error("Marcação para 'em oferta' inválido");
+        if (typeof em_oferta != "boolean") {
+            return new Error("Marcação para 'em oferta' inválida");
         }
 
-        if(typeof produzido != "boolean"){
-            return new Error("Marcação para 'produzido' inválido");
+        if (typeof produzido != "boolean") {
+            return new Error("Marcação para 'produzido' inválida");
         }
 
-        if(!validate(disciplina_id)){
+        if (!validate(disciplina_id)) {
             return new Error("ID de disciplina inválido");
         }
         const repoDisciplina = getRepository(Disciplina);
         const disciplina = await repoDisciplina.findOne(disciplina_id);
-        if(!disciplina) {
+        if (!disciplina) {
             return new Error("Disciplina não existe!");
         }
 
         const repo = getRepository(DisciplinaVersao);
         const where: FindConditions<DisciplinaVersao> = {};
         where.disciplina_id = disciplina_id;
-        const numeroVersao = await repo.count({where});
+        const numeroVersao = await repo.count({ where });
 
-        const disciplina_versao_nome = `${disciplina.sigla}${credito_quantidade}-${numeroVersao+1}`;
+        const disciplina_versao_nome = `${
+            disciplina.sigla
+        }${credito_quantidade}-${numeroVersao + 1}`;
 
         const disciplinaVersao = repo.create({
             disciplina_id,
@@ -71,13 +75,14 @@ export class CreateDisciplinaVersaoService {
             ementa,
             observacao,
             em_oferta,
-            produzido
+            produzido,
         });
 
         await repo.save(disciplinaVersao);
 
         return {
-            ...disciplinaVersao, disciplina
+            ...disciplinaVersao,
+            disciplina,
         };
     }
 }
