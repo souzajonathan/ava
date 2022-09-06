@@ -1,6 +1,5 @@
 import { getRepository } from "typeorm";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
-import { Pedido } from "../../entities/Pedido";
 import { Ppc } from "../../entities/Ppc";
 
 type CalculoPedidoRequest = {
@@ -16,7 +15,6 @@ type DisciplinaPedido = DisciplinaVersao & {
 export class CalculoPedidoService {
     async execute({ dateLeft, dateRight, aux }: CalculoPedidoRequest) {
         const repo = getRepository(Ppc);
-        const repoPedidos = getRepository(Pedido);
 
         const ppcs = await repo
             .createQueryBuilder("ppc")
