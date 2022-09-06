@@ -1,11 +1,13 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePpcs1651173061200 implements MigrationInterface {
-    public async up(queryRunner: QueryRunner): Promise<any> {
+export class CreateComponentesTrilhaComponente1661886185768
+    implements MigrationInterface
+{
+    public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "ppcs",
+                name: "componentes_trilha_componentes",
                 columns: [
                     {
                         name: "id",
@@ -15,32 +17,23 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "anoVoto",
-                        type: "int",
+                        name: "trilha_componentes_id",
+                        type: "uuid",
+                        isPrimary: true,
+                        isNullable: true,
                     },
                     {
-                        name: "dataInicio",
-                        type: "varchar",
+                        name: "tipos_componentes_id",
+                        type: "uuid",
+                        isPrimary: true,
                     },
                     {
-                        name: "dataFim",
+                        name: "observacao",
                         type: "varchar",
                         isNullable: true,
                     },
                     {
-                        name: "horaCredito",
-                        type: "int",
-                    },
-                    {
-                        name: "quantSemestres",
-                        type: "int",
-                    },
-                    {
-                        name: "curso_id",
-                        type: "uuid",
-                    },
-                    {
-                        name: "ppc_ativo",
+                        name: "item_interno",
                         type: "boolean",
                     },
                     {
@@ -56,18 +49,23 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_cursos",
-                        columnNames: ["curso_id"],
-                        referencedTableName: "cursos",
+                        name: "fk_tipos_componentes_id",
+                        columnNames: ["tipos_componentes_id"],
+                        referencedTableName: "tipos_componentes",
                         referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
+                    },
+                    {
+                        name: "fk_trilha_componentes_id",
+                        columnNames: ["trilha_componentes_id"],
+                        referencedTableName: "trilha_componentes",
+                        referencedColumnNames: ["id"],
                     },
                 ],
             })
         );
     }
 
-    public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("ppcs");
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("componentes_trilha_componente");
     }
 }

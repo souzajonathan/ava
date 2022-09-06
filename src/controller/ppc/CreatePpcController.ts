@@ -2,8 +2,19 @@ import { Request, Response } from "express";
 import { CreatePpcService } from "../../services/ppc/CreatePpcService";
 
 export class CreatePpcController {
-    async handle (request: Request, response: Response) {
-        const {curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active, competencias, perfis} = request.body;
+    async handle(request: Request, response: Response) {
+        const {
+            curso_id,
+            anoVoto,
+            dataInicio,
+            dataFim,
+            horaCredito,
+            quantSemestres,
+            ppc_ativo,
+            active,
+            competencias,
+            perfis,
+        } = request.body;
 
         const service = new CreatePpcService();
 
@@ -14,9 +25,10 @@ export class CreatePpcController {
             dataFim,
             horaCredito,
             quantSemestres,
+            ppc_ativo,
             active,
             competencias,
-            perfis
+            perfis,
         });
 
         if (result instanceof Error) {

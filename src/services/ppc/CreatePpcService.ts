@@ -8,12 +8,12 @@ import { CreatePerfilService } from "../perfil/CreatePerfilService";
 type Competencia = {
     competencia: string;
     competenciaNumero: number;
-}
+};
 
 type Perfil = {
     perfil: string;
     perfilNumero: number;
-}
+};
 
 type PpcRequest = {
     curso_id: string;
@@ -23,75 +23,98 @@ type PpcRequest = {
     horaCredito: number;
     quantSemestres: number;
     active: boolean;
+    ppc_ativo: boolean;
     competencias: Competencia[];
     perfis: Perfil[];
-}
+};
 
 export class CreatePpcService {
-    async execute ({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres, active, competencias, perfis}: PpcRequest) {
-        if(!validate(curso_id)){
+    async execute({
+        curso_id,
+        anoVoto,
+        dataInicio,
+        dataFim,
+        horaCredito,
+        quantSemestres,
+        ppc_ativo,
+        active,
+        competencias,
+        perfis,
+    }: PpcRequest) {
+        if (!validate(curso_id)) {
             return new Error("ID de curso inválido");
         }
 
-        if(!dataInicio){
+        if (!dataInicio) {
             return new Error("Data de início é obrigatória");
         }
-        
-        if(!Number.isInteger(anoVoto)){
+
+        if (!Number.isInteger(anoVoto)) {
             return new Error("Insira um número válido em 'ano voto'");
         }
 
-        if(!Number.isInteger(horaCredito)){
+        if (!Number.isInteger(horaCredito)) {
             return new Error("Insira um número válido em 'hora crédito'");
         }
 
-        if(!Number.isInteger(quantSemestres)){
-            return new Error("Insira um número válido em 'quantidade de semestres'");
+        if (!Number.isInteger(quantSemestres)) {
+            return new Error(
+                "Insira um número válido em 'quantidade de semestres'"
+            );
         }
 
-        if(typeof active != "boolean"){
+        if (typeof active != "boolean") {
+            return new Error("Marcação para 'PPC atual' inválido");
+        }
+
+        if (typeof ppc_ativo != "boolean") {
             return new Error("Marcação para 'PPC ativo' inválido");
         }
 
         const repoCurso = getRepository(Curso);
         const curso = await repoCurso.findOne(curso_id);
-        if(!curso) {
+        if (!curso) {
             return new Error("Curso não existe!");
         }
-        
+
         const repo = getRepository(Ppc);
-        const ppc = repo.create({curso_id, anoVoto, dataInicio, dataFim, horaCredito, quantSemestres});
+        const ppc = repo.create({
+            curso_id,
+            anoVoto,
+            dataInicio,
+            dataFim,
+            horaCredito,
+            quantSemestres,
+            ppc_ativo,
+        });
         await repo.save(ppc);
 
-        if(active){
+        if (active) {
             curso.ppc_ativo = ppc.id;
             await repoCurso.save(curso);
         }
 
         for await (const competencia of competencias) {
-
             const service = new CreateCompetenciaService();
 
             const result = await service.execute({
                 ppc_id: ppc.id,
                 competencia: competencia.competencia,
-                competenciaNumero: competencia.competenciaNumero
+                competenciaNumero: competencia.competenciaNumero,
             });
 
             if (result instanceof Error) {
                 return result;
             }
-        
         }
 
         for await (const perfil of perfis) {
-            
             const service = new CreatePerfilService();
 
             const result = await service.execute({
                 ppc_id: ppc.id,
                 perfil: perfil.perfil,
-                perfilNumero: perfil.perfilNumero
+                perfilNumero: perfil.perfilNumero,
             });
 
             if (result instanceof Error) {
@@ -100,7 +123,8 @@ export class CreatePpcService {
         }
 
         return {
-            ...ppc, curso
+            ...ppc,
+            curso,
         };
     }
 }

@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { Curso } from "./Curso";
 import { PerfisEgresso } from "./PerfisEgresso";
@@ -10,7 +19,7 @@ export class Ppc {
     id: string;
 
     @ManyToOne(() => Curso)
-    @JoinColumn({name: "curso_id"})
+    @JoinColumn({ name: "curso_id" })
     curso: Curso;
 
     @OneToMany(() => PerfisEgresso, (perfil) => perfil.ppc)
@@ -19,9 +28,12 @@ export class Ppc {
     @OneToMany(() => CompetenciasHabilidades, (competencia) => competencia.ppc)
     competencias: CompetenciasHabilidades[];
 
-    @OneToMany(() => PpcDisciplinaVersao, (ppcDisciplinaVersao) => ppcDisciplinaVersao.ppc)
+    @OneToMany(
+        () => PpcDisciplinaVersao,
+        (ppcDisciplinaVersao) => ppcDisciplinaVersao.ppc
+    )
     ppcDisciplinaVersoes: PpcDisciplinaVersao[];
-    
+
     @Column("uuid")
     curso_id: string;
 
@@ -39,7 +51,10 @@ export class Ppc {
 
     @Column("int")
     quantSemestres: number;
-    
+
+    @Column("boolean")
+    ppc_ativo: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 

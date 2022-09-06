@@ -1,11 +1,13 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePpcs1651173061200 implements MigrationInterface {
+export class CreateComponentePedidoVersao1661976266122
+    implements MigrationInterface
+{
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "ppcs",
+                name: "componentes_pedido_versao",
                 columns: [
                     {
                         name: "id",
@@ -15,32 +17,19 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "anoVoto",
-                        type: "int",
-                    },
-                    {
-                        name: "dataInicio",
+                        name: "nome",
                         type: "varchar",
                     },
                     {
-                        name: "dataFim",
-                        type: "varchar",
-                        isNullable: true,
-                    },
-                    {
-                        name: "horaCredito",
-                        type: "int",
-                    },
-                    {
-                        name: "quantSemestres",
-                        type: "int",
-                    },
-                    {
-                        name: "curso_id",
+                        name: "pedido_id",
                         type: "uuid",
                     },
                     {
-                        name: "ppc_ativo",
+                        name: "concluido",
+                        type: "boolean",
+                    },
+                    {
+                        name: "cancelado",
                         type: "boolean",
                     },
                     {
@@ -56,11 +45,10 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_cursos",
-                        columnNames: ["curso_id"],
-                        referencedTableName: "cursos",
+                        name: "fk_pedido",
+                        columnNames: ["pedido_id"],
+                        referencedTableName: "pedidos",
                         referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
                     },
                 ],
             })
@@ -68,6 +56,6 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("ppcs");
+        await queryRunner.dropTable("componentes_pedido_versao");
     }
 }
