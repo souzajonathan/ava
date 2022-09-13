@@ -24,6 +24,6 @@ export class CreateTipoSolicitacaoService {
 
         await repo.save(tipoSolicitacao);
 
-        return tipo;
+        return tipoSolicitacao;
     }
 }

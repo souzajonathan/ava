@@ -8,6 +8,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { ComponentesPedidoVersao } from "./ComponentePedidoVersao";
 import { Pedido } from "./Pedido";
 import { TiposComponentes } from "./TiposComponentes";
 
@@ -31,8 +32,11 @@ export class ComponentesPedido {
     @Column("uuid")
     parent_item: string;
 
-    /*@OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
-    obrasAutores: ObraAutor[];*/
+    @OneToMany(
+        () => ComponentesPedidoVersao,
+        (componente) => componente.componente
+    )
+    versoes: ComponentesPedidoVersao[];
 
     @ManyToOne(() => Pedido)
     @JoinColumn({ name: "pedido_id" })

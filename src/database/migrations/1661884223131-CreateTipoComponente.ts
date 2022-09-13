@@ -21,6 +21,7 @@ export class CreateTipoComponente1661884223131 implements MigrationInterface {
                     {
                         name: "descricao",
                         type: "varchar",
+                        isNullable: true,
                     },
                     {
                         name: "carga_horaria",

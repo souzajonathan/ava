@@ -5,7 +5,7 @@ import { Ppc } from "../../entities/Ppc";
 type CalculoPedidoRequest = {
     dateLeft: string;
     dateRight: string;
-    aux: boolean;
+    aux: string;
 };
 
 type DisciplinaPedido = DisciplinaVersao & {
@@ -35,7 +35,33 @@ export class CalculoPedidoService {
 
         const disciplinasPedido: DisciplinaPedido[] = [];
 
-        ppcs.forEach((ppc) => {
+        let filteredPpcs: Ppc[] = [];
+
+        switch (aux) {
+            case "todos": {
+                filteredPpcs = ppcs;
+                break;
+            }
+            case "tem pedidos": {
+                filteredPpcs = ppcs.filter((ppc) => {
+                    return ppc.ppcDisciplinaVersoes.some((pdv) => {
+                        return pdv.versoes.pedidos.length > 0;
+                    });
+                });
+                break;
+            }
+            case "nao tem pedidos": {
+                filteredPpcs = ppcs.filter((ppc) => {
+                    return ppc.ppcDisciplinaVersoes.some((pdv) => {
+                        return pdv.versoes.pedidos.length === 0;
+                    });
+                });
+                break;
+            }
+            default:
+        }
+
+        filteredPpcs.forEach((ppc) => {
             const startDatePpc = new Date(ppc.dataInicio);
 
             const mesesI =

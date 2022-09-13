@@ -7,39 +7,54 @@ type CompetenciaRequest = {
     ppc_id: string;
     competencia: string;
     competenciaNumero: number;
-}
+};
 
 export class CreateCompetenciaService {
-    async execute({ ppc_id, competencia, competenciaNumero }: CompetenciaRequest) {
-        if(!validate(ppc_id)){
+    async execute({
+        ppc_id,
+        competencia,
+        competenciaNumero,
+    }: CompetenciaRequest) {
+        if (!validate(ppc_id)) {
             return new Error("ID de PPC inválido");
         }
 
-        if(!competencia){
+        if (!competencia) {
             return new Error("Competência é obrigatória");
         }
 
-        if(!Number.isInteger(competenciaNumero)){
-            return new Error("Insira um número válido em 'número de competência'");
+        if (!Number.isInteger(competenciaNumero)) {
+            return new Error(
+                "Insira um número válido em 'número de competência'"
+            );
         }
-        
+
+        const repo = getRepository(CompetenciasHabilidades);
+        const competenciaAlreadyExists = await repo.findOne({
+            competenciaNumero,
+            ppc_id,
+        });
+        if (competenciaAlreadyExists) {
+            return new Error("Número de competência e habilidade já existe");
+        }
+
         const repoPpc = getRepository(Ppc);
         const ppc = await repoPpc.findOne(ppc_id);
-        if(!ppc) {
+        if (!ppc) {
             return new Error("Ppc não existe!");
         }
-        
-        const repo = getRepository(CompetenciasHabilidades);
+
         const competHabilidades = repo.create({
             ppc_id,
             competencia,
-            competenciaNumero
+            competenciaNumero,
         });
 
         await repo.save(competHabilidades);
 
         return {
-            ...competHabilidades, ppc
+            ...competHabilidades,
+            ppc,
         };
     }
 }

@@ -26,7 +26,7 @@ export class TrilhaComponentes {
         () => ComponentesTrilhaComponentes,
         (componentes) => componentes.trilha
     )
-    trilha: ComponentesTrilhaComponentes[];
+    trilhaComponentes: ComponentesTrilhaComponentes[];
 
     @CreateDateColumn()
     created_at: Date;

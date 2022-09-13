@@ -4,13 +4,14 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
-import { Pedido } from "./Pedido";
+import { ComponentesPedido } from "./ComponentesPedido";
 
-@Entity("componentes_pedido")
-export class ComponentesPedido {
+@Entity("componentes_pedido_versao")
+export class ComponentesPedidoVersao {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -26,12 +27,22 @@ export class ComponentesPedido {
     @Column()
     cancelado: boolean;
 
+    @Column("uuid")
+    parent_item: string;
+
+    @ManyToOne(() => ComponentesPedidoVersao)
+    @JoinColumn({ name: "parent_item" })
+    versaoParent: ComponentesPedidoVersao[];
+
+    @OneToMany(() => ComponentesPedidoVersao, (versao) => versao.versaoParent)
+    versaoChildren: ComponentesPedidoVersao;
+
     /*@OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
     obrasAutores: ObraAutor[];*/
 
-    @ManyToOne(() => Pedido)
-    @JoinColumn({ name: "pedido_id" })
-    pedido: Pedido[];
+    @ManyToOne(() => ComponentesPedido)
+    @JoinColumn({ name: "componente_pedido_id" })
+    componente: ComponentesPedido[];
 
     @CreateDateColumn()
     created_at: Date;

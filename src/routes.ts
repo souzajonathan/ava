@@ -64,6 +64,11 @@ import { CreateCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc
 import { DeletePerfilPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeletePerfilPpcDisciplinaVersaoController";
 import { DeleteCompetenciaPpcDisciplinaVersaoController } from "./controller/ppc_disciplina_versao/DeleteCompetenciaPpcDisciplinaVersaoController";
 import { CalculoPedidoController } from "./controller/pedido/CalculoPedidoController";
+import { CreatePedidoController } from "./controller/pedido/CreatePedidoController";
+import { CreatePedidosController } from "./controller/pedido/CreatePedidosController";
+import { GetOnePedidoController } from "./controller/pedido/GetOnePedidoController";
+import { GetAllPedidosController } from "./controller/pedido/GetAllPedidosController";
+import { DeletePedidoController } from "./controller/pedido/DeletePedidoController";
 
 const routes = Router();
 
@@ -133,17 +138,49 @@ routes.get("/obra_autor/:id", new GetOneObraAutorController().handle);
 routes.get("/obra_autor", new GetAllObraAutorController().handle);
 routes.delete("/obra_autor/:id", new DeleteObraAutorController().handle);
 
-routes.post("/ppc_disciplina_versao", new CreatePpcDisciplinaVersaoController().handle);
-routes.put("/ppc_disciplina_versao/:id", new UpdatePpcDisciplinaVersaoController().handle);
-routes.get("/ppc_disciplina_versao/:id", new GetOnePpcDisciplinaVersaoController().handle);
-routes.get("/ppc_disciplina_versao", new GetAllPpcDisciplinaVersoesController().handle);
-routes.delete("/ppc_disciplina_versao/:id", new DeletePpcDisciplinaVersaoController().handle);
+routes.post(
+    "/ppc_disciplina_versao",
+    new CreatePpcDisciplinaVersaoController().handle
+);
+routes.put(
+    "/ppc_disciplina_versao/:id",
+    new UpdatePpcDisciplinaVersaoController().handle
+);
+routes.get(
+    "/ppc_disciplina_versao/:id",
+    new GetOnePpcDisciplinaVersaoController().handle
+);
+routes.get(
+    "/ppc_disciplina_versao",
+    new GetAllPpcDisciplinaVersoesController().handle
+);
+routes.delete(
+    "/ppc_disciplina_versao/:id",
+    new DeletePpcDisciplinaVersaoController().handle
+);
 
-routes.post("/perfil_ppc_disciplina_versao/:perfil_id", new CreatePerfilPpcDisciplinaVersaoController().handle);
-routes.post("/competencia_ppc_disciplina_versao/:competencia_id", new CreateCompetenciaPpcDisciplinaVersaoController().handle);
-routes.delete("/perfil_ppc_disciplina_versao/:perfil_id", new DeletePerfilPpcDisciplinaVersaoController().handle);
-routes.delete("/competencia_ppc_disciplina_versao/:competencia_id", new DeleteCompetenciaPpcDisciplinaVersaoController().handle);
+routes.post(
+    "/perfil_ppc_disciplina_versao/:perfil_id",
+    new CreatePerfilPpcDisciplinaVersaoController().handle
+);
+routes.post(
+    "/competencia_ppc_disciplina_versao/:competencia_id",
+    new CreateCompetenciaPpcDisciplinaVersaoController().handle
+);
+routes.delete(
+    "/perfil_ppc_disciplina_versao/:perfil_id",
+    new DeletePerfilPpcDisciplinaVersaoController().handle
+);
+routes.delete(
+    "/competencia_ppc_disciplina_versao/:competencia_id",
+    new DeleteCompetenciaPpcDisciplinaVersaoController().handle
+);
 
-routes.get("/pedido", new CalculoPedidoController().handle);
+routes.get("/calcpedido", new CalculoPedidoController().handle);
+routes.post("/pedido", new CreatePedidoController().handle);
+routes.post("/pedidos", new CreatePedidosController().handle);
+routes.get("/pedido/:id", new GetOnePedidoController().handle);
+routes.get("/pedidos", new GetAllPedidosController().handle);
+routes.delete("/pedidos/:id", new DeletePedidoController().handle);
 
-export { routes }
+export { routes };

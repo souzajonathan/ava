@@ -27,6 +27,7 @@ export class CreateTrilhaComponentes1661885708498
                     {
                         name: "observacoes",
                         type: "varchar",
+                        isNullable: true,
                     },
                     {
                         name: "created_at",

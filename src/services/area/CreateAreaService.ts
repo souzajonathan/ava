@@ -4,24 +4,24 @@ import { Area } from "../../entities/Area";
 type AreaRequest = {
     name: string;
     description: string;
-}
+};
 
 export class CreateAreaService {
     async execute({ name, description }: AreaRequest) {
-        if(!name){
+        if (!name) {
             return new Error("Nome de área não inserido");
         }
-        
-        const repo = getRepository(Area);
-        const areaAlreadyExists = await repo.findOne({name});
 
-        if(areaAlreadyExists) {
+        const repo = getRepository(Area);
+
+        const areaAlreadyExists = await repo.findOne({ name });
+        if (areaAlreadyExists) {
             return new Error("Área já existe");
         }
 
         const area = repo.create({
             name,
-            description
+            description,
         });
 
         await repo.save(area);

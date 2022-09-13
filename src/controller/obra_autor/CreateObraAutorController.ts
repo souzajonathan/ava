@@ -2,15 +2,15 @@ import { Request, Response } from "express";
 import { CreateObraAutorService } from "../../services/obra_autor/CreateObraAutorService";
 
 export class CreateObraAutorController {
-    async handle (request: Request, response: Response) {
+    async handle(request: Request, response: Response) {
         const { autor_id, obra_id, funcao } = request.body;
 
-        const service = new CreateObraAutorService;
+        const service = new CreateObraAutorService();
 
         const result = await service.execute({
             autor_id,
             obra_id,
-            funcao
+            funcao,
         });
 
         if (result instanceof Error) {

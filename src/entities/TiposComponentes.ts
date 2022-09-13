@@ -6,6 +6,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { ComponentesPedido } from "./ComponentesPedido";
 import { ComponentesTrilhaComponentes } from "./ComponentesTrilhaComponente";
 
 @Entity("tipos_componentes")
@@ -24,9 +25,15 @@ export class TiposComponentes {
 
     @OneToMany(
         () => ComponentesTrilhaComponentes,
-        (componentes) => componentes.tipos_componentes_id
+        (componentes) => componentes.tipos
     )
-    tipos: ComponentesTrilhaComponentes[];
+    componentesTrilha: ComponentesTrilhaComponentes[];
+
+    @OneToMany(
+        () => ComponentesPedido,
+        (componentes) => componentes.tipoComponente
+    )
+    componentesPedido: ComponentesPedido[];
 
     @CreateDateColumn()
     created_at: Date;

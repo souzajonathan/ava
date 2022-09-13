@@ -21,7 +21,7 @@ export class CreateComponentePedidoVersao1661976266122
                         type: "varchar",
                     },
                     {
-                        name: "pedido_id",
+                        name: "componente_pedido_id",
                         type: "uuid",
                     },
                     {
@@ -31,6 +31,11 @@ export class CreateComponentePedidoVersao1661976266122
                     {
                         name: "cancelado",
                         type: "boolean",
+                    },
+                    {
+                        name: "parent_item",
+                        type: "uuid",
+                        isNullable: true,
                     },
                     {
                         name: "created_at",
@@ -45,9 +50,15 @@ export class CreateComponentePedidoVersao1661976266122
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_pedido",
-                        columnNames: ["pedido_id"],
-                        referencedTableName: "pedidos",
+                        name: "fk_componente_pedido",
+                        columnNames: ["componente_pedido_id"],
+                        referencedTableName: "componentes_pedido",
+                        referencedColumnNames: ["id"],
+                    },
+                    {
+                        name: "fk_componente_pedido_versao",
+                        columnNames: ["parent_item"],
+                        referencedTableName: "componentes_pedido_versao",
                         referencedColumnNames: ["id"],
                     },
                 ],

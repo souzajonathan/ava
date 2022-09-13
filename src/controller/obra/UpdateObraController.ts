@@ -7,11 +7,8 @@ export class UpdateObraController {
         const {
             item_tipo,
             obra_nome,
-            capitulo_nome,
             serie_nome,
             colecao_nome,
-            organizador_editor_nome,
-            funcao,
             cidade,
             editora,
             ano,
@@ -30,7 +27,7 @@ export class UpdateObraController {
             issn,
             url,
             acesso_em,
-            contido_em
+            contido_em,
         } = request.body;
 
         const service = new UpdateObraService();
@@ -39,11 +36,8 @@ export class UpdateObraController {
             id,
             item_tipo,
             obra_nome,
-            capitulo_nome,
             serie_nome,
             colecao_nome,
-            organizador_editor_nome,
-            funcao,
             cidade,
             editora,
             ano,
@@ -62,13 +56,13 @@ export class UpdateObraController {
             issn,
             url,
             acesso_em,
-            contido_em
+            contido_em,
         });
 
-        if(result instanceof Error) {
+        if (result instanceof Error) {
             return response.status(400).json(result.message);
         }
-        
+
         return response.json(result);
     }
 }
