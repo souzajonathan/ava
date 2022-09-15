@@ -3,7 +3,7 @@ import { validate } from "uuid";
 import { ComponentesTrilhaComponentes } from "../../entities/ComponentesTrilhaComponente";
 
 type ComponenteTrilhaComponentesRequest = {
-    tipos_componentes_id: string;
+    tipo_componente_id: string;
     trilha_componentes_id: string;
     observacao: string;
     item_interno: boolean;
@@ -11,12 +11,12 @@ type ComponenteTrilhaComponentesRequest = {
 
 export class CreateComponenteTrilhaComponentesService {
     async execute({
-        tipos_componentes_id,
+        tipo_componente_id,
         trilha_componentes_id,
         observacao,
         item_interno,
     }: ComponenteTrilhaComponentesRequest) {
-        if (!validate(tipos_componentes_id)) {
+        if (!validate(tipo_componente_id)) {
             return new Error("ID de tipo de componente inválido");
         }
 
@@ -30,7 +30,7 @@ export class CreateComponenteTrilhaComponentesService {
 
         const repo = getRepository(ComponentesTrilhaComponentes);
         const componenteTrilhaComponente = repo.create({
-            tipos_componentes_id,
+            tipo_componente_id,
             trilha_componentes_id,
             observacao,
             item_interno,

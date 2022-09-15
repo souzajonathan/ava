@@ -4,7 +4,7 @@ import { CreateComponenteTrilhaComponentesService } from "../../services/compone
 export class CreateComponenteTrilhaComponentesController {
     async handle(request: Request, response: Response) {
         const {
-            tipos_componentes_id,
+            tipo_componente_id,
             trilha_componentes_id,
             observacao,
             item_interno,
@@ -13,7 +13,7 @@ export class CreateComponenteTrilhaComponentesController {
         const service = new CreateComponenteTrilhaComponentesService();
 
         const result = await service.execute({
-            tipos_componentes_id,
+            tipo_componente_id,
             trilha_componentes_id,
             observacao,
             item_interno,

@@ -5,7 +5,7 @@ export class UpdateComponenteTrilhaComponentesController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
         const {
-            tipos_componentes_id,
+            tipo_componente_id,
             trilha_componentes_id,
             observacao,
             item_interno,
@@ -15,7 +15,7 @@ export class UpdateComponenteTrilhaComponentesController {
 
         const result = await service.execute({
             id,
-            tipos_componentes_id,
+            tipo_componente_id,
             trilha_componentes_id,
             observacao,
             item_interno,

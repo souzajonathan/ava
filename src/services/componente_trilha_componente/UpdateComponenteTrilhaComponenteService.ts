@@ -6,7 +6,7 @@ import { TrilhaComponentes } from "../../entities/TrilhaComponentes";
 
 type ComponenteTrilhaComponentesUpdateRequest = {
     id: string;
-    tipos_componentes_id: string;
+    tipo_componente_id: string;
     trilha_componentes_id: string;
     observacao: string;
     item_interno: boolean;
@@ -15,7 +15,7 @@ type ComponenteTrilhaComponentesUpdateRequest = {
 export class UpdateComponenteTrilhaComponentesService {
     async execute({
         id,
-        tipos_componentes_id,
+        tipo_componente_id,
         trilha_componentes_id,
         observacao,
         item_interno,
@@ -30,7 +30,7 @@ export class UpdateComponenteTrilhaComponentesService {
             return new Error("componentes_trilha_componentes não existe!");
         }
 
-        if (tipos_componentes_id && !validate(tipos_componentes_id)) {
+        if (tipo_componente_id && !validate(tipo_componente_id)) {
             return new Error("ID de tipo de componente inválido");
         }
 
@@ -52,15 +52,15 @@ export class UpdateComponenteTrilhaComponentesService {
 
         const repoTipoComponente = getRepository(TiposComponentes);
         const tipoComponente = await repoTipoComponente.findOne(
-            tipos_componentes_id
+            tipo_componente_id
         );
         if (!tipoComponente) {
             return new Error("Tipo de componente não existe!");
         }
 
-        componenteTrilhaComponentes.tipos_componentes_id = tipos_componentes_id
-            ? tipos_componentes_id
-            : componenteTrilhaComponentes.tipos_componentes_id;
+        componenteTrilhaComponentes.tipo_componente_id = tipo_componente_id
+            ? tipo_componente_id
+            : componenteTrilhaComponentes.tipo_componente_id;
         componenteTrilhaComponentes.trilha_componentes_id =
             trilha_componentes_id
                 ? trilha_componentes_id

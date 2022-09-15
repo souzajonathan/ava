@@ -25,6 +25,10 @@ export class CreateComponentePedidoVersao1661976266122
                         type: "uuid",
                     },
                     {
+                        name: "tipo_solicitacao_id",
+                        type: "uuid",
+                    },
+                    {
                         name: "concluido",
                         type: "boolean",
                     },
@@ -53,6 +57,12 @@ export class CreateComponentePedidoVersao1661976266122
                         name: "fk_componente_pedido",
                         columnNames: ["componente_pedido_id"],
                         referencedTableName: "componentes_pedido",
+                        referencedColumnNames: ["id"],
+                    },
+                    {
+                        name: "fk_tipo_solicitacao",
+                        columnNames: ["tipo_solicitacao_id"],
+                        referencedTableName: "tipos_solicitacao",
                         referencedColumnNames: ["id"],
                     },
                     {

@@ -1,13 +1,15 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { ComponentesPedido } from "../../entities/ComponentesPedido";
+import { Pedido } from "../../entities/Pedido";
+import { CreateComponentePedidoVersaoService } from "../componente_pedido_versao/CreateComponentePedidoVersaoService";
 
 type ComponentePedidoRequest = {
     pedido_id: string;
     tipo_componente_id: string;
     observacao: string;
     item_interno: boolean;
-    parent_item: string;
+    parent_item?: string;
 };
 
 export class CreateComponentePedidoService {
@@ -54,6 +56,34 @@ export class CreateComponentePedidoService {
         });
 
         await repo.save(componentePedido);
+
+        if (parent_item) {
+            const componentePai = await repo.findOne(parent_item, {
+                relations: ["componenteParent"],
+
+                //BIRULEIBE
+            });
+        } else {
+            const service = new CreateComponentePedidoVersaoService();
+
+            const repoPedido = getRepository(Pedido);
+            const pedido = await repoPedido.findOne(pedido_id, {
+                relations: ["tipoSolicitacao"],
+            });
+            const tipoSolicitacao = pedido.tipoSolicitacao.tipo;
+
+            const result = await service.execute({
+                nome: "principal",
+                componente_pedido_id: componentePedido.id,
+                tipo_solicitacao_id: tipoSolicitacao,
+                concluido: false,
+                cancelado: false,
+            });
+
+            if (result instanceof Error) {
+                return result;
+            }
+        }
 
         return componentePedido;
     }

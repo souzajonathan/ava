@@ -69,6 +69,36 @@ import { CreatePedidosController } from "./controller/pedido/CreatePedidosContro
 import { GetOnePedidoController } from "./controller/pedido/GetOnePedidoController";
 import { GetAllPedidosController } from "./controller/pedido/GetAllPedidosController";
 import { DeletePedidoController } from "./controller/pedido/DeletePedidoController";
+import { CreateComponentePedidoController } from "./controller/componente_pedido/CreateComponentePedidoController";
+import { UpdateComponentePedidoController } from "./controller/componente_pedido/UpdateComponentePedidoController";
+import { GetOneComponentePedidoController } from "./controller/componente_pedido/GetOneComponentePedidoController";
+import { GetAllComponentesPedidoController } from "./controller/componente_pedido/GetAllComponentesPedidoController";
+import { DeleteComponentePedidoController } from "./controller/componente_pedido/DeleteComponentePedidoController";
+import { CreateComponentePedidoVersaoController } from "./controller/componente_pedido_versao/CreateComponentePedidoVersaoController";
+import { UpdateComponentePedidoVersaoController } from "./controller/componente_pedido_versao/UpdateComponentePedidoVersaoController";
+import { GetOneComponentePedidoVersaoController } from "./controller/componente_pedido_versao/GetOneComponentePedidoVersaoController";
+import { GetAllComponentePedidoVersoesController } from "./controller/componente_pedido_versao/GetAllComponentesPedidoVersaoController";
+import { DeleteComponentePedidoVersaoController } from "./controller/componente_pedido_versao/DeleteComponentePedidoVersaoController";
+import { CreateTipoSolicitacaoController } from "./controller/tipo_solicitacao/CreateTipoSolicitacaoController";
+import { UpdateTipoSolicitacaoController } from "./controller/tipo_solicitacao/UpdateTipoSolicitacaoController";
+import { GetOneTipoSolicitacaoController } from "./controller/tipo_solicitacao/GetOneTipoSolicitacaoController";
+import { GetAllTiposSolicitacaoController } from "./controller/tipo_solicitacao/GetAllTiposSolicitacaoController";
+import { DeleteTipoSolicitacaoController } from "./controller/tipo_solicitacao/DeleteTipoSolicitacaoController";
+import { CreateTipoComponenteController } from "./controller/tipo_componente/CreateTipoComponenteController";
+import { UpdateTipoComponenteController } from "./controller/tipo_componente/UpdateTipoComponenteController";
+import { GetOneTipoComponenteController } from "./controller/tipo_componente/GetOneTipoComponenteController";
+import { GetAllTiposComponentesController } from "./controller/tipo_componente/GetAllTiposComponentesController";
+import { DeleteTipoComponenteController } from "./controller/tipo_componente/DeleteTipoComponenteController";
+import { CreateTrilhaComponentesController } from "./controller/trilha_componentes/CreateTrilhaComponentesController";
+import { UpdateTrilhaComponentesController } from "./controller/trilha_componentes/UpdateTrilhaComponentesController";
+import { GetOneTrilhaComponentesController } from "./controller/trilha_componentes/GetOneTrilhaComponentesController";
+import { GetAllTrilhaComponentesController } from "./controller/trilha_componentes/GetAllTrilhaComponentesController";
+import { DeleteTrilhaComponentesController } from "./controller/trilha_componentes/DeleteTrilhaComponentesController";
+import { CreateComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/CreateComponenteTrilhaComponentesController";
+import { UpdateComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/UpdateComponenteTrilhaComponentesController";
+import { GetOneComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/GetOneComponenteTrilhaComponentesController";
+import { GetAllComponentesTrilhaComponentesController } from "./controller/componente_trilha_componentes/GetAllComponenteTrilhaComponentesController";
+import { DeleteComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/DeleteComponenteTrilhaComponentesController";
 
 const routes = Router();
 
@@ -180,7 +210,115 @@ routes.get("/calcpedido", new CalculoPedidoController().handle);
 routes.post("/pedido", new CreatePedidoController().handle);
 routes.post("/pedidos", new CreatePedidosController().handle);
 routes.get("/pedido/:id", new GetOnePedidoController().handle);
-routes.get("/pedidos", new GetAllPedidosController().handle);
-routes.delete("/pedidos/:id", new DeletePedidoController().handle);
+routes.get("/pedido", new GetAllPedidosController().handle);
+routes.delete("/pedido/:id", new DeletePedidoController().handle);
+
+routes.post("/tipo_solicitacao", new CreateTipoSolicitacaoController().handle);
+routes.put(
+    "/tipo_solicitacao/:id",
+    new UpdateTipoSolicitacaoController().handle
+);
+routes.get(
+    "/tipo_solicitacao/:id",
+    new GetOneTipoSolicitacaoController().handle
+);
+routes.get("/tipo_solicitacao", new GetAllTiposSolicitacaoController().handle);
+routes.delete(
+    "/tipo_solicitacao/:id",
+    new DeleteTipoSolicitacaoController().handle
+);
+
+routes.post(
+    "/componente_pedido",
+    new CreateComponentePedidoController().handle
+);
+routes.put(
+    "/componente_pedido/:id",
+    new UpdateComponentePedidoController().handle
+);
+routes.get(
+    "/componente_pedido/:id",
+    new GetOneComponentePedidoController().handle
+);
+routes.get(
+    "/componente_pedido",
+    new GetAllComponentesPedidoController().handle
+);
+routes.delete(
+    "/componente_pedido/:id",
+    new DeleteComponentePedidoController().handle
+);
+
+routes.post(
+    "/componente_pedido_versao",
+    new CreateComponentePedidoVersaoController().handle
+);
+routes.put(
+    "/componente_pedido_versao/:id",
+    new UpdateComponentePedidoVersaoController().handle
+);
+routes.get(
+    "/componente_pedido_versao/:id",
+    new GetOneComponentePedidoVersaoController().handle
+);
+routes.get(
+    "/componente_pedido_versao",
+    new GetAllComponentePedidoVersoesController().handle
+);
+routes.delete(
+    "/componente_pedido_versao/:id",
+    new DeleteComponentePedidoVersaoController().handle
+);
+
+routes.post("/tipo_componente", new CreateTipoComponenteController().handle);
+routes.put("/tipo_componente/:id", new UpdateTipoComponenteController().handle);
+routes.get("/tipo_componente/:id", new GetOneTipoComponenteController().handle);
+routes.get("/tipo_componente", new GetAllTiposComponentesController().handle);
+routes.delete(
+    "/tipo_componente/:id",
+    new DeleteTipoComponenteController().handle
+);
+
+routes.post(
+    "/trilha_componentes",
+    new CreateTrilhaComponentesController().handle
+);
+routes.put(
+    "/trilha_componentes/:id",
+    new UpdateTrilhaComponentesController().handle
+);
+routes.get(
+    "/trilha_componentes/:id",
+    new GetOneTrilhaComponentesController().handle
+);
+routes.get(
+    "/trilha_componentes",
+    new GetAllTrilhaComponentesController().handle
+);
+routes.delete(
+    "/trilha_componentes/:id",
+    new DeleteTrilhaComponentesController().handle
+);
+
+routes.post(
+    "/componente_trilha_componente",
+    new CreateComponenteTrilhaComponentesController().handle
+);
+routes.put(
+    "/componente_trilha_componente/:id",
+    new UpdateComponenteTrilhaComponentesController().handle
+);
+routes.get(
+    "/componente_trilha_componente/:id",
+    new GetOneComponenteTrilhaComponentesController().handle
+);
+routes.get(
+    "/componente_trilha_componente",
+    new GetAllComponentesTrilhaComponentesController().handle
+);
+routes.delete(
+    "/componente_trilha_componente/:id",
+    new DeleteComponenteTrilhaComponentesController().handle
+);
 
 export { routes };

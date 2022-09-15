@@ -26,7 +26,7 @@ export class UpdateTipoComponenteService {
             return new Error("Tipo de componente não existe!");
         }
 
-        if (carga_horaria && isNaN(carga_horaria)) {
+        if (carga_horaria && !Number.isInteger(carga_horaria)) {
             return new Error("Insira um número válido em 'carga horária'");
         }
 

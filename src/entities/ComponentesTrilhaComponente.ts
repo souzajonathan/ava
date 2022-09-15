@@ -20,7 +20,7 @@ export class ComponentesTrilhaComponentes {
     tipos: TiposComponentes;
 
     @Column("uuid")
-    tipos_componentes_id: string;
+    tipo_componente_id: string;
 
     @ManyToOne(() => TrilhaComponentes)
     @JoinColumn({ name: "trilha_componentes_id" })

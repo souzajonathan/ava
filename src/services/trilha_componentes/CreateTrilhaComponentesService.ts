@@ -17,7 +17,7 @@ export class CreateTrilhaComponentesService {
             return new Error("Nome de versão de trilha não inserido");
         }
 
-        if (isNaN(quantidade_creditos)) {
+        if (!Number.isInteger(quantidade_creditos)) {
             return new Error(
                 "Insira um número válido em 'quantidade de créditos"
             );

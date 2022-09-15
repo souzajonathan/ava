@@ -10,11 +10,11 @@ export class DeleteComponentePedidoService {
 
         const repo = getRepository(ComponentesPedido);
         const componente = await repo.findOne(id, {
-            relations: ["versao"],
+            relations: ["versoes"],
         });
 
         if (!componente) {
-            return new Error("Versão de Disciplina não existente!");
+            return new Error("Componente de pedido não existente!");
         }
 
         if (componente.versoes.length > 0) {

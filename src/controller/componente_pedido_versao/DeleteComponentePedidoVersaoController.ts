@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { DeleteComponenteTrilhaComponentesService } from "../../services/componente_trilha_componente/DeleteComponenteTrilhaComponentesService";
+import { DeleteComponentePedidoVersaoService } from "../../services/componente_pedido_versao/DeleteComponentePedidoVersaoService";
 
-export class DeleteComponenteTrilhaComponentesController {
+export class DeleteComponentePedidoVersaoController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
 
-        const service = new DeleteComponenteTrilhaComponentesService();
+        const service = new DeleteComponentePedidoVersaoService();
 
         const result = await service.execute(id);
 

@@ -9,6 +9,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import { ComponentesPedido } from "./ComponentesPedido";
+import { TiposSolicitacao } from "./TiposSolicitacao";
 
 @Entity("componentes_pedido_versao")
 export class ComponentesPedidoVersao {
@@ -19,7 +20,10 @@ export class ComponentesPedidoVersao {
     nome: string;
 
     @Column("uuid")
-    pedido_id: string;
+    componente_pedido_id: string;
+
+    @Column("uuid")
+    tipo_solicitacao_id: string;
 
     @Column()
     concluido: boolean;
@@ -27,7 +31,9 @@ export class ComponentesPedidoVersao {
     @Column()
     cancelado: boolean;
 
-    @Column("uuid")
+    @Column("uuid", {
+        nullable: true,
+    })
     parent_item: string;
 
     @ManyToOne(() => ComponentesPedidoVersao)
@@ -43,6 +49,10 @@ export class ComponentesPedidoVersao {
     @ManyToOne(() => ComponentesPedido)
     @JoinColumn({ name: "componente_pedido_id" })
     componente: ComponentesPedido[];
+
+    @ManyToOne(() => TiposSolicitacao)
+    @JoinColumn({ name: "tipo_solicitacao_id" })
+    tipoSolicitacao: TiposSolicitacao[];
 
     @CreateDateColumn()
     created_at: Date;

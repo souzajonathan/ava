@@ -8,22 +8,28 @@ type DisciplinaUpdateRequest = {
     name: string;
     area_id: string;
     sigla: string;
-}
+};
 
 export class UpdateDisciplinaService {
-    async execute ({id, name, area_id, sigla}: DisciplinaUpdateRequest) {
-        if (!validate(id)){
+    async execute({ id, name, area_id, sigla }: DisciplinaUpdateRequest) {
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if(area_id && !validate(area_id)){
+        if (area_id && !validate(area_id)) {
             return new Error("ID de área inválido");
         }
-        
+
         const repo = getRepository(Disciplina);
         const disciplina = await repo.findOne(id);
         if (!disciplina) {
             return new Error("Disciplina não existe!");
+        }
+        const siglaAlreadyExists = await repo.findOne({
+            where: { sigla },
+        });
+        if (siglaAlreadyExists) {
+            return new Error("Sigla já existe!");
         }
 
         const repoArea = getRepository(Area);
@@ -39,7 +45,8 @@ export class UpdateDisciplinaService {
         await repo.save(disciplina);
 
         return {
-            ...disciplina, area
+            ...disciplina,
+            area,
         };
     }
 }

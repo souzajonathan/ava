@@ -31,7 +31,7 @@ export class UpdateTrilhaComponentesService {
             return new Error("Tipo já existe");
         }
 
-        if (quantidade_creditos && isNaN(quantidade_creditos)) {
+        if (quantidade_creditos && !Number.isInteger(quantidade_creditos)) {
             return new Error(
                 "Insira um número válido em 'quantidade de créditos"
             );

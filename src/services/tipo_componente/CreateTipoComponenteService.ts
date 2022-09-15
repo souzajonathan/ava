@@ -17,7 +17,7 @@ export class CreateTipoComponenteService {
             return new Error("Carga horária não inserida");
         }
 
-        if (isNaN(carga_horaria)) {
+        if (!Number.isInteger(carga_horaria)) {
             return new Error("Insira um número válido em 'carga horária");
         }
 
