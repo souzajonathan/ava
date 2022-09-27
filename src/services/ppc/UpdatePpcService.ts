@@ -94,7 +94,7 @@ export class UpdatePpcService {
             await repoCurso.save(curso);
         }
 
-        if (competencias.length > 0) {
+        if (competencias) {
             for await (const competencia of competencias) {
                 const service = new CreateCompetenciaService();
 
@@ -110,7 +110,7 @@ export class UpdatePpcService {
             }
         }
 
-        if (perfis.length > 0) {
+        if (perfis) {
             for await (const perfil of perfis) {
                 const service = new CreatePerfilService();
 

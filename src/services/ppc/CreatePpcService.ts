@@ -24,8 +24,8 @@ type PpcRequest = {
     quantSemestres: number;
     active: boolean;
     ppc_ativo: boolean;
-    competencias: Competencia[];
-    perfis: Perfil[];
+    competencias?: Competencia[];
+    perfis?: Perfil[];
 };
 
 export class CreatePpcService {
@@ -94,7 +94,7 @@ export class CreatePpcService {
             await repoCurso.save(curso);
         }
 
-        if (competencias.length > 0) {
+        if (competencias) {
             for await (const competencia of competencias) {
                 const service = new CreateCompetenciaService();
 
@@ -110,7 +110,7 @@ export class CreatePpcService {
             }
         }
 
-        if (perfis.length > 0) {
+        if (perfis) {
             for await (const perfil of perfis) {
                 const service = new CreatePerfilService();
 
