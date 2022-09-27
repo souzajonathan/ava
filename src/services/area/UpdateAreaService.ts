@@ -21,7 +21,7 @@ export class UpdateAreaService {
         }
 
         const areaAlreadyExists = await repo.findOne({ name });
-        if (areaAlreadyExists) {
+        if (areaAlreadyExists && areaAlreadyExists.name != area.name) {
             return new Error("Área já existe");
         }
 

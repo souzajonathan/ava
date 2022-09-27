@@ -70,12 +70,12 @@ export class UpdateDisciplinaVersaoService {
         disciplinaVersao.observacao = observacao
             ? observacao
             : disciplinaVersao.observacao;
-        disciplinaVersao.em_oferta = em_oferta
-            ? em_oferta
-            : disciplinaVersao.em_oferta;
-        disciplinaVersao.produzido = produzido
-            ? produzido
-            : disciplinaVersao.produzido;
+        if (em_oferta != undefined && em_oferta != null) {
+            disciplinaVersao.em_oferta = em_oferta;
+        }
+        if (produzido != undefined && produzido != null) {
+            disciplinaVersao.produzido = produzido;
+        }
 
         await repo.save(disciplinaVersao);
 

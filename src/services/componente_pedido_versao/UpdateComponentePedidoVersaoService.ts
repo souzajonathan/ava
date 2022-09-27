@@ -96,12 +96,12 @@ export class UpdateComponentePedidoVersaoService {
         componentePedidoVersao.tipo_solicitacao_id = tipo_solicitacao_id
             ? tipo_solicitacao_id
             : componentePedidoVersao.tipo_solicitacao_id;
-        componentePedidoVersao.concluido = concluido
-            ? concluido
-            : componentePedidoVersao.concluido;
-        componentePedidoVersao.cancelado = cancelado
-            ? cancelado
-            : componentePedidoVersao.cancelado;
+        if (concluido != undefined && concluido != null) {
+            componentePedidoVersao.concluido = concluido;
+        }
+        if (cancelado != undefined && cancelado != null) {
+            componentePedidoVersao.cancelado = cancelado;
+        }
         componentePedidoVersao.parent_item = parent_item
             ? parent_item
             : componentePedidoVersao.parent_item;

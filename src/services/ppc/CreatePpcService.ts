@@ -94,31 +94,35 @@ export class CreatePpcService {
             await repoCurso.save(curso);
         }
 
-        for await (const competencia of competencias) {
-            const service = new CreateCompetenciaService();
+        if (competencias.length > 0) {
+            for await (const competencia of competencias) {
+                const service = new CreateCompetenciaService();
 
-            const result = await service.execute({
-                ppc_id: ppc.id,
-                competencia: competencia.competencia,
-                competenciaNumero: competencia.competenciaNumero,
-            });
+                const result = await service.execute({
+                    ppc_id: ppc.id,
+                    competencia: competencia.competencia,
+                    competenciaNumero: competencia.competenciaNumero,
+                });
 
-            if (result instanceof Error) {
-                return result;
+                if (result instanceof Error) {
+                    return result;
+                }
             }
         }
 
-        for await (const perfil of perfis) {
-            const service = new CreatePerfilService();
+        if (perfis.length > 0) {
+            for await (const perfil of perfis) {
+                const service = new CreatePerfilService();
 
-            const result = await service.execute({
-                ppc_id: ppc.id,
-                perfil: perfil.perfil,
-                perfilNumero: perfil.perfilNumero,
-            });
+                const result = await service.execute({
+                    ppc_id: ppc.id,
+                    perfil: perfil.perfil,
+                    perfilNumero: perfil.perfilNumero,
+                });
 
-            if (result instanceof Error) {
-                return result;
+                if (result instanceof Error) {
+                    return result;
+                }
             }
         }
 

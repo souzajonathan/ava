@@ -25,17 +25,22 @@ export class UpdateDisciplinaService {
         if (!disciplina) {
             return new Error("Disciplina não existe!");
         }
-        const siglaAlreadyExists = await repo.findOne({
-            where: { sigla },
-        });
-        if (siglaAlreadyExists) {
-            return new Error("Sigla já existe!");
-        }
 
         const repoArea = getRepository(Area);
         const area = await repoArea.findOne(area_id);
         if (!area) {
             return new Error("Área não existe!");
+        }
+
+        const siglaAlreadyExists = await repo.findOne({
+            where: { sigla },
+        });
+
+        if (
+            siglaAlreadyExists &&
+            siglaAlreadyExists.sigla != disciplina.sigla
+        ) {
+            return new Error("Sigla já existe!");
         }
 
         disciplina.name = name ? name : disciplina.name;

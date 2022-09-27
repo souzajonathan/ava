@@ -68,9 +68,9 @@ export class UpdateComponenteTrilhaComponentesService {
         componenteTrilhaComponentes.observacao = observacao
             ? observacao
             : componenteTrilhaComponentes.observacao;
-        componenteTrilhaComponentes.item_interno = item_interno
-            ? item_interno
-            : componenteTrilhaComponentes.item_interno;
+        if (item_interno != undefined && item_interno != null) {
+            componenteTrilhaComponentes.item_interno = item_interno;
+        }
 
         await repo.save(componenteTrilhaComponentes);
 

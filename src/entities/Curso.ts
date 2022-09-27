@@ -20,7 +20,7 @@ export class Curso {
     ppc_ativo: string;
 
     @Column({ default: true })
-    active: boolean = true;
+    active: boolean;
 
     @OneToMany(() => Ppc, (ppc) => ppc.curso)
     ppcs: Ppc[];

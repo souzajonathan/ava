@@ -87,14 +87,18 @@ export class UpdatePedidoService {
         pedido.tipo_solicitacao_id = tipo_solicitacao_id
             ? tipo_solicitacao_id
             : pedido.tipo_solicitacao_id;
-        pedido.analisado = analisado ? analisado : pedido.analisado;
-        pedido.aprovacao_interna = aprovacao_interna
-            ? aprovacao_interna
-            : pedido.aprovacao_interna;
-        pedido.aprovacao_interna = aprovacao_interna
-            ? aprovacao_externa
-            : pedido.aprovacao_externa;
-        pedido.concluido = concluido ? concluido : pedido.concluido;
+        if (analisado != undefined && analisado != null) {
+            pedido.analisado = analisado;
+        }
+        if (aprovacao_interna != undefined && aprovacao_interna != null) {
+            pedido.aprovacao_interna = aprovacao_interna;
+        }
+        if (aprovacao_externa != undefined && aprovacao_externa != null) {
+            pedido.aprovacao_externa = aprovacao_externa;
+        }
+        if (concluido != undefined && concluido != null) {
+            pedido.concluido = concluido;
+        }
         pedido.observacoes = observacoes ? observacoes : pedido.observacoes;
         pedido.solicitante_id = solicitante_id
             ? solicitante_id

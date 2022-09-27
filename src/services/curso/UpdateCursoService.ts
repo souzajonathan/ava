@@ -16,12 +16,12 @@ export class UpdateCursoService {
             return new Error("ID inválido");
         }
 
-        if (ppc_ativo && !validate(ppc_ativo)) {
-            return new Error("ID de ppc inválido");
+        if (active && typeof active != "boolean") {
+            return new Error("Marcação para 'active' inválida");
         }
 
-        if (active && typeof active != "boolean") {
-            return new Error("Marcação para 'ativo' inválida");
+        if (ppc_ativo && !validate(ppc_ativo)) {
+            return new Error("ID de ppc inválido");
         }
 
         const repo = getRepository(Curso);
@@ -38,10 +38,14 @@ export class UpdateCursoService {
 
         curso.name = name ? name : curso.name;
         curso.ppc_ativo = ppc_ativo ? ppc_ativo : curso.ppc_ativo;
-        curso.active = active ? active : curso.active;
+        if (active != undefined && active != null) {
+            curso.active = active;
+        }
 
         await repo.save(curso);
 
+        console.log(typeof active);
+        console.log(active);
         return {
             ...curso,
             ppc,

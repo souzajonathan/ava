@@ -70,9 +70,9 @@ export class UpdateComponentePedidoService {
         componentePedido.observacao = observacao
             ? observacao
             : componentePedido.observacao;
-        componentePedido.item_interno = item_interno
-            ? item_interno
-            : componentePedido.item_interno;
+        if (item_interno != undefined && item_interno != null) {
+            componentePedido.item_interno = item_interno;
+        }
         componentePedido.parent_item = parent_item
             ? parent_item
             : componentePedido.parent_item;
