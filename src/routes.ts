@@ -177,6 +177,14 @@ routes.put(
     new UpdatePpcDisciplinaVersaoController().handle
 );
 routes.get(
+    "/ppc_disciplina_versao/perfil/:perfil_id",
+    new GetAllPpcDisciplinaVersoesController().handlePerfil
+);
+routes.get(
+    "/ppc_disciplina_versao/competencia/:competencia_id",
+    new GetAllPpcDisciplinaVersoesController().handleCompetencia
+);
+routes.get(
     "/ppc_disciplina_versao/:id",
     new GetOnePpcDisciplinaVersaoController().handle
 );
