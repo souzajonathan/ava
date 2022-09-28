@@ -8,7 +8,6 @@ export class GetAllPpcDisciplinaVersoesService {
 
         const ppcDisciplinaVersoes = await repo.find({
             relations: ["ppc", "versoes", "perfis", "competencias"],
-            where: ["perfis"],
         });
 
         return ppcDisciplinaVersoes;
