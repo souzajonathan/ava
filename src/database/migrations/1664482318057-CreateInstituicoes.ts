@@ -1,13 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePpcDisciplinaVersao1651690986159
-    implements MigrationInterface
-{
+export class CreateInstituicoes1664482318057 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "ppc_disciplina_versao",
+                name: "instituicoes",
                 columns: [
                     {
                         name: "id",
@@ -17,20 +15,22 @@ export class CreatePpcDisciplinaVersao1651690986159
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "modulo",
-                        type: "int",
+                        name: "name",
+                        type: "varchar",
                     },
                     {
-                        name: "semestre",
-                        type: "int",
+                        name: "link",
+                        type: "varchar",
                     },
                     {
-                        name: "ppc_id",
-                        type: "uuid",
+                        name: "sigla",
+                        type: "varchar",
+                        isUnique: true,
                     },
                     {
-                        name: "disciplina_versao_id",
-                        type: "uuid",
+                        name: "inst_default",
+                        type: "boolean",
+                        isNullable: true,
                     },
                     {
                         name: "created_at",
@@ -43,27 +43,11 @@ export class CreatePpcDisciplinaVersao1651690986159
                         default: "now()",
                     },
                 ],
-                foreignKeys: [
-                    {
-                        name: "fk_ppc",
-                        columnNames: ["ppc_id"],
-                        referencedTableName: "ppcs",
-                        referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
-                    },
-                    {
-                        name: "fk_disciplina_versao_id",
-                        columnNames: ["disciplina_versao_id"],
-                        referencedTableName: "disciplina_versao",
-                        referencedColumnNames: ["id"],
-                        onDelete: "CASCADE",
-                    },
-                ],
             })
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("ppc_disciplina_versao");
+        await queryRunner.dropTable("instituicoes");
     }
 }

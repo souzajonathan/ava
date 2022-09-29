@@ -9,6 +9,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import { ComponentesPedido } from "./ComponentesPedido";
+import { Servico } from "./Servico";
 import { TiposSolicitacao } from "./TiposSolicitacao";
 
 @Entity("componentes_pedido_versao")
@@ -43,8 +44,8 @@ export class ComponentesPedidoVersao {
     @OneToMany(() => ComponentesPedidoVersao, (versao) => versao.versaoParent)
     versaoChildren: ComponentesPedidoVersao;
 
-    /*@OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
-    obrasAutores: ObraAutor[];*/
+    @OneToMany(() => Servico, (servico) => servico.componentePedidoVersao)
+    servicos: Servico[];
 
     @ManyToOne(() => ComponentesPedido)
     @JoinColumn({ name: "componente_pedido_id" })

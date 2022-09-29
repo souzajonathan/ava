@@ -4,25 +4,23 @@ import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
 export class DeleteDisciplinaVersaoService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
-        
+
         const repo = getRepository(DisciplinaVersao);
         const versao = await repo.findOne(id, {
-            relations: ["bibliografias", "ppcDisciplinaVersoes"]
+            relations: ["bibliografias", "ppcDisciplinaVersoes"],
         });
-        
-        if(!versao){
+
+        if (!versao) {
             return new Error("Versão de Disciplina não existente!");
         }
 
-        if(versao.bibliografias.length > 0){
-            return new Error("Versão de disciplina com bibliografias cadastradas");
-        }
-
-        if(versao.ppcDisciplinaVersoes.length > 0){
-            return new Error("Versão de disciplina com ppc's cadastrados");
+        if (versao.bibliografias.length > 0) {
+            return new Error(
+                "Versão de disciplina com bibliografias cadastradas"
+            );
         }
 
         await repo.delete(id);

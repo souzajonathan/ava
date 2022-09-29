@@ -1,36 +1,22 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePpcDisciplinaVersao1651690986159
+export class CreateServicosTiposServicos1664474552969
     implements MigrationInterface
 {
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "ppc_disciplina_versao",
+                name: "funcoes_tipos_servicos",
                 columns: [
                     {
-                        name: "id",
+                        name: "funcao_id",
                         type: "uuid",
                         isPrimary: true,
-                        generationStrategy: "uuid",
-                        default: "uuid_generate_v4()",
                     },
                     {
-                        name: "modulo",
-                        type: "int",
-                    },
-                    {
-                        name: "semestre",
-                        type: "int",
-                    },
-                    {
-                        name: "ppc_id",
+                        name: "tipo_servico_id",
                         type: "uuid",
-                    },
-                    {
-                        name: "disciplina_versao_id",
-                        type: "uuid",
+                        isPrimary: true,
                     },
                     {
                         name: "created_at",
@@ -45,16 +31,16 @@ export class CreatePpcDisciplinaVersao1651690986159
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_ppc",
-                        columnNames: ["ppc_id"],
-                        referencedTableName: "ppcs",
+                        name: "fk_funcao",
+                        columnNames: ["funcao_id"],
+                        referencedTableName: "funcoes",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
                     },
                     {
-                        name: "fk_disciplina_versao_id",
-                        columnNames: ["disciplina_versao_id"],
-                        referencedTableName: "disciplina_versao",
+                        name: "fk_tipo_servico",
+                        columnNames: ["tipo_servico_id"],
+                        referencedTableName: "tipos_servicos",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
                     },
@@ -64,6 +50,6 @@ export class CreatePpcDisciplinaVersao1651690986159
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("ppc_disciplina_versao");
+        await queryRunner.dropTable("servicos_tipos_servicos");
     }
 }

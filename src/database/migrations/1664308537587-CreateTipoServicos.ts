@@ -15,7 +15,7 @@ export class CreateTipoServicos1664308537587 implements MigrationInterface {
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "name",
+                        name: "nome",
                         type: "varchar",
                     },
                     {

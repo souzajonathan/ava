@@ -99,6 +99,11 @@ import { UpdateComponenteTrilhaComponentesController } from "./controller/compon
 import { GetOneComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/GetOneComponenteTrilhaComponentesController";
 import { GetAllComponentesTrilhaComponentesController } from "./controller/componente_trilha_componentes/GetAllComponenteTrilhaComponentesController";
 import { DeleteComponenteTrilhaComponentesController } from "./controller/componente_trilha_componentes/DeleteComponenteTrilhaComponentesController";
+import { CreateInstituicaoController } from "./controller/instituicao/CreateInstituicaoController";
+import { UpdateInstituicaoController } from "./controller/instituicao/UpdateInstituicaoController";
+import { GetOneInstituicaoController } from "./controller/instituicao/GetOneInstituicaoController";
+import { GetAllInstituicoesController } from "./controller/instituicao/GetAllInstituicoesController";
+import { DeleteInstituicaoController } from "./controller/instituicao/DeleteInstituicaoController";
 
 const routes = Router();
 
@@ -328,5 +333,11 @@ routes.delete(
     "/componente_trilha_componente/:id",
     new DeleteComponenteTrilhaComponentesController().handle
 );
+
+routes.post("/instituicao", new CreateInstituicaoController().handle);
+routes.put("/instituicao/:id", new UpdateInstituicaoController().handle);
+routes.get("/instituicao/:id", new GetOneInstituicaoController().handle);
+routes.get("/instituicao", new GetAllInstituicoesController().handle);
+routes.delete("/instituicao/:id", new DeleteInstituicaoController().handle);
 
 export { routes };
