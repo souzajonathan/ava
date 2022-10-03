@@ -25,7 +25,7 @@ export class CreateTipoServicos1664308537587 implements MigrationInterface {
                     },
                     {
                         name: "valor",
-                        type: "number",
+                        type: "numeric",
                     },
                     {
                         name: "unidade_medida",

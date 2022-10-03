@@ -29,7 +29,7 @@ export class CreateServicos1664309518278 implements MigrationInterface {
                     },
                     {
                         name: "posicao",
-                        type: "number",
+                        type: "int",
                     },
                     {
                         name: "em_andamento",
