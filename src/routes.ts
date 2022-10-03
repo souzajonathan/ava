@@ -334,10 +334,14 @@ routes.delete(
     new DeleteComponenteTrilhaComponentesController().handle
 );
 
-routes.post("/instituicao", new CreateInstituicaoController().handle);
-routes.put("/instituicao/:id", new UpdateInstituicaoController().handle);
-routes.get("/instituicao/:id", new GetOneInstituicaoController().handle);
-routes.get("/instituicao", new GetAllInstituicoesController().handle);
-routes.delete("/instituicao/:id", new DeleteInstituicaoController().handle);
+routes.post("/instituicoes", new CreateInstituicaoController().handle);
+routes.put("/instituicoes/:id", new UpdateInstituicaoController().handle);
+routes.get("/instituicoes/:id", new GetOneInstituicaoController().handle);
+routes.get("/instituicoes", new GetAllInstituicoesController().handle);
+routes.delete("/instituicoes/:id", new DeleteInstituicaoController().handle);
+routes.get(
+    "/instituicoes/default/",
+    new GetOneInstituicaoController().handleInstituicaoDefault
+);
 
 export { routes };

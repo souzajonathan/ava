@@ -6,8 +6,9 @@ type InstituicaoUpdateRequest = {
     id: string;
     name: string;
     sigla: string;
+    description: string;
     link: string;
-    inst_default: boolean;
+    padrao: boolean;
 };
 
 export class UpdateInstituicaoService {
@@ -15,14 +16,15 @@ export class UpdateInstituicaoService {
         id,
         name,
         sigla,
+        description,
         link,
-        inst_default,
+        padrao,
     }: InstituicaoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if (inst_default && typeof inst_default != "boolean") {
+        if (padrao && typeof padrao != "boolean") {
             return new Error("Marcação para 'instituição default' inválida");
         }
 
@@ -45,9 +47,12 @@ export class UpdateInstituicaoService {
 
         instituicao.name = name ? name : instituicao.name;
         instituicao.sigla = sigla ? sigla : instituicao.sigla;
+        instituicao.description = description
+            ? description
+            : instituicao.description;
         instituicao.link = link ? link : instituicao.link;
-        if (inst_default != undefined && inst_default != null) {
-            instituicao.inst_default = inst_default;
+        if (padrao != undefined && padrao != null) {
+            instituicao.padrao = padrao;
         }
 
         await repo.save(instituicao);

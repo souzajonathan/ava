@@ -53,6 +53,10 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()",
                     },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
@@ -61,6 +65,12 @@ export class CreatePpcs1651173061200 implements MigrationInterface {
                         referencedTableName: "cursos",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
+                    },
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
                     },
                 ],
             })

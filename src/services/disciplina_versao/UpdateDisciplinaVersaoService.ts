@@ -12,6 +12,7 @@ type DisciplinaVersaoUpdateRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
+    instituicao_id: string;
 };
 
 export class UpdateDisciplinaVersaoService {
@@ -24,6 +25,7 @@ export class UpdateDisciplinaVersaoService {
         observacao,
         em_oferta,
         produzido,
+        instituicao_id,
     }: DisciplinaVersaoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
@@ -31,6 +33,10 @@ export class UpdateDisciplinaVersaoService {
 
         if (disciplina_id && !validate(disciplina_id)) {
             return new Error("ID de disciplina inválido");
+        }
+
+        if (instituicao_id && !validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         if (credito_quantidade && !Number.isInteger(credito_quantidade)) {
@@ -76,6 +82,9 @@ export class UpdateDisciplinaVersaoService {
         if (produzido != undefined && produzido != null) {
             disciplinaVersao.produzido = produzido;
         }
+        disciplinaVersao.instituicao_id = instituicao_id
+            ? instituicao_id
+            : disciplinaVersao.instituicao_id;
 
         await repo.save(disciplinaVersao);
 

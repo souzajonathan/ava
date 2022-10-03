@@ -27,6 +27,7 @@ type PpcUpdateRequest = {
     active: boolean;
     competencias: Competencia[];
     perfis: Perfil[];
+    instituicao_id: string;
 };
 
 export class UpdatePpcService {
@@ -42,6 +43,7 @@ export class UpdatePpcService {
         active,
         competencias,
         perfis,
+        instituicao_id,
     }: PpcUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
@@ -102,6 +104,7 @@ export class UpdatePpcService {
                     ppc_id: ppc.id,
                     competencia: competencia.competencia,
                     competenciaNumero: competencia.competenciaNumero,
+                    instituicao_id: instituicao_id,
                 });
 
                 if (result instanceof Error) {
@@ -118,6 +121,7 @@ export class UpdatePpcService {
                     ppc_id: ppc.id,
                     perfil: perfil.perfil,
                     perfilNumero: perfil.perfilNumero,
+                    instituicao_id: instituicao_id,
                 });
 
                 if (result instanceof Error) {
@@ -137,6 +141,9 @@ export class UpdatePpcService {
             ppc.ppc_ativo = ppc_ativo;
         }
         ppc.curso_id = curso_id ? curso_id : ppc.curso_id;
+        ppc.instituicao_id = instituicao_id
+            ? instituicao_id
+            : ppc.instituicao_id;
 
         await repo.save(ppc);
 

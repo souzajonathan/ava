@@ -14,6 +14,7 @@ export class CreatePpcController {
             active,
             competencias,
             perfis,
+            instituicao_id,
         } = request.body;
 
         const service = new CreatePpcService();
@@ -29,6 +30,7 @@ export class CreatePpcController {
             active,
             competencias,
             perfis,
+            instituicao_id,
         });
 
         if (result instanceof Error) {

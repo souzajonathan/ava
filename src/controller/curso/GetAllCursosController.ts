@@ -5,7 +5,10 @@ export class GetAllCursosController {
     async handle(request: Request, response: Response) {
         const service = new GetAllCursosService();
 
-        const cursos = await service.execute(request.query);
+        const cursos = await service.execute(
+            request.query,
+            request.query?.instituicao_id as string
+        );
 
         return response.json(cursos);
     }

@@ -15,6 +15,7 @@ export class UpdatePpcController {
             active,
             competencias,
             perfis,
+            instituicao_id,
         } = request.body;
 
         const service = new UpdatePpcService();
@@ -31,6 +32,7 @@ export class UpdatePpcController {
             active,
             competencias,
             perfis,
+            instituicao_id,
         });
 
         if (result instanceof Error) {

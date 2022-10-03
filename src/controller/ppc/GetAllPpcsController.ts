@@ -5,7 +5,10 @@ export class GetAllPpcsController {
     async handle(request: Request, response: Response) {
         const service = new GetAllPpcsService();
 
-        const ppcs = await service.execute(request.query?.curso_id as string);
+        const ppcs = await service.execute(
+            request.query?.curso_id as string,
+            request.query?.instituicao_id as string
+        );
 
         return response.json(ppcs);
     }

@@ -4,7 +4,7 @@ import { UpdateInstituicaoService } from "../../services/instituicao/UpdateInsti
 export class UpdateInstituicaoController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
-        const { name, sigla, link, inst_default } = request.body;
+        const { name, sigla, link, description, padrao } = request.body;
 
         const service = new UpdateInstituicaoService();
 
@@ -13,7 +13,8 @@ export class UpdateInstituicaoController {
             name,
             sigla,
             link,
-            inst_default,
+            description,
+            padrao,
         });
 
         if (result instanceof Error) {

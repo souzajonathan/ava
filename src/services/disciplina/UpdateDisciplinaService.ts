@@ -8,16 +8,27 @@ type DisciplinaUpdateRequest = {
     name: string;
     area_id: string;
     sigla: string;
+    instituicao_id: string;
 };
 
 export class UpdateDisciplinaService {
-    async execute({ id, name, area_id, sigla }: DisciplinaUpdateRequest) {
+    async execute({
+        id,
+        name,
+        area_id,
+        sigla,
+        instituicao_id,
+    }: DisciplinaUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
 
         if (area_id && !validate(area_id)) {
             return new Error("ID de área inválido");
+        }
+
+        if (instituicao_id && !validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(Disciplina);
@@ -46,6 +57,9 @@ export class UpdateDisciplinaService {
         disciplina.name = name ? name : disciplina.name;
         disciplina.area_id = area_id ? area_id : disciplina.area_id;
         disciplina.sigla = sigla ? sigla : disciplina.sigla;
+        disciplina.instituicao_id = instituicao_id
+            ? instituicao_id
+            : disciplina.instituicao_id;
 
         await repo.save(disciplina);
 

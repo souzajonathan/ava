@@ -7,12 +7,22 @@ type PerfilRequest = {
     ppc_id: string;
     perfil: string;
     perfilNumero: number;
+    instituicao_id: string;
 };
 
 export class CreatePerfilService {
-    async execute({ ppc_id, perfil, perfilNumero }: PerfilRequest) {
+    async execute({
+        ppc_id,
+        perfil,
+        perfilNumero,
+        instituicao_id,
+    }: PerfilRequest) {
         if (!validate(ppc_id)) {
             return new Error("ID de PPC inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         if (!perfil) {
@@ -42,6 +52,7 @@ export class CreatePerfilService {
             ppc_id,
             perfil,
             perfilNumero,
+            instituicao_id,
         });
 
         await repo.save(perfilEgresso);

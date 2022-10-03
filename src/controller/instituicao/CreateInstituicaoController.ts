@@ -3,7 +3,7 @@ import { CreateInstituicaoService } from "../../services/instituicao/CreateInsti
 
 export class CreateInstituicaoController {
     async handle(request: Request, response: Response) {
-        const { name, sigla, link, inst_default } = request.body;
+        const { name, sigla, link, padrao, description } = request.body;
 
         const service = new CreateInstituicaoService();
 
@@ -11,7 +11,8 @@ export class CreateInstituicaoController {
             name,
             sigla,
             link,
-            inst_default,
+            description,
+            padrao,
         });
 
         if (result instanceof Error) {

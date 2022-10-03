@@ -37,6 +37,18 @@ export class CreateCursos1651171158299 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()",
                     },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
+                ],
+                foreignKeys: [
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
+                    },
                 ],
             })
         );

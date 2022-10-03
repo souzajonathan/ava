@@ -28,7 +28,11 @@ export class CreateInstituicoes1664482318057 implements MigrationInterface {
                         isUnique: true,
                     },
                     {
-                        name: "inst_default",
+                        name: "description",
+                        type: "varchar",
+                    },
+                    {
+                        name: "padrao",
                         type: "boolean",
                         isNullable: true,
                     },

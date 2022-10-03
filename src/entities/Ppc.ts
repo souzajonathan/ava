@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { CompetenciasHabilidades } from "./CompetenciasHabilidades";
 import { Curso } from "./Curso";
+import { Instituicao } from "./Instituicao";
 import { PerfisEgresso } from "./PerfisEgresso";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
@@ -60,4 +61,11 @@ export class Ppc {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @Column("uuid")
+    instituicao_id: string;
+
+    @ManyToOne(() => Instituicao)
+    @JoinColumn({ name: "instituicao_id" })
+    instituicao: Instituicao;
 }

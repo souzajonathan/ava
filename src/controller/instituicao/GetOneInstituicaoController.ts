@@ -14,4 +14,12 @@ export class GetOneInstituicaoController {
 
         return response.json(instituicao);
     }
+
+    async handleInstituicaoDefault(request: Request, response: Response) {
+        const service = new GetOneInstituicaoService();
+
+        const instituicao = await service.instituicaoDefault();
+
+        return response.json(instituicao);
+    }
 }

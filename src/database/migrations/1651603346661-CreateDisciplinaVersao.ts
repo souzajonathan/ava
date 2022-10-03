@@ -1,7 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
@@ -9,64 +8,74 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
                 name: "disciplina_versao",
                 columns: [
                     {
-                        name: 'id',
-                        type: 'uuid',
+                        name: "id",
+                        type: "uuid",
                         isPrimary: true,
-                        generationStrategy: 'uuid',
-                        default: 'uuid_generate_v4()'
+                        generationStrategy: "uuid",
+                        default: "uuid_generate_v4()",
                     },
                     {
                         name: "disciplina_versao_nome",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "codigo",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "credito_quantidade",
-                        type: "int"
+                        type: "int",
                     },
                     {
                         name: "ementa",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "observacao",
                         type: "varchar",
-                        isNullable: true
+                        isNullable: true,
                     },
                     {
                         name: "em_oferta",
-                        type: "boolean"
+                        type: "boolean",
                     },
                     {
                         name: "produzido",
-                        type: "boolean"
+                        type: "boolean",
                     },
                     {
                         name: "disciplina_id",
-                        type: "uuid"
+                        type: "uuid",
                     },
                     {
                         name: "created_at",
                         type: "timestamp",
-                        default: "now()"
+                        default: "now()",
                     },
                     {
                         name: "updated_at",
                         type: "timestamp",
-                        default: "now()"
-                    }
+                        default: "now()",
+                    },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
                         name: "fk_disciplina",
                         columnNames: ["disciplina_id"],
                         referencedTableName: "disciplinas",
-                        referencedColumnNames: ["id"]
-                    }
-                ]
+                        referencedColumnNames: ["id"],
+                    },
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
+                    },
+                ],
             })
         );
     }
@@ -74,5 +83,4 @@ export class CreateDisciplinaVersao1651603346661 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.dropTable("disciplina_versao");
     }
-
 }

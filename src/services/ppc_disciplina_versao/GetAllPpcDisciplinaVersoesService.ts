@@ -1,10 +1,19 @@
-import { getRepository } from "typeorm";
+import { FindConditions, getRepository } from "typeorm";
 import { validate } from "uuid";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 export class GetAllPpcDisciplinaVersoesService {
-    async execute() {
+    async execute(instituicao_id?: string) {
         const repo = getRepository(PpcDisciplinaVersao);
+
+        const where: FindConditions<PpcDisciplinaVersao> = {};
+
+        if (instituicao_id) {
+            if (!validate(instituicao_id)) {
+                return new Error("ID de instituição inválido");
+            }
+            where.instituicao_id = instituicao_id;
+        }
 
         const ppcDisciplinaVersoes = await repo.find({
             relations: ["ppc", "versoes", "perfis", "competencias"],
@@ -13,11 +22,20 @@ export class GetAllPpcDisciplinaVersoesService {
         return ppcDisciplinaVersoes;
     }
 
-    async findByPerfil(perfil_id: string) {
+    async findByPerfil(perfil_id: string, instituicao_id?: string) {
         if (!validate(perfil_id)) {
             return new Error("ID inválido");
         }
         const repo = getRepository(PpcDisciplinaVersao);
+
+        const where: FindConditions<PpcDisciplinaVersao> = {};
+
+        if (instituicao_id) {
+            if (!validate(instituicao_id)) {
+                return new Error("ID de instituição inválido");
+            }
+            where.instituicao_id = instituicao_id;
+        }
 
         const ppcDisciplinaVersoes = await repo
             .createQueryBuilder("pcdv")
@@ -36,11 +54,20 @@ export class GetAllPpcDisciplinaVersoesService {
         return ppcDisciplinaVersoes;
     }
 
-    async findByCompetencia(competencia_id: string) {
+    async findByCompetencia(competencia_id: string, instituicao_id?: string) {
         if (!validate(competencia_id)) {
             return new Error("ID inválido");
         }
         const repo = getRepository(PpcDisciplinaVersao);
+
+        const where: FindConditions<PpcDisciplinaVersao> = {};
+
+        if (instituicao_id) {
+            if (!validate(instituicao_id)) {
+                return new Error("ID de instituição inválido");
+            }
+            where.instituicao_id = instituicao_id;
+        }
 
         const ppcDisciplinaVersoes = await repo
             .createQueryBuilder("pcdv")

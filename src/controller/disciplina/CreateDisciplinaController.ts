@@ -2,15 +2,16 @@ import { Request, Response } from "express";
 import { CreateDisciplinaService } from "../../services/disciplina/CreateDisciplinaService";
 
 export class CreateDisciplinaController {
-    async handle (request: Request, response: Response) {
-        const {name, area_id, sigla} = request.body;
+    async handle(request: Request, response: Response) {
+        const { name, area_id, sigla, instituicao_id } = request.body;
 
         const service = new CreateDisciplinaService();
 
         const result = await service.execute({
             name,
             area_id,
-            sigla
+            sigla,
+            instituicao_id,
         });
 
         if (result instanceof Error) {

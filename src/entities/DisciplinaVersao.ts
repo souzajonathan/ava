@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { Bibliografia } from "./Bibliografia";
 import { Disciplina } from "./Disciplina";
+import { Instituicao } from "./Instituicao";
 import { Pedido } from "./Pedido";
 import { PpcDisciplinaVersao } from "./PpcDisciplinaVersao";
 
@@ -63,4 +64,11 @@ export class DisciplinaVersao {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @Column("uuid")
+    instituicao_id: string;
+
+    @ManyToOne(() => Instituicao)
+    @JoinColumn({ name: "instituicao_id" })
+    instituicao: Instituicao;
 }

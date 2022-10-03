@@ -7,10 +7,11 @@ type DisciplinaRequest = {
     name: string;
     area_id: string;
     sigla: string;
+    instituicao_id: string;
 };
 
 export class CreateDisciplinaService {
-    async execute({ name, area_id, sigla }: DisciplinaRequest) {
+    async execute({ name, area_id, sigla, instituicao_id }: DisciplinaRequest) {
         if (!name) {
             return new Error("Nome de disciplina é obrigatório");
         }
@@ -21,6 +22,10 @@ export class CreateDisciplinaService {
 
         if (!validate(area_id)) {
             return new Error("ID de área inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repoArea = getRepository(Area);
@@ -37,7 +42,12 @@ export class CreateDisciplinaService {
             return new Error("Sigla já existe!");
         }
 
-        const disciplina = repo.create({ name, area_id, sigla });
+        const disciplina = repo.create({
+            name,
+            area_id,
+            sigla,
+            instituicao_id,
+        });
 
         await repo.save(disciplina);
 

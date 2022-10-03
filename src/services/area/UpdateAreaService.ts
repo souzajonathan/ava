@@ -6,12 +6,22 @@ type AreaUpdateRequest = {
     id: string;
     name: string;
     description: string;
+    instituicao_id: string;
 };
 
 export class UpdateAreaService {
-    async execute({ id, name, description }: AreaUpdateRequest) {
+    async execute({
+        id,
+        name,
+        description,
+        instituicao_id,
+    }: AreaUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
+        }
+
+        if (instituicao_id && !validate(id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(Area);
@@ -27,6 +37,9 @@ export class UpdateAreaService {
 
         area.name = name ? name : area.name;
         area.description = description ? description : area.description;
+        area.instituicao_id = instituicao_id
+            ? instituicao_id
+            : area.instituicao_id;
 
         await repo.save(area);
 

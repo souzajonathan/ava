@@ -11,6 +11,7 @@ type DisciplinaVersaoRequest = {
     observacao: string;
     em_oferta: boolean;
     produzido: boolean;
+    instituicao_id: string;
 };
 
 export class CreateDisciplinaVersaoService {
@@ -22,9 +23,14 @@ export class CreateDisciplinaVersaoService {
         observacao,
         em_oferta,
         produzido,
+        instituicao_id,
     }: DisciplinaVersaoRequest) {
         if (!disciplina_id) {
             return new Error("ID de disciplina é obrigatório");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         if (!codigo) {
@@ -76,6 +82,7 @@ export class CreateDisciplinaVersaoService {
             observacao,
             em_oferta,
             produzido,
+            instituicao_id,
         });
 
         await repo.save(disciplinaVersao);

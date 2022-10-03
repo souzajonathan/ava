@@ -5,7 +5,10 @@ export class GetAllAreasController {
     async handle(request: Request, response: Response) {
         const service = new GetAllAreasService();
 
-        const areas = await service.execute(request.query);
+        const areas = await service.execute(
+            request.query,
+            request.query?.instituicao_id as string
+        );
 
         return response.json(areas);
     }

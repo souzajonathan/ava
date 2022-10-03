@@ -7,6 +7,7 @@ type CompetenciaRequest = {
     ppc_id: string;
     competencia: string;
     competenciaNumero: number;
+    instituicao_id: string;
 };
 
 export class CreateCompetenciaService {
@@ -14,9 +15,14 @@ export class CreateCompetenciaService {
         ppc_id,
         competencia,
         competenciaNumero,
+        instituicao_id,
     }: CompetenciaRequest) {
         if (!validate(ppc_id)) {
             return new Error("ID de PPC inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         if (!competencia) {
@@ -48,6 +54,7 @@ export class CreateCompetenciaService {
             ppc_id,
             competencia,
             competenciaNumero,
+            instituicao_id,
         });
 
         await repo.save(competHabilidades);

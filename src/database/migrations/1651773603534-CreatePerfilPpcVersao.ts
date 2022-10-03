@@ -1,7 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.createTable(
             new Table({
@@ -10,23 +9,27 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                     {
                         name: "perfil_id",
                         type: "uuid",
-                        isPrimary: true
+                        isPrimary: true,
                     },
                     {
                         name: "ppc_disciplina_versao_id",
                         type: "uuid",
-                        isPrimary: true
+                        isPrimary: true,
                     },
                     {
                         name: "created_at",
                         type: "timestamp",
-                        default: "now()"
+                        default: "now()",
                     },
                     {
                         name: "updated_at",
                         type: "timestamp",
-                        default: "now()"
-                    }
+                        default: "now()",
+                    },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
@@ -34,16 +37,22 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                         columnNames: ["perfil_id"],
                         referencedTableName: "perfis_egresso",
                         referencedColumnNames: ["id"],
-                        onDelete: "CASCADE"
+                        onDelete: "CASCADE",
                     },
                     {
                         name: "fk_ppc_disciplina_versao",
                         columnNames: ["ppc_disciplina_versao_id"],
                         referencedTableName: "ppc_disciplina_versao",
                         referencedColumnNames: ["id"],
-                        onDelete: "CASCADE"
-                    }
-                ]
+                        onDelete: "CASCADE",
+                    },
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
+                    },
+                ],
             })
         );
     }
@@ -51,5 +60,4 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.dropTable("perfil_ppc_versao");
     }
-
 }

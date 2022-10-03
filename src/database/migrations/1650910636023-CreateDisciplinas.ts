@@ -1,7 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateDisciplinas1650910636023 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
@@ -9,44 +8,48 @@ export class CreateDisciplinas1650910636023 implements MigrationInterface {
                 name: "disciplinas",
                 columns: [
                     {
-                        name: 'id',
-                        type: 'uuid',
+                        name: "id",
+                        type: "uuid",
                         isPrimary: true,
-                        generationStrategy: 'uuid',
-                        default: 'uuid_generate_v4()'
+                        generationStrategy: "uuid",
+                        default: "uuid_generate_v4()",
                     },
                     {
                         name: "name",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "area_id",
-                        type: "uuid"
+                        type: "uuid",
                     },
                     {
                         name: "sigla",
                         type: "varchar",
-                        isUnique: true
+                        isUnique: true,
                     },
                     {
                         name: "created_at",
                         type: "timestamp",
-                        default: "now()"
+                        default: "now()",
                     },
                     {
                         name: "updated_at",
                         type: "timestamp",
-                        default: "now()"
-                    }
+                        default: "now()",
+                    },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_disciplinas_area",
-                        columnNames: ["area_id"],
-                        referencedTableName: "areas",
-                        referencedColumnNames: ["id"]
-                    }
-                ]
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
+                    },
+                ],
             })
         );
     }
@@ -54,5 +57,4 @@ export class CreateDisciplinas1650910636023 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.dropTable("disciplinas");
     }
-
 }

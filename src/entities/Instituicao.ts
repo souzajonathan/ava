@@ -20,8 +20,11 @@ export class Instituicao {
     @Column()
     link: string;
 
+    @Column()
+    description: string;
+
     @Column("boolean")
-    inst_default: boolean;
+    padrao: boolean;
 
     @CreateDateColumn()
     created_at: Date;

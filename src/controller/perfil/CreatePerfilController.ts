@@ -2,15 +2,16 @@ import { Request, Response } from "express";
 import { CreatePerfilService } from "../../services/perfil/CreatePerfilService";
 
 export class CreatePerfilController {
-    async handle (request: Request, response: Response) {
-        const { ppc_id, perfil, perfilNumero } = request.body;
+    async handle(request: Request, response: Response) {
+        const { ppc_id, perfil, perfilNumero, instituicao_id } = request.body;
 
         const service = new CreatePerfilService();
 
         const result = await service.execute({
             ppc_id,
             perfil,
-            perfilNumero
+            perfilNumero,
+            instituicao_id,
         });
 
         if (result instanceof Error) {

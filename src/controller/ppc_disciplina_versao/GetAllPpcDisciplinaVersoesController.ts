@@ -5,7 +5,9 @@ export class GetAllPpcDisciplinaVersoesController {
     async handle(request: Request, response: Response) {
         const service = new GetAllPpcDisciplinaVersoesService();
 
-        const ppcDisciplinaVersoes = await service.execute();
+        const ppcDisciplinaVersoes = await service.execute(
+            request.query?.instituicao_id as string
+        );
 
         return response.json(ppcDisciplinaVersoes);
     }
@@ -14,7 +16,10 @@ export class GetAllPpcDisciplinaVersoesController {
         const service = new GetAllPpcDisciplinaVersoesService();
         const { perfil_id } = request.params;
 
-        const ppcDisciplinaVersoes = await service.findByPerfil(perfil_id);
+        const ppcDisciplinaVersoes = await service.findByPerfil(
+            perfil_id,
+            request.query?.instituicao_id as string
+        );
 
         if (ppcDisciplinaVersoes instanceof Error) {
             return response.status(400).json(ppcDisciplinaVersoes.message);
@@ -28,7 +33,8 @@ export class GetAllPpcDisciplinaVersoesController {
         const { competencia_id } = request.params;
 
         const ppcDisciplinaVersoes = await service.findByCompetencia(
-            competencia_id
+            competencia_id,
+            request.query?.instituicao_id as string
         );
 
         if (ppcDisciplinaVersoes instanceof Error) {

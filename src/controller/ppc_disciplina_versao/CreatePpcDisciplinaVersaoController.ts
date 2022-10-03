@@ -10,6 +10,7 @@ export class CreatePpcDisciplinaVersaoController {
             semestre,
             competencias_id,
             perfis_id,
+            instituicao_id,
         } = request.body;
 
         const service = new CreatePpcDisciplinaVersaoService();
@@ -21,6 +22,7 @@ export class CreatePpcDisciplinaVersaoController {
             semestre,
             competencias_id,
             perfis_id,
+            instituicao_id,
         });
 
         if (result instanceof Error) {

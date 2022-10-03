@@ -26,6 +26,7 @@ type PpcRequest = {
     ppc_ativo: boolean;
     competencias?: Competencia[];
     perfis?: Perfil[];
+    instituicao_id: string;
 };
 
 export class CreatePpcService {
@@ -40,9 +41,14 @@ export class CreatePpcService {
         active,
         competencias,
         perfis,
+        instituicao_id,
     }: PpcRequest) {
         if (!validate(curso_id)) {
             return new Error("ID de curso inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         if (!dataInicio) {
@@ -86,6 +92,7 @@ export class CreatePpcService {
             horaCredito,
             quantSemestres,
             ppc_ativo,
+            instituicao_id,
         });
         await repo.save(ppc);
 
@@ -102,6 +109,7 @@ export class CreatePpcService {
                     ppc_id: ppc.id,
                     competencia: competencia.competencia,
                     competenciaNumero: competencia.competenciaNumero,
+                    instituicao_id: instituicao_id,
                 });
 
                 if (result instanceof Error) {
@@ -118,6 +126,7 @@ export class CreatePpcService {
                     ppc_id: ppc.id,
                     perfil: perfil.perfil,
                     perfilNumero: perfil.perfilNumero,
+                    instituicao_id: instituicao_id,
                 });
 
                 if (result instanceof Error) {

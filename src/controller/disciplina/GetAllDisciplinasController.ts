@@ -5,7 +5,11 @@ export class GetAllDisciplinasController {
     async handle(request: Request, response: Response) {
         const service = new GetAllDisciplinasService();
 
-        const disciplinas = await service.execute(request.query, request.query?.area_id as string);
+        const disciplinas = await service.execute(
+            request.query,
+            request.query?.area_id as string,
+            request.query?.instituicao_id as string
+        );
 
         return response.json(disciplinas);
     }

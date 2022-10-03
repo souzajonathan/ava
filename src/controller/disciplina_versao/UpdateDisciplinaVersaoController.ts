@@ -11,7 +11,8 @@ export class UpdateDisciplinaVersaoController {
             ementa,
             observacao,
             em_oferta,
-            produzido
+            produzido,
+            instituicao_id,
         } = request.body;
 
         const service = new UpdateDisciplinaVersaoService();
@@ -24,13 +25,14 @@ export class UpdateDisciplinaVersaoController {
             ementa,
             observacao,
             em_oferta,
-            produzido
+            produzido,
+            instituicao_id,
         });
 
-        if(result instanceof Error) {
+        if (result instanceof Error) {
             return response.status(400).json(result.message);
         }
-        
+
         return response.json(result);
     }
 }

@@ -5,7 +5,9 @@ export class GetAllCompetenciasController {
     async handle(request: Request, response: Response) {
         const service = new GetAllCompetenciasService();
 
-        const competencias = await service.execute();
+        const competencias = await service.execute(
+            request.query?.instituicao_id as string
+        );
 
         return response.json(competencias);
     }

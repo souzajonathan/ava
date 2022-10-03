@@ -1,7 +1,6 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreatePerfisEgresso1651175844642 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
@@ -9,34 +8,38 @@ export class CreatePerfisEgresso1651175844642 implements MigrationInterface {
                 name: "perfis_egresso",
                 columns: [
                     {
-                        name: 'id',
-                        type: 'uuid',
+                        name: "id",
+                        type: "uuid",
                         isPrimary: true,
-                        generationStrategy: 'uuid',
-                        default: 'uuid_generate_v4()'
+                        generationStrategy: "uuid",
+                        default: "uuid_generate_v4()",
                     },
                     {
                         name: "perfilNumero",
-                        type: "int"
+                        type: "int",
                     },
                     {
                         name: "perfil",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "ppc_id",
-                        type: "uuid"
+                        type: "uuid",
                     },
                     {
                         name: "created_at",
                         type: "timestamp",
-                        default: "now()"
+                        default: "now()",
                     },
                     {
                         name: "updated_at",
                         type: "timestamp",
-                        default: "now()"
-                    }
+                        default: "now()",
+                    },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
@@ -44,9 +47,15 @@ export class CreatePerfisEgresso1651175844642 implements MigrationInterface {
                         columnNames: ["ppc_id"],
                         referencedTableName: "ppcs",
                         referencedColumnNames: ["id"],
-                        onDelete: 'CASCADE'
-                    }
-                ]
+                        onDelete: "CASCADE",
+                    },
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
+                    },
+                ],
             })
         );
     }
@@ -54,5 +63,4 @@ export class CreatePerfisEgresso1651175844642 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.dropTable("perfis_egresso");
     }
-
 }

@@ -18,4 +18,16 @@ export class GetOneInstituicaoService {
 
         return instituicao;
     }
+
+    async instituicaoDefault() {
+        const repo = getRepository(Instituicao);
+
+        const instituicao = await repo.findOne({ padrao: true });
+
+        if (instituicao) {
+            return instituicao;
+        } else {
+            return null;
+        }
+    }
 }

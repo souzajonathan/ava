@@ -8,10 +8,17 @@ type CursoUpdateRequest = {
     name: string;
     ppc_ativo: string;
     active: boolean;
+    instituicao_id: string;
 };
 
 export class UpdateCursoService {
-    async execute({ id, name, ppc_ativo, active }: CursoUpdateRequest) {
+    async execute({
+        id,
+        name,
+        ppc_ativo,
+        active,
+        instituicao_id,
+    }: CursoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
@@ -22,6 +29,10 @@ export class UpdateCursoService {
 
         if (ppc_ativo && !validate(ppc_ativo)) {
             return new Error("ID de ppc inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(Curso);
@@ -41,6 +52,9 @@ export class UpdateCursoService {
         if (active != undefined && active != null) {
             curso.active = active;
         }
+        curso.instituicao_id = instituicao_id
+            ? instituicao_id
+            : curso.instituicao_id;
 
         await repo.save(curso);
 

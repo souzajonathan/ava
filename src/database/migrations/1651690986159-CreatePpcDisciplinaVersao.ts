@@ -42,6 +42,10 @@ export class CreatePpcDisciplinaVersao1651690986159
                         type: "timestamp",
                         default: "now()",
                     },
+                    {
+                        name: "instituicao_id",
+                        type: "uuid",
+                    },
                 ],
                 foreignKeys: [
                     {
@@ -57,6 +61,12 @@ export class CreatePpcDisciplinaVersao1651690986159
                         referencedTableName: "disciplina_versao",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
+                    },
+                    {
+                        name: "fk_instituicao",
+                        columnNames: ["instituicao_id"],
+                        referencedTableName: "instituicoes",
+                        referencedColumnNames: ["id"],
                     },
                 ],
             })
