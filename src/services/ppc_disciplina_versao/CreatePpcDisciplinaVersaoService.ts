@@ -110,7 +110,6 @@ export class CreatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersaoCreated.perfis = perfis;
-            ppcDisciplinaVersaoCreated.instituicao_id = instituicao_id;
 
             ppcDisciplinaVersaoCreated = await repo.save(
                 ppcDisciplinaVersaoCreated
@@ -129,7 +128,6 @@ export class CreatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersaoCreated.competencias = competencias;
-            ppcDisciplinaVersaoCreated.instituicao_id = instituicao_id;
 
             ppcDisciplinaVersaoCreated = await repo.save(
                 ppcDisciplinaVersaoCreated

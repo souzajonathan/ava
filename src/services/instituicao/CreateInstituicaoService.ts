@@ -67,11 +67,11 @@ export class CreateInstituicaoService {
         connection.transaction(async (manager) => {
             const repom = manager.getRepository(Instituicao);
 
-            await repom.save(pesquisa);
+            if (pesquisa) {
+                await repom.save(pesquisa);
+            }
 
-            await repom.save(instituicao);
+            return await repom.save(instituicao);
         });
-
-        return instituicao;
     }
 }

@@ -336,12 +336,12 @@ routes.delete(
 
 routes.post("/instituicoes", new CreateInstituicaoController().handle);
 routes.put("/instituicoes/:id", new UpdateInstituicaoController().handle);
-routes.get("/instituicoes/:id", new GetOneInstituicaoController().handle);
-routes.get("/instituicoes", new GetAllInstituicoesController().handle);
-routes.delete("/instituicoes/:id", new DeleteInstituicaoController().handle);
 routes.get(
     "/instituicoes/default/",
     new GetOneInstituicaoController().handleInstituicaoDefault
 );
+routes.get("/instituicoes/:id", new GetOneInstituicaoController().handle);
+routes.get("/instituicoes", new GetAllInstituicoesController().handle);
+routes.delete("/instituicoes/:id", new DeleteInstituicaoController().handle);
 
 export { routes };

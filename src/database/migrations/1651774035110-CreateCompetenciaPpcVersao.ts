@@ -28,10 +28,6 @@ export class CreateCompetenciaPpcVersao1651774035110
                         type: "timestamp",
                         default: "now()",
                     },
-                    {
-                        name: "instituicao_id",
-                        type: "uuid",
-                    },
                 ],
                 foreignKeys: [
                     {
@@ -47,12 +43,6 @@ export class CreateCompetenciaPpcVersao1651774035110
                         referencedTableName: "ppc_disciplina_versao",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
-                    },
-                    {
-                        name: "fk_instituicao",
-                        columnNames: ["instituicao_id"],
-                        referencedTableName: "instituicoes",
-                        referencedColumnNames: ["id"],
                     },
                 ],
             })

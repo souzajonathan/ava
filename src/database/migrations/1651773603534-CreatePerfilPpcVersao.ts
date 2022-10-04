@@ -26,10 +26,6 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()",
                     },
-                    {
-                        name: "instituicao_id",
-                        type: "uuid",
-                    },
                 ],
                 foreignKeys: [
                     {
@@ -45,12 +41,6 @@ export class CreatePerfilPpcVersao1651773603534 implements MigrationInterface {
                         referencedTableName: "ppc_disciplina_versao",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
-                    },
-                    {
-                        name: "fk_instituicao",
-                        columnNames: ["instituicao_id"],
-                        referencedTableName: "instituicoes",
-                        referencedColumnNames: ["id"],
                     },
                 ],
             })
