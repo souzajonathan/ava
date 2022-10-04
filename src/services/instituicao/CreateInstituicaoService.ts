@@ -64,7 +64,7 @@ export class CreateInstituicaoService {
             padrao,
         });
 
-        connection.transaction(async (manager) => {
+        return connection.transaction(async (manager) => {
             const repom = manager.getRepository(Instituicao);
 
             if (pesquisa) {

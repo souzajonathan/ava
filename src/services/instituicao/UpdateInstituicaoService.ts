@@ -45,15 +45,19 @@ export class UpdateInstituicaoService {
             return new Error("Sigla já existe!");
         }
 
+        if (padrao === true) {
+            const pesquisa = await repo.findOne({ padrao: true });
+            pesquisa.padrao = false;
+            instituicao.padrao = true;
+            await repo.save(pesquisa);
+        }
+
         instituicao.name = name ? name : instituicao.name;
         instituicao.sigla = sigla ? sigla : instituicao.sigla;
         instituicao.description = description
             ? description
             : instituicao.description;
         instituicao.link = link ? link : instituicao.link;
-        if (padrao != undefined && padrao != null) {
-            instituicao.padrao = padrao;
-        }
 
         await repo.save(instituicao);
 
