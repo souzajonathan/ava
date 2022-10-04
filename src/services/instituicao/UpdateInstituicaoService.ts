@@ -1,4 +1,4 @@
-import { getRepository } from "typeorm";
+import { getRepository, getConnection } from "typeorm";
 import { validate } from "uuid";
 import { Instituicao } from "../../entities/Instituicao";
 
@@ -45,11 +45,10 @@ export class UpdateInstituicaoService {
             return new Error("Sigla já existe!");
         }
 
+        const pesquisa = await repo.findOne({ padrao: true });
         if (padrao === true) {
-            const pesquisa = await repo.findOne({ padrao: true });
             pesquisa.padrao = false;
             instituicao.padrao = true;
-            await repo.save(pesquisa);
         }
 
         instituicao.name = name ? name : instituicao.name;
@@ -59,7 +58,16 @@ export class UpdateInstituicaoService {
             : instituicao.description;
         instituicao.link = link ? link : instituicao.link;
 
-        await repo.save(instituicao);
+        const connection = getConnection();
+        connection.transaction(async (manager) => {
+            const repom = manager.getRepository(Instituicao);
+
+            if (padrao === true) {
+                await repom.save(pesquisa);
+            }
+
+            await repom.save(instituicao);
+        });
 
         return instituicao;
     }

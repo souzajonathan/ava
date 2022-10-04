@@ -54,8 +54,6 @@ export class CreateInstituicaoService {
             }
         }
 
-        const connection = getConnection();
-
         const instituicao = repo.create({
             name,
             sigla,
@@ -64,6 +62,7 @@ export class CreateInstituicaoService {
             padrao,
         });
 
+        const connection = getConnection();
         return connection.transaction(async (manager) => {
             const repom = manager.getRepository(Instituicao);
 

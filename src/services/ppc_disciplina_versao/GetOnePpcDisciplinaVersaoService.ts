@@ -4,14 +4,14 @@ import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 export class GetOnePpcDisciplinaVersaoService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.findOne(id, {
-            relations: ["ppc", "versoes", "perfis", "competencias"]
+            relations: ["ppc", "versoes", "perfis", "competencias"],
         });
 
         if (!ppcDisciplinaVersao) {
