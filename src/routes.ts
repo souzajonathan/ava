@@ -340,7 +340,7 @@ routes.get(
     "/instituicoes/default/",
     new GetOneInstituicaoController().handleInstituicaoDefault
 );
-routes.get("/instituicoes/:id", new GetOneInstituicaoController().handle);
+routes.get("/instituicao/:id", new GetOneInstituicaoController().handle);
 routes.get("/instituicoes", new GetAllInstituicoesController().handle);
 routes.delete("/instituicoes/:id", new DeleteInstituicaoController().handle);
 
