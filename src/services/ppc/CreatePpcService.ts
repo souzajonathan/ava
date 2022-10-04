@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
+import { Instituicao } from "../../entities/Instituicao";
 import { Ppc } from "../../entities/Ppc";
 import { CreateCompetenciaService } from "../competencia/CreateCompetenciaService";
 import { CreatePerfilService } from "../perfil/CreatePerfilService";
@@ -75,6 +76,12 @@ export class CreatePpcService {
 
         if (typeof ppc_ativo != "boolean") {
             return new Error("Marcação para 'PPC ativo' inválido");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         const repoCurso = getRepository(Curso);

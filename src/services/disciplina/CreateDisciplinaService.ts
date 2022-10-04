@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Area } from "../../entities/Area";
 import { Disciplina } from "../../entities/Disciplina";
+import { Instituicao } from "../../entities/Instituicao";
 
 type DisciplinaRequest = {
     name: string;
@@ -26,6 +27,12 @@ export class CreateDisciplinaService {
 
         if (!validate(instituicao_id)) {
             return new Error("ID de instituição inválido");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         const repoArea = getRepository(Area);

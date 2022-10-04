@@ -2,6 +2,7 @@ import { getRepository, In } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
+import { Instituicao } from "../../entities/Instituicao";
 import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
@@ -44,6 +45,12 @@ export class CreatePpcDisciplinaVersaoService {
 
         if (!Number.isInteger(semestre)) {
             return new Error("Insira um número válido em semestre");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         let auxP = false;

@@ -6,21 +6,15 @@ import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 type PerfilPpcDisciplinaVersaoRequest = {
     perfil_id: string;
     ppcDisciplinaVersao_id: string;
-    instituicao_id: string;
 };
 
 export class CreatePerfilPpcDisciplinaVersaoService {
     async execute({
         perfil_id,
         ppcDisciplinaVersao_id,
-        instituicao_id,
     }: PerfilPpcDisciplinaVersaoRequest) {
         if (!validate(perfil_id)) {
             return new Error("ID de perfil inválido");
-        }
-
-        if (!validate(instituicao_id)) {
-            return new Error("ID de instituição inválido");
         }
 
         if (!validate(ppcDisciplinaVersao_id)) {
@@ -42,7 +36,6 @@ export class CreatePerfilPpcDisciplinaVersaoService {
         }
 
         ppcDisciplinaVersao.perfis = [...ppcDisciplinaVersao.perfis, perfil];
-        ppcDisciplinaVersao.instituicao_id = instituicao_id;
 
         await repo.save(ppcDisciplinaVersao);
 

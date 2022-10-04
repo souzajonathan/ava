@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
+import { Instituicao } from "../../entities/Instituicao";
 import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 
@@ -25,6 +26,14 @@ export class UpdatePerfilService {
 
         if (instituicao_id && !validate(instituicao_id)) {
             return new Error("ID de instituição inválido");
+        }
+
+        if (instituicao_id) {
+            const repoInstituicao = getRepository(Instituicao);
+            const instituicao = await repoInstituicao.findOne(instituicao_id);
+            if (!instituicao) {
+                return new Error("Instituição não existe!");
+            }
         }
 
         if (ppc_id && !validate(ppc_id)) {

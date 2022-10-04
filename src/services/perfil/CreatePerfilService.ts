@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
+import { Instituicao } from "../../entities/Instituicao";
 import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 
@@ -31,6 +32,12 @@ export class CreatePerfilService {
 
         if (!Number.isInteger(perfilNumero)) {
             return new Error("Insira um número válido em 'número de perfil'");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         const repo = getRepository(PerfisEgresso);

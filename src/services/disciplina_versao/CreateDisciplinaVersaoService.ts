@@ -2,6 +2,7 @@ import { FindConditions, getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
+import { Instituicao } from "../../entities/Instituicao";
 
 type DisciplinaVersaoRequest = {
     disciplina_id: string;
@@ -53,6 +54,12 @@ export class CreateDisciplinaVersaoService {
 
         if (typeof produzido != "boolean") {
             return new Error("Marcação para 'produzido' inválida");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         if (!validate(disciplina_id)) {

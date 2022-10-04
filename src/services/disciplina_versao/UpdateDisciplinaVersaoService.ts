@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
+import { Instituicao } from "../../entities/Instituicao";
 
 type DisciplinaVersaoUpdateRequest = {
     id: string;
@@ -37,6 +38,14 @@ export class UpdateDisciplinaVersaoService {
 
         if (instituicao_id && !validate(instituicao_id)) {
             return new Error("ID de instituição inválido");
+        }
+
+        if (instituicao_id) {
+            const repoInstituicao = getRepository(Instituicao);
+            const instituicao = await repoInstituicao.findOne(instituicao_id);
+            if (!instituicao) {
+                return new Error("Instituição não existe!");
+            }
         }
 
         if (credito_quantidade && !Number.isInteger(credito_quantidade)) {

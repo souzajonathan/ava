@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Area } from "../../entities/Area";
+import { Instituicao } from "../../entities/Instituicao";
 
 type AreaRequest = {
     name: string;
@@ -15,7 +16,13 @@ export class CreateAreaService {
         }
 
         if (!validate(instituicao_id)) {
-            return new Error("ID inválido");
+            return new Error("ID de instituição inválido");
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         const repo = getRepository(Area);

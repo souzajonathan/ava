@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
+import { Instituicao } from "../../entities/Instituicao";
 import { Ppc } from "../../entities/Ppc";
 
 type CompetenciaRequest = {
@@ -33,6 +34,12 @@ export class CreateCompetenciaService {
             return new Error(
                 "Insira um número válido em 'número de competência'"
             );
+        }
+
+        const repoInstituicao = getRepository(Instituicao);
+        const instituicao = await repoInstituicao.findOne(instituicao_id);
+        if (!instituicao) {
+            return new Error("Instituição não existe!");
         }
 
         const repo = getRepository(CompetenciasHabilidades);

@@ -2,6 +2,7 @@ import { getRepository, In } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
+import { Instituicao } from "../../entities/Instituicao";
 import { PerfisEgresso } from "../../entities/PerfisEgresso";
 import { Ppc } from "../../entities/Ppc";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
@@ -32,16 +33,24 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("ID inválido");
         }
 
-        if (!validate(ppc_id)) {
+        if (ppc_id && !validate(ppc_id)) {
             return new Error("ID de PPC inválido");
         }
 
-        if (!validate(disciplina_versao_id)) {
+        if (disciplina_versao_id && !validate(disciplina_versao_id)) {
             return new Error("ID de versão de disciplina inválido");
         }
 
-        if (!validate(instituicao_id)) {
+        if (instituicao_id && !validate(instituicao_id)) {
             return new Error("ID de instituição inválido");
+        }
+
+        if (instituicao_id) {
+            const repoInstituicao = getRepository(Instituicao);
+            const instituicao = await repoInstituicao.findOne(instituicao_id);
+            if (!instituicao) {
+                return new Error("Instituição não existe!");
+            }
         }
 
         if (modulo && !Number.isInteger(modulo)) {

@@ -6,21 +6,15 @@ import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 type CompetenciaPpcDisciplinaVersaoRequest = {
     competencia_id: string;
     ppcDisciplinaVersao_id: string;
-    instituicao_id: string;
 };
 
 export class CreateCompetenciaPpcDisciplinaVersaoService {
     async execute({
         competencia_id,
         ppcDisciplinaVersao_id,
-        instituicao_id,
     }: CompetenciaPpcDisciplinaVersaoRequest) {
         if (!validate(competencia_id)) {
             return new Error("ID de competência inválido");
-        }
-
-        if (!validate(instituicao_id)) {
-            return new Error("ID de instituição inválido");
         }
 
         if (!validate(ppcDisciplinaVersao_id)) {
@@ -45,7 +39,6 @@ export class CreateCompetenciaPpcDisciplinaVersaoService {
             ...ppcDisciplinaVersao.competencias,
             competencia,
         ];
-        ppcDisciplinaVersao.instituicao_id = instituicao_id;
 
         await repo.save(ppcDisciplinaVersao);
 

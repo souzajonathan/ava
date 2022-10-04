@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
+import { Instituicao } from "../../entities/Instituicao";
 import { Ppc } from "../../entities/Ppc";
 import { CreateCompetenciaService } from "../competencia/CreateCompetenciaService";
 import { CreatePerfilService } from "../perfil/CreatePerfilService";
@@ -77,6 +78,18 @@ export class UpdatePpcService {
 
         if (curso_id && !validate(curso_id)) {
             return new Error("ID de curso inválido");
+        }
+
+        if (instituicao_id && !validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
+        }
+
+        if (instituicao_id) {
+            const repoInstituicao = getRepository(Instituicao);
+            const instituicao = await repoInstituicao.findOne(instituicao_id);
+            if (!instituicao) {
+                return new Error("Instituição não existe!");
+            }
         }
 
         const repo = getRepository(Ppc);

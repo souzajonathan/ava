@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
+import { Instituicao } from "../../entities/Instituicao";
 import { Ppc } from "../../entities/Ppc";
 
 type CompetenciaUpdateRequest = {
@@ -29,6 +30,14 @@ export class UpdateCompetenciaService {
 
         if (instituicao_id && !validate(instituicao_id)) {
             return new Error("ID de instituição inválido");
+        }
+
+        if (instituicao_id) {
+            const repoInstituicao = getRepository(Instituicao);
+            const instituicao = await repoInstituicao.findOne(instituicao_id);
+            if (!instituicao) {
+                return new Error("Instituição não existe!");
+            }
         }
 
         if (competenciaNumero && !Number.isInteger(competenciaNumero)) {
