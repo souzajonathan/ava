@@ -8,8 +8,8 @@ import {
 } from "typeorm";
 import { Agente } from "./Agente";
 
-@Entity("usuarios")
-export class Usuario {
+@Entity("funcoes")
+export class Funcao {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -17,9 +17,9 @@ export class Usuario {
     name: string;
 
     @Column()
-    description: string;
+    descricao: string;
 
-    @OneToMany(() => Agente, (agentes) => agentes.usuario)
+    @OneToMany(() => Agente, (agentes) => agentes.funcao)
     agentes: Agente[];
 
     @CreateDateColumn()

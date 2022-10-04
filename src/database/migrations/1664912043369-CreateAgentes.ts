@@ -15,15 +15,15 @@ export class CreateAgentes1664912043369 implements MigrationInterface {
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "ppc_id",
+                        name: "usuario_id",
                         type: "uuid",
                     },
                     {
-                        name: "disciplina_versao_id",
+                        name: "curso_id",
                         type: "uuid",
                     },
                     {
-                        name: "instituicao_id",
+                        name: "funcao_id",
                         type: "uuid",
                     },
                     {
@@ -39,24 +39,25 @@ export class CreateAgentes1664912043369 implements MigrationInterface {
                 ],
                 foreignKeys: [
                     {
-                        name: "fk_ppc",
-                        columnNames: ["ppc_id"],
-                        referencedTableName: "ppcs",
+                        name: "fk_usuario",
+                        columnNames: ["usuario_id"],
+                        referencedTableName: "usuarios",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
                     },
                     {
-                        name: "fk_disciplina_versao_id",
-                        columnNames: ["disciplina_versao_id"],
-                        referencedTableName: "disciplina_versao",
+                        name: "fk_curso",
+                        columnNames: ["curso_id"],
+                        referencedTableName: "cursos",
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
                     },
                     {
-                        name: "fk_instituicao",
-                        columnNames: ["instituicao_id"],
-                        referencedTableName: "instituicoes",
+                        name: "fk_funcao",
+                        columnNames: ["funcao_id"],
+                        referencedTableName: "funcoes",
                         referencedColumnNames: ["id"],
+                        onDelete: "CASCADE",
                     },
                 ],
             })

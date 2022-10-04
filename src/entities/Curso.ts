@@ -8,6 +8,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { Agente } from "./Agente";
 import { Instituicao } from "./Instituicao";
 import { Ppc } from "./Ppc";
 
@@ -40,4 +41,7 @@ export class Curso {
     @ManyToOne(() => Instituicao)
     @JoinColumn({ name: "instituicao_id" })
     instituicao: Instituicao;
+
+    @OneToMany(() => Agente, (agentes) => agentes.curso)
+    agentes: Agente[];
 }
