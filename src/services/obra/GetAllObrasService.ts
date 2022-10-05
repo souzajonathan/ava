@@ -49,7 +49,7 @@ export class GetAllObrasService {
             relations: [
                 "bibliografias",
                 "obrasAutores",
-                "obrasChildren",
+                "obraChildren",
                 "obraParent",
                 "obrasAutores.autores",
             ],

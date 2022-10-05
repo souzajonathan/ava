@@ -1,4 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Bibliografia } from "./Bibliografia";
 import { ObraAutor } from "./ObraAutor";
 
@@ -6,7 +15,7 @@ import { ObraAutor } from "./ObraAutor";
 export class Obra {
     @PrimaryGeneratedColumn("uuid")
     id: string;
-    
+
     @Column()
     item_tipo: string;
 
@@ -30,7 +39,7 @@ export class Obra {
 
     @Column()
     mes: string;
-    
+
     @Column("int")
     dia: number;
 
@@ -75,7 +84,7 @@ export class Obra {
 
     @Column("uuid")
     contido_em: string;
-    
+
     @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
     obrasAutores: ObraAutor[];
 
@@ -83,12 +92,12 @@ export class Obra {
     bibliografias: Bibliografia[];
 
     @ManyToOne(() => Obra)
-    @JoinColumn({name: "contido_em"})
-    obraParent: Obra[];
-    
-    @OneToMany(() => Obra, (obras) => obras.obraParent)
-    obrasChildren: Obra;
-    
+    @JoinColumn({ name: "contido_em" })
+    obraParent: Obra;
+
+    @OneToMany(() => Obra, (obra) => obra.obraParent)
+    obraChildren: Obra[];
+
     @CreateDateColumn()
     created_at: Date;
 

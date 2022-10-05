@@ -4,28 +4,28 @@ import { Obra } from "../../entities/Obra";
 
 export class DeleteObraService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
-        
+
         const repo = getRepository(Obra);
         const obra = await repo.findOne(id, {
-            relations: ["bibliografias", "obrasAutores", "obras"]
+            relations: ["bibliografias", "obrasAutores", "obrasChildren"],
         });
-        
-        if(!obra){
+
+        if (!obra) {
             return new Error("Obra não existe!");
         }
 
-        if(obra.bibliografias.length > 0){
+        if (obra.bibliografias.length > 0) {
             return new Error("Obra com bibliografias cadastradas");
         }
 
-        if(obra.obrasAutores.length > 0){
+        if (obra.obrasAutores.length > 0) {
             return new Error("Obra com autores cadastrados");
         }
 
-        if(obra.obraParent.length > 0){
+        if (obra.obraChildren.length > 0) {
             return new Error("Obra com obras cadastradas");
         }
 
