@@ -7,6 +7,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import { Agente } from "./Agente";
+import { FuncoesRodada } from "./FuncoesRodada";
 
 @Entity("funcoes")
 export class Funcao {
@@ -21,6 +22,9 @@ export class Funcao {
 
     @OneToMany(() => Agente, (agentes) => agentes.funcao)
     agentes: Agente[];
+
+    @OneToMany(() => FuncoesRodada, (funcoes) => funcoes.funcao)
+    funcoesRodadas: FuncoesRodada[];
 
     @CreateDateColumn()
     created_at: Date;

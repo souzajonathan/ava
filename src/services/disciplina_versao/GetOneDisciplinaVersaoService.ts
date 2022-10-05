@@ -24,6 +24,7 @@ export class GetOneDisciplinaVersaoService {
             .leftJoinAndSelect("ppcDisciplinaVersoes.ppc", "ppc")
             .leftJoinAndSelect("ppc.competencias", "competencias")
             .leftJoinAndSelect("ppc.perfis", "perfis")
+            .leftJoinAndSelect("ppc.curso", "curso")
             .getOne();
 
         /* .findOne(id, {
