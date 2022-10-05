@@ -51,7 +51,7 @@ export class GetAllObrasService {
                 "obrasAutores",
                 "obrasChildren",
                 "obraParent",
-                "obraAutores.autores",
+                "obrasAutores.autores",
             ],
             where,
         });
