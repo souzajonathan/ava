@@ -10,7 +10,7 @@ export class DeleteComponentePedidoVersaoService {
 
         const repo = getRepository(ComponentesPedidoVersao);
         const versaoComponente = await repo.findOne(id, {
-            relations: ["versoes"],
+            relations: ["servicos"],
         });
 
         if (!versaoComponente) {
