@@ -33,11 +33,11 @@ export class GetAllPedidosService {
             where.solicitante_id = solicitante_id;
         }
 
-        const versoes = await repo.find({
+        const pedidos = await repo.find({
             relations: ["componentes", "tipoSolicitacao", "DisciplinaVersao"],
             where,
         });
 
-        return versoes;
+        return pedidos;
     }
 }

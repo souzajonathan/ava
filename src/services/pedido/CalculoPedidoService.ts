@@ -22,10 +22,7 @@ export class CalculoPedidoService {
                 "ppc.ppcDisciplinaVersoes",
                 "ppcDisciplinaVersao"
             )
-            .leftJoinAndSelect(
-                "ppcDisciplinaVersao.versoes",
-                "disciplinaVersao"
-            )
+            .leftJoinAndSelect("ppcDisciplinaVersao.versao", "disciplinaVersao")
             .leftJoinAndSelect("disciplinaVersao.disciplina", "Disciplina")
             .leftJoinAndSelect("disciplinaVersao.pedidos", "Pedido")
             .getMany();
@@ -45,7 +42,7 @@ export class CalculoPedidoService {
             case "tem pedidos": {
                 filteredPpcs = ppcs.filter((ppc) => {
                     return ppc.ppcDisciplinaVersoes.some((pdv) => {
-                        return pdv.versoes.pedidos.length > 0;
+                        return pdv.versao.pedidos.length > 0;
                     });
                 });
                 break;
@@ -53,7 +50,7 @@ export class CalculoPedidoService {
             case "nao tem pedidos": {
                 filteredPpcs = ppcs.filter((ppc) => {
                     return ppc.ppcDisciplinaVersoes.some((pdv) => {
-                        return pdv.versoes.pedidos.length === 0;
+                        return pdv.versao.pedidos.length === 0;
                     });
                 });
                 break;
@@ -79,7 +76,7 @@ export class CalculoPedidoService {
             ppc.ppcDisciplinaVersoes.forEach((versao) => {
                 if (versao.modulo <= moduloF && versao.modulo >= moduloI) {
                     disciplinasPedido.push({
-                        ...versao.versoes,
+                        ...versao.versao,
                         modulo: versao.modulo,
                     });
                 }

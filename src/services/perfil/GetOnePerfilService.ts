@@ -4,7 +4,7 @@ import { PerfisEgresso } from "../../entities/PerfisEgresso";
 
 export class GetOnePerfilService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
@@ -13,11 +13,14 @@ export class GetOnePerfilService {
         const perfil = await repo
             .createQueryBuilder("perfil")
             .where({
-                id: id
+                id: id,
             })
             .leftJoinAndSelect("perfil.ppc", "ppc")
-            .leftJoinAndSelect("ppc.ppcDisciplinaVersoes", "ppcDisciplinaVersoes")
-            .leftJoinAndSelect("ppcDisciplinaVersoes.versoes", "versoes")
+            .leftJoinAndSelect(
+                "ppc.ppcDisciplinaVersoes",
+                "ppcDisciplinaVersoes"
+            )
+            .leftJoinAndSelect("ppcDisciplinaVersoes.versao", "versao")
             .getOne();
 
         if (!perfil) {
