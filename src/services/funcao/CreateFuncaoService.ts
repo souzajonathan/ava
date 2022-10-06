@@ -6,7 +6,7 @@ type FuncaoRequest = {
     descricao: string;
 };
 
-export class CreateAreaService {
+export class CreateFuncaoService {
     async execute({ name, descricao }: FuncaoRequest) {
         if (!name) {
             return new Error("Nome de função não inserido");

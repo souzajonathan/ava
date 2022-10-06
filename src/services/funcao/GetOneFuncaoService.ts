@@ -1,23 +1,23 @@
 import { getRepository } from "typeorm";
-import { Area } from "../../entities/Area";
-import { validate} from "uuid";
+import { validate } from "uuid";
+import { Funcao } from "../../entities/Funcao";
 
-export class GetOneAreaService {
+export class GetOneFuncaoService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        const repo = getRepository(Area);
-        
-        const area = await repo.findOne(id, {
-            relations: ["disciplinas"]
+        const repo = getRepository(Funcao);
+
+        const funcao = await repo.findOne(id, {
+            relations: ["agentes", "funcoesRodadas"],
         });
 
-        if (!area) {
-            return new Error("Área não existe!");
+        if (!funcao) {
+            return new Error("Função não existe!");
         }
 
-        return area;
+        return funcao;
     }
 }

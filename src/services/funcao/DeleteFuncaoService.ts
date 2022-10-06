@@ -1,24 +1,28 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { Area } from "../../entities/Area";
+import { Funcao } from "../../entities/Funcao";
 
-export class DeleteAreaService {
+export class DeleteFuncaoService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
-        
-        const repo = getRepository(Area);
-        const area = await repo.findOne(id, {
-            relations: ["disciplinas"]
+
+        const repo = getRepository(Funcao);
+        const funcao = await repo.findOne(id, {
+            relations: ["agentes", "funcoesRodadas"],
         });
-        
-        if(!area){
-            return new Error("Área não existe!");
+
+        if (!funcao) {
+            return new Error("Função não existe!");
         }
 
-        if(area.disciplinas.length > 0){
-            return new Error("Área com disciplinas cadastradas");
+        if (funcao.agentes.length > 0) {
+            return new Error("Função com agentes cadastrados");
+        }
+
+        if (funcao.funcoesRodadas.length > 0) {
+            return new Error("Função com rodadas de aprovação cadastradas");
         }
 
         await repo.delete(id);

@@ -1,57 +1,35 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { Area } from "../../entities/Area";
-import { Instituicao } from "../../entities/Instituicao";
+import { Funcao } from "../../entities/Funcao";
 
-type AreaUpdateRequest = {
+type FuncaoUpdateRequest = {
     id: string;
     name: string;
-    description: string;
-    instituicao_id: string;
+    descricao: string;
 };
 
-export class UpdateAreaService {
-    async execute({
-        id,
-        name,
-        description,
-        instituicao_id,
-    }: AreaUpdateRequest) {
+export class UpdateFuncaoService {
+    async execute({ id, name, descricao }: FuncaoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if (instituicao_id && !validate(id)) {
-            return new Error("ID de instituição inválido");
+        const repo = getRepository(Funcao);
+        const funcao = await repo.findOne(id);
+        if (!funcao) {
+            return new Error("Função não existe!");
         }
 
-        if (instituicao_id) {
-            const repoInstituicao = getRepository(Instituicao);
-            const instituicao = await repoInstituicao.findOne(instituicao_id);
-            if (!instituicao) {
-                return new Error("Instituição não existe!");
-            }
+        const funcaoAlreadyExists = await repo.findOne({ name });
+        if (funcaoAlreadyExists && funcaoAlreadyExists.name != funcao.name) {
+            return new Error("Função já existe");
         }
 
-        const repo = getRepository(Area);
-        const area = await repo.findOne(id);
-        if (!area) {
-            return new Error("Área não existe!");
-        }
+        funcao.name = name ? name : funcao.name;
+        funcao.descricao = descricao ? descricao : funcao.descricao;
 
-        const areaAlreadyExists = await repo.findOne({ name });
-        if (areaAlreadyExists && areaAlreadyExists.name != area.name) {
-            return new Error("Área já existe");
-        }
+        await repo.save(funcao);
 
-        area.name = name ? name : area.name;
-        area.description = description ? description : area.description;
-        area.instituicao_id = instituicao_id
-            ? instituicao_id
-            : area.instituicao_id;
-
-        await repo.save(area);
-
-        return area;
+        return funcao;
     }
 }
