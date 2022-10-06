@@ -24,7 +24,7 @@ export class GetOnePpcService {
                 "ppcDisciplinaVersoes"
             )
             .leftJoinAndSelect("ppcDisciplinaVersoes.versao", "versao")
-            .leftJoin("versoes.disciplina", "disciplina")
+            .leftJoin("versao.disciplina", "disciplina")
             .addSelect(["disciplina.name"])
             .leftJoinAndSelect("ppc.curso", "curso")
             .leftJoinAndSelect("ppc.perfis", "perfis")
