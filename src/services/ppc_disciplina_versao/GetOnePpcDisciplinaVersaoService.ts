@@ -11,7 +11,13 @@ export class GetOnePpcDisciplinaVersaoService {
         const repo = getRepository(PpcDisciplinaVersao);
 
         const ppcDisciplinaVersao = await repo.findOne(id, {
-            relations: ["ppc", "versao", "perfis", "competencias"],
+            relations: [
+                "ppc",
+                "versao",
+                "perfis",
+                "competencias",
+                "versao.disciplina",
+            ],
         });
 
         if (!ppcDisciplinaVersao) {
