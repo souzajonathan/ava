@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreateObraService } from "../../services/obra/CreateObraService";
 
 export class CreateObraController {
-    async handle (request: Request, response: Response) {
+    async handle(request: Request, response: Response) {
         const {
             item_tipo,
             obra_nome,
@@ -26,7 +26,8 @@ export class CreateObraController {
             issn,
             url,
             acesso_em,
-            contido_em
+            contido_em,
+            obraAutores,
         } = request.body;
 
         const service = new CreateObraService();
@@ -54,7 +55,8 @@ export class CreateObraController {
             issn,
             url,
             acesso_em,
-            contido_em
+            contido_em,
+            obraAutores,
         });
 
         if (result instanceof Error) {

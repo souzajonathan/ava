@@ -28,8 +28,8 @@ export class Autor {
     @Column()
     nationality: string;
 
-    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.autor)
-    obrasAutores: ObraAutor[];
+    @OneToMany(() => ObraAutor, (obrasAutor) => obrasAutor.autor)
+    obrasAutor: ObraAutor[];
 
     @CreateDateColumn()
     created_at: Date;

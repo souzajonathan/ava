@@ -28,6 +28,7 @@ export class UpdateObraController {
             url,
             acesso_em,
             contido_em,
+            obraAutores,
         } = request.body;
 
         const service = new UpdateObraService();
@@ -57,6 +58,7 @@ export class UpdateObraController {
             url,
             acesso_em,
             contido_em,
+            obraAutores,
         });
 
         if (result instanceof Error) {

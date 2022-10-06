@@ -6,24 +6,30 @@ type filter = {
     ultimoNome?: string;
     nacionalidade?: string;
     citacao?: string;
-}
+};
 
 export class GetAllAutoresService {
-    async execute(query?:filter) {
+    async execute(query?: filter) {
         const repo = getRepository(Autor);
 
         const where: FindConditions<Autor> = {};
 
         if (query?.primeiroNome) {
-            where.first_name = Raw((alias) => `${alias} ilike '%${query.primeiroNome}%'`);
+            where.first_name = Raw(
+                (alias) => `${alias} ilike '%${query.primeiroNome}%'`
+            );
         }
 
         if (query?.ultimoNome) {
-            where.last_name = Raw((alias) => `${alias} ilike '%${query.ultimoNome}%'`);
+            where.last_name = Raw(
+                (alias) => `${alias} ilike '%${query.ultimoNome}%'`
+            );
         }
 
         if (query?.nacionalidade) {
-            where.nationality = Raw((alias) => `${alias} ilike '%${query.nacionalidade}%'`);
+            where.nationality = Raw(
+                (alias) => `${alias} ilike '%${query.nacionalidade}%'`
+            );
         }
 
         if (query?.citacao) {
@@ -31,8 +37,8 @@ export class GetAllAutoresService {
         }
 
         const autores = await repo.find({
-            relations: ["obrasAutores"],
-            where
+            relations: ["obrasAutor"],
+            where,
         });
 
         return autores;

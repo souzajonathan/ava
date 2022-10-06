@@ -1,6 +1,12 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Obra } from "../../entities/Obra";
+import { CreateObraAutorService } from "../obra_autor/CreateObraAutorService";
+
+type ObraAutor = {
+    autor_id: string;
+    funcao: string;
+};
 
 type ObraRequest = {
     item_tipo: string;
@@ -26,6 +32,7 @@ type ObraRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
+    obraAutores?: ObraAutor[];
 };
 
 export class CreateObraService {
@@ -53,6 +60,7 @@ export class CreateObraService {
         url,
         acesso_em,
         contido_em,
+        obraAutores,
     }: ObraRequest) {
         if (!item_tipo) {
             return new Error("Tipo de item é obrigatório");
@@ -111,6 +119,25 @@ export class CreateObraService {
 
         await repo.save(obra);
 
-        return obra;
+        if (obraAutores.length) {
+            for await (const obraAutor of obraAutores) {
+                const service = new CreateObraAutorService();
+
+                const result = await service.execute({
+                    obra_id: obra.id,
+                    autor_id: obraAutor.autor_id,
+                    funcao: obraAutor.funcao,
+                });
+
+                if (result instanceof Error) {
+                    return result;
+                }
+            }
+        }
+
+        return {
+            ...obra,
+            obraAutores,
+        };
     }
 }

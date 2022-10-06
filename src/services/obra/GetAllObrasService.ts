@@ -48,10 +48,10 @@ export class GetAllObrasService {
         const obras = await repo.find({
             relations: [
                 "bibliografias",
-                "obrasAutores",
+                "obraAutores",
                 "obraChildren",
                 "obraParent",
-                "obrasAutores.autores",
+                "obraAutores.autor",
             ],
             where,
         });

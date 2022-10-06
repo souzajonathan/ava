@@ -15,7 +15,7 @@ export class GetOneAutorService {
             .where({
                 id: id,
             })
-            .leftJoinAndSelect("autor.obrasAutores", "obraAutor")
+            .leftJoinAndSelect("autor.obrasAutor", "obraAutor")
             .leftJoinAndSelect("obraAutor.obra", "obra")
             .getOne();
 

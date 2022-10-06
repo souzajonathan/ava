@@ -10,7 +10,7 @@ export class DeleteObraService {
 
         const repo = getRepository(Obra);
         const obra = await repo.findOne(id, {
-            relations: ["bibliografias", "obrasAutores", "obrasChildren"],
+            relations: ["bibliografias", "obraAutores", "obraChildren"],
         });
 
         if (!obra) {
@@ -21,7 +21,7 @@ export class DeleteObraService {
             return new Error("Obra com bibliografias cadastradas");
         }
 
-        if (obra.obrasAutores.length > 0) {
+        if (obra.obraAutores.length > 0) {
             return new Error("Obra com autores cadastrados");
         }
 

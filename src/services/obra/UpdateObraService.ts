@@ -1,6 +1,13 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Obra } from "../../entities/Obra";
+import { CreateObraAutorService } from "../obra_autor/CreateObraAutorService";
+
+type ObraAutores = {
+    autor_id: string;
+    obra_id: string;
+    funcao: string;
+};
 
 type ObraUpdateRequest = {
     id: string;
@@ -27,6 +34,7 @@ type ObraUpdateRequest = {
     url: string;
     acesso_em: string;
     contido_em: string;
+    obraAutores?: ObraAutores[];
 };
 
 export class UpdateObraService {
@@ -55,6 +63,7 @@ export class UpdateObraService {
         url,
         acesso_em,
         contido_em,
+        obraAutores,
     }: ObraUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
@@ -122,6 +131,22 @@ export class UpdateObraService {
         obra.contido_em = contido_em ? contido_em : obra.contido_em;
 
         await repo.save(obra);
+
+        if (obraAutores) {
+            for await (const obraAutor of obraAutores) {
+                const service = new CreateObraAutorService();
+
+                const result = await service.execute({
+                    autor_id: obraAutor.autor_id,
+                    obra_id: obra.id,
+                    funcao: obraAutor.funcao,
+                });
+
+                if (result instanceof Error) {
+                    return result;
+                }
+            }
+        }
 
         return obra;
     }
