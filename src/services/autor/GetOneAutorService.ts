@@ -1,10 +1,10 @@
 import { getRepository } from "typeorm";
-import { validate} from "uuid";
+import { validate } from "uuid";
 import { Autor } from "../../entities/Autor";
 
 export class GetOneAutorService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
@@ -13,10 +13,10 @@ export class GetOneAutorService {
         const autor = await repo
             .createQueryBuilder("autor")
             .where({
-                id: id
+                id: id,
             })
             .leftJoinAndSelect("autor.obrasAutores", "obraAutor")
-            .leftJoinAndSelect("obraAutor.obras", "obras")
+            .leftJoinAndSelect("obraAutor.obra", "obra")
             .getOne();
 
         if (!autor) {

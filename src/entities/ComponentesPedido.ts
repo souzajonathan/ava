@@ -48,13 +48,13 @@ export class ComponentesPedido {
 
     @ManyToOne(() => ComponentesPedido)
     @JoinColumn({ name: "parent_item" })
-    componenteParent: ComponentesPedido[];
+    componenteParent: ComponentesPedido;
 
     @OneToMany(
         () => ComponentesPedido,
         (componentes) => componentes.componenteParent
     )
-    componenteChildren: ComponentesPedido;
+    componenteChildren: ComponentesPedido[];
 
     @CreateDateColumn()
     created_at: Date;

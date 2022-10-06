@@ -1,4 +1,12 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Autor } from "./Autor";
 import { Obra } from "./Obra";
 
@@ -6,21 +14,21 @@ import { Obra } from "./Obra";
 export class ObraAutor {
     @PrimaryGeneratedColumn("uuid")
     id: string;
-    
+
     @ManyToOne(() => Autor)
-    @JoinColumn({name: "autor_id"})
-    autores: Autor;
+    @JoinColumn({ name: "autor_id" })
+    autor: Autor;
 
     @Column("uuid")
     autor_id: string;
 
     @ManyToOne(() => Obra)
-    @JoinColumn({name: "obra_id"})
-    obras: Obra;
+    @JoinColumn({ name: "obra_id" })
+    obra: Obra;
 
     @Column("uuid")
     obra_id: string;
-    
+
     @Column()
     funcao: string;
 

@@ -3,7 +3,7 @@ import { ObraAutor } from "../../entities/ObraAutor";
 
 type filter = {
     func?: string;
-}
+};
 
 export class GetAllObraAutorService {
     async execute(query?: filter) {
@@ -11,12 +11,12 @@ export class GetAllObraAutorService {
 
         const where: FindConditions<ObraAutor> = {};
 
-        if(query?.func){
+        if (query?.func) {
             where.funcao = Raw((alias) => `${alias} ilike '%${query.func}%'`);
         }
 
         const obraAutor = await repo.find({
-            relations: ["autores", "obras"]
+            relations: ["autor", "obra"],
         });
 
         return obraAutor;

@@ -1,11 +1,18 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { ObraAutor } from "./ObraAutor";
 
 @Entity("autores")
 export class Autor {
     @PrimaryGeneratedColumn("uuid")
     id: string;
-    
+
     @Column()
     first_name: string;
 
@@ -20,10 +27,10 @@ export class Autor {
 
     @Column()
     nationality: string;
-    
-    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.autores)
+
+    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.autor)
     obrasAutores: ObraAutor[];
-    
+
     @CreateDateColumn()
     created_at: Date;
 

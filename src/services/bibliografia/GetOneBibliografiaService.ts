@@ -4,14 +4,14 @@ import { Bibliografia } from "../../entities/Bibliografia";
 
 export class GetOneBibliografiaService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
         const repo = getRepository(Bibliografia);
 
         const bibliografia = await repo.findOne(id, {
-            relations: ["versoes", "obras"]
+            relations: ["versao", "obra"],
         });
 
         if (!bibliografia) {

@@ -85,10 +85,10 @@ export class Obra {
     @Column("uuid")
     contido_em: string;
 
-    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obras)
+    @OneToMany(() => ObraAutor, (obrasAutores) => obrasAutores.obra)
     obrasAutores: ObraAutor[];
 
-    @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.obras)
+    @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.obra)
     bibliografias: Bibliografia[];
 
     @ManyToOne(() => Obra)

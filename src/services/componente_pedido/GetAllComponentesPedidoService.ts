@@ -11,6 +11,7 @@ export class GetAllComponentesPedidoService {
                 "componenteParent",
                 "tipoComponente",
                 "pedido",
+                "versoes",
             ],
         });
 

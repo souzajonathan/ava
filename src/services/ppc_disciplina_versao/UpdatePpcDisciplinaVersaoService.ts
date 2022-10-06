@@ -121,7 +121,6 @@ export class UpdatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersao.perfis = perfis;
-            ppcDisciplinaVersao.instituicao_id = instituicao_id;
         }
 
         if (auxC) {
@@ -136,7 +135,6 @@ export class UpdatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersao.competencias = competencias;
-            ppcDisciplinaVersao.instituicao_id = instituicao_id;
         }
 
         ppcDisciplinaVersao.ppc_id = ppc_id

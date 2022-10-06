@@ -25,11 +25,11 @@ export class DisciplinaVersao {
 
     @OneToMany(
         () => PpcDisciplinaVersao,
-        (ppcDisciplinaVersao) => ppcDisciplinaVersao.versoes
+        (ppcDisciplinaVersao) => ppcDisciplinaVersao.versao
     )
     ppcDisciplinaVersoes: PpcDisciplinaVersao[];
 
-    @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.versoes)
+    @OneToMany(() => Bibliografia, (bibliografias) => bibliografias.versao)
     bibliografias: Bibliografia[];
 
     @OneToMany(() => Pedido, (pedidos) => pedidos.versaoDisciplina)

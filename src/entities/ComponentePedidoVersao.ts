@@ -39,10 +39,10 @@ export class ComponentesPedidoVersao {
 
     @ManyToOne(() => ComponentesPedidoVersao)
     @JoinColumn({ name: "parent_item" })
-    versaoParent: ComponentesPedidoVersao[];
+    versaoParent: ComponentesPedidoVersao;
 
     @OneToMany(() => ComponentesPedidoVersao, (versao) => versao.versaoParent)
-    versaoChildren: ComponentesPedidoVersao;
+    versaoChildren: ComponentesPedidoVersao[];
 
     @OneToMany(() => Servico, (servico) => servico.componentePedidoVersao)
     servicos: Servico[];

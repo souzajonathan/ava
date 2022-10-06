@@ -4,14 +4,14 @@ import { ObraAutor } from "../../entities/ObraAutor";
 
 export class GetOneObraAutorService {
     async execute(id: string) {
-        if (!validate(id)){
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
         const repo = getRepository(ObraAutor);
 
         const obraAutor = await repo.findOne(id, {
-            relations: ["autores", "obras"]
+            relations: ["autor", "obra"],
         });
 
         if (!obraAutor) {

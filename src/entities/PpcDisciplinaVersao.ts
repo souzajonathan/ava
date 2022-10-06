@@ -29,7 +29,7 @@ export class PpcDisciplinaVersao {
 
     @ManyToOne(() => DisciplinaVersao)
     @JoinColumn({ name: "disciplina_versao_id" })
-    versoes: DisciplinaVersao;
+    versao: DisciplinaVersao;
 
     @Column("uuid")
     disciplina_versao_id: string;

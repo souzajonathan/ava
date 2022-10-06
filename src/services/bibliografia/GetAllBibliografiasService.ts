@@ -6,7 +6,7 @@ export class GetAllBibliografiasService {
         const repo = getRepository(Bibliografia);
 
         const bibliografias = await repo.find({
-            relations: ["versoes", "obras"]
+            relations: ["versao", "obra"],
         });
 
         return bibliografias;

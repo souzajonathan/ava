@@ -16,7 +16,7 @@ export class GetAllPpcDisciplinaVersoesService {
         }
 
         const ppcDisciplinaVersoes = await repo.find({
-            relations: ["ppc", "versoes", "perfis", "competencias"],
+            relations: ["ppc", "versao", "perfis", "competencias"],
         });
 
         return ppcDisciplinaVersoes;
@@ -39,9 +39,9 @@ export class GetAllPpcDisciplinaVersoesService {
 
         const ppcDisciplinaVersoes = await repo
             .createQueryBuilder("pcdv")
-            .leftJoinAndSelect("pcdv.versoes", "versoes")
+            .leftJoinAndSelect("pcdv.versao", "versao")
             .leftJoinAndSelect("pcdv.perfis", "perfis")
-            .leftJoinAndSelect("versoes.disciplina", "disciplina")
+            .leftJoinAndSelect("versao.disciplina", "disciplina")
             .where("perfis.id = :id", { id: perfil_id })
             .getMany();
 
@@ -71,9 +71,9 @@ export class GetAllPpcDisciplinaVersoesService {
 
         const ppcDisciplinaVersoes = await repo
             .createQueryBuilder("pcdv")
-            .leftJoinAndSelect("pcdv.versoes", "versoes")
+            .leftJoinAndSelect("pcdv.versao", "versao")
             .leftJoinAndSelect("pcdv.competencias", "competencias")
-            .leftJoinAndSelect("versoes.disciplina", "disciplina")
+            .leftJoinAndSelect("versao.disciplina", "disciplina")
             .where("competencias.id = :id", { id: competencia_id })
             .getMany();
 

@@ -17,9 +17,9 @@ export class DeleteComponentePedidoVersaoService {
             return new Error("Versão de componente de pedido não existente!");
         }
 
-        /* if (versaoComponente.servicos.length > 0) {
+        if (versaoComponente.servicos.length > 0) {
             return new Error("Versão de Componente com serviços cadastrados");
-        } */
+        }
 
         await repo.delete(id);
     }
