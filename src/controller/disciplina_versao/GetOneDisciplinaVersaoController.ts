@@ -6,9 +6,12 @@ export class GetOneDisciplinaVersaoController {
         const { id } = request.params;
         const service = new GetOneDisciplinaVersaoService();
 
-        const versao = await service.execute(id);
+        const versao = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(versao instanceof Error) {
+        if (versao instanceof Error) {
             return response.status(400).json(versao.message);
         }
 

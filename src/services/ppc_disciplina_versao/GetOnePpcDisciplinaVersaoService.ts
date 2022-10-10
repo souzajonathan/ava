@@ -3,9 +3,13 @@ import { validate } from "uuid";
 import { PpcDisciplinaVersao } from "../../entities/PpcDisciplinaVersao";
 
 export class GetOnePpcDisciplinaVersaoService {
-    async execute(id: string) {
+    async execute(id: string, instituicao_id: string) {
         if (!validate(id)) {
             return new Error("ID inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(PpcDisciplinaVersao);
@@ -22,6 +26,12 @@ export class GetOnePpcDisciplinaVersaoService {
 
         if (!ppcDisciplinaVersao) {
             return new Error("PpcDisciplinaVersao não existe!");
+        }
+
+        if (ppcDisciplinaVersao.instituicao_id != instituicao_id) {
+            return new Error(
+                "Essa instituição não contém esse ppcDisciplinaVersao"
+            );
         }
 
         return ppcDisciplinaVersao;

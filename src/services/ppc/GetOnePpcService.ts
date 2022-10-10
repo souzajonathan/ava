@@ -3,9 +3,13 @@ import { Ppc } from "../../entities/Ppc";
 import { validate } from "uuid";
 
 export class GetOnePpcService {
-    async execute(id: string) {
+    async execute(id: string, instituicao_id: string) {
         if (!validate(id)) {
             return new Error("ID inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(Ppc);
@@ -33,6 +37,10 @@ export class GetOnePpcService {
 
         if (!ppc) {
             return new Error("PPC não existe!");
+        }
+
+        if (ppc.instituicao_id != instituicao_id) {
+            return new Error("Essa instituição não contém esse PPC");
         }
 
         return ppc;

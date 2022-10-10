@@ -6,9 +6,12 @@ export class GetOneAreaController {
         const { id } = request.params;
         const service = new GetOneAreaService();
 
-        const area = await service.execute(id);
+        const area = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(area instanceof Error) {
+        if (area instanceof Error) {
             return response.status(400).json(area.message);
         }
 

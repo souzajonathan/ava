@@ -6,9 +6,12 @@ export class GetOnePpcDisciplinaVersaoController {
         const { id } = request.params;
         const service = new GetOnePpcDisciplinaVersaoService();
 
-        const ppcDisciplinaVersao = await service.execute(id);
+        const ppcDisciplinaVersao = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(ppcDisciplinaVersao instanceof Error) {
+        if (ppcDisciplinaVersao instanceof Error) {
             return response.status(400).json(ppcDisciplinaVersao.message);
         }
 

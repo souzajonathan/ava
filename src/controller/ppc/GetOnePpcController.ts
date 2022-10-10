@@ -6,9 +6,12 @@ export class GetOnePpcController {
         const { id } = request.params;
         const service = new GetOnePpcService();
 
-        const ppc = await service.execute(id);
+        const ppc = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(ppc instanceof Error) {
+        if (ppc instanceof Error) {
             return response.status(400).json(ppc.message);
         }
 

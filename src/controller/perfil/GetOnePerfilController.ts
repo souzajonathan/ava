@@ -6,9 +6,12 @@ export class GetOnePerfilController {
         const { id } = request.params;
         const service = new GetOnePerfilService();
 
-        const perfil = await service.execute(id);
+        const perfil = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(perfil instanceof Error) {
+        if (perfil instanceof Error) {
             return response.status(400).json(perfil.message);
         }
 

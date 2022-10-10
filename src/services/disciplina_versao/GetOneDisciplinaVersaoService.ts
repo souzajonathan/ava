@@ -3,9 +3,13 @@ import { validate } from "uuid";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 
 export class GetOneDisciplinaVersaoService {
-    async execute(id: string) {
+    async execute(id: string, instituicao_id: string) {
         if (!validate(id)) {
             return new Error("ID inválido");
+        }
+
+        if (!validate(instituicao_id)) {
+            return new Error("ID de instituição inválido");
         }
 
         const repo = getRepository(DisciplinaVersao);
@@ -35,8 +39,15 @@ export class GetOneDisciplinaVersaoService {
             ],
         });
  */
+
         if (!versao) {
             return new Error("Versão de disciplina não existe!");
+        }
+
+        if (versao.instituicao_id != instituicao_id) {
+            return new Error(
+                "Essa instituição não contém essa versão de disciplina"
+            );
         }
 
         return versao;

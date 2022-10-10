@@ -6,9 +6,12 @@ export class GetOneDisciplinaController {
         const { id } = request.params;
         const service = new GetOneDisciplinaService();
 
-        const disciplina = await service.execute(id);
+        const disciplina = await service.execute(
+            id,
+            request.query.instituicao_id as string
+        );
 
-        if(disciplina instanceof Error) {
+        if (disciplina instanceof Error) {
             return response.status(400).json(disciplina.message);
         }
 
