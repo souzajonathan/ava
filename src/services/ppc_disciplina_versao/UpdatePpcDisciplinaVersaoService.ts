@@ -61,8 +61,6 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("Insira um número válido em semestre");
         }
 
-        let auxP = false;
-
         if (perfis_id) {
             const invalidId = perfis_id.some((perfil_id) => {
                 return !validate(perfil_id);
@@ -71,11 +69,7 @@ export class UpdatePpcDisciplinaVersaoService {
             if (invalidId) {
                 return new Error("ID('s) de perfil(s) inválido(s)");
             }
-
-            auxP = true;
         }
-
-        let auxC = false;
 
         if (competencias_id) {
             const invalidId = competencias_id.some((competencia_id) => {
@@ -85,8 +79,6 @@ export class UpdatePpcDisciplinaVersaoService {
             if (invalidId) {
                 return new Error("ID('s) de competência(s) inválido(s)");
             }
-
-            auxC = true;
         }
 
         const repo = getRepository(PpcDisciplinaVersao);
@@ -109,7 +101,7 @@ export class UpdatePpcDisciplinaVersaoService {
             return new Error("Disciplina não existe!");
         }
 
-        if (auxP) {
+        if (perfis_id && perfis_id.length) {
             const repoPerfis = getRepository(PerfisEgresso);
 
             const perfis = await repoPerfis.find({
@@ -121,9 +113,11 @@ export class UpdatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersao.perfis = perfis;
+        } else {
+            ppcDisciplinaVersao.perfis = [];
         }
 
-        if (auxC) {
+        if (competencias_id && competencias_id.length) {
             const repoCompetencias = getRepository(CompetenciasHabilidades);
 
             const competencias = await repoCompetencias.find({
@@ -135,6 +129,8 @@ export class UpdatePpcDisciplinaVersaoService {
             }
 
             ppcDisciplinaVersao.competencias = competencias;
+        } else {
+            ppcDisciplinaVersao.competencias = [];
         }
 
         ppcDisciplinaVersao.ppc_id = ppc_id
