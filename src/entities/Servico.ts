@@ -4,10 +4,12 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 import { ComponentesPedidoVersao } from "./ComponentePedidoVersao";
+import { ProfissionalServico } from "./ProfissionalServico";
 import { TiposServicos } from "./TiposServicos";
 
 @Entity("servicos")
@@ -15,8 +17,11 @@ export class Servico {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    /* @OneToMany(() => ComponentesPedido, (componentes) => componentes.pedido)
-    componentes: ComponentesPedido[]; */
+    @OneToMany(
+        () => ProfissionalServico,
+        (profissionalServico) => profissionalServico.servico
+    )
+    profissionaisServico: ProfissionalServico[];
 
     @ManyToOne(() => ComponentesPedidoVersao)
     @JoinColumn({ name: "componente_pedido_versao_id" })

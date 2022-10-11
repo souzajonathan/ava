@@ -1,3 +1,4 @@
+import { isPositive } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
@@ -40,7 +41,7 @@ export class UpdateCompetenciaService {
             }
         }
 
-        if (competenciaNumero && !Number.isInteger(competenciaNumero)) {
+        if (competenciaNumero && !isPositive(competenciaNumero)) {
             return new Error(
                 "Insira um número válido em número de competência"
             );
@@ -50,6 +51,14 @@ export class UpdateCompetenciaService {
         const competHabilidades = await repo.findOne(id);
         if (!competHabilidades) {
             return new Error("Competências e Habilidades não existente!");
+        }
+
+        const competenciaAlreadyExists = await repo.findOne({
+            competenciaNumero,
+            ppc_id,
+        });
+        if (competenciaAlreadyExists) {
+            return new Error("Número de competência e habilidade já existente");
         }
 
         const repoPpc = getRepository(Ppc);

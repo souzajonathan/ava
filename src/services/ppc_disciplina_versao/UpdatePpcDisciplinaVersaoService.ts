@@ -63,7 +63,7 @@ export class UpdatePpcDisciplinaVersaoService {
 
         let auxP = false;
 
-        if (perfis_id && perfis_id.length > 0) {
+        if (perfis_id) {
             const invalidId = perfis_id.some((perfil_id) => {
                 return !validate(perfil_id);
             });
@@ -77,7 +77,7 @@ export class UpdatePpcDisciplinaVersaoService {
 
         let auxC = false;
 
-        if (competencias_id && competencias_id.length > 0) {
+        if (competencias_id) {
             const invalidId = competencias_id.some((competencia_id) => {
                 return !validate(competencia_id);
             });

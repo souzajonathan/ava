@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { validate as validation } from "class-validator";
+import { isBoolean, isDate, isDateString } from "class-validator";
 import { Pedido } from "../../entities/Pedido";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { TiposSolicitacao } from "../../entities/TiposSolicitacao";
@@ -39,23 +39,23 @@ export class CreatePedidoService {
             return new Error("ID de tipo de solicitação é obrigatório");
         }
 
-        if (data_entrega && !validation(data_entrega)) {
+        if (data_entrega && !isDate(data_entrega)) {
             return new Error("Data de entrega inválida");
         }
 
-        if (analisado && typeof analisado != "boolean") {
+        if (analisado && !isBoolean(analisado)) {
             return new Error("Marcação para 'analisado' inválida");
         }
 
-        if (aprovacao_interna && typeof aprovacao_interna != "boolean") {
+        if (aprovacao_interna && !isBoolean(aprovacao_interna)) {
             return new Error("Marcação para 'aprovação interna' inválida");
         }
 
-        if (aprovacao_externa && typeof aprovacao_externa != "boolean") {
+        if (aprovacao_externa && !isBoolean(aprovacao_externa)) {
             return new Error("Marcação para 'aprovação externa' inválida");
         }
 
-        if (concluido && typeof concluido != "boolean") {
+        if (concluido && !isBoolean(concluido)) {
             return new Error("Marcação para 'concluído' inválida");
         }
 

@@ -35,7 +35,7 @@ export class Agente {
 
     @ManyToOne(() => Funcao)
     @JoinColumn({ name: "funcao_id" })
-    funcao: Usuario;
+    funcao: Funcao;
 
     @CreateDateColumn()
     created_at: Date;

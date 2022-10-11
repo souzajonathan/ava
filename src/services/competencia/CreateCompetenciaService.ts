@@ -1,3 +1,4 @@
+import { isPositive } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
@@ -30,7 +31,7 @@ export class CreateCompetenciaService {
             return new Error("Competência é obrigatória");
         }
 
-        if (!Number.isInteger(competenciaNumero)) {
+        if (!isPositive(competenciaNumero)) {
             return new Error(
                 "Insira um número válido em 'número de competência'"
             );
@@ -48,7 +49,7 @@ export class CreateCompetenciaService {
             ppc_id,
         });
         if (competenciaAlreadyExists) {
-            return new Error("Número de competência e habilidade já existe");
+            return new Error("Número de competência e habilidade já existente");
         }
 
         const repoPpc = getRepository(Ppc);

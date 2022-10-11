@@ -1,3 +1,4 @@
+import { isPositive } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Instituicao } from "../../entities/Instituicao";
@@ -40,7 +41,7 @@ export class UpdatePerfilService {
             return new Error("ID de PPC inválido");
         }
 
-        if (perfilNumero && !Number.isInteger(perfilNumero)) {
+        if (perfilNumero && !isPositive(perfilNumero)) {
             return new Error("Insira um número válido em número de perfil");
         }
 
@@ -48,6 +49,14 @@ export class UpdatePerfilService {
         const perfilEgresso = await repo.findOne(id);
         if (!perfilEgresso) {
             return new Error("Perfil não existente!");
+        }
+
+        const perfilAlreadyExists = await repo.findOne({
+            perfilNumero,
+            ppc_id,
+        });
+        if (perfilAlreadyExists) {
+            return new Error("Número de perfil de egresso já existe");
         }
 
         const repoPpc = getRepository(Ppc);
