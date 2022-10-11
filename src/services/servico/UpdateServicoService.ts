@@ -1,6 +1,8 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
+import { ComponentesPedidoVersao } from "../../entities/ComponentePedidoVersao";
 import { Servico } from "../../entities/Servico";
+import { TiposServicos } from "../../entities/TiposServicos";
 
 type ServicoUpdateRequest = {
     id: string;
@@ -53,6 +55,26 @@ export class UpdateServicoService {
 
         if (aprovacao && typeof aprovacao != "boolean") {
             return new Error("Marcação para 'aprovação' inválida");
+        }
+
+        if (componente_pedido_versao_id) {
+            const repoComponentePedidoVersao = getRepository(
+                ComponentesPedidoVersao
+            );
+            const versao = await repoComponentePedidoVersao.findOne(
+                componente_pedido_versao_id
+            );
+            if (!versao) {
+                return new Error("Versão de componente de pedido não existe!");
+            }
+        }
+
+        if (tipo_servico_id) {
+            const repoTipoServico = getRepository(TiposServicos);
+            const tipoServico = await repoTipoServico.findOne(tipo_servico_id);
+            if (!tipoServico) {
+                return new Error("Tipo de serviço não existe!");
+            }
         }
 
         servico.componente_pedido_versao_id = componente_pedido_versao_id

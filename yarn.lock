@@ -704,6 +704,11 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
+iscpf@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/iscpf/-/iscpf-2.0.0.tgz#a008caa9fe48389a03aa0e9c3bde65e1db6aad67"
+  integrity sha512-zAsGBmSX/SXhIdVmRRYJKTlDM1jua5AXKM0DNoYF6WL/rMIevJxIf0daQftRfrNMmeTUoFpCWENdWpHrmv5qjA==
+
 js-yaml@^3.13.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"

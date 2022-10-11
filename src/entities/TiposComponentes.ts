@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { ComponentesPedido } from "./ComponentesPedido";
 import { ComponentesTrilhaComponentes } from "./ComponentesTrilhaComponente";
+import { TrilhaServicos } from "./TrilhaServicos";
 
 @Entity("tipos_componentes")
 export class TiposComponentes {
@@ -34,6 +35,9 @@ export class TiposComponentes {
         (componentes) => componentes.tipoComponente
     )
     componentesPedido: ComponentesPedido[];
+
+    @OneToMany(() => TrilhaServicos, (trilhas) => trilhas.tipoComponente)
+    trilhasServicos: TrilhaServicos[];
 
     @CreateDateColumn()
     created_at: Date;

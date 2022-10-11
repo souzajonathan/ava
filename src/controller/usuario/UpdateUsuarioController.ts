@@ -4,14 +4,33 @@ import { UpdateUsuarioService } from "../../services/usuario/UpdateUsuarioServic
 export class UpdateUsuarioController {
     async handle(request: Request, response: Response) {
         const { id } = request.params;
-        const { name, description } = request.body;
+        const {
+            name,
+            cpf,
+            birthday,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            complement,
+        } = request.body;
 
         const service = new UpdateUsuarioService();
 
         const result = await service.execute({
             id,
             name,
-            description,
+            cpf,
+            birthday,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            complement,
         });
 
         if (result instanceof Error) {

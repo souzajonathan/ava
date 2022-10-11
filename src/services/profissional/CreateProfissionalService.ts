@@ -3,11 +3,11 @@ import { Profissional } from "../../entities/Profissional";
 
 type UsuarioRequest = {
     name: string;
-    descricao: string;
+    description: string;
 };
 
 export class CreateProfissionalService {
-    async execute({ name, descricao }: UsuarioRequest) {
+    async execute({ name, description }: UsuarioRequest) {
         if (!name) {
             return new Error("Nome de profissional não inserido");
         }
@@ -21,7 +21,7 @@ export class CreateProfissionalService {
 
         const profissional = repo.create({
             name,
-            descricao,
+            description,
         });
 
         await repo.save(profissional);

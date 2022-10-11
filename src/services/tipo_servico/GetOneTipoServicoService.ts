@@ -11,7 +11,7 @@ export class GetOneTipoServicoService {
         const repo = getRepository(TiposServicos);
 
         const tipo = await repo.findOne(id, {
-            relations: ["servicos"],
+            relations: ["servicos", "servicosTrilhaServicos"],
         });
 
         if (!tipo) {

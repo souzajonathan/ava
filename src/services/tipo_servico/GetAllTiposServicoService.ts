@@ -16,7 +16,7 @@ export class GetAllTiposServicosService {
         }
 
         const tipos = await repo.find({
-            relations: ["servicos"],
+            relations: ["servicos", "servicosTrilhaServicos"],
             where,
         });
 

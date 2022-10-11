@@ -19,6 +19,43 @@ export class CreateUsuarios1664911404679 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
+                        name: "cpf",
+                        type: "varchar",
+                    },
+                    {
+                        name: "birthday",
+                        type: "timestamp with time zone",
+                    },
+                    {
+                        name: "email",
+                        type: "varchar",
+                    },
+                    {
+                        name: "phone",
+                        type: "varchar",
+                    },
+                    {
+                        name: "address",
+                        type: "varchar",
+                    },
+                    {
+                        name: "city",
+                        type: "varchar",
+                    },
+                    {
+                        name: "state",
+                        type: "varchar",
+                    },
+                    {
+                        name: "country",
+                        type: "varchar",
+                    },
+                    {
+                        name: "complement",
+                        type: "varchar",
+                        isNullable: true,
+                    },
+                    {
                         name: "created_at",
                         type: "timestamp",
                         default: "now()",

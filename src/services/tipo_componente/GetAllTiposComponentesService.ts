@@ -1,6 +1,5 @@
 import { FindConditions, getRepository, Raw } from "typeorm";
 import { TiposComponentes } from "../../entities/TiposComponentes";
-import { TiposSolicitacao } from "../../entities/TiposSolicitacao";
 
 type filter = {
     name?: string;
@@ -17,7 +16,11 @@ export class GetAllTiposComponentesService {
         }
 
         const tipos = await repo.find({
-            relations: ["tipos"],
+            relations: [
+                "componentesTrilha",
+                "componentesPedido",
+                "trilhasServicos",
+            ],
             where,
         });
 

@@ -1,9 +1,9 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { isBoolean, isDate, isDecimal, isPositive } from "class-validator";
-import { Autor } from "../../entities/Autor";
-import { Obra } from "../../entities/Obra";
 import { ProfissionalServico } from "../../entities/ProfissionalServico";
+import { Profissional } from "../../entities/Profissional";
+import { Servico } from "../../entities/Servico";
 
 type ProfissionalServicoRequest = {
     servico_id: string;
@@ -103,13 +103,13 @@ export class CreateProfissionalServicoService {
             return new Error("Insira um valor válido em valor pago");
         }
 
-        const repoServico = getRepository(Autor);
+        const repoServico = getRepository(Servico);
         const servico = await repoServico.findOne(servico_id);
         if (!servico) {
             return new Error("Serviço não existe!");
         }
 
-        const repoProfissional = getRepository(Obra);
+        const repoProfissional = getRepository(Profissional);
         const profissional = await repoProfissional.findOne(profissional_id);
         if (!profissional) {
             return new Error("Profissional não existe!");

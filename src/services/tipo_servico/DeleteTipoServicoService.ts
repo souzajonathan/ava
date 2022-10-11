@@ -10,7 +10,7 @@ export class DeleteTipoServicoService {
 
         const repo = getRepository(TiposServicos);
         const tipo = await repo.findOne(id, {
-            relations: ["servicos"],
+            relations: ["servicos", "servicosTrilhaServicos"],
         });
 
         if (!tipo) {
@@ -19,6 +19,12 @@ export class DeleteTipoServicoService {
 
         if (tipo.servicos.length > 0) {
             return new Error("Tipo de serviço com serviços cadastrados");
+        }
+
+        if (tipo.servicosTrilhaServicos.length > 0) {
+            return new Error(
+                "Tipo de serviço com serviços na trilha de serviços"
+            );
         }
 
         await repo.delete(id);

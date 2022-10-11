@@ -1,35 +1,40 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { Usuario } from "../../entities/Usuario";
+import { Profissional } from "../../entities/Profissional";
 
-type UsuarioUpdateRequest = {
+type ProfissionalUpdateRequest = {
     id: string;
     name: string;
     description: string;
 };
 
-export class UpdateUsuarioService {
-    async execute({ id, name, description }: UsuarioUpdateRequest) {
+export class UpdateProfissionalService {
+    async execute({ id, name, description }: ProfissionalUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        const repo = getRepository(Usuario);
-        const usuario = await repo.findOne(id);
-        if (!usuario) {
-            return new Error("Usuário não existe!");
+        const repo = getRepository(Profissional);
+        const profissional = await repo.findOne(id);
+        if (!profissional) {
+            return new Error("Profissional não existe!");
         }
 
-        const funcaoAlreadyExists = await repo.findOne({ name });
-        if (funcaoAlreadyExists && funcaoAlreadyExists.name != usuario.name) {
-            return new Error("Usuário já existe");
+        const profissionalAlreadyExists = await repo.findOne({ name });
+        if (
+            profissionalAlreadyExists &&
+            profissionalAlreadyExists.name != profissional.name
+        ) {
+            return new Error("Profissional já existe");
         }
 
-        usuario.name = name ? name : usuario.name;
-        usuario.description = description ? description : usuario.description;
+        profissional.name = name ? name : profissional.name;
+        profissional.description = description
+            ? description
+            : profissional.description;
 
-        await repo.save(usuario);
+        await repo.save(profissional);
 
-        return usuario;
+        return profissional;
     }
 }

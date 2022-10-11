@@ -23,7 +23,7 @@ export class Profissional {
     name: string;
 
     @Column()
-    descricao: string;
+    description: string;
 
     @CreateDateColumn()
     created_at: Date;

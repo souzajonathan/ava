@@ -17,7 +17,31 @@ export class Usuario {
     name: string;
 
     @Column()
-    description: string;
+    cpf: string;
+
+    @Column("timestamp with time zone")
+    birthday: Date;
+
+    @Column()
+    email: string;
+
+    @Column()
+    phone: string;
+
+    @Column()
+    address: string;
+
+    @Column()
+    city: string;
+
+    @Column()
+    state: string;
+
+    @Column()
+    country: string;
+
+    @Column()
+    complement: string;
 
     @OneToMany(() => Agente, (agentes) => agentes.usuario)
     agentes: Agente[];

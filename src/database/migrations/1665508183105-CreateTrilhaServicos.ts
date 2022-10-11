@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateProfissionais1662666641755 implements MigrationInterface {
+export class CreateTrilhaServicos1665508183105 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "profissionais",
+                name: "trilha_servicos",
                 columns: [
                     {
                         name: "id",
@@ -15,13 +15,12 @@ export class CreateProfissionais1662666641755 implements MigrationInterface {
                         default: "uuid_generate_v4()",
                     },
                     {
-                        name: "name",
+                        name: "nome_trilha",
                         type: "varchar",
                     },
                     {
-                        name: "description",
-                        type: "varchar",
-                        isNullable: true,
+                        name: "componente_tipo_id",
+                        type: "uuid",
                     },
                     {
                         name: "created_at",
@@ -34,11 +33,19 @@ export class CreateProfissionais1662666641755 implements MigrationInterface {
                         default: "now()",
                     },
                 ],
+                foreignKeys: [
+                    {
+                        name: "fk_componente_tipo",
+                        columnNames: ["componente_tipo_id"],
+                        referencedTableName: "tipos_componentes",
+                        referencedColumnNames: ["id"],
+                    },
+                ],
             })
         );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("profissionais");
+        await queryRunner.dropTable("trilha_servicos");
     }
 }

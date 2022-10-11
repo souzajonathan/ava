@@ -3,13 +3,32 @@ import { CreateUsuarioService } from "../../services/usuario/CreateUsuarioServic
 
 export class CreateUsuarioController {
     async handle(request: Request, response: Response) {
-        const { name, description } = request.body;
+        const {
+            name,
+            cpf,
+            birthday,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            complement,
+        } = request.body;
 
         const service = new CreateUsuarioService();
 
         const result = await service.execute({
             name,
-            description,
+            cpf,
+            birthday,
+            email,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            complement,
         });
 
         if (result instanceof Error) {

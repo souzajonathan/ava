@@ -7,6 +7,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 import { Servico } from "./Servico";
+import { ServicosTrilhaServicos } from "./ServicosTrilhaServicos";
 
 @Entity("tipos_servicos")
 export class TiposServicos {
@@ -38,6 +39,9 @@ export class TiposServicos {
 
     @OneToMany(() => Servico, (servico) => servico.tipoServico)
     servicos: Servico[];
+
+    @OneToMany(() => ServicosTrilhaServicos, (servico) => servico.tipoServico)
+    servicosTrilhaServicos: ServicosTrilhaServicos[];
 
     @CreateDateColumn()
     created_at: Date;
