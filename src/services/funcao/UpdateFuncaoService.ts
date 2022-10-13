@@ -5,11 +5,11 @@ import { Funcao } from "../../entities/Funcao";
 type FuncaoUpdateRequest = {
     id: string;
     name: string;
-    descricao: string;
+    description: string;
 };
 
 export class UpdateFuncaoService {
-    async execute({ id, name, descricao }: FuncaoUpdateRequest) {
+    async execute({ id, name, description }: FuncaoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
         }
@@ -26,7 +26,7 @@ export class UpdateFuncaoService {
         }
 
         funcao.name = name ? name : funcao.name;
-        funcao.descricao = descricao ? descricao : funcao.descricao;
+        funcao.description = description ? description : funcao.description;
 
         await repo.save(funcao);
 

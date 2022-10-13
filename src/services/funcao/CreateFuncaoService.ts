@@ -3,11 +3,11 @@ import { Funcao } from "../../entities/Funcao";
 
 type FuncaoRequest = {
     name: string;
-    descricao: string;
+    description: string;
 };
 
 export class CreateFuncaoService {
-    async execute({ name, descricao }: FuncaoRequest) {
+    async execute({ name, description }: FuncaoRequest) {
         if (!name) {
             return new Error("Nome de função não inserido");
         }
@@ -21,7 +21,7 @@ export class CreateFuncaoService {
 
         const funcao = repo.create({
             name,
-            descricao,
+            description,
         });
 
         await repo.save(funcao);

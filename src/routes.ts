@@ -104,6 +104,26 @@ import { UpdateInstituicaoController } from "./controller/instituicao/UpdateInst
 import { GetOneInstituicaoController } from "./controller/instituicao/GetOneInstituicaoController";
 import { GetAllInstituicoesController } from "./controller/instituicao/GetAllInstituicoesController";
 import { DeleteInstituicaoController } from "./controller/instituicao/DeleteInstituicaoController";
+import { CreateFuncaoController } from "./controller/funcao/CreateFuncaoController";
+import { UpdateFuncaoController } from "./controller/funcao/UpdateFuncaoController";
+import { GetOneFuncaoController } from "./controller/funcao/GetOneFuncaoController";
+import { GetAllFuncoesController } from "./controller/funcao/GetAllFuncoesController";
+import { DeleteFuncaoController } from "./controller/funcao/DeleteFuncaoController";
+import { CreateEntidadeController } from "./controller/entidade/CreateEntidadeController";
+import { UpdateEntidadeController } from "./controller/entidade/UpdateEntidadeController";
+import { GetOneEntidadeController } from "./controller/entidade/GetOneEntidadeController";
+import { GetAllEntidadesController } from "./controller/entidade/GetAllEntidadesController";
+import { DeleteEntidadeController } from "./controller/entidade/DeleteEntidadeController";
+import { CreateEspecificacaoRodadaController } from "./controller/especificacao_rodada/CreateEspecificacaoRodadaController";
+import { UpdateEspecificacaoRodadaController } from "./controller/especificacao_rodada/UpdateEspecificacaoRodadaController";
+import { GetOneEspecificacaoRodadaController } from "./controller/especificacao_rodada/GetOneEspecificacaoRodadaController";
+import { GetAllEspecificacacoesRodadaController } from "./controller/especificacao_rodada/GetAllEspecificacoesRodadaController";
+import { DeleteEspecificacaoRodadaController } from "./controller/especificacao_rodada/DeleteEspecificacaoRodadaController";
+import { CreateFuncaoRodadaController } from "./controller/funcao_rodada/CreateFuncaoRodadaController";
+import { UpdateFuncaoRodadaController } from "./controller/funcao_rodada/UpdateFuncaoRodadaController";
+import { GetOneFuncaoRodadaController } from "./controller/funcao_rodada/GetOneFuncaoRodadaController";
+import { GetAllFuncoesRodadaController } from "./controller/funcao_rodada/GetAllFuncoesRodadaController";
+import { DeleteFuncaoRodadaController } from "./controller/funcao_rodada/DeleteFuncaoRodadaController";
 
 const routes = Router();
 
@@ -343,5 +363,44 @@ routes.get(
 routes.get("/instituicao/:id", new GetOneInstituicaoController().handle);
 routes.get("/instituicoes", new GetAllInstituicoesController().handle);
 routes.delete("/instituicoes/:id", new DeleteInstituicaoController().handle);
+
+routes.post("/funcoes", new CreateFuncaoController().handle);
+routes.put("/funcoes/:id", new UpdateFuncaoController().handle);
+routes.get("/funcao/:id", new GetOneFuncaoController().handle);
+routes.get("/funcoes", new GetAllFuncoesController().handle);
+routes.delete("/funcoes/:id", new DeleteFuncaoController().handle);
+
+routes.post("/entidades", new CreateEntidadeController().handle);
+routes.put("/entidades/:id", new UpdateEntidadeController().handle);
+routes.get("/entidade/:id", new GetOneEntidadeController().handle);
+routes.get("/entidades", new GetAllEntidadesController().handle);
+routes.delete("/entidades/:id", new DeleteEntidadeController().handle);
+
+routes.post(
+    "/especificacoes",
+    new CreateEspecificacaoRodadaController().handle
+);
+routes.put(
+    "/especificacoes/:id",
+    new UpdateEspecificacaoRodadaController().handle
+);
+routes.get(
+    "/especificacao/:id",
+    new GetOneEspecificacaoRodadaController().handle
+);
+routes.get(
+    "/especificacoes",
+    new GetAllEspecificacacoesRodadaController().handle
+);
+routes.delete(
+    "/especificacoes/:id",
+    new DeleteEspecificacaoRodadaController().handle
+);
+
+routes.post("/funcoes_rodada", new CreateFuncaoRodadaController().handle);
+routes.put("/funcoes_rodada/:id", new UpdateFuncaoRodadaController().handle);
+routes.get("/funcao_rodada/:id", new GetOneFuncaoRodadaController().handle);
+routes.get("/funcoes_rodada", new GetAllFuncoesRodadaController().handle);
+routes.delete("/funcoes_rodada/:id", new DeleteFuncaoRodadaController().handle);
 
 export { routes };

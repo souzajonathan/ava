@@ -18,7 +18,7 @@ export class Funcao {
     name: string;
 
     @Column()
-    descricao: string;
+    description: string;
 
     @OneToMany(() => Agente, (agentes) => agentes.funcao)
     agentes: Agente[];

@@ -19,7 +19,7 @@ export class CreateFuncao1662665476330 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
-                        name: "descricao",
+                        name: "description",
                         type: "varchar",
                         isNullable: true,
                     },
