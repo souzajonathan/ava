@@ -19,8 +19,9 @@ export class CreateFuncoesRodada1664993138271 implements MigrationInterface {
                         type: "numeric",
                     },
                     {
-                        name: "consideracoes_relevantes",
+                        name: "considerar_relevantes",
                         type: "varchar",
+                        isNullable: true,
                     },
                     {
                         name: "especificacao_id",

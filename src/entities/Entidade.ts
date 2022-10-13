@@ -22,8 +22,8 @@ export class Entidade {
     @Column()
     description: string;
 
-    @Column()
-    quantidade_rodadas: string;
+    @Column("int")
+    quantidade_rodadas: number;
 
     @OneToMany(
         () => EspecificacoesRodadas,

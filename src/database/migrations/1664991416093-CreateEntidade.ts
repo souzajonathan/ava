@@ -25,7 +25,7 @@ export class CreateEntidade1664991416093 implements MigrationInterface {
                     },
                     {
                         name: "quantidade_rodadas",
-                        type: "varchar",
+                        type: "int",
                     },
                     {
                         name: "created_at",

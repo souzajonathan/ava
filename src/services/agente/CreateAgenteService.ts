@@ -38,7 +38,7 @@ export class CreateAgenteService {
         }
 
         const repoFuncao = getRepository(Funcao);
-        const funcao = await repoUsuario.findOne(usuario_id);
+        const funcao = await repoFuncao.findOne(funcao_id);
         if (!funcao) {
             return new Error("Função não existe!");
         }

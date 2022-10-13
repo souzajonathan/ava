@@ -20,7 +20,7 @@ export class FuncoesRodada {
     peso_voto: number;
 
     @Column()
-    consideracoes_relevantes: string;
+    considerar_relevantes: string;
 
     @Column("uuid")
     especificacao_id: string;
