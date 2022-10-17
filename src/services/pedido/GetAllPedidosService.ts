@@ -34,7 +34,7 @@ export class GetAllPedidosService {
         }
 
         const pedidos = await repo.find({
-            relations: ["componentes", "tipoSolicitacao", "DisciplinaVersao"],
+            relations: ["componentes", "tipoSolicitacao", "versaoDisciplina"],
             where,
         });
 

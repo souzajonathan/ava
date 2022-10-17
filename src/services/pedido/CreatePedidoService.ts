@@ -1,6 +1,6 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { isBoolean, isDate, isDateString } from "class-validator";
+import { isBoolean, isDate } from "class-validator";
 import { Pedido } from "../../entities/Pedido";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { TiposSolicitacao } from "../../entities/TiposSolicitacao";
