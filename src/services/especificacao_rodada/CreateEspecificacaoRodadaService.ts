@@ -1,4 +1,4 @@
-import { isDecimal, isInt, isNegative } from "class-validator";
+import { isInt, isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Entidade } from "../../entities/Entidade";
@@ -43,8 +43,8 @@ export class CreateEspecificacaoRodadaService {
         }
 
         if (
-            isNegative(porcentagem_aprovacao) ||
-            !isDecimal(porcentagem_aprovacao)
+            !isNumber(porcentagem_aprovacao) ||
+            isNegative(porcentagem_aprovacao)
         ) {
             return new Error(
                 "Insira um valor válido para porcentagem de aprovação"

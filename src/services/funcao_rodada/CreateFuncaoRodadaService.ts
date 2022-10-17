@@ -1,4 +1,4 @@
-import { isDecimal, isNegative } from "class-validator";
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { EspecificacoesRodadas } from "../../entities/EspecificacoesRodadas";
@@ -36,7 +36,7 @@ export class CreateFuncaoRodadaService {
             return new Error("ID de instituição inválido");
         }
 
-        if (!isDecimal(peso_voto) || isNegative(peso_voto)) {
+        if (!isNumber(peso_voto) || isNegative(peso_voto)) {
             return new Error("Insira um valor válido em peso voto");
         }
 
@@ -68,7 +68,7 @@ export class CreateFuncaoRodadaService {
             instituicao_id,
         });
 
-        await repo.save(funcao);
+        await repo.save(funcaoRodada);
 
         return funcaoRodada;
     }

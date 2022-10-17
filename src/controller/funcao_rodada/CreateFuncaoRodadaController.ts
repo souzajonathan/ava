@@ -5,7 +5,7 @@ export class CreateFuncaoRodadaController {
     async handle(request: Request, response: Response) {
         const {
             peso_voto,
-            consideracoes_relevantes,
+            considerar_relevantes,
             especificacao_id,
             funcao_id,
             instituicao_id,
@@ -15,7 +15,7 @@ export class CreateFuncaoRodadaController {
 
         const result = await service.execute({
             peso_voto,
-            consideracoes_relevantes,
+            considerar_relevantes,
             especificacao_id,
             funcao_id,
             instituicao_id,
