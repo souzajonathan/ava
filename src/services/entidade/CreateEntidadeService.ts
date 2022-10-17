@@ -66,7 +66,7 @@ export class CreateEntidadeService {
         });
         await repo.save(entidade);
 
-        if (especificacoes.length) {
+        if (especificacoes) {
             for await (const especificacao of especificacoes) {
                 const service = new CreateEspecificacaoRodadaService();
 
@@ -82,7 +82,7 @@ export class CreateEntidadeService {
                     return resultEspecificacao;
                 }
 
-                if (funcoes.length) {
+                if (funcoes) {
                     for await (const funcao of funcoes) {
                         const service = new CreateFuncaoRodadaService();
 

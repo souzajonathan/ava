@@ -77,7 +77,7 @@ export class CreateEspecificacaoRodadaService {
         });
         await repo.save(especificacao);
 
-        if (funcoesRodada.length) {
+        if (funcoesRodada) {
             for await (const funcao of funcoesRodada) {
                 const service = new CreateFuncaoRodadaService();
 
