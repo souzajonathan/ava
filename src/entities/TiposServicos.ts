@@ -29,14 +29,6 @@ export class TiposServicos {
     @Column("boolean")
     aprovacao: boolean;
 
-    /* @ManyToMany(() => Servico)
-    @JoinTable({
-        name: "servicos_tipos_servicos",
-        joinColumn: { name: "tipo_servico_id" },
-        inverseJoinColumn: { name: "servico_id" },
-    })
-    servicos: Servico[]; */
-
     @OneToMany(() => Servico, (servico) => servico.tipoServico)
     servicos: Servico[];
 
