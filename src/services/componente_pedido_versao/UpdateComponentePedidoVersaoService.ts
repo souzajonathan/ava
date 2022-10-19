@@ -50,24 +50,31 @@ export class UpdateComponentePedidoVersaoService {
             return new Error("Versão de Componente de Pedido não existe!");
         }
 
-        const repoComponente = getRepository(ComponentesPedido);
-        const componente = await repoComponente.findOne(componente_pedido_id, {
-            relations: ["versoes"],
-        });
-        if (!componente) {
-            return new Error("Componente de pedido não existe!");
-        }
-
-        const repoTipo = getRepository(TiposSolicitacao);
-        const tipo = await repoTipo.findOne(tipo_solicitacao_id);
-        if (!tipo) {
-            return new Error("Tipo de solicitação não existe!");
-        }
-
-        if (nome && componente.versoes.length == 1) {
-            return new Error(
-                "Não é possível editar o nome da versão principal do componente de pedido!"
+        if (componente_pedido_id) {
+            const repoComponente = getRepository(ComponentesPedido);
+            const componente = await repoComponente.findOne(
+                componente_pedido_id,
+                {
+                    relations: ["versoes"],
+                }
             );
+            if (!componente) {
+                return new Error("Componente de pedido não existe!");
+            }
+
+            if (nome && componente.versoes.length == 1) {
+                return new Error(
+                    "Não é possível editar o nome da versão principal do componente de pedido!"
+                );
+            }
+        }
+
+        if (tipo_solicitacao_id) {
+            const repoTipo = getRepository(TiposSolicitacao);
+            const tipo = await repoTipo.findOne(tipo_solicitacao_id);
+            if (!tipo) {
+                return new Error("Tipo de solicitação não existe!");
+            }
         }
 
         if (parent_item) {

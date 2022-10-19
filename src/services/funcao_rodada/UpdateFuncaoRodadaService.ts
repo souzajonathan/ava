@@ -1,4 +1,4 @@
-import { isDecimal, isPositive } from "class-validator";
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { EspecificacoesRodadas } from "../../entities/EspecificacoesRodadas";
@@ -38,7 +38,7 @@ export class UpdateFuncaoRodadaService {
             );
         }
 
-        if (peso_voto && (!isPositive(peso_voto) || !isDecimal(peso_voto))) {
+        if (peso_voto && (!isNumber(peso_voto) || isNegative(peso_voto))) {
             return new Error("Insira um valor válido em peso voto");
         }
 

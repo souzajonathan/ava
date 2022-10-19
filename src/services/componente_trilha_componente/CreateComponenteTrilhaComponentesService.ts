@@ -1,6 +1,8 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { ComponentesTrilhaComponentes } from "../../entities/ComponentesTrilhaComponente";
+import { TiposComponentes } from "../../entities/TiposComponentes";
+import { TrilhaComponentes } from "../../entities/TrilhaComponentes";
 
 type ComponenteTrilhaComponentesRequest = {
     tipo_componente_id: string;
@@ -26,6 +28,22 @@ export class CreateComponenteTrilhaComponentesService {
 
         if (typeof item_interno != "boolean") {
             return new Error("Marcação para 'item interno' inválida");
+        }
+
+        const repoTipoComponente = getRepository(TiposComponentes);
+        const tipoComponente = await repoTipoComponente.findOne(
+            tipo_componente_id
+        );
+        if (!tipoComponente) {
+            return new Error("Tipo de componente não existe!");
+        }
+
+        const repoTrilhaComponentes = getRepository(TrilhaComponentes);
+        const trilhaComponentes = await repoTrilhaComponentes.findOne(
+            trilha_componentes_id
+        );
+        if (!trilhaComponentes) {
+            return new Error("Trilha de componentes não existe!");
         }
 
         const repo = getRepository(ComponentesTrilhaComponentes);

@@ -42,20 +42,24 @@ export class UpdateComponenteTrilhaComponentesService {
             return new Error("Marcação para 'item interno' inválida");
         }
 
-        const repoTrilhaComponentes = getRepository(TrilhaComponentes);
-        const trilhaComponentes = await repoTrilhaComponentes.findOne(
-            trilha_componentes_id
-        );
-        if (!trilhaComponentes) {
-            return new Error("Trilha de componentes não existe!");
+        if (tipo_componente_id) {
+            const repoTipoComponente = getRepository(TiposComponentes);
+            const tipoComponente = await repoTipoComponente.findOne(
+                tipo_componente_id
+            );
+            if (!tipoComponente) {
+                return new Error("Tipo de componente não existe!");
+            }
         }
 
-        const repoTipoComponente = getRepository(TiposComponentes);
-        const tipoComponente = await repoTipoComponente.findOne(
-            tipo_componente_id
-        );
-        if (!tipoComponente) {
-            return new Error("Tipo de componente não existe!");
+        if (trilha_componentes_id) {
+            const repoTrilhaComponentes = getRepository(TrilhaComponentes);
+            const trilhaComponentes = await repoTrilhaComponentes.findOne(
+                trilha_componentes_id
+            );
+            if (!trilhaComponentes) {
+                return new Error("Trilha de componentes não existe!");
+            }
         }
 
         componenteTrilhaComponentes.tipo_componente_id = tipo_componente_id

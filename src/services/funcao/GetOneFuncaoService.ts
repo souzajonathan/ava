@@ -11,7 +11,12 @@ export class GetOneFuncaoService {
         const repo = getRepository(Funcao);
 
         const funcao = await repo.findOne(id, {
-            relations: ["agentes", "funcoesRodadas"],
+            relations: [
+                "agentes",
+                "funcoesRodadas",
+                "tiposServicos",
+                "profissionais",
+            ],
         });
 
         if (!funcao) {

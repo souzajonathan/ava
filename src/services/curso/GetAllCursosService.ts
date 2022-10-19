@@ -24,7 +24,7 @@ export class GetAllCursosService {
         }
 
         const cursos = await repo.find({
-            relations: ["ppcs"],
+            relations: ["ppcs", "agentes"],
             where,
         });
 

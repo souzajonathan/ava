@@ -1,3 +1,4 @@
+import { isInt, isNegative } from "class-validator";
 import { getRepository, In } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
@@ -53,11 +54,11 @@ export class UpdatePpcDisciplinaVersaoService {
             }
         }
 
-        if (modulo && !Number.isInteger(modulo)) {
+        if (modulo && (!isInt(modulo) || isNegative(modulo))) {
             return new Error("Insira um número válido em módulo");
         }
 
-        if (semestre && !Number.isInteger(semestre)) {
+        if (semestre && (!isInt(semestre) || isNegative(semestre))) {
             return new Error("Insira um número válido em semestre");
         }
 

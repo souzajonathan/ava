@@ -13,6 +13,7 @@ export class UpdateDisciplinaVersaoController {
             em_oferta,
             produzido,
             instituicao_id,
+            bibliografias,
         } = request.body;
 
         const service = new UpdateDisciplinaVersaoService();
@@ -27,6 +28,7 @@ export class UpdateDisciplinaVersaoController {
             em_oferta,
             produzido,
             instituicao_id,
+            bibliografias,
         });
 
         if (result instanceof Error) {

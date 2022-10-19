@@ -14,6 +14,7 @@ export class DeleteTipoComponenteService {
                 "componentesTrilha",
                 "componentesPedido",
                 "trilhasServicos",
+                "checksTipoServico",
             ],
         });
 
@@ -23,19 +24,25 @@ export class DeleteTipoComponenteService {
 
         if (tipo.componentesTrilha.length > 0) {
             return new Error(
-                "Tipo de componente com componentes de trilha cadastrados"
+                "Tipo de componente com componente(s) de trilha cadastrado(s)"
             );
         }
 
         if (tipo.componentesPedido.length > 0) {
             return new Error(
-                "Tipo de componente com componentes de pedido cadastrados"
+                "Tipo de componente com componente(s) de pedido cadastrado(s)"
             );
         }
 
         if (tipo.trilhasServicos.length > 0) {
             return new Error(
-                "Tipo de componente com trilhas de serviço cadastrados"
+                "Tipo de componente com trilha(s) de serviço cadastrado(s)"
+            );
+        }
+
+        if (tipo.checksTipoServico.length > 0) {
+            return new Error(
+                "Tipo de componente com check(s) de tipo de serviço cadastrado(s)"
             );
         }
 

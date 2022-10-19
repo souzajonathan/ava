@@ -1,4 +1,4 @@
-import { isPositive } from "class-validator";
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { CompetenciasHabilidades } from "../../entities/CompetenciasHabilidades";
@@ -31,7 +31,7 @@ export class CreateCompetenciaService {
             return new Error("Competência é obrigatória");
         }
 
-        if (!isPositive(competenciaNumero)) {
+        if (!isNumber(competenciaNumero) || isNegative(competenciaNumero)) {
             return new Error(
                 "Insira um número válido em 'número de competência'"
             );

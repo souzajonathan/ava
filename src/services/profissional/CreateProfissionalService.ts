@@ -1,13 +1,13 @@
 import { getRepository } from "typeorm";
 import { Profissional } from "../../entities/Profissional";
 
-type UsuarioRequest = {
+type ProfissionalRequest = {
     name: string;
     description: string;
 };
 
 export class CreateProfissionalService {
-    async execute({ name, description }: UsuarioRequest) {
+    async execute({ name, description }: ProfissionalRequest) {
         if (!name) {
             return new Error("Nome de profissional não inserido");
         }

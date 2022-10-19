@@ -1,3 +1,4 @@
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { TrilhaComponentes } from "../../entities/TrilhaComponentes";
 
@@ -17,7 +18,7 @@ export class CreateTrilhaComponentesService {
             return new Error("Nome de versão de trilha não inserido");
         }
 
-        if (!Number.isInteger(quantidade_creditos)) {
+        if (!isInt(quantidade_creditos) || isNegative(quantidade_creditos)) {
             return new Error(
                 "Insira um número válido em 'quantidade de créditos"
             );

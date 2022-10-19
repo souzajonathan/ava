@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { Agente } from "./Agente";
 import { FuncoesRodada } from "./FuncoesRodada";
+import { Profissional } from "./Profissional";
 import { TiposServicos } from "./TiposServicos";
 
 @Entity("funcoes")
@@ -31,11 +32,19 @@ export class Funcao {
 
     @ManyToMany(() => TiposServicos)
     @JoinTable({
-        name: "funcao_tipo",
+        name: "funcoes_tipos",
         joinColumn: { name: "funcao_id" },
         inverseJoinColumn: { name: "tipo_id" },
     })
     tiposServicos: TiposServicos[];
+
+    @ManyToMany(() => Profissional)
+    @JoinTable({
+        name: "profissionais_funcoes",
+        joinColumn: { name: "funcao_id" },
+        inverseJoinColumn: { name: "profissional_id" },
+    })
+    profissionais: Profissional[];
 
     @CreateDateColumn()
     created_at: Date;

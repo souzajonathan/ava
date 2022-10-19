@@ -15,6 +15,7 @@ export class GetOneTipoComponenteService {
                 "componentesTrilha",
                 "componentesPedido",
                 "trilhasServicos",
+                "checksTipoServico",
             ],
         });
 

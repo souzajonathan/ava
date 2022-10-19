@@ -1,3 +1,4 @@
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { TiposServicos } from "../../entities/TiposServicos";
 
@@ -21,7 +22,7 @@ export class CreateTipoServicoService {
             return new Error("Tipo de solicitação não inserido");
         }
 
-        if (!Number.isInteger(valor)) {
+        if (!isNumber(valor) || isNegative(valor)) {
             return new Error("Insira um valor válido");
         }
 

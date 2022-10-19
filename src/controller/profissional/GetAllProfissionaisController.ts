@@ -9,4 +9,17 @@ export class GetAllProfissionaisController {
 
         return response.json(profissionais);
     }
+
+    async handleFuncao(request: Request, response: Response) {
+        const service = new GetAllProfissionaisService();
+        const { funcao_id } = request.params;
+
+        const profissionais = await service.findByFuncao(funcao_id);
+
+        if (profissionais instanceof Error) {
+            return response.status(400).json(profissionais.message);
+        }
+
+        return response.json(profissionais);
+    }
 }

@@ -4,14 +4,13 @@ import { CreateCompetenciaPpcDisciplinaVersaoService } from "../../services/ppc_
 export class CreateCompetenciaPpcDisciplinaVersaoController {
     async handle(request: Request, response: Response) {
         const { ppcDisciplinaVersao_id } = request.body;
-        const { competencia_id, instituicao_id } = request.params;
+        const { competencia_id } = request.params;
 
         const service = new CreateCompetenciaPpcDisciplinaVersaoService();
 
         const result = await service.execute({
             competencia_id,
             ppcDisciplinaVersao_id,
-            instituicao_id,
         });
 
         if (result instanceof Error) {

@@ -1,3 +1,4 @@
+import { isBoolean, isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
@@ -50,30 +51,29 @@ export class UpdatePpcService {
             return new Error("ID inválido");
         }
 
-        if (anoVoto && !Number.isInteger(anoVoto)) {
+        if (anoVoto && (!isInt(anoVoto) || isNegative(anoVoto))) {
             return new Error("Insira um número válido em 'ano voto'");
         }
 
-        if (horaCredito && !Number.isInteger(horaCredito)) {
+        if (horaCredito && (!isInt(horaCredito) || isNegative(horaCredito))) {
             return new Error("Insira um número válido em 'hora crédito'");
         }
 
-        if (quantSemestres && !Number.isInteger(quantSemestres)) {
+        if (
+            quantSemestres &&
+            (!isInt(quantSemestres) || isNegative(quantSemestres))
+        ) {
             return new Error(
                 "Insira um número válido em 'quantidade de semestres'"
             );
         }
 
-        if (ppc_ativo) {
-            if (typeof ppc_ativo != "boolean") {
-                return new Error("Marcação para 'PPC ativo' inválido");
-            }
+        if (ppc_ativo && !isBoolean(ppc_ativo)) {
+            return new Error("Marcação para 'PPC ativo' inválido");
         }
 
-        if (active) {
-            if (typeof active != "boolean") {
-                return new Error("Marcação para 'PPC atual' inválido");
-            }
+        if (active && !isBoolean(active)) {
+            return new Error("Marcação para 'PPC atual' inválido");
         }
 
         if (curso_id && !validate(curso_id)) {

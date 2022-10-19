@@ -20,6 +20,7 @@ export class GetAllTiposComponentesService {
                 "componentesTrilha",
                 "componentesPedido",
                 "trilhasServicos",
+                "checksTipoServico",
             ],
             where,
         });

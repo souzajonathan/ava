@@ -1,8 +1,15 @@
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Disciplina } from "../../entities/Disciplina";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
 import { Instituicao } from "../../entities/Instituicao";
+import { CreateBibliografiaService } from "../bibliografia/CreateBibliografiaService";
+
+type Bibliografia = {
+    obra_id: string;
+    tipo: string;
+};
 
 type DisciplinaVersaoUpdateRequest = {
     id: string;
@@ -14,6 +21,7 @@ type DisciplinaVersaoUpdateRequest = {
     em_oferta: boolean;
     produzido: boolean;
     instituicao_id: string;
+    bibliografias?: Bibliografia[];
 };
 
 export class UpdateDisciplinaVersaoService {
@@ -27,6 +35,7 @@ export class UpdateDisciplinaVersaoService {
         em_oferta,
         produzido,
         instituicao_id,
+        bibliografias,
     }: DisciplinaVersaoUpdateRequest) {
         if (!validate(id)) {
             return new Error("ID inválido");
@@ -48,7 +57,10 @@ export class UpdateDisciplinaVersaoService {
             }
         }
 
-        if (credito_quantidade && !Number.isInteger(credito_quantidade)) {
+        if (
+            credito_quantidade &&
+            (!isInt(credito_quantidade) || isNegative(credito_quantidade))
+        ) {
             return new Error(
                 "Insira um número válido em quantidade de crédito"
             );
@@ -97,9 +109,26 @@ export class UpdateDisciplinaVersaoService {
 
         await repo.save(disciplinaVersao);
 
+        if (bibliografias.length) {
+            for await (const bibliografia of bibliografias) {
+                const service = new CreateBibliografiaService();
+
+                const result = await service.execute({
+                    obra_id: bibliografia.obra_id,
+                    disciplina_versao_id: disciplinaVersao.id,
+                    tipo: bibliografia.tipo,
+                });
+
+                if (result instanceof Error) {
+                    return result;
+                }
+            }
+        }
+
         return {
             ...disciplinaVersao,
             disciplina,
+            bibliografias,
         };
     }
 }

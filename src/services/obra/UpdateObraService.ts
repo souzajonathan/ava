@@ -1,3 +1,4 @@
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Obra } from "../../entities/Obra";
@@ -69,11 +70,11 @@ export class UpdateObraService {
             return new Error("ID inválido");
         }
 
-        if (ano && !Number.isInteger(ano)) {
+        if (ano && (!isNumber(ano) || isNegative(ano))) {
             return new Error("Insira um número válido em 'ano'");
         }
 
-        if (dia && !Number.isInteger(dia)) {
+        if (dia && (!isNumber(dia) || isNegative(dia))) {
             return new Error("Insira um número válido em 'dia'");
         }
 
@@ -148,6 +149,9 @@ export class UpdateObraService {
             }
         }
 
-        return obra;
+        return {
+            ...obra,
+            obraAutores,
+        };
     }
 }

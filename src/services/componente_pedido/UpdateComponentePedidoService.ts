@@ -1,6 +1,8 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { ComponentesPedido } from "../../entities/ComponentesPedido";
+import { Pedido } from "../../entities/Pedido";
+import { TiposComponentes } from "../../entities/TiposComponentes";
 
 type ComponentePedidoUpdateRequest = {
     id: string;
@@ -34,6 +36,24 @@ export class UpdateComponentePedidoService {
 
         if (item_interno && typeof item_interno != "boolean") {
             return new Error("Marcação para 'item interno' inválida");
+        }
+
+        if (pedido_id) {
+            const repoPedido = getRepository(Pedido);
+            const pedido = await repoPedido.findOne(pedido_id);
+            if (!pedido) {
+                return new Error("Pedido não existe!");
+            }
+        }
+
+        if (tipo_componente_id) {
+            const repoTipoComponente = getRepository(TiposComponentes);
+            const tipoComponente = await repoTipoComponente.findOne(
+                tipo_componente_id
+            );
+            if (!tipoComponente) {
+                return new Error("Tipo de componente não existe!");
+            }
         }
 
         const repo = getRepository(ComponentesPedido);

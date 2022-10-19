@@ -1,3 +1,4 @@
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { TiposServicos } from "../../entities/TiposServicos";
@@ -30,7 +31,7 @@ export class UpdateTipoServicoService {
             return new Error("Tipo de serviço não existe!");
         }
 
-        if (valor && !Number.isInteger(valor)) {
+        if (valor && (!isNumber(valor) || isNegative(valor))) {
             return new Error("Insira um valor válido");
         }
 

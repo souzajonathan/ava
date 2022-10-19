@@ -1,4 +1,4 @@
-import { isInt } from "class-validator";
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Entidade } from "../../entities/Entidade";
@@ -45,7 +45,7 @@ export class CreateEntidadeService {
             return new Error("Nome é obrigatório");
         }
 
-        if (!isInt(quantidade_rodadas)) {
+        if (!isInt(quantidade_rodadas) && isNegative(quantidade_rodadas)) {
             return new Error(
                 "Insira um número válido em quantidade de rodadas de aprovação"
             );

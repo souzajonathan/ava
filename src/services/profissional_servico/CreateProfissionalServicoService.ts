@@ -1,6 +1,12 @@
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
-import { isBoolean, isDate, isDecimal, isPositive } from "class-validator";
+import {
+    isBoolean,
+    isDate,
+    isInt,
+    isNegative,
+    isNumber,
+} from "class-validator";
 import { ProfissionalServico } from "../../entities/ProfissionalServico";
 import { Profissional } from "../../entities/Profissional";
 import { Servico } from "../../entities/Servico";
@@ -67,7 +73,7 @@ export class CreateProfissionalServicoService {
             return new Error("Marcação para 'aceite' inválida");
         }
 
-        if (contrato && !isPositive(contrato)) {
+        if (contrato && (!isInt(contrato) || isNegative(contrato))) {
             return new Error("Insira um valor válido em contrato");
         }
 
@@ -79,7 +85,7 @@ export class CreateProfissionalServicoService {
             return new Error("Marcação para 'check' inválida");
         }
 
-        if (ajuste && !isPositive(ajuste)) {
+        if (ajuste && (!isInt(ajuste) || isNegative(ajuste))) {
             return new Error("Insira um valor válido em ajuste");
         }
 
@@ -95,11 +101,14 @@ export class CreateProfissionalServicoService {
             return new Error("Marcação para 'pagamento' inválida");
         }
 
-        if (valor_orcado && isDecimal(valor_orcado)) {
+        if (
+            valor_orcado &&
+            (!isNumber(valor_orcado) || isNegative(valor_orcado))
+        ) {
             return new Error("Insira um valor válido em valor orçado");
         }
 
-        if (valor_pago && !isDecimal(valor_pago)) {
+        if (valor_pago && (!isNumber(valor_pago) || isNegative(valor_pago))) {
             return new Error("Insira um valor válido em valor pago");
         }
 

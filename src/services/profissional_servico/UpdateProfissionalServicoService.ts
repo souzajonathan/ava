@@ -1,4 +1,10 @@
-import { isBoolean, isDate, isDecimal, isPositive } from "class-validator";
+import {
+    isBoolean,
+    isDate,
+    isInt,
+    isNegative,
+    isNumber,
+} from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Profissional } from "../../entities/Profissional";
@@ -73,7 +79,7 @@ export class UpdateProfissionalServicoService {
             return new Error("Marcação para 'aceite' inválida");
         }
 
-        if (contrato && !isPositive(contrato)) {
+        if (contrato && (!isInt(contrato) || isNegative(contrato))) {
             return new Error("Insira um valor válido em contrato");
         }
 
@@ -85,7 +91,7 @@ export class UpdateProfissionalServicoService {
             return new Error("Marcação para 'check' inválida");
         }
 
-        if (ajuste && !isPositive(ajuste)) {
+        if (ajuste && (!isInt(ajuste) || isNegative(ajuste))) {
             return new Error("Insira um valor válido em ajuste");
         }
 
@@ -101,18 +107,21 @@ export class UpdateProfissionalServicoService {
             return new Error("Marcação para 'pagamento' inválida");
         }
 
-        if (valor_orcado && isDecimal(valor_orcado)) {
+        if (
+            valor_orcado &&
+            (!isNumber(valor_orcado) || isNegative(valor_orcado))
+        ) {
             return new Error("Insira um valor válido em valor orçado");
         }
 
-        if (valor_pago && !isDecimal(valor_pago)) {
+        if (valor_pago && (!isNumber(valor_pago) || isNegative(valor_pago))) {
             return new Error("Insira um valor válido em valor pago");
         }
 
         const repo = getRepository(ProfissionalServico);
         const profissionalServico = await repo.findOne(id);
         if (!profissionalServico) {
-            return new Error("profissional_serviço não existe");
+            return new Error("Profissional num serviço não existe");
         }
 
         if (servico_id) {

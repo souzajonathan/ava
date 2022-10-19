@@ -4,14 +4,13 @@ import { CreatePerfilPpcDisciplinaVersaoService } from "../../services/ppc_disci
 export class CreatePerfilPpcDisciplinaVersaoController {
     async handle(request: Request, response: Response) {
         const { ppcDisciplinaVersao_id } = request.body;
-        const { perfil_id, instituicao_id } = request.params;
+        const { perfil_id } = request.params;
 
         const service = new CreatePerfilPpcDisciplinaVersaoService();
 
         const result = await service.execute({
             perfil_id,
             ppcDisciplinaVersao_id,
-            instituicao_id,
         });
 
         if (result instanceof Error) {

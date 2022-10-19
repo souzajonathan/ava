@@ -6,6 +6,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { CheckTipoServico } from "./CheckTipoServico";
 import { ComponentesPedido } from "./ComponentesPedido";
 import { ComponentesTrilhaComponentes } from "./ComponentesTrilhaComponente";
 import { TrilhaServicos } from "./TrilhaServicos";
@@ -44,4 +45,7 @@ export class TiposComponentes {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @OneToMany(() => CheckTipoServico, (check) => check.tipoComponente)
+    checksTipoServico: CheckTipoServico[];
 }

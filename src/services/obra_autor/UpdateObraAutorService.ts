@@ -9,22 +9,22 @@ type ObraAutorUpdateRequest = {
     autor_id: string;
     obra_id: string;
     funcao: string;
-}
+};
 
 export class UpdateObraAutorService {
-    async execute ({id, autor_id, obra_id, funcao}: ObraAutorUpdateRequest) {
-        if (!validate(id)){
+    async execute({ id, autor_id, obra_id, funcao }: ObraAutorUpdateRequest) {
+        if (!validate(id)) {
             return new Error("ID inválido");
         }
 
-        if(autor_id && !validate(autor_id)){
+        if (autor_id && !validate(autor_id)) {
             return new Error("ID de autor inválido");
         }
-        
-        if(obra_id && !validate(obra_id)){
+
+        if (obra_id && !validate(obra_id)) {
             return new Error("ID de obra inválido");
         }
-        
+
         const repo = getRepository(ObraAutor);
         const obraAutor = await repo.findOne(id);
         if (!obraAutor) {
@@ -36,7 +36,7 @@ export class UpdateObraAutorService {
         if (!autor) {
             return new Error("Autor não existe!");
         }
-        
+
         const repoObra = getRepository(Obra);
         const obra = await repoObra.findOne(obra_id);
         if (!obra) {
@@ -50,7 +50,9 @@ export class UpdateObraAutorService {
         await repo.save(obraAutor);
 
         return {
-            ...obraAutor, autor, obra
+            ...obraAutor,
+            autor,
+            obra,
         };
     }
 }

@@ -1,3 +1,4 @@
+import { isNegative, isNumber } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Obra } from "../../entities/Obra";
@@ -70,11 +71,11 @@ export class CreateObraService {
             return new Error("Nome de obra é obrigatório");
         }
 
-        if (dia && !Number.isInteger(dia)) {
+        if (dia && (!isNumber(dia) || isNegative(dia))) {
             return new Error("Insira um número válido em dia");
         }
 
-        if (ano && !Number.isInteger(ano)) {
+        if (ano && (!isNumber(ano) || isNegative(ano))) {
             return new Error("Insira um número válido em ano");
         }
 

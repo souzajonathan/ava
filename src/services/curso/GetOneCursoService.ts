@@ -15,7 +15,7 @@ export class GetOneCursoService {
         const repo = getRepository(Curso);
 
         const curso = await repo.findOne(id, {
-            relations: ["ppcs"],
+            relations: ["ppcs", "agentes"],
         });
 
         if (!curso) {

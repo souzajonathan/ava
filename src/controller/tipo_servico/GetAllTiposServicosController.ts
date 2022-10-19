@@ -9,4 +9,17 @@ export class GetAllTiposServicoController {
 
         return response.json(tipos);
     }
+
+    async handleFuncao(request: Request, response: Response) {
+        const service = new GetAllTiposServicosService();
+        const { funcao_id } = request.params;
+
+        const tipos = await service.findByFuncao(funcao_id);
+
+        if (tipos instanceof Error) {
+            return response.status(400).json(tipos.message);
+        }
+
+        return response.json(tipos);
+    }
 }

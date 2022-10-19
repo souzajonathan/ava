@@ -11,7 +11,7 @@ export class GetOneProfissionalService {
         const repo = getRepository(Profissional);
 
         const profissional = await repo.findOne(id, {
-            relations: ["profissionalServicos"],
+            relations: ["profissionalServicos", "funcoes"],
         });
 
         if (!profissional) {

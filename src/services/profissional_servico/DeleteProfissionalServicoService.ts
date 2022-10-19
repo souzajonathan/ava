@@ -9,10 +9,18 @@ export class DeleteProfissionalServicoService {
         }
 
         const repo = getRepository(ProfissionalServico);
-        const profissionalServico = await repo.findOne(id);
+        const profissionalServico = await repo.findOne(id, {
+            relations: ["listasCheck"],
+        });
 
         if (!profissionalServico) {
-            return new Error("profissional_serviço não existente!");
+            return new Error("Profissional num servico não existente!");
+        }
+
+        if (profissionalServico.listasCheck.length > 0) {
+            return new Error(
+                "Profissional num servico com lista(s) de check de serviço cadastrada(s)"
+            );
         }
 
         await repo.delete(id);

@@ -4,9 +4,11 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { ListaChecks } from "./ListaChecks";
 import { Profissional } from "./Profissional";
 import { Servico } from "./Servico";
 
@@ -76,4 +78,7 @@ export class ProfissionalServico {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @OneToMany(() => ListaChecks, (lista) => lista.profissionalServico)
+    listasCheck: ListaChecks[];
 }

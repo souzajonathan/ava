@@ -1,4 +1,4 @@
-import { isPositive } from "class-validator";
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { ServicosTrilhaServicos } from "../../entities/ServicosTrilhaServicos";
@@ -25,7 +25,7 @@ export class CreateServicoTrilhaServicosService {
             return new Error("ID de trilha de serviços inválido");
         }
 
-        if (!posicao || !isPositive(posicao)) {
+        if (!posicao || !isInt(posicao) || isNegative(posicao)) {
             return new Error("Insira um número de posição válido");
         }
 

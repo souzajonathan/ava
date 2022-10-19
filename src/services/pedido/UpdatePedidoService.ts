@@ -1,3 +1,4 @@
+import { isBoolean } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { DisciplinaVersao } from "../../entities/DisciplinaVersao";
@@ -35,27 +36,27 @@ export class UpdatePedidoService {
             return new Error("ID inválido");
         }
 
-        if (disciplina_versao_id && !validate(disciplina_versao_id)) {
+        if (disciplina_versao_id && !isBoolean(disciplina_versao_id)) {
             return new Error("ID de versão de disciplina inválido");
         }
 
-        if (tipo_solicitacao_id && !validate(tipo_solicitacao_id)) {
+        if (tipo_solicitacao_id && !isBoolean(tipo_solicitacao_id)) {
             return new Error("ID de tipo de solicitação inválido");
         }
 
-        if (analisado && typeof analisado != "boolean") {
+        if (analisado && !isBoolean(analisado)) {
             return new Error("Marcação para 'analisado' inválida");
         }
 
-        if (aprovacao_interna && typeof aprovacao_interna != "boolean") {
+        if (aprovacao_interna && !isBoolean(aprovacao_interna)) {
             return new Error("Marcação para 'aprovação interna' inválida");
         }
 
-        if (aprovacao_externa && typeof aprovacao_externa != "boolean") {
+        if (aprovacao_externa && !isBoolean(aprovacao_externa)) {
             return new Error("Marcação para 'aprovação externa' inválida");
         }
 
-        if (concluido && typeof concluido != "boolean") {
+        if (concluido && !isBoolean(concluido)) {
             return new Error("Marcação para 'concluído' inválida");
         }
 

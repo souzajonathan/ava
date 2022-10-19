@@ -1,4 +1,4 @@
-import { isPositive } from "class-validator";
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Instituicao } from "../../entities/Instituicao";
@@ -31,7 +31,7 @@ export class CreatePerfilService {
             return new Error("Perfil é obrigatório");
         }
 
-        if (!isPositive(perfilNumero)) {
+        if (!isInt(perfilNumero) || isNegative(perfilNumero)) {
             return new Error("Insira um número válido em 'número de perfil'");
         }
 

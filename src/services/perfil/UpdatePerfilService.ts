@@ -1,4 +1,4 @@
-import { isPositive } from "class-validator";
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Instituicao } from "../../entities/Instituicao";
@@ -41,7 +41,10 @@ export class UpdatePerfilService {
             return new Error("ID de PPC inválido");
         }
 
-        if (perfilNumero && !isPositive(perfilNumero)) {
+        if (
+            perfilNumero &&
+            (!isInt(perfilNumero) || isNegative(perfilNumero))
+        ) {
             return new Error("Insira um número válido em número de perfil");
         }
 
@@ -55,7 +58,10 @@ export class UpdatePerfilService {
             perfilNumero,
             ppc_id,
         });
-        if (perfilAlreadyExists) {
+        if (
+            perfilAlreadyExists &&
+            perfilAlreadyExists.perfilNumero != perfilEgresso.perfilNumero
+        ) {
             return new Error("Número de perfil de egresso já existe");
         }
 

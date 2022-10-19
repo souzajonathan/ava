@@ -1,3 +1,4 @@
+import { isBoolean, isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { ComponentesPedidoVersao } from "../../entities/ComponentePedidoVersao";
@@ -30,15 +31,15 @@ export class CreateServicoService {
             return new Error("ID de tipo de serviço inválido");
         }
 
-        if (!Number.isInteger(posicao)) {
+        if (!isInt(posicao) || isNegative(posicao)) {
             return new Error("Insira um valor válido em posição");
         }
 
-        if (typeof em_andamento != "boolean") {
+        if (!isBoolean(em_andamento)) {
             return new Error("Marcação para 'em andamento' inválida");
         }
 
-        if (typeof aprovacao != "boolean") {
+        if (!isBoolean(aprovacao)) {
             return new Error("Marcação para 'aprovação' inválida");
         }
 

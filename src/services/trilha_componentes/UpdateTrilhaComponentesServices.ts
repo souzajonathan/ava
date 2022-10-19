@@ -1,3 +1,4 @@
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { TrilhaComponentes } from "../../entities/TrilhaComponentes";
@@ -31,7 +32,10 @@ export class UpdateTrilhaComponentesService {
             return new Error("Tipo já existe");
         }
 
-        if (quantidade_creditos && !Number.isInteger(quantidade_creditos)) {
+        if (
+            quantidade_creditos &&
+            (!isInt(quantidade_creditos) || isNegative(quantidade_creditos))
+        ) {
             return new Error(
                 "Insira um número válido em 'quantidade de créditos"
             );

@@ -1,3 +1,4 @@
+import { isBoolean, isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { validate } from "uuid";
 import { Curso } from "../../entities/Curso";
@@ -56,25 +57,25 @@ export class CreatePpcService {
             return new Error("Data de início é obrigatória");
         }
 
-        if (!Number.isInteger(anoVoto)) {
+        if (!isInt(anoVoto) || isNegative(anoVoto)) {
             return new Error("Insira um número válido em 'ano voto'");
         }
 
-        if (!Number.isInteger(horaCredito)) {
+        if (!isInt(horaCredito) || isNegative(horaCredito)) {
             return new Error("Insira um número válido em 'hora crédito'");
         }
 
-        if (!Number.isInteger(quantSemestres)) {
+        if (!isInt(quantSemestres) || isNegative(quantSemestres)) {
             return new Error(
                 "Insira um número válido em 'quantidade de semestres'"
             );
         }
 
-        if (typeof active != "boolean") {
+        if (!isBoolean(active)) {
             return new Error("Marcação para 'PPC atual' inválido");
         }
 
-        if (typeof ppc_ativo != "boolean") {
+        if (!isBoolean(ppc_ativo)) {
             return new Error("Marcação para 'PPC ativo' inválido");
         }
 

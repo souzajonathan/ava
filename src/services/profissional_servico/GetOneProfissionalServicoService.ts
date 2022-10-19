@@ -15,7 +15,7 @@ export class GetOneProfissionalServicoService {
         });
 
         if (!profissionalServico) {
-            return new Error("profissional_serviço não existe!");
+            return new Error("Profissional num serviço não existe!");
         }
 
         return profissionalServico;

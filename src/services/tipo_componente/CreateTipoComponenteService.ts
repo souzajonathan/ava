@@ -1,3 +1,4 @@
+import { isInt, isNegative } from "class-validator";
 import { getRepository } from "typeorm";
 import { TiposComponentes } from "../../entities/TiposComponentes";
 
@@ -17,7 +18,7 @@ export class CreateTipoComponenteService {
             return new Error("Carga horária não inserida");
         }
 
-        if (!Number.isInteger(carga_horaria)) {
+        if (!isInt(carga_horaria) || isNegative(carga_horaria)) {
             return new Error("Insira um número válido em 'carga horária");
         }
 

@@ -12,6 +12,7 @@ export class CreateDisciplinaVersaoController {
             em_oferta,
             produzido,
             instituicao_id,
+            bibliografias,
         } = request.body;
 
         const service = new CreateDisciplinaVersaoService();
@@ -25,6 +26,7 @@ export class CreateDisciplinaVersaoController {
             em_oferta,
             produzido,
             instituicao_id,
+            bibliografias,
         });
 
         if (result instanceof Error) {

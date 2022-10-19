@@ -124,6 +124,20 @@ import { UpdateFuncaoRodadaController } from "./controller/funcao_rodada/UpdateF
 import { GetOneFuncaoRodadaController } from "./controller/funcao_rodada/GetOneFuncaoRodadaController";
 import { GetAllFuncoesRodadaController } from "./controller/funcao_rodada/GetAllFuncoesRodadaController";
 import { DeleteFuncaoRodadaController } from "./controller/funcao_rodada/DeleteFuncaoRodadaController";
+import { CreateFuncaoTipoController } from "./controller/funcao_tipo/CreateFuncaoTipoController";
+import { DeleteFuncaoTipoController } from "./controller/funcao_tipo/DeleteFuncaoTipoController";
+import { CreateTipoServicoController } from "./controller/tipo_servico/CreateTipoServicoController";
+import { UpdateTipoServicoController } from "./controller/tipo_servico/UpdateTipoServicoController";
+import { GetOneTipoServicoController } from "./controller/tipo_servico/GetOneTipoServicoController";
+import { GetAllTiposServicoController } from "./controller/tipo_servico/GetAllTiposServicosController";
+import { DeleteTipoServicoController } from "./controller/tipo_servico/DeleteTipoServicoController";
+import { CreateProfissionalFuncaoController } from "./controller/profissional_funcao/CreateProfissionalFuncaoController";
+import { DeleteProfissionalFuncaoController } from "./controller/profissional_funcao/DeleteProfissionalFuncaoController";
+import { GetAllProfissionaisController } from "./controller/profissional/GetAllProfissionaisController";
+import { CreateProfissionalController } from "./controller/profissional/CreateProfissionalController";
+import { UpdateProfissionalController } from "./controller/profissional/UpdateProfissionalController";
+import { GetOneProfissionalController } from "./controller/profissional/GetOneProfissionalController";
+import { DeleteProfissionalController } from "./controller/profissional/DeleteProfissonalController";
 
 const routes = Router();
 
@@ -402,5 +416,48 @@ routes.put("/funcoes_rodada/:id", new UpdateFuncaoRodadaController().handle);
 routes.get("/funcao_rodada/:id", new GetOneFuncaoRodadaController().handle);
 routes.get("/funcoes_rodada", new GetAllFuncoesRodadaController().handle);
 routes.delete("/funcoes_rodada/:id", new DeleteFuncaoRodadaController().handle);
+
+routes.post("/tipo_servico", new CreateTipoServicoController().handle);
+routes.put("/tipo_servico/:id", new UpdateTipoServicoController().handle);
+routes.get("/tipo_servico/:id", new GetOneTipoServicoController().handle);
+routes.get("/tipo_servico", new GetAllTiposServicoController().handle);
+routes.delete("/tipo_servico/:id", new DeleteTipoServicoController().handle);
+
+routes.post("/funcao_tipo/:funcao_id", new CreateFuncaoTipoController().handle);
+routes.delete(
+    "/funcao_tipo/:funcao_id",
+    new DeleteFuncaoTipoController().handle
+);
+routes.get(
+    "/funcao_tipo/funcao/:tipo_id",
+    new GetAllFuncoesController().handleTipo
+);
+routes.get(
+    "/funcao_tipo/tipo/:funcao_id",
+    new GetAllTiposServicoController().handleFuncao
+);
+
+routes.post("/profissional", new CreateProfissionalController().handle);
+routes.put("/profissional/:id", new UpdateProfissionalController().handle);
+routes.get("/profissional/:id", new GetOneProfissionalController().handle);
+routes.get("/profissional", new GetAllProfissionaisController().handle);
+routes.delete("/profissional/:id", new DeleteProfissionalController().handle);
+
+routes.post(
+    "/profissional_funcao/:profissional_id",
+    new CreateProfissionalFuncaoController().handle
+);
+routes.delete(
+    "/profissional_funcao/:profissional_id",
+    new DeleteProfissionalFuncaoController().handle
+);
+routes.get(
+    "/profissional_funcao/funcao/:profissional_id",
+    new GetAllFuncoesController().handleProfissional
+);
+routes.get(
+    "/profissional_funcao/profissional/:funcao_id",
+    new GetAllProfissionaisController().handleFuncao
+);
 
 export { routes };
